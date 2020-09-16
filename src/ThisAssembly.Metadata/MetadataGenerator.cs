@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using Scriban;
 using Microsoft.CodeAnalysis.Text;
@@ -11,7 +10,7 @@ using System.IO;
 namespace ThisAssembly
 {
     [Generator]
-    public class CSharpGenerator : ISourceGenerator
+    public class MetadataGenerator : ISourceGenerator
     {
         public void Initialize(GeneratorInitializationContext context) { }
 
@@ -24,7 +23,9 @@ namespace ThisAssembly
             var metadata = context.Compilation.Assembly.GetAttributes()
                 .Where(x => x.AttributeClass?.Name == nameof(System.Reflection.AssemblyMetadataAttribute) &&
                     Microsoft.CodeAnalysis.CSharp.SyntaxFacts.IsValidIdentifier((string)x.ConstructorArguments[0].Value))
-                .Select(x => new KeyValuePair<string, string>((string)x.ConstructorArguments[0].Value, (string)x.ConstructorArguments[1].Value));
+                .Select(x => new KeyValuePair<string, string>((string)x.ConstructorArguments[0].Value, (string)x.ConstructorArguments[1].Value))
+                .Distinct(new KeyValueComparer())
+                .ToDictionary(x => x.Key, x => x.Value);
 
             var language = context.ParseOptions.Language;
             var file = language.Replace("#", "Sharp") + ".sbntxt";
@@ -47,6 +48,15 @@ namespace ThisAssembly
             }
 
             context.AddSource("ThisAssembly.Metadata", SourceText.From(output, Encoding.UTF8));
+        }
+
+        class KeyValueComparer : IEqualityComparer<KeyValuePair<string, string>>
+        {
+            public bool Equals(KeyValuePair<string, string> x, KeyValuePair<string, string> y)
+                => x.Key == y.Key && x.Value == y.Value;
+
+            public int GetHashCode(KeyValuePair<string, string> obj)
+                => HashCode.Combine(obj.Key, obj.Value);
         }
     }
 }
