@@ -1,0 +1,23 @@
+<Project>
+
+  <PropertyGroup>
+    <Authors>kzu</Authors>
+    <Copyright>Copyright 2020 - Daniel Cazzulino</Copyright>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <Version>42.42.42</Version>
+    <PackageVersion>42.42.42</PackageVersion>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GenerateRepositoryUrlAttribute>true</GenerateRepositoryUrlAttribute>
+
+    <PackageOutputPath Condition="'$(PackageOutputPath)' == ''">$(MSBuildThisFileDirectory)bin</PackageOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Label="CI" Condition="'$(CI)' == ''">
+    <CI>false</CI>
+    <CI Condition="'$(TF_BUILD)' == 'true'">true</CI>
+  </PropertyGroup>
+
+</Project>

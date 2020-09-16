@@ -1,0 +1,25 @@
+<Project>
+
+  <PropertyGroup>
+    <DefaultLanguageSourceExtension Condition="'$(DefaultLanguageSourceExtension)' == '' And '$(MSBuildProjectExtension)' == '.csproj'">.cs</DefaultLanguageSourceExtension>
+    <DefaultLanguageSourceExtension Condition="'$(DefaultLanguageSourceExtension)' == '' And '$(MSBuildProjectExtension)' == '.vbproj'">.vb</DefaultLanguageSourceExtension>
+    <DefaultLanguageSourceExtension Condition="'$(DefaultLanguageSourceExtension)' == '' And '$(MSBuildProjectExtension)' == '.fsproj'">.fs</DefaultLanguageSourceExtension>
+    <ThisAssemblyIntellisenseFixExtension>.ta.g$(DefaultLanguageSourceExtension)</ThisAssemblyIntellisenseFixExtension>
+    <IncludeSourceGeneratorIntellisenseFix Condition="'$(IncludeSourceGeneratorIntellisenseFix)' == ''">true</IncludeSourceGeneratorIntellisenseFix>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="ThisAssemblyIntellisenseFixExtension" />
+    <CompilerVisibleProperty Include="IncludeSourceGeneratorIntellisenseFix" />
+    <CompilerVisibleProperty Include="IntermediateOutputPath" />
+    <Compile Include="**/*$(ThisAssemblyIntellisenseFixExtension)" Link="%(Filename)%(Extension)" Visible="false" />
+  </ItemGroup>
+
+  <!-- To workaround https://github.com/dotnet/roslyn/issues/44093, remove written files before compile -->
+  <Target Name="WorkaroundRoslyn44093" BeforeTargets="CoreCompile;Compile" Condition="'$(IncludeSourceGeneratorIntellisenseFix)' == 'true'">
+    <ItemGroup>
+      <Compile Remove="**/*$(ThisAssemblyIntellisenseFixExtension)" />
+    </ItemGroup>
+  </Target>
+  
+</Project>
