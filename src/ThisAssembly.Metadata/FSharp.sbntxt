@@ -13,7 +13,7 @@
 /// </summary>
 [<System.CodeDom.Compiler.GeneratedCode("ThisAssembly.Metadata", "{{ Version }}")>]
 [<System.Runtime.CompilerServices.CompilerGenerated>]
-module ThisAssembly
+module internal ThisAssembly
 
 /// <summary>
 /// Gets the assembly metadata.

@@ -2,32 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <BuildOutputTargetFolder>analyzers</BuildOutputTargetFolder>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <DebugType>embedded</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <LangVersion>Preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Metadata</PackageId>
-    <Description>This package generates a static `ThisAssembly.Metadata` class with the 
-`[System.Reflection.AssemblyMetadata(..)]` defined for the project, such as when using 
-.NET 5.0+ support for `@(AssemblyMetadata)` items.
+    <Description>This package generates a static `ThisAssembly.Metadata` with public 
+constants exposing each `[System.Reflection.AssemblyMetadata(..)]` defined for the project, 
+such as when using .NET 5.0+ support for `@(AssemblyMetadata)` items.
 
 So for an attribute like:
 
   [assembly: System.Reflection.AssemblyMetadataAttribute("Foo", "Bar")]
 
 A corresponding `ThisAssembly.Metadata.Foo` constant with the value `Bar` is provided. 
-The metadata attribute can alternatively be declared using MSBuild:
+The metadata attribute can alternatively be declared using MSBuild in the project 
+(for .NET 5.0+ projects):
 
     &lt;ItemGroup&gt;
       &lt;AssemblyMetadata Include="Foo" Value="Bar" /&gt;
     &lt;/ItemGroup&gt;
 
-Generated code (C#):
+Generated code:
+C#:
 
   partial class ThisAssembly
   {
@@ -37,41 +33,36 @@ Generated code (C#):
       }
   }
 
-or (VB):
+VB:
 
-Namespace Global
-  Partial Class ThisAssembly
-        Partial Class Metadata
-            Public Const Foo = "Bar"
-        End Class
-    End Class
-End Namespace</Description>
+  Namespace Global
+    Partial Class ThisAssembly
+          Partial Class Metadata
+              Public Const Foo = "Bar"
+          End Class
+      End Class
+  End Namespace
+
+F#:
+
+  module internal ThisAssembly
+
+  module public Metadata =
+      [&lt;Literal&gt;]
+      let public Foo = @"Bar"
+
+</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Scriban" Version="2.1.2" PrivateAssets="all" Pack="true" />
-    <PackageReference Include="System.Collections.Immutable" Version="5.0.0-preview.*" PrivateAssets="all" />
-    <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-preview.*" PrivateAssets="all" />
-
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
-
+    <PackageReference Include="Scriban" Version="2.1.2" PrivateAssets="all" Pack="true" />
+    
+    <!-- Uncomment when things ship -->
     <!--
-    <PackageReference Include="System.Collections.Immutable" Version="5.0.0-preview.*" />
-    <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-preview.*" />
-
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0-2.final" ExcludeAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-2.final" ExcludeAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="3.8.0-2.final" ExcludeAssets="all" />
-
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0-2.final" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="3.8.0-2.final" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="3.8.0" PrivateAssets="all" />
     -->
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.CodeAnalysis" HintPath="$(MSBuildToolsPath)\Roslyn\Microsoft.CodeAnalysis.dll" />
-    <Reference Include="Microsoft.CodeAnalysis.VisualBasic" HintPath="$(MSBuildToolsPath)\Roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
-    <Reference Include="Microsoft.CodeAnalysis.CSharp" HintPath="$(MSBuildToolsPath)\Roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
   </ItemGroup>
 
 </Project>
