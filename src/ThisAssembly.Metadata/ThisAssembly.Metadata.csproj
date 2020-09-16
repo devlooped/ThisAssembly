@@ -74,11 +74,4 @@ End Namespace</Description>
     <Reference Include="Microsoft.CodeAnalysis.CSharp" HintPath="$(MSBuildToolsPath)\Roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
-    <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="*.targets" PackagePath="build/$(TargetFramework)" CopyToOutputDirectory="PreserveNewest" />
-    <_PackageFiles Include="_._" PackagePath="lib/netstandard2.0/_._" />
-  </ItemGroup>
-
 </Project>

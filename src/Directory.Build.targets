@@ -23,6 +23,11 @@
     <NuGetCache>$(UserProfile)\.nuget\packages</NuGetCache>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
+    <_PackageFiles Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
+  </ItemGroup>
+  
   <Target Name="UpdatePackageMetadata" Condition="$(CI) And $(IsPackable) And '$(PackageProjectUrl)' != '' And '$(SourceRevisionId)' != ''">
     <PropertyGroup>
       <Description>
@@ -33,8 +38,16 @@
     </PropertyGroup>
   </Target>
   
-  <Target Name="EnsurePackageOutputPath" BeforeTargets="PrepareForBuild" Condition="'$(PackageOutputPath)' != '' and !Exists('$(PackageOutputPath)')">
-    <MakeDir Directories="$(PackageOutputPath)" />
+  <Target Name="Prepare" BeforeTargets="PrepareForBuild">
+    <ItemGroup>
+      <!-- Do this in a target to avoid interfering with the project system when adding items -->
+      <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
+      <_PackageFiles Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
+      <_PackageFiles Include="*.props" PackagePath="build/$(TargetFramework)" />
+      <_PackageFiles Include="*.targets" PackagePath="build/$(TargetFramework)" />
+    </ItemGroup>
+
+    <MakeDir Directories="$(PackageOutputPath)" Condition="'$(PackageOutputPath)' != '' And !Exists('$(PackageOutputPath)')" />
   </Target>
 
   <Target Name="ClearPackageOutput"
