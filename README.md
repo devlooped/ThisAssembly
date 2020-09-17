@@ -7,7 +7,7 @@
 
 
 Exposes project and assembly level information as constants in the ThisAssembly 
-class using .NET 5.0+ source generators powered by Roslyn.
+class using source generators powered by Roslyn.
 
 The main generated entry point type is `ThisAssembly` in the global namespace, 
 and is declared as partial so you can extend it too with manually created members.
