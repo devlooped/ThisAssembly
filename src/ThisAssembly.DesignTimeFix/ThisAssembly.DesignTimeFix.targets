@@ -5,7 +5,7 @@
     <DefaultLanguageSourceExtension Condition="'$(DefaultLanguageSourceExtension)' == '' And '$(MSBuildProjectExtension)' == '.vbproj'">.vb</DefaultLanguageSourceExtension>
     <DefaultLanguageSourceExtension Condition="'$(DefaultLanguageSourceExtension)' == '' And '$(MSBuildProjectExtension)' == '.fsproj'">.fs</DefaultLanguageSourceExtension>
     <ThisAssemblyIntellisenseFixExtension>.ta.g$(DefaultLanguageSourceExtension)</ThisAssemblyIntellisenseFixExtension>
-    <IncludeSourceGeneratorIntellisenseFix Condition="'$(IncludeSourceGeneratorIntellisenseFix)' == ''">true</IncludeSourceGeneratorIntellisenseFix>
+    <IncludeSourceGeneratorIntellisenseFix Condition="'$(IncludeSourceGeneratorIntellisenseFix)' == ''">false</IncludeSourceGeneratorIntellisenseFix>
   </PropertyGroup>
 
   <ItemGroup>
