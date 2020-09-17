@@ -1,0 +1,16 @@
+name: release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100-rc.1.20452.10
+      - run: dotnet build -p:version=${GITHUB_REF#refs/*/}
+      - run: dotnet nuget push ./bin -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}}
