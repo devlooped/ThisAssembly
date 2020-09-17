@@ -18,11 +18,11 @@ The [ThisAssembly](https://nuget.org/packages/ThisAssembly) meta-package include
 all the other packages for convenience.
 
 > NOTE: as of .NET 5.0 RC1, only C# is supported for source generators
-> so even if the generators do support VB and F#, no code will be generated 
+> so even if the generators here can emit proper VB and F#, no code will be generated 
 > (yet) for those languages. When support is introduced for those languages,
 > things will Just Work without the need to update these packages.
 
-> NOTE: if intellisense isn't lighting automatically, try closing and reopening 
+> NOTE: if intellisense isn't working properly, try closing and reopening 
 > Visual Studio. If that doesn't work, please set the *$(IncludeSourceGeneratorIntellisenseFix)* 
 > property to *true* in your project. This is a temporary workaround for a 
 > [Roslyn issue](https://github.com/dotnet/roslyn/issues/44093) that should be 
