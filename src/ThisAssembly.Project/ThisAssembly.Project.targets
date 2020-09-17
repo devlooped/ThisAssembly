@@ -1,0 +1,17 @@
+<Project>
+  
+  <Target Name="InjectThisAssemblyProject" BeforeTargets="PrepareForBuild;CompileDesignTime">
+    <PropertyGroup>
+      <ThisAssemblyProject>@(ProjectProperty, '|')</ThisAssemblyProject>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(ThisAssemblyProject)' != ''">
+      <CompilerVisibleProperty Include="@(ProjectProperty)" />
+      <CompilerVisibleProperty Include="ThisAssemblyProject" />
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="DebugThisAssemblyGenerator" />
+  </ItemGroup>
+  
+</Project>

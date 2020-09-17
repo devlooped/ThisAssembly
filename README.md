@@ -18,6 +18,8 @@ This package provides a static `ThisAssembly.Metadata` class with public
 constants exposing each `[System.Reflection.AssemblyMetadata(..)]` defined for 
 the project.
 
+![](img/ThisAssembly.Metadata.png)
+
 For an attribute declared (i.e. in *AssemblyInfo.cs*) like:
 
 ```csharp
@@ -35,6 +37,7 @@ The metadata attribute can alternatively be declared using MSBuild syntax in the
 ```
 
 Generated code:
+
 C#:
 
 ```csharp
@@ -63,6 +66,57 @@ F#:
   module internal ThisAssembly
 
   module public Metadata =
+      [<Literal>]
+      let public Foo = @"Bar"
+```
+
+## ThisAssembly.Project
+
+This package generates a static `ThisAssembly.Project` class with public 
+constants exposing project properties that have been opted into this mechanism by adding 
+them as `ThisAssemblyProject` MSBuild items in project file, such as:
+
+```xml
+  <PropertyGroup>
+    <Foo>Bar</Foo>
+  </PropertyGroup>
+  <ItemGroup>
+    <ThisAssemblyProject Include="Foo" />
+  </ItemGroup>
+```
+
+![](img/ThisAssembly.Project.png)
+
+Generated code:
+
+C#:
+
+```csharp
+  partial class ThisAssembly
+  {
+      public static partial class Project
+      {
+          public const string Foo = "Bar";
+      }
+  }
+```
+
+VB:
+```vbnet
+  Namespace Global
+    Partial Class ThisAssembly
+          Partial Class Project
+              Public Const Foo = "Bar"
+          End Class
+      End Class
+  End Namespace
+```
+
+F#:
+```fsharp
+  module internal ThisAssembly
+
+  module public Project =
       [<Literal>]
       let public Foo = @"Bar"
 ```

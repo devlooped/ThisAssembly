@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>ThisAssembly.DesignTimeFix</PackageId>
+    <Description>This package provides a temporary workaround for 
+https://github.com/dotnet/roslyn/issues/44093
+</Description>
+  </PropertyGroup>
+
+</Project>

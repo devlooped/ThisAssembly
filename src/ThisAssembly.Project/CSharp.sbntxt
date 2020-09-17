@@ -14,12 +14,12 @@
 partial class ThisAssembly
 {
     /// <summary>
-    /// Gets the assembly metadata.
+    /// Gets the project properties.
     /// </summary>
-    public static partial class Metadata
+    public static partial class Project
     {
-        {{~ for md in Metadata ~}}
-        public const string {{ md.Key }} = @"{{ md.Value }}";
+        {{~ for prop in Properties ~}}
+        public const string {{ prop.Key }} = @"{{ prop.Value }}";
 
         {{~ end ~}}
     }

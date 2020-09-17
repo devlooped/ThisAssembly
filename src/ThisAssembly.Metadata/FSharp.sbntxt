@@ -11,8 +11,6 @@
 /// Provides access to the current assembly information as pure constants, 
 //  without requiring reflection.
 /// </summary>
-[<System.CodeDom.Compiler.GeneratedCode("ThisAssembly.Metadata", "{{ Version }}")>]
-[<System.Runtime.CompilerServices.CompilerGenerated>]
 module internal ThisAssembly
 
 /// <summary>

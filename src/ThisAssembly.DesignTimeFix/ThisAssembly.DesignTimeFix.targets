@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <CompilerVisibleProperty Include="DebugThisAssemblyGenerator" />
     <CompilerVisibleProperty Include="ThisAssemblyIntellisenseFixExtension" />
     <CompilerVisibleProperty Include="IncludeSourceGeneratorIntellisenseFix" />
     <CompilerVisibleProperty Include="IntermediateOutputPath" />

@@ -11,16 +11,14 @@
 /// Provides access to the current assembly information as pure constants, 
 //  without requiring reflection.
 /// </summary>
-partial class ThisAssembly
-{
-    /// <summary>
-    /// Gets the assembly metadata.
-    /// </summary>
-    public static partial class Metadata
-    {
-        {{~ for md in Metadata ~}}
-        public const string {{ md.Key }} = @"{{ md.Value }}";
+module internal ThisAssembly
 
-        {{~ end ~}}
-    }
-}
+/// <summary>
+/// Gets the project properties.
+/// </summary>
+module public Project =
+    {{~ for prop in Properties ~}}
+    [<Literal>]
+    let public {{ prop.Key }} = @"{{ prop.Value }}"
+    {{~ end ~}}
+

@@ -11,7 +11,7 @@ using System.Diagnostics;
 namespace ThisAssembly
 {
     [Generator]
-    public class MetadataGenerator : ISourceGenerator
+    public class ProjectPropertyGenerator : ISourceGenerator
     {
         public void Initialize(GeneratorInitializationContext context) { }
 
@@ -22,10 +22,14 @@ namespace ThisAssembly
                 shouldDebug)
                 Debugger.Launch();
 
-            var metadata = context.Compilation.Assembly.GetAttributes()
-                .Where(x => x.AttributeClass?.Name == nameof(System.Reflection.AssemblyMetadataAttribute) &&
-                    Microsoft.CodeAnalysis.CSharp.SyntaxFacts.IsValidIdentifier((string)x.ConstructorArguments[0].Value))
-                .Select(x => new KeyValuePair<string, string>((string)x.ConstructorArguments[0].Value, (string)x.ConstructorArguments[1].Value))
+            if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.thisassemblyproject", out var properties))
+                return;
+
+            var metadata = properties.Split('|')
+                .Select(prop => new KeyValuePair<string, string>(prop,
+                    context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property." + prop, out var value) ? 
+                    value : null))
+                .Where(pair => pair.Value != null)
                 .Distinct(new KeyValueComparer())
                 .ToDictionary(x => x.Key, x => x.Value);
 
@@ -46,13 +50,13 @@ namespace ThisAssembly
                 if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.IntermediateOutputPath", out var intermediate))
                     throw new NotSupportedException();
 
-                var path = Path.Combine(intermediate, "ThisAssembly.Metadata" + extension);
+                var path = Path.Combine(intermediate, "ThisAssembly.Project" + extension);
                 Directory.CreateDirectory(intermediate);
                 File.WriteAllText(path, output, Encoding.UTF8);
 
             }
 
-            context.AddSource("ThisAssembly.Metadata", SourceText.From(output, Encoding.UTF8));
+            context.AddSource("ThisAssembly.Project", SourceText.From(output, Encoding.UTF8));
         }
 
         class KeyValueComparer : IEqualityComparer<KeyValuePair<string, string>>
@@ -63,5 +67,14 @@ namespace ThisAssembly
             public int GetHashCode(KeyValuePair<string, string> obj)
                 => HashCode.Combine(obj.Key, obj.Value);
         }
+
+        public static string[] GetItems(GeneratorExecutionContext context)
+            => context
+                .AdditionalFiles
+                .Where(f => context.AnalyzerConfigOptions
+                    .GetOptions(f)
+                    .TryGetValue("build_metadata.ThisAssemblyProject.ItemSpec", out var identity))
+                .Select(f => f.Path)
+                .ToArray();
     }
 }

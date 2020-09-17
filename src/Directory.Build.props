@@ -27,18 +27,7 @@
     <CI Condition="'$(TF_BUILD)' == 'true'">true</CI>
   </PropertyGroup>
 
-  <!-- Everything that follows are workarounds until things ship properly -->
-
-  <PropertyGroup>
-    <!-- Workaround for missing public packages with latest source generator APIs -->
-    <RoslynPath Condition="'$(MSBuildRuntimeType)' == 'Core'">$(MSBuildToolsPath)\Roslyn\bincore</RoslynPath>
-    <RoslynPath Condition="'$(MSBuildRuntimeType)' != 'Core'">$(MSBuildToolsPath)\Roslyn</RoslynPath>
-  </PropertyGroup>
-
   <ItemGroup Label="Workaround for public packages not having the latest ISourceGenerator API changes">
-    <Reference Include="Microsoft.CodeAnalysis" HintPath="$(RoslynPath)\Microsoft.CodeAnalysis.dll" />
-    <Reference Include="Microsoft.CodeAnalysis.VisualBasic" HintPath="$(RoslynPath)\Microsoft.CodeAnalysis.VisualBasic.dll" />
-    <Reference Include="Microsoft.CodeAnalysis.CSharp" HintPath="$(RoslynPath)\Microsoft.CodeAnalysis.CSharp.dll" />
     <!-- Workaround for revision mismatch with public versions -->
     <PackageReference Include="System.Collections.Immutable" Version="5.0.0-preview.*" PrivateAssets="all" />
     <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-preview.*" PrivateAssets="all" />

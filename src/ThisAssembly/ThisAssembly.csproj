@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../ThisAssembly.Metadata/ThisAssembly.Metadata.csproj" />
+    <ProjectReference Include="../ThisAssembly.Project/ThisAssembly.Project.csproj" />
   </ItemGroup>
 
 </Project>

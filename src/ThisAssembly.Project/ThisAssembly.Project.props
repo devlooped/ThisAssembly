@@ -1,0 +1,11 @@
+<Project>
+
+  <ItemGroup>
+    <ProjectProperty Include="RootNamespace" />
+    <ProjectProperty Include="AssemblyName" />
+    <ProjectProperty Include="TargetFrameworkVersion" />
+    <ProjectProperty Include="TargetFrameworkIdentifier" />
+    <ProjectProperty Include="TargetFrameworkMoniker" />
+  </ItemGroup>
+
+</Project>
