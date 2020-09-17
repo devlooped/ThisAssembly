@@ -14,9 +14,9 @@ Namespace Global
     ''' </summary>
     Partial Class ThisAssembly
         ''' <summary>
-        ''' Gets the project properties.
+        ''' Gets the AssemblyInfo attributes.
         ''' </summary>
-        Partial Class Project
+        Partial Class AssemblyInfo
         {{~ for prop in Properties ~}}
         Public Const {{ prop.Key }} As String = @"{{ prop.Value }}"
 

@@ -7,12 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Metadata", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4CA0A26B-C9E5-4F5A-93EC-A1E1FE8CA389}"
 	ProjectSection(SolutionItems) = preProject
-		azure-pipelines.yml = azure-pipelines.yml
-		.github\workflows\build.yml = .github\workflows\build.yml
 		src\Directory.Build.props = src\Directory.Build.props
 		src\Directory.Build.targets = src\Directory.Build.targets
 		global.json = global.json
 		README.md = README.md
+		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly", "src\ThisAssembly\ThisAssembly.csproj", "{D3A47732-4937-4B6E-BCD1-66896D04E20D}"
@@ -20,6 +19,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Project", "src\ThisAssembly.Project\ThisAssembly.Project.csproj", "{A91C7A07-FFD6-4D19-BD78-B0BC8F9267DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.DesignTimeFix", "src\ThisAssembly.DesignTimeFix\ThisAssembly.DesignTimeFix.csproj", "{C64BCC51-5E65-4062-BB92-A7E196DCD580}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.AssemblyInfo", "src\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj", "{CDDF83BC-70BE-46C3-BD79-524D868A2812}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +44,10 @@ Global
 		{C64BCC51-5E65-4062-BB92-A7E196DCD580}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C64BCC51-5E65-4062-BB92-A7E196DCD580}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C64BCC51-5E65-4062-BB92-A7E196DCD580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDF83BC-70BE-46C3-BD79-524D868A2812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDF83BC-70BE-46C3-BD79-524D868A2812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDF83BC-70BE-46C3-BD79-524D868A2812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDF83BC-70BE-46C3-BD79-524D868A2812}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
