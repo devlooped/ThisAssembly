@@ -16,7 +16,7 @@ partial class ThisAssembly
     /// <summary>
     /// Gets the AssemblyInfo attributes.
     /// </summary>
-    public static partial class AssemblyInfo
+    public static partial class Info
     {
         {{~ for prop in Properties ~}}
         public const string {{ prop.Key }} = @"{{ prop.Value }}";

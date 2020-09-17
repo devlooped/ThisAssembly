@@ -16,7 +16,7 @@ module internal ThisAssembly
 /// <summary>
 /// Gets the AssemblyInfo attributes.
 /// </summary>
-module public AssemblyInfo =
+module public Info =
     {{~ for prop in Properties ~}}
     [<Literal>]
     let public {{ prop.Key }} = @"{{ prop.Value }}"

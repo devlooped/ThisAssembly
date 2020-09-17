@@ -16,7 +16,7 @@ Namespace Global
         ''' <summary>
         ''' Gets the AssemblyInfo attributes.
         ''' </summary>
-        Partial Class AssemblyInfo
+        Partial Class Info
         {{~ for prop in Properties ~}}
         Public Const {{ prop.Key }} As String = @"{{ prop.Value }}"
 
