@@ -1,9 +1,9 @@
 # ThisAssembly
 
 [![Version](https://img.shields.io/nuget/v/ThisAssembly.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=darkgreen)](https://www.nuget.org/packages/ThisAssembly)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=green)](https://www.nuget.org/packages/ThisAssembly)
 [![License](https://img.shields.io/github/license/kzu/ThisAssembly.svg?color=blue)](https://github.com//kzu/ThisAssembly/blob/main/LICENSE)
-[![Build](https://github.com/kzu/ThisAssembly/workflows/.github/workflows/build.yml/badge.svg)](https://github.com/kzu/ThisAssembly/actions)
+[![build](https://github.com/kzu/ThisAssembly/workflows/build/badge.svg)](https://github.com/kzu/ThisAssembly/actions)
 
 
 Exposes project and assembly level information as constants in the ThisAssembly 
