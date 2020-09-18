@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using Scriban;
 using Microsoft.CodeAnalysis.Text;
 using System.Text;
-using System.IO;
-using System.Diagnostics;
 
 namespace ThisAssembly
 {

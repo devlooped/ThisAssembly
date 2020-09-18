@@ -1,12 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using Scriban;
 using Microsoft.CodeAnalysis.Text;
 using System.Text;
-using System.IO;
-using System.Diagnostics;
 using System.Reflection;
 
 namespace ThisAssembly

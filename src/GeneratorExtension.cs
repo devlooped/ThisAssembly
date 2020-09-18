@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -29,6 +28,7 @@ namespace ThisAssembly
             }
         }
 
+        //[Conditional("DEBUG")]
         public static void CheckDebugger(this GeneratorExecutionContext context, string generatorName)
         {
             if (context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.DebugSourceGenerators", out var debugValue) &&
