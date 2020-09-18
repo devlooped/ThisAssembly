@@ -11,7 +11,8 @@
   </Target>
 
   <ItemGroup>
-    <CompilerVisibleProperty Include="DebugThisAssemblyGenerator" />
+    <CompilerVisibleProperty Include="DebugSourceGenerators" />
+    <CompilerVisibleProperty Include="DebugThisAssemblyProject" />
   </ItemGroup>
   
 </Project>

@@ -67,4 +67,8 @@ F#:
     <ProjectReference Include="../ThisAssembly.DesignTimeFix/ThisAssembly.DesignTimeFix.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_PackageFiles Remove="ThisAssembly.Metadata.targets" />
+  </ItemGroup>
+
 </Project>

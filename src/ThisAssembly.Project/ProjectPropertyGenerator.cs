@@ -17,10 +17,7 @@ namespace ThisAssembly
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.DebugThisAssemblyGenerator", out var debugValue) &&
-                bool.TryParse(debugValue, out var shouldDebug) &&
-                shouldDebug)
-                Debugger.Launch();
+            context.CheckDebugger("ThisAssemblyProject");
 
             if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.ThisAssemblyProject", out var properties))
                 return;

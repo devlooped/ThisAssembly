@@ -17,10 +17,7 @@ namespace ThisAssembly
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.DebugThisAssemblyGenerator", out var debugValue) &&
-                bool.TryParse(debugValue, out var shouldDebug) &&
-                shouldDebug)
-                Debugger.Launch();
+            context.CheckDebugger("ThisAssemblyMetadata");
 
             var metadata = context.Compilation.Assembly.GetAttributes()
                 .Where(x => x.AttributeClass?.Name == nameof(System.Reflection.AssemblyMetadataAttribute) &&
@@ -35,7 +32,7 @@ namespace ThisAssembly
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
             var output = template.Render(model, member => member.Name);
 
-            context.ApplyDesignTimeFix(output, "ThisAssembly.Project", language);
+            context.ApplyDesignTimeFix(output, "ThisAssembly.Metadata", language);
             context.AddSource("ThisAssembly.Metadata", SourceText.From(output, Encoding.UTF8));
         }
 

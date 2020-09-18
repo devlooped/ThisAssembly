@@ -35,4 +35,8 @@ on the `ThisAssembly.Info` class.
     <ProjectReference Include="../ThisAssembly.DesignTimeFix/ThisAssembly.DesignTimeFix.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_PackageFiles Remove="ThisAssembly.AssemblyInfo.targets" />
+  </ItemGroup>
+
 </Project>
