@@ -25,17 +25,13 @@
 
   <ItemGroup>
     <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
+    <_PackageFiles Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
+    <_PackageFiles Include="*.props" PackagePath="build/$(TargetFramework)" />
+    <_PackageFiles Include="*.targets" PackagePath="build/$(TargetFramework)" />
   </ItemGroup>
 
   <Target Name="Prepare" BeforeTargets="PrepareForBuild">
-    <ItemGroup>
-      <!-- Do this in a target to avoid interfering with the project system when adding items -->
-      <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
-      <_PackageFiles Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
-      <_PackageFiles Include="*.props" PackagePath="build/$(TargetFramework)" />
-      <_PackageFiles Include="*.targets" PackagePath="build/$(TargetFramework)" />
-    </ItemGroup>
-
     <MakeDir Directories="$(PackageOutputPath)" Condition="'$(PackageOutputPath)' != '' And !Exists('$(PackageOutputPath)')" />
   </Target>
 
