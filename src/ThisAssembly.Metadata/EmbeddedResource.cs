@@ -9,8 +9,13 @@ namespace ThisAssembly
         public static string GetContent(string relativePath)
         {
             var baseName = Assembly.GetExecutingAssembly().GetName().Name;
-            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(baseName + "." +
-                relativePath.TrimStart('.').Replace(Path.DirectorySeparatorChar, '.').Replace(Path.AltDirectorySeparatorChar, '.'));
+            var resourceName = relativePath
+                .TrimStart('.')
+                .Replace(Path.DirectorySeparatorChar, '.')
+                .Replace(Path.AltDirectorySeparatorChar, '.');
+
+            using var stream = Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream(baseName + "." + resourceName);
 
             if (stream == null)
                 throw new NotSupportedException();
