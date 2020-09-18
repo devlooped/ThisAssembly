@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 
 namespace ThisAssembly
 {
-    static class DesignTimeFixExtension
+    static class GeneratorExtensions
     {
         public static void ApplyDesignTimeFix(this GeneratorExecutionContext context, string content, string hintName, string language)
         {
