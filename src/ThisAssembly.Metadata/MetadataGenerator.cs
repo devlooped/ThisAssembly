@@ -29,29 +29,13 @@ namespace ThisAssembly
                 .Distinct(new KeyValueComparer())
                 .ToDictionary(x => x.Key, x => x.Value);
 
+            var model = new Model(metadata);
             var language = context.ParseOptions.Language;
             var file = language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-            var output = template.Render(new Model(metadata), member => member.Name);
+            var output = template.Render(model, member => member.Name);
 
-            var includeFix = context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.IncludeSourceGeneratorIntellisenseFix", out var raw) &&
-                bool.TryParse(raw, out var value) &&
-                value;
-
-            if (includeFix)
-            {
-                if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.ThisAssemblyIntellisenseFixExtension", out var extension))
-                    extension = ".ta.g." + (language == LanguageNames.CSharp ? "cs" : language == LanguageNames.VisualBasic ? "vb" : "fs");
-
-                if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.IntermediateOutputPath", out var intermediate))
-                    throw new NotSupportedException();
-
-                var path = Path.Combine(intermediate, "ThisAssembly.Metadata" + extension);
-                Directory.CreateDirectory(intermediate);
-                File.WriteAllText(path, output, Encoding.UTF8);
-
-            }
-
+            context.ApplyDesignTimeFix(output, "ThisAssembly.Project", language);
             context.AddSource("ThisAssembly.Metadata", SourceText.From(output, Encoding.UTF8));
         }
 

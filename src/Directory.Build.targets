@@ -26,7 +26,7 @@
   <ItemGroup>
     <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
-    <Compile Include="$(MSBuildThisFileDirectory)EmbeddedResource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)*.cs" />
     <_PackageFiles Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
     <_PackageFiles Include="*.props" PackagePath="build/$(TargetFramework)" />
     <_PackageFiles Include="*.targets" PackagePath="build/$(TargetFramework)" />
