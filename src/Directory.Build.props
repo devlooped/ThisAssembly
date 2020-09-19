@@ -19,6 +19,10 @@
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <LangVersion>Preview</LangVersion>
+    <!--<Nullable>enable</Nullable>-->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <DefaultItemExcludes>$(DefaultItemExcludes);*.binlog;*.zip</DefaultItemExcludes>
   </PropertyGroup>
 
   <PropertyGroup Label="CI" Condition="'$(CI)' == ''">
