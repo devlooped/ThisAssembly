@@ -1,0 +1,22 @@
+<Project>
+
+  <Target Name="_InjectRexAdditionalFiles"
+          BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
+          DependsOnTargets="PrepareResourceNames"
+          Returns="@(ResxCode)">
+    <ItemGroup>
+      <ResxCode Include="@(EmbeddedResource)" 
+                Condition="'%(EmbeddedResource.Type)' == 'Resx' And '%(EmbeddedResource.GenerateResource)' != 'false' And '%(EmbeddedResource.ManifestResourceName)' != ''" />
+      <AdditionalFiles Include="@(ResxCode)" SourceItemType="EmbeddedResource" />
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="DebugSourceGenerators" />
+    <CompilerVisibleProperty Include="DebugThisAssemblyStrings" />
+
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="ManifestResourceName" />
+  </ItemGroup>
+
+</Project>

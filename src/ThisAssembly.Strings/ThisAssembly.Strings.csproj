@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>ThisAssembly.Strings</PackageId>
+    <Description>This package generates a static `ThisAssembly.Project` class with public 
+constants exposing project properties that have been opted into this mechanism by adding 
+them as `ProjectProperty` MSBuild items in project file, such as:
+
+    &lt;PropertyGroup&gt;
+      &lt;Foo&gt;Bar&lt;/Foo&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup&gt;
+      &lt;ProjectProperty Include="Foo" /&gt;
+    &lt;/ItemGroup&gt;
+
+A corresponding `ThisAssembly.Project.Foo` constant with the value `Bar` is provided. 
+
+Generated code:
+C#:
+
+  partial class ThisAssembly
+  {
+      public static partial class Project
+      {
+          public const string Foo = "Bar";
+      }
+  }
+
+VB:
+
+  Namespace Global
+    Partial Class ThisAssembly
+          Partial Class Project
+              Public Const Foo = "Bar"
+          End Class
+      End Class
+  End Namespace
+
+F#:
+
+  module internal ThisAssembly
+
+  module public Project =
+      [&lt;Literal&gt;]
+      let public Foo = @"Bar"
+
+</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
+    <PackageReference Include="Scriban" Version="2.1.2" PrivateAssets="all" Pack="true" />
+
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-3.final" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="3.8.0-3.final" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../ThisAssembly.DesignTimeFix/ThisAssembly.DesignTimeFix.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ThisAssembly.Strings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ThisAssembly.Strings.cs" />
+  </ItemGroup>
+
+</Project>
