@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.Runtime.CompilerServices;
+
 /// <summary>
 /// Provides access to the current assembly information as pure constants, 
 //  without requiring reflection.
@@ -16,6 +19,8 @@ partial class ThisAssembly
     /// <summary>
     /// Gets the assembly metadata.
     /// </summary>
+    [GeneratedCode("ThisAssembly.Metadata", "{{ Version }}")]
+    [CompilerGenerated]
     public static partial class Metadata
     {
         {{~ for md in Metadata ~}}

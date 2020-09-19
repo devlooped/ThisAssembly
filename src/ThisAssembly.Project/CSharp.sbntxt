@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.Runtime.CompilerServices;
+
 /// <summary>
 /// Provides access to the current assembly information as pure constants, 
 //  without requiring reflection.
@@ -16,6 +19,8 @@ partial class ThisAssembly
     /// <summary>
     /// Gets the project properties.
     /// </summary>
+    [GeneratedCode("ThisAssembly.Project", "{{ Version }}")]
+    [CompilerGenerated]
     public static partial class Project
     {
         {{~ for prop in Properties ~}}
