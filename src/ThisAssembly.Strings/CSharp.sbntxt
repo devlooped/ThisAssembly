@@ -12,15 +12,15 @@
     public static partial class {{ $0.Name }}
     {
         {{~ for value in $0.Values ~}}
-		{{~ if!(value.HasFormat) ~}}
 	    /// <summary>
+        {{~ if value.Comment ~}}
+        /// {{ value.Comment }}
+        {{~ end ~}}
 	    /// => "{{ value.Value }}"
 	    /// </summary>
+		{{~ if!(value.HasFormat) ~}}
 	    public static string {{ value.Name }} => Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Prefix + value.Name }}");
         {{~ else ~}}
-	    /// <summary>
-	    /// => "{{ value.Value }}"
-	    /// </summary>
 	    public static string {{ value.Name }}(
             {{- for arg in value.Format -}}
             object arg {{~ arg ~}}{{ if !for.last }}, {{ end }}

@@ -39,7 +39,7 @@ namespace ThisAssembly
 
                 var rootArea = ResourceFile.Load(resourceFile.Path, "Strings");
                 var model = new Model(rootArea, resourceName);
-                model = model with { ResourceName = "Bar" };
+                model = model with { ResourceName = resourceName };
 
                 var output = template.Render(model, member => member.Name);
 

@@ -36,15 +36,16 @@ namespace ThisAssembly
                 //  Splits: ([resouce area]_)*[resouce name]
                 var nameAttribute = element.Attribute("name").Value;
                 var valueElement = element.Element("value").Value;
+                var comment = element.Element("comment")?.Value;
                 var areaParts = nameAttribute.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
                 if (areaParts.Length <= 1)
                 {
-                    root.Values.Add(GetValue(nameAttribute, valueElement));
+                    root.Values.Add(GetValue(nameAttribute, valueElement) with { Comment = comment });
                 }
                 else
                 {
                     var area = GetArea(root, areaParts.Take(areaParts.Length - 1));
-                    var value = GetValue(areaParts.Skip(areaParts.Length - 1).First(), valueElement);
+                    var value = GetValue(areaParts.Skip(areaParts.Length - 1).First(), valueElement) with { Comment = comment };
 
                     area.Values.Add(value);
                 }
@@ -112,6 +113,7 @@ namespace ThisAssembly
     [DebuggerDisplay("{Name} = {Value}")]
     record ResourceValue(string Name, string Value)
     {
+        public string Comment { get; init; }
         public bool HasFormat => Format != null && Format.Count > 0;
         public List<string> Format { get; } = new List<string>();
     }
