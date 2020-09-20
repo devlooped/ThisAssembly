@@ -57,7 +57,7 @@ F#:
   <ItemGroup>
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.0" PrivateAssets="all" Pack="true" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
-    <PackageReference Include="Scriban" Version="2.1.2" PrivateAssets="all" Pack="true" />
+    <PackageReference Include="Scriban" Version="2.1.4" PrivateAssets="all" Pack="true" />
     
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-3.final" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="3.8.0-3.final" PrivateAssets="all" />

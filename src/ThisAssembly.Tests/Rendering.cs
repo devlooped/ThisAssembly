@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Scriban;
-using Xunit;
 
-namespace ThisAssembly.Tests
+namespace ThisAssemblyTests
 {
     public class Rendering
     {
@@ -15,13 +13,13 @@ namespace ThisAssembly.Tests
             {
                 Values =
                 {
-                    new ResourceValue("Foo", "Hello {0}, {1} :)")
+                    new ResourceValue("Foo", "Hello {first}, {last}. Yay {first} :)")
                     {
-                        Format = { "0", "1" }
+                        Format = { "first", "last" }
                     },
-                    new ResourceValue("Bar", "Bye {0}")
+                    new ResourceValue("Bar", "Bye {0} and {name}")
                     {
-                        Format = { "0" }
+                        Format = { "0", "{name}" }
                     },
                 },
                 NestedAreas =

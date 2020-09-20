@@ -8,29 +8,50 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+{{ func summary }}
+	    /// <summary>
+        {{~ if $0.Comment ~}}
+        /// {{ $0.Comment }}
+        {{~ end ~}}
+	    /// => "{{ $0.Value }}"
+	    /// </summary>
+{{ end }}
 {{ func render }}
     public static partial class {{ $0.Name }}
     {
         {{~ for value in $0.Values ~}}
-	    /// <summary>
-        {{~ if value.Comment ~}}
-        /// {{ value.Comment }}
-        {{~ end ~}}
-	    /// => "{{ value.Value }}"
-	    /// </summary>
 		{{~ if!(value.HasFormat) ~}}
+        {{- summary value ~}}
 	    public static string {{ value.Name }} => Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Prefix + value.Name }}");
         {{~ else ~}}
+        {{~ if value.IsIndexedFormat ~}}
+        {{- summary value ~}}
 	    public static string {{ value.Name }}(
             {{- for arg in value.Format -}}
-            object arg {{~ arg ~}}{{ if !for.last }}, {{ end }}
+            object arg{{~ arg ~}}{{ if !for.last }}, {{ end }}
             {{- end -}}) 
             => string.Format(
                 CultureInfo.CurrentCulture,
                 Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Prefix + value.Name }}"),
                 {{ for arg in value.Format -}}
                 arg{{- arg -}}{{- if !for.last -}}, {{ end }}{{- end -}});
+        {{~ else if value.IsNamedFormat ~}}
+        {{- summary value ~}}
+	    public static string {{ value.Name }}(
+            {{- for arg in value.Format -}}
+            object {{ arg ~}}{{ if !for.last }}, {{ end }}
+            {{- end -}}) 
+            => string.Format(
+                CultureInfo.CurrentCulture,
+                Strings
+                    .GetResourceManager("{{ $1 }}")
+                    .GetString("{{ value.Prefix + value.Name }}")
+                    {{- for arg in value.Format }}
+                    .Replace("{{ arg }}", "{{ for.index }}"){{- end -}},
+                {{ for arg in value.Format -}}
+                {{- arg -}}{{- if !for.last -}}, {{ end }}{{- end -}});
 
+        {{~ end ~}}
         {{~ end ~}}
         {{~ end ~}}
 
