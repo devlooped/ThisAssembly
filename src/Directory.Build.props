@@ -36,4 +36,8 @@
     <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-preview.*" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)*.cs" />
+  </ItemGroup>
+  
 </Project>

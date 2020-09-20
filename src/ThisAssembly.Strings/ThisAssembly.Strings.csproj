@@ -6,49 +6,14 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Strings</PackageId>
-    <Description>This package generates a static `ThisAssembly.Project` class with public 
-constants exposing project properties that have been opted into this mechanism by adding 
-them as `ProjectProperty` MSBuild items in project file, such as:
+    <Description>This package generates a static `ThisAssembly.Strings` class with public 
+constants exposing string resources in .resx files or methods with the right number of 
+parameters for strings that use formatting parameters. 
 
-    &lt;PropertyGroup&gt;
-      &lt;Foo&gt;Bar&lt;/Foo&gt;
-    &lt;/PropertyGroup&gt;
-
-    &lt;ItemGroup&gt;
-      &lt;ProjectProperty Include="Foo" /&gt;
-    &lt;/ItemGroup&gt;
-
-A corresponding `ThisAssembly.Project.Foo` constant with the value `Bar` is provided. 
-
-Generated code:
-C#:
-
-  partial class ThisAssembly
-  {
-      public static partial class Project
-      {
-          public const string Foo = "Bar";
-      }
-  }
-
-VB:
-
-  Namespace Global
-    Partial Class ThisAssembly
-          Partial Class Project
-              Public Const Foo = "Bar"
-          End Class
-      End Class
-  End Namespace
-
-F#:
-
-  module internal ThisAssembly
-
-  module public Project =
-      [&lt;Literal&gt;]
-      let public Foo = @"Bar"
-
+In addition, it groups constants and methods in nested classes according to an optional 
+underscore separator to organize strings. For example, *User_InvalidCredentials* can be
+accessed with *ThisAssembly.Strings.User.InvalidCredentials* if it contains a simple string, 
+or as a method with the right number of parametres if its value has a format string.
 </Description>
   </PropertyGroup>
 

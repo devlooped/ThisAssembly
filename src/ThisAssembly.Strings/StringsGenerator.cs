@@ -59,7 +59,7 @@ namespace ThisAssembly
                         .GetText()
                         .ToString();
                 }
-
+                
                 context.ApplyDesignTimeFix(output, resourceName, language);
                 context.AddSource(resourceName, SourceText.From(output, Encoding.UTF8));
             }

@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.AssemblyInfo",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Strings", "src\ThisAssembly.Strings\ThisAssembly.Strings.csproj", "{3E7158B5-BFEF-4416-8226-9096C7C98268}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThisAssembly.Tests", "src\ThisAssembly.Tests\ThisAssembly.Tests.csproj", "{0EE54C4D-192C-40BF-B311-408CE833834D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{3E7158B5-BFEF-4416-8226-9096C7C98268}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7158B5-BFEF-4416-8226-9096C7C98268}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7158B5-BFEF-4416-8226-9096C7C98268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EE54C4D-192C-40BF-B311-408CE833834D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EE54C4D-192C-40BF-B311-408CE833834D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EE54C4D-192C-40BF-B311-408CE833834D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EE54C4D-192C-40BF-B311-408CE833834D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -86,29 +86,16 @@ namespace ThisAssembly
 
         static ResourceValue GetValue(string resourceName, string resourceValue)
         {
-            var value = new ResourceValue(resourceName, resourceValue, FormatExpression.IsMatch(resourceValue));
+            var value = new ResourceValue(resourceName, resourceValue);
 
             // Parse parameter names
-            if (value.HasFormat)
+            if (FormatExpression.IsMatch(resourceValue))
             {
                 value.Format.AddRange(FormatExpression
                         .Matches(resourceValue)
                         .OfType<Match>()
                         .Select(match => match.Groups["name"].Value)
                         .Distinct());
-            }
-
-            int index;
-            // Find if there are any index values
-            value = value with
-            {
-                IsIndexed = value.Format.Any(format => int.TryParse(format, out index))
-            };
-
-            // If there are mixed names and indexes, treat it as unformatted.
-            if (value.IsIndexed && value.Format.Any(format => !int.TryParse(format, out index)))
-            {
-                value = value with { HasFormat = false };
             }
 
             return value;
@@ -123,9 +110,9 @@ namespace ThisAssembly
     }
 
     [DebuggerDisplay("{Name} = {Value}")]
-    record ResourceValue(string Name, string Value, bool HasFormat)
+    record ResourceValue(string Name, string Value)
     {
-        public bool IsIndexed { get; init; }
+        public bool HasFormat => Format != null && Format.Count > 0;
         public List<string> Format { get; } = new List<string>();
     }
 }

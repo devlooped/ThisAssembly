@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ThisAssembly.Strings\IsExternalInit.cs" Link="IsExternalInit.cs" />
+    <Compile Include="..\ThisAssembly.Strings\Model.cs" Link="Model.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\ThisAssembly.Strings\CSharp.sbntxt" Link="CSharp.sbntxt" />
+    <Compile Remove="..\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Scriban" Version="2.1.4" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+</Project>

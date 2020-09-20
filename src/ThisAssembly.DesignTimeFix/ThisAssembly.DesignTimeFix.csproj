@@ -12,7 +12,7 @@ https://github.com/dotnet/roslyn/issues/44093
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0-3.final" PrivateAssets="all" />
+    <Compile Remove="..\*.cs" />
   </ItemGroup>
 
 </Project>
