@@ -1,4 +1,5 @@
-# ThisAssembly
+![Icon](img/icon-32.png) ThisAssembly
+============
 
 [![Version](https://img.shields.io/nuget/v/ThisAssembly.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly)
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=green)](https://www.nuget.org/packages/ThisAssembly)

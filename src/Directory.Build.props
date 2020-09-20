@@ -5,6 +5,8 @@
     <Copyright>Copyright 2020 - Daniel Cazzulino</Copyright>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon-128.png</PackageIcon>
+    <PackageTags>dotnet</PackageTags>
 
     <Version>42.42.42</Version>
     <PackageVersion>$(Version)</PackageVersion>
@@ -38,6 +40,7 @@
 
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)*.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)..\img\icon-128.png" Link="icon-128.png" CopyToOutputDirectory="PreserveNewest" PackagePath="%(Filename)%(Extension)" />
   </ItemGroup>
   
 </Project>
