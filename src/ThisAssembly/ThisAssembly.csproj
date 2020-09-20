@@ -20,6 +20,7 @@
     <ProjectReference Include="../ThisAssembly.AssemblyInfo/ThisAssembly.AssemblyInfo.csproj" />
     <ProjectReference Include="../ThisAssembly.Metadata/ThisAssembly.Metadata.csproj" />
     <ProjectReference Include="../ThisAssembly.Project/ThisAssembly.Project.csproj" />
+    <ProjectReference Include="../ThisAssembly.Project/ThisAssembly.Strings.csproj" />
   </ItemGroup>
 
 </Project>
