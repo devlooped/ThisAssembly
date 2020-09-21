@@ -2,12 +2,11 @@
 
   <Target Name="_InjectRexAdditionalFiles"
           BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
-          DependsOnTargets="PrepareResourceNames"
-          Returns="@(ResxCode)">
+          DependsOnTargets="PrepareResourceNames">
     <ItemGroup>
       <ResxCode Include="@(EmbeddedResource)" 
                 Condition="'%(EmbeddedResource.Type)' == 'Resx' And '%(EmbeddedResource.GenerateResource)' != 'false' And '%(EmbeddedResource.ManifestResourceName)' != ''" />
-      <AdditionalFiles Include="@(ResxCode)" SourceItemType="EmbeddedResource" />
+      <AdditionalFiles Include="@(ResxCode -> '%(FullPath)')" SourceItemType="EmbeddedResource" />
     </ItemGroup>
   </Target>
 
