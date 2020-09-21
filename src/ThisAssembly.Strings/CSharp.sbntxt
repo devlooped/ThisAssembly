@@ -22,7 +22,7 @@
         {{~ for value in $0.Values ~}}
 		{{~ if!(value.HasFormat) ~}}
         {{- summary value ~}}
-	    public static string {{ value.Name }} => Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Prefix + value.Name }}");
+	    public static string {{ value.Name }} => Strings.GetResourceManager("{{ $1 }}").GetString("{{ $0.Prefix + value.Name }}");
         {{~ else ~}}
         {{~ if value.IsIndexedFormat ~}}
         {{- summary value ~}}
@@ -32,7 +32,7 @@
             {{- end -}}) 
             => string.Format(
                 CultureInfo.CurrentCulture,
-                Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Prefix + value.Name }}"),
+                Strings.GetResourceManager("{{ $1 }}").GetString("{{ $0.Prefix + value.Name }}"),
                 {{ for arg in value.Format -}}
                 arg{{- arg -}}{{- if !for.last -}}, {{ end }}{{- end -}});
         {{~ else if value.IsNamedFormat ~}}
@@ -45,7 +45,7 @@
                 CultureInfo.CurrentCulture,
                 Strings
                     .GetResourceManager("{{ $1 }}")
-                    .GetString("{{ value.Prefix + value.Name }}")
+                    .GetString("{{ $0.Prefix + value.Name }}")
                     {{- for arg in value.Format }}
                     .Replace("{{ arg }}", "{{ for.index }}"){{- end -}},
                 {{ for arg in value.Format -}}

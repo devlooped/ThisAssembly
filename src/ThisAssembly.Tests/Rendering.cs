@@ -6,6 +6,15 @@ namespace ThisAssemblyTests
 {
     public class Rendering
     {
+        public void LoadAndRender()
+        {
+            var root = ResourceFile.Load(@"Resources.resx", "Strings");
+            var model = new Model(root, "MyAssembly.Resources");
+            var template = Template.Parse(File.ReadAllText("CSharp.sbntxt"));
+
+            Console.WriteLine(template.Render(model, member => member.Name));
+        }
+
         public void Render()
         {
             var template = Template.Parse(File.ReadAllText("CSharp.sbntxt"));

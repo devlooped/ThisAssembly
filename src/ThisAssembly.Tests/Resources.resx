@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Foo_Bar_Baz" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Foo_Hey" xml:space="preserve">
+    <value>Hey</value>
+  </data>
   <data name="Indexed" xml:space="preserve">
     <value>Hello {0}, {1}. Should we call you {0}?</value>
   </data>
