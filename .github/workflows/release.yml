@@ -1,8 +1,9 @@
 name: release
-
 on:
   release:
     types: [created]
+env:
+  DOTNET_NOLOGO: true
 
 jobs:
   push:
