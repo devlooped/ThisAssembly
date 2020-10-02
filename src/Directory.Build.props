@@ -8,8 +8,7 @@
     <PackageIcon>icon-128.png</PackageIcon>
     <PackageTags>dotnet</PackageTags>
 
-    <Version>42.42.42</Version>
-    <PackageVersion>$(Version)</PackageVersion>
+    <VersionPrefix>42.42.42</VersionPrefix>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <GenerateRepositoryUrlAttribute>true</GenerateRepositoryUrlAttribute>

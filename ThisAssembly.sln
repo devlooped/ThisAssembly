@@ -7,12 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Metadata", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4CA0A26B-C9E5-4F5A-93EC-A1E1FE8CA389}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\build.yml = .github\workflows\build.yml
 		src\Directory.Build.props = src\Directory.Build.props
 		src\Directory.Build.targets = src\Directory.Build.targets
 		global.json = global.json
 		README.md = README.md
-		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly", "src\ThisAssembly\ThisAssembly.csproj", "{D3A47732-4937-4B6E-BCD1-66896D04E20D}"
@@ -24,6 +22,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.AssemblyInfo", "src\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj", "{CDDF83BC-70BE-46C3-BD79-524D868A2812}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Strings", "src\ThisAssembly.Strings\ThisAssembly.Strings.csproj", "{3E7158B5-BFEF-4416-8226-9096C7C98268}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{09733D87-085D-4857-A556-5D28796CC138}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +62,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{09733D87-085D-4857-A556-5D28796CC138} = {4CA0A26B-C9E5-4F5A-93EC-A1E1FE8CA389}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF2DC9F-5F77-4F6E-8804-CFF5892CD064}
