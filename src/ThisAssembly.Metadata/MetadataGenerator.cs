@@ -40,7 +40,7 @@ namespace ThisAssembly
                 => x.Key == y.Key && x.Value == y.Value;
 
             public int GetHashCode(KeyValuePair<string, string> obj)
-                => HashCode.Combine(obj.Key, obj.Value);
+                => new HashCode().AddRange(obj.Key, obj.Value).ToHashCode();
         }
     }
 }

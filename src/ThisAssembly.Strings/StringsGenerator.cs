@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
 using Scriban;
 using Microsoft.CodeAnalysis.Text;
 using System.Text;
@@ -52,13 +50,13 @@ namespace ThisAssembly
                         .GetText()
                         .ToString();
                 }
-                else if (language == LanguageNames.VisualBasic)
-                {
-                    output = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseCompilationUnit(output)
-                        .NormalizeWhitespace()
-                        .GetText()
-                        .ToString();
-                }
+                //else if (language == LanguageNames.VisualBasic)
+                //{
+                //    output = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseCompilationUnit(output)
+                //        .NormalizeWhitespace()
+                //        .GetText()
+                //        .ToString();
+                //}
                 
                 context.ApplyDesignTimeFix(output, resourceName, language);
                 context.AddSource(resourceName, SourceText.From(output, Encoding.UTF8));

@@ -17,3 +17,4 @@ obj
 /src/Usage
 /src/Backup
 /src/TestResults
+dotnet-nugetize.items

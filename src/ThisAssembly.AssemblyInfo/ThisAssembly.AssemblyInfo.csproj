@@ -24,11 +24,11 @@ on the `ThisAssembly.Info` class.
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NuGetizer" Version="0.4.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
-    <PackageReference Include="Scriban" Version="2.1.4" PrivateAssets="all" Pack="true" />
+    <PackageReference Include="Scriban" Version="2.1.4" PrivateAssets="all" />
     
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-3.final" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="3.8.0-3.final" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-3.final" Pack="false" />
   </ItemGroup>
 
   <ItemGroup>

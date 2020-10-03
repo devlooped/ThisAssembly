@@ -13,10 +13,10 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <GenerateRepositoryUrlAttribute>true</GenerateRepositoryUrlAttribute>
 
-    <PackageOutputPath Condition="'$(PackageOutputPath)' == ''">$(MSBuildThisFileDirectory)..\bin</PackageOutputPath>
+    <PackageOutputPath Condition="'$(PackageOutputPath)' == ''">$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\bin))</PackageOutputPath>
 
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <BuildOutputTargetFolder>analyzers</BuildOutputTargetFolder>
+    <PackOnBuild>true</PackOnBuild>
+    <PackFolder>analyzers\cs</PackFolder>
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <LangVersion>Preview</LangVersion>
@@ -33,13 +33,13 @@
 
   <ItemGroup Label="Workaround for public packages not having the latest ISourceGenerator API changes">
     <!-- Workaround for revision mismatch with public versions -->
-    <PackageReference Include="System.Collections.Immutable" Version="5.0.0-preview.*" PrivateAssets="all" />
-    <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-preview.*" PrivateAssets="all" />
+    <PackageReference Include="System.Collections.Immutable" Version="5.0.0-preview.*" Pack="false" />
+    <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-preview.*" Pack="false" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)*.cs" />
-    <Content Include="$(MSBuildThisFileDirectory)..\img\icon-128.png" Link="icon-128.png" CopyToOutputDirectory="PreserveNewest" PackagePath="%(Filename)%(Extension)" />
+    <PackageFile Include="$(MSBuildThisFileDirectory)..\img\icon-128.png" PackagePath="%(Filename)%(Extension)" />
   </ItemGroup>
   
 </Project>

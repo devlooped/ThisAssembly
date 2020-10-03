@@ -1,20 +1,5 @@
 <Project>
 
-  <PropertyGroup Label="Pack">
-    <!-- The Sdks\NuGet.Build.Tasks.Pack\build\NuGet.Build.Tasks.Pack.targets unconditionally sets 
-        PackageId=AssemblyName if no PackageId is provided, and then defaults IsPackable=true if 
-        a PackageId is set (?!), meaning that by default everything is packable in Sdk-style 
-        projects. 
-
-        The Directory.Build.targets are imported after the user's project properties have been 
-        read, and therefore gives us a chance to inspect if an explicit PackageId was provided, 
-        before the NuGet SDK target is imported and defaults it. At this point, we can give 
-        IsPackable a more sensible default, making it false if no PackageId was provided at this 
-        point. -->
-    <IsPackable Condition="'$(PackageId)' == ''">false</IsPackable>
-    <IsPackable Condition="'$(PackageId)' != ''">true</IsPackable>
-  </PropertyGroup>
-
   <PropertyGroup Label="NuGet Pack">
     <HttpNuGetCache>$(LocalAppData)\NuGet\v3-cache</HttpNuGetCache>
     <!-- By default, we clear the HTTP cache if our project is packable. This does *not* clear the cached installed packages -->
@@ -26,13 +11,14 @@
   <ItemGroup>
     <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
-    
-    <_PackageFiles Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)/%(Filename)%(Extension)" />
-    <_PackageFiles Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
-    <_PackageFiles Include="*.props" PackagePath="build/$(TargetFramework)" />
-    <_PackageFiles Include="*.targets" PackagePath="build/$(TargetFramework)" />
+    <None Update="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
 
-    <UpToDateCheck Include="@(EmbeddedResource);@(_PackageFiles)" />
+    <!--<_PackageFiles Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)/%(Filename)%(Extension)" />-->
+
+    <PackageFile Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
+    <PackageFile Include="*.props;*.targets" PackagePath="build/$(TargetFramework)/%(Filename)%(Extension)" />
+
+    <UpToDateCheck Include="@(EmbeddedResource);@(PackageFile)" />
   </ItemGroup>
 
   <Target Name="Prepare" BeforeTargets="PrepareForBuild">

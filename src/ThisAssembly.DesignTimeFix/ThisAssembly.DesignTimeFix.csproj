@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackBuildOutput>false</PackBuildOutput>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -13,6 +14,10 @@ https://github.com/dotnet/roslyn/issues/44093
 
   <ItemGroup>
     <Compile Remove="..\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGetizer" Version="0.4.1" />
   </ItemGroup>
 
 </Project>
