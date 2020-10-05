@@ -1,6 +1,13 @@
 <Project>
+
+  <PropertyGroup>
+    <InjectThisAssemblyProjectDependsOn Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
+      InitializeSourceControlInformation
+    </InjectThisAssemblyProjectDependsOn>
+  </PropertyGroup>
   
-  <Target Name="InjectThisAssemblyProject" BeforeTargets="PrepareForBuild;CompileDesignTime">
+  <Target Name="InjectThisAssemblyProject" DependsOnTargets="$(InjectThisAssemblyProjectDependsOn)" 
+          BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun">
     <PropertyGroup>
       <ThisAssemblyProject>@(ProjectProperty, '|')</ThisAssemblyProject>
     </PropertyGroup>
