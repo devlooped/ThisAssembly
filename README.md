@@ -1,7 +1,7 @@
 ![Icon](img/icon-32.png) ThisAssembly
 ============
 
-[![Version](https://img.shields.io/nuget/v/ThisAssembly.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly)
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly)
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=green)](https://www.nuget.org/packages/ThisAssembly)
 [![License](https://img.shields.io/github/license/kzu/ThisAssembly.svg?color=blue)](https://github.com//kzu/ThisAssembly/blob/main/LICENSE)
 [![Build](https://github.com/kzu/ThisAssembly/workflows/build/badge.svg?branch=main)](https://github.com/kzu/ThisAssembly/actions)
@@ -31,7 +31,7 @@ all the other packages for convenience.
 
 ## ThisAssembly.AssemblyInfo
 
-[![Version](https://img.shields.io/nuget/v/ThisAssembly.AssemblyInfo.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.AssemblyInfo)
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.AssemblyInfo.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.AssemblyInfo)
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.AssemblyInfo.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.AssemblyInfo)
 
 This package generates a static `ThisAssembly.Info` class with public 
@@ -53,7 +53,7 @@ on the `ThisAssembly.Info` class.
 
 ## ThisAssembly.Metadata
 
-[![Version](https://img.shields.io/nuget/v/ThisAssembly.Metadata.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Metadata)
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Metadata.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Metadata)
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Metadata.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Metadata)
 
 This package provides a static `ThisAssembly.Metadata` class with public 
@@ -114,7 +114,7 @@ F#:
 
 ## ThisAssembly.Project
 
-[![Version](https://img.shields.io/nuget/v/ThisAssembly.Project.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Project)
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Project.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Project)
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Project.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Project)
 
 This package generates a static `ThisAssembly.Project` class with public 
@@ -168,7 +168,7 @@ F#:
 
 ## ThisAssembly.Strings
 
-[![Version](https://img.shields.io/nuget/v/ThisAssembly.Strings.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Strings)
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Strings.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Strings)
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Strings.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Strings)
 
 ![](img/ThisAssembly.Strings.gif)
