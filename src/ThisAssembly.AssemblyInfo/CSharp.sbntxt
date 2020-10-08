@@ -24,7 +24,7 @@ partial class ThisAssembly
     public static partial class Info
     {
         {{~ for prop in Properties ~}}
-        /// <summary>{{ prop.Key }} => {{ prop.Value }}</summary>
+        /// <summary>{{ prop.Key }} = {{ prop.Value }}</summary>
         public const string {{ prop.Key }} = @"{{ prop.Value }}";
 
         {{~ end ~}}
