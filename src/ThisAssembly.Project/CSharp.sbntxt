@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides access to the current assembly information as pure constants, 
-//  without requiring reflection.
+///  without requiring reflection.
 /// </summary>
 partial class ThisAssembly
 {
@@ -24,6 +24,7 @@ partial class ThisAssembly
     public static partial class Project
     {
         {{~ for prop in Properties ~}}
+        /// <summary>{{ prop.Key }} => {{ prop.Value }}</summary>
         public const string {{ prop.Key }} = @"{{ prop.Value }}";
 
         {{~ end ~}}
