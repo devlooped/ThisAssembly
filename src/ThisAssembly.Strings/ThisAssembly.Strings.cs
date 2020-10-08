@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides access to the current assembly information as pure constants, 
-//  without requiring reflection.
+///  without requiring reflection.
 /// </summary>
 partial class ThisAssembly
 {
