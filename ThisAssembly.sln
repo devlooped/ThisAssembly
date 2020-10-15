@@ -9,7 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		src\Directory.Build.props = src\Directory.Build.props
 		src\Directory.Build.targets = src\Directory.Build.targets
-		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -29,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThisAssembly.Prerequisites", "src\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj", "{568E5150-84AD-4619-BEA3-AA5EDF084ABC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Prerequisites", "src\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj", "{568E5150-84AD-4619-BEA3-AA5EDF084ABC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
