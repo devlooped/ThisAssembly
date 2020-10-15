@@ -25,14 +25,20 @@
     <MakeDir Directories="$(PackageOutputPath)" Condition="'$(PackageOutputPath)' != '' And !Exists('$(PackageOutputPath)')" />
   </Target>
 
-  <Target Name="UpdatePackageMetadata" BeforeTargets="PrepareForBuild;GetAssemblyVersion;GenerateNuspec;Pack" Condition="$(IsPackable) And '$(RepositoryUrl)' != '' And '$(SourceRevisionId)' != ''">
+  <Target Name="UpdatePackageMetadata"
+        BeforeTargets="PrepareForBuild;GetAssemblyVersion;GetPackageMetadata;GenerateNuspec;Pack"
+        DependsOnTargets="InitializeSourceControlInformation"
+        Condition="'$(SourceControlInformationFeatureSupported)' And
+                     '$(IsPackable)' == 'true' And 
+                     '$(RepositoryUrl)' != '' And 
+                     '$(SourceRevisionId)' != ''">
     <PropertyGroup>
       <Description>
         $(Description)
 
-Built from $(RepositoryUrl)/tree/$(SourceRevisionId.Substring(0, 9))
+        Built from $(RepositoryUrl)/tree/$(SourceRevisionId.Substring(0, 9))
       </Description>
-      <!-- Update nuspec properties too -->
+      <PackageDescription>$(Description)</PackageDescription>
       <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
       <PackageDescription> $(Description)</PackageDescription>
     </PropertyGroup>

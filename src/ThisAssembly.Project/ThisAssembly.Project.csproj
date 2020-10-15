@@ -57,7 +57,7 @@ F#:
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="0.4.1" />
+    <PackageReference Include="NuGetizer" Version="0.4.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
     <PackageReference Include="Scriban" Version="2.1.4" PrivateAssets="all" />
 

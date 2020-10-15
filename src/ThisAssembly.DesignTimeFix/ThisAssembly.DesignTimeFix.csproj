@@ -17,7 +17,7 @@ https://github.com/dotnet/roslyn/issues/44093
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="0.4.1" />
+    <PackageReference Include="NuGetizer" Version="0.4.5" />
   </ItemGroup>
 
 </Project>
