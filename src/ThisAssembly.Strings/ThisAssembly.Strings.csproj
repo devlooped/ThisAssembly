@@ -6,7 +6,8 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Strings</PackageId>
-    <Description>This package generates a static `ThisAssembly.Strings` class with public 
+    <Description>** C# 9.0 ONLY **
+This package generates a static `ThisAssembly.Strings` class with public 
 constants exposing string resources in .resx files or methods with the right number of 
 parameters for strings that use formatting parameters. 
 
