@@ -6,7 +6,8 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Project</PackageId>
-    <Description>This package generates a static `ThisAssembly.Project` class with public 
+    <Description>** C# 9.0 ONLY **
+This package generates a static `ThisAssembly.Project` class with public 
 constants exposing project properties that have been opted into this mechanism by adding 
 them as `ProjectProperty` MSBuild items in project file, such as:
 
@@ -30,24 +31,6 @@ C#:
           public const string Foo = "Bar";
       }
   }
-
-VB:
-
-  Namespace Global
-    Partial Class ThisAssembly
-          Partial Class Project
-              Public Const Foo = "Bar"
-          End Class
-      End Class
-  End Namespace
-
-F#:
-
-  module internal ThisAssembly
-
-  module public Project =
-      [&lt;Literal&gt;]
-      let public Foo = @"Bar"
 
 </Description>
   </PropertyGroup>
