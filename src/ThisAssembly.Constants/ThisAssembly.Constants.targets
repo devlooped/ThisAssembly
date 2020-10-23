@@ -1,0 +1,25 @@
+<Project>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="DebugSourceGenerators" />
+    <CompilerVisibleProperty Include="DebugThisAssemblyConstants" />
+
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
+    <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />
+    <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
+  </ItemGroup>
+
+  <Target Name="_InjectConstantAdditionalFiles"
+          BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
+          DependsOnTargets="PrepareResourceNames">
+    <ItemGroup>
+      <FileConstant>
+        <Area>$([MSBuild]::ValueOrDefault('%(RelativeDir)', '').Replace('\', '.').Replace('/', '.'))%(Filename)</Area>
+        <Value>%(RelativeDir)%(Filename)%(Extension)</Value>
+      </FileConstant>
+      <Constant Include="@(FileConstant -> '%(Area)')" Value="%(FileConstant.Value)" Comment="%(FileConstant.Comment)" />
+      <AdditionalFiles Include="@(Constant)" SourceItemType="Constant" />
+    </ItemGroup>
+  </Target>
+
+</Project>

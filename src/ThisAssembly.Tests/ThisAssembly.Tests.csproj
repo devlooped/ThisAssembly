@@ -3,26 +3,27 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <LangVersion>Preview</LangVersion>
+    <RootNamespace>ThisAssemblyTests</RootNamespace>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<RestoreAdditionalProjectSources>$(PackageOutputPath);$(RestoreAdditionalProjectSources)</RestoreAdditionalProjectSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\ThisAssembly.Strings\IsExternalInit.cs" Link="IsExternalInit.cs" />
     <Compile Include="..\ThisAssembly.Strings\Model.cs" Link="Model.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\ThisAssembly.Strings\CSharp.sbntxt" Link="CSharp.sbntxt" />
-    <Compile Remove="..\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-3.final" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="Scriban" Version="2.1.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <PackageReference Include="ThisAssembly.Strings" Version="*" />
+    <PackageReference Include="ThisAssembly.Constants" Version="42.42.42" />
+    <PackageReference Include="ThisAssembly.Strings" Version="42.42.42" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,4 +33,14 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
+    <!--<Constant Include="Foo.Hello" Value="World" Comment="Yay!" />-->
+    <Constant Include="Baz" Value="Bar" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FileConstant Include="@(None)" />
+  </ItemGroup>
+  
 </Project>

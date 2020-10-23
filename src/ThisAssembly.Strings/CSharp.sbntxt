@@ -47,7 +47,7 @@
                     .GetResourceManager("{{ $1 }}")
                     .GetString("{{ $0.Prefix + value.Name }}")
                     {{- for arg in value.Format }}
-                    .Replace("{{ arg }}", "{{ for.index }}"){{- end -}},
+                    .Replace("{%{{}%}{{ arg }}{%{}}%}", "{%{{}%}{{ for.index }}{%{}}%}"){{- end -}},
                 {{ for arg in value.Format -}}
                 {{- arg -}}{{- if !for.last -}}, {{ end }}{{- end -}});
 

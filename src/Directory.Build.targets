@@ -1,13 +1,5 @@
 <Project>
 
-  <PropertyGroup Label="NuGet Pack">
-    <HttpNuGetCache>$(LocalAppData)\NuGet\v3-cache</HttpNuGetCache>
-    <!-- By default, we clear the HTTP cache if our project is packable. This does *not* clear the cached installed packages -->
-    <ClearHttpNuGetCacheOnPack Condition="'$(ClearHttpNuGetCacheOnPack)' == ''">$(IsPackable)</ClearHttpNuGetCacheOnPack>
-    <!-- The actual NuGet cache is only cleared for the *current* PackageId, so no need to turn off its clearing on build/pack -->
-    <NuGetCache>$(UserProfile)\.nuget\packages</NuGetCache>
-  </PropertyGroup>
-
   <ItemGroup>
     <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
@@ -16,7 +8,8 @@
     <!--<_PackageFiles Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)/%(Filename)%(Extension)" />-->
 
     <PackageFile Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
-    <PackageFile Include="*.props;*.targets" PackagePath="build/$(TargetFramework)/%(Filename)%(Extension)" />
+    <PackageFile Include="*.props;*.targets" PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)" />
+    <PackageFile Include="*.props;*.targets" PackagePath="buildTransitive\$(TargetFramework)\%(Filename)%(Extension)" />
 
     <UpToDateCheck Include="@(EmbeddedResource);@(PackageFile)" />
   </ItemGroup>
@@ -43,40 +36,6 @@
       <PackageDescription> $(Description)</PackageDescription>
     </PropertyGroup>
   </Target>
-  
-  <Target Name="ClearPackageOutput"
-        Condition="!$(CI) And '$(PackageId)' != '' And '$(IsPackable)' == 'true'"
-        BeforeTargets="Build">
-    <ItemGroup>
-      <_ExistingPackage Include="$(PackageOutputPath)\$(PackageId)*.nupkg" />
-      <_PackageToDelete Include="@(_ExistingPackage)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)', '$(PackageId)\.\d\.\d\.\d.*'))" />
-    </ItemGroup>
-    <Delete Files="@(_PackageToDelete)" ContinueOnError="true">
-      <Output TaskParameter="DeletedFiles" ItemName="_DeletedPackages" />
-    </Delete>
-    <Message Text="Nuked existing packages: @(_DeletedPackages -> '%(Filename)%(Extension)')" Condition="'@(_DeletedPackages)' != ''" Importance="high" />
-  </Target>
-
-  <!-- Clears nuget cache for the current project package id -->
-  <Target Name="ClearCachedPackageId"
-          Condition="!$(CI) And '$(PackageId)' != '' And '$(IsPackable)' == 'true'"
-          AfterTargets="Build;Pack" DependsOnTargets="Pack">
-    <PropertyGroup>
-      <PackageFolder>$(NuGetCache)\$(PackageId.ToLowerInvariant())</PackageFolder>
-    </PropertyGroup>
-
-    <Message Text="Nuking $(PackageFolder)" Condition="Exists($(PackageFolder))" Importance="high" />
-    <Exec Command='rd "$(PackageFolder)" /q /s' Condition="Exists($(PackageFolder)) And '$(OS)' == 'Windows_NT'" />
-    <Exec Command='rm -rf "$(PackageFolder)"' Condition="Exists($(PackageFolder)) And '$(OS)' != 'Windows_NT'" />
-  </Target>
-
-  <Target Name="ClearHttpNuGetCache"
-          Condition="!$(CI) And $(ClearHttpNuGetCacheOnPack) And Exists('$(HttpNuGetCache)') And '$(PackageId)' != '' And '$(IsPackable)' == 'true'"
-          AfterTargets="Build;Pack" DependsOnTargets="Pack">
-    <Message Text="Nuking $(HttpNuGetCache)" Importance="high" />
-    <Exec Command='rd "$(HttpNuGetCache)" /q /s' Condition="'$(OS)' == 'Windows_NT'" />
-    <Exec Command='rm -rf "$(HttpNuGetCache)"' Condition="'$(OS)' != 'Windows_NT'" />
-  </Target>
 
   <!-- For every PackageReference with Pack=true, we include the assemblies from it in the package -->
   <Target Name="AddPackDependencies" Inputs="@(RuntimeCopyLocalItems)" Outputs="%(RuntimeCopyLocalItems.NuGetPackageId)" AfterTargets="ResolvePackageAssets">
@@ -93,7 +52,7 @@
       <NuGetPackagePack>@(PackageReferenceDependency -> '%(Pack)')</NuGetPackagePack>
     </PropertyGroup>
     <ItemGroup Condition="'$(NuGetPackagePack)' == 'true'">
-      <_PackageFiles Include="@(RuntimeCopyLocalItems)" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)/%(Filename)%(Extension)" />
+      <_PackageFiles Include="@(RuntimeCopyLocalItems)" PackagePath="$(BuildOutputTargetFolder)\$(TargetFramework)\%(Filename)%(Extension)" />
       <RuntimeCopyLocalItems Update="@(RuntimeCopyLocalItems)" CopyLocal="true" Private="true" />
       <ResolvedFileToPublish Include="@(RuntimeCopyLocalItems)" CopyToPublishDirectory="PreserveNewest" RelativePath="%(Filename)%(Extension)" />
     </ItemGroup>

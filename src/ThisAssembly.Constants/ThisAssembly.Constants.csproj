@@ -5,38 +5,43 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>ThisAssembly.Project</PackageId>
+    <PackageId>ThisAssembly.Constants</PackageId>
     <Description>** C# 9.0 ONLY **
-This package generates a static `ThisAssembly.Project` class with public 
-constants exposing project properties that have been opted into this mechanism by adding 
-them as `ProjectProperty` MSBuild items in project file, such as:
+This package generates a static `ThisAssembly.Constants` class with public
+constants for each Constant MSBuild item in the project.
 
-    &lt;PropertyGroup&gt;
-      &lt;Foo&gt;Bar&lt;/Foo&gt;
-    &lt;/PropertyGroup&gt;
+For example:
 
-    &lt;ItemGroup&gt;
-      &lt;ProjectProperty Include="Foo" /&gt;
-    &lt;/ItemGroup&gt;
+  &lt;ItemGroup&gt;
+  &lt;Constant Include="Foo.Bar" Value="Baz" /&gt;
+  &lt;/ItemGroup&gt;
 
-A corresponding `ThisAssembly.Project.Foo` constant with the value `Bar` is provided. 
+Results in a corresponding `ThisAssembly.Constants.Foo.Bar` constant with the value `Baz`:
 
 Generated code:
 C#:
 
   partial class ThisAssembly
   {
-      public static partial class Project
+      public static partial class Constants
       {
-          public const string Foo = "Bar";
+          public static partial class Foo
+          {
+              public const string Bar = "Baz";
+          }
       }
   }
 
-</Description>
+    </Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\ThisAssembly.Metadata\HashCode.cs" Link="HashCode.cs" />
+    <None Remove="CSharp.sbntxt" />
+    <None Remove="ThisAssembly.Constants.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CSharp.sbntxt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
