@@ -11,7 +11,6 @@
   </Target>
 
   <ItemGroup>
-    <CompilerVisibleProperty Include="DebugSourceGenerators" />
     <CompilerVisibleProperty Include="DebugThisAssemblyStrings" />
 
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />

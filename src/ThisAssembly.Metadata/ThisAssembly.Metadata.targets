@@ -1,7 +1,6 @@
 <Project>
   
   <ItemGroup>
-    <CompilerVisibleProperty Include="DebugSourceGenerators" />
     <CompilerVisibleProperty Include="DebugThisAssemblyMetadata" />
   </ItemGroup>
   

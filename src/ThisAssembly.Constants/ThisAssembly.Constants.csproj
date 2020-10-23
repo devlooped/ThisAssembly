@@ -53,7 +53,6 @@ C#:
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThisAssembly.DesignTimeFix\ThisAssembly.DesignTimeFix.csproj" />
     <ProjectReference Include="..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
   </ItemGroup>
 
