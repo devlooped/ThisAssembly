@@ -1,5 +1,9 @@
 name: build
-on: push
+on: 
+  push:
+    branches: [ '*' ]
+  pull_request:
+    types: [opened, synchronize, reopened]
 env:
   DOTNET_NOLOGO: true
 

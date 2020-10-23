@@ -261,3 +261,20 @@ partial class ThisAssembly
     }
 }
 ```
+
+# Dogfooding
+
+[![CI Version](https://img.shields.io/endpoint?url=https://shields.kzu.io/vpre/Stunts/main&label=nuget.ci&color=brightgreen)](https://pkg.kzu.io/index.json)
+[![GH CI Status](https://github.com/kzu/stunts/workflows/build/badge.svg?branch=main)](https://github.com/kzu/stunts/actions?query=branch%3Amain+workflow%3Abuild+)
+[![AzDO CI Status](https://dev.azure.com/kzu/oss/_apis/build/status/stunts?branchName=main)](http://build.azdo.io/kzu/oss/45)
+
+We also produce CI packages from branches and pull requests so you can dogfood builds as quickly as they are produced. 
+
+The CI feed is `https://pkg.kzu.io/index.json`. 
+
+The versioning scheme for packages is:
+
+- PR builds: *42.42.42-pr*`[NUMBER]`.`[COMMITS]`
+- Branch builds: *42.42.42-*`[BRANCH]`.`[COMMITS]`
+
+
