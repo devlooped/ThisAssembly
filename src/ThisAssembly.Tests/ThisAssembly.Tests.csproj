@@ -35,8 +35,7 @@
 
   <ItemGroup>
     <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
-    <!--<Constant Include="Foo.Hello" Value="World" Comment="Yay!" />-->
-    <Constant Include="Baz" Value="Bar" />
+    <Constant Include="Foo.Hello" Value="World" Comment="Comments make everything better 😍" />
   </ItemGroup>
 
   <ItemGroup>

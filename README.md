@@ -59,19 +59,9 @@ on the `ThisAssembly.Info` class.
 This package generates a static `ThisAssembly.Constants` class with public
 constants for `@(Constant)` MSBuild items in the project.
 
-For example:
-
-```xml
-  <ItemGroup>
-    <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
-  <ItemGroup>
-```
-
-Results in a corresponding `ThisAssembly.Constants.Foo.Bar` constant with the value `Baz`:
-
 ![](img/ThisAssembly.Constants.png)
 
-In addition to arbitrary constants, it's quite useful in particular in test projects, to generate constants for files in the project, so there's also a shorthand for those:
+In addition to arbitrary constants via `<Constant ...>`, it's quite useful in particular in test projects, to generate constants for files in the project, so there's also a shorthand for those:
 
 ```xml
   <ItemGroup>
