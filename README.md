@@ -51,10 +51,10 @@ on the `ThisAssembly.Info` class.
 
 ![](img/ThisAssembly.AssemblyInfo.png)
 
-## ThisAssembly.Contracts
+## ThisAssembly.Constants
 
-[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Contracts.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Contracts)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Contracts.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Contracts)
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Constants.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Constants)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Constants.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Constants)
 
 This package generates a static `ThisAssembly.Constants` class with public
 constants for `@(Constant)` MSBuild items in the project.
