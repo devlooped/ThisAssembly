@@ -37,20 +37,16 @@ C#:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="0.4.5" />
+    <PackageReference Include="NuGetizer" Version="0.4.7" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
     <PackageReference Include="Scriban" Version="2.1.4" PrivateAssets="all" />
     
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-3.final" Pack="false" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-4.final" Pack="false" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../ThisAssembly.DesignTimeFix/ThisAssembly.DesignTimeFix.csproj" />
+    <ProjectReference Include="..\ThisAssembly.DesignTimeFix\ThisAssembly.DesignTimeFix.csproj" />
     <ProjectReference Include="..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_PackageFiles Remove="ThisAssembly.Metadata.targets" />
   </ItemGroup>
 
 </Project>

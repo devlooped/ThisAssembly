@@ -51,6 +51,39 @@ on the `ThisAssembly.Info` class.
 
 ![](img/ThisAssembly.AssemblyInfo.png)
 
+## ThisAssembly.Contracts
+
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Contracts.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Contracts)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Contracts.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Contracts)
+
+This package generates a static `ThisAssembly.Constants` class with public
+constants for `@(Constant)` MSBuild items in the project.
+
+For example:
+
+```xml
+  <ItemGroup>
+    <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
+  <ItemGroup>
+```
+
+Results in a corresponding `ThisAssembly.Constants.Foo.Bar` constant with the value `Baz`:
+
+![](img/ThisAssembly.Constants.png)
+
+In addition to arbitrary constants, it's quite useful in particular in test projects, to generate constants for files in the project, so there's also a shorthand for those:
+
+```xml
+  <ItemGroup>
+    <FileConstant Include="@(Content)" />
+  <ItemGroup>
+```
+
+Which results in:
+
+![](img/ThisAssembly.Constants2.png)
+
+
 ## ThisAssembly.Metadata
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Metadata.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Metadata)

@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)*.cs" Visible="false" />
     <PackageFile Include="$(MSBuildThisFileDirectory)..\img\icon-128.png" PackagePath="%(Filename)%(Extension)" />
   </ItemGroup>
   

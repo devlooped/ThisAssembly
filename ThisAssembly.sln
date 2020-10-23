@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Prerequisites", "src\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj", "{568E5150-84AD-4619-BEA3-AA5EDF084ABC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThisAssembly.Constants", "src\ThisAssembly.Constants\ThisAssembly.Constants.csproj", "{31C53CCE-13FC-4890-803A-85CD146B909B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{568E5150-84AD-4619-BEA3-AA5EDF084ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{568E5150-84AD-4619-BEA3-AA5EDF084ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{568E5150-84AD-4619-BEA3-AA5EDF084ABC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31C53CCE-13FC-4890-803A-85CD146B909B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31C53CCE-13FC-4890-803A-85CD146B909B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31C53CCE-13FC-4890-803A-85CD146B909B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31C53CCE-13FC-4890-803A-85CD146B909B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
