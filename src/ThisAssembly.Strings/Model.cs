@@ -109,8 +109,9 @@ record ResourceArea(string Name, string Prefix)
 }
 
 [DebuggerDisplay("{Name} = {Value}")]
-record ResourceValue(string Name, string Value)
+record ResourceValue(string Name, string raw)
 {
+    public string Value => raw.Replace(Environment.NewLine, "");
     public string Comment { get; init; }
     public bool HasFormat => Format != null && Format.Count > 0;
     // We either have *all* named or all indexed. Can't mix. We'll skip generating 

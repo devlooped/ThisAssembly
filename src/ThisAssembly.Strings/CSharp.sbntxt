@@ -12,8 +12,9 @@
 	    /// <summary>
         {{~ if $0.Comment ~}}
         /// {{ $0.Comment }}
-        {{~ end ~}}
+        {{~ else ~}}
 	    /// = "{{ $0.Value }}"
+        {{~ end ~}}
 	    /// </summary>
 {{ end }}
 {{ func render }}
