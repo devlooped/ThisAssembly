@@ -34,7 +34,7 @@ static class ResourceFile
             //  Splits: ([resouce area]_)*[resouce name]
             var nameAttribute = element.Attribute("name").Value;
             var valueElement = element.Element("value").Value;
-            var comment = element.Element("comment")?.Value;
+            var comment = element.Element("comment")?.Value?.Replace("<", "&lt;").Replace(">", "&gt;");
             var areaParts = nameAttribute.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
             if (areaParts.Length <= 1)
             {
@@ -111,7 +111,7 @@ record ResourceArea(string Name, string Prefix)
 [DebuggerDisplay("{Name} = {Value}")]
 record ResourceValue(string Name, string raw)
 {
-    public string Value => raw.Replace(Environment.NewLine, "");
+    public string Value => raw?.Replace(Environment.NewLine, "")?.Replace("<", "&lt;")?.Replace(">", "&gt;");
     public string Comment { get; init; }
     public bool HasFormat => Format != null && Format.Count > 0;
     // We either have *all* named or all indexed. Can't mix. We'll skip generating 
