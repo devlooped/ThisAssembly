@@ -23,6 +23,7 @@ jobs:
       - name: 🙏 build
         run: dotnet build -p:versionsuffix="$(git name-rev --name-only --refs=refs/heads/* HEAD).$GITHUB_RUN_NUMBER"
       - name: 🚀 sleet
+        if: ${{ !github.event.pull_request.head.repo.fork }}
         run: |
           dotnet tool install -g --version 3.2.0 sleet 
           sleet push bin --config none -f --verbose -p "SLEET_FEED_CONTAINER=nuget" -p "SLEET_FEED_CONNECTIONSTRING=${{ secrets.SLEET_CONNECTION }}" -p "SLEET_FEED_TYPE=azure"
