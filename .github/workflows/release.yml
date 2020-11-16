@@ -12,6 +12,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.100-rc.2.20479.15
+          dotnet-version: 5.0.x
       - run: dotnet build -p:version=${GITHUB_REF#refs/*/v}
       - run: dotnet nuget push ./bin/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
