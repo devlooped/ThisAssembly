@@ -22,7 +22,7 @@ such as "Hello {name}".
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="0.4.7" />
+    <PackageReference Include="NuGetizer" Version="0.4.11" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
     <PackageReference Include="Scriban" Version="3.0.0" PrivateAssets="all" />
 
