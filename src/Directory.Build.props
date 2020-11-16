@@ -34,7 +34,7 @@
   <ItemGroup Label="Workaround for public packages not having the latest ISourceGenerator API changes">
     <!-- Workaround for revision mismatch with public versions -->
     <PackageReference Include="System.Collections.Immutable" Version="5.0.0-preview.*" Pack="false" />
-    <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-preview.*" Pack="false" />
+    <PackageReference Include="System.Reflection.Metadata" Version="5.0.0.*" Pack="false" />
   </ItemGroup>
 
   <ItemGroup>
