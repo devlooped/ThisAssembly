@@ -5,6 +5,7 @@
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=green)](https://www.nuget.org/packages/ThisAssembly)
 [![License](https://img.shields.io/github/license/kzu/ThisAssembly.svg?color=blue)](https://github.com//kzu/ThisAssembly/blob/main/LICENSE)
 [![Build](https://github.com/kzu/ThisAssembly/workflows/build/badge.svg?branch=main)](https://github.com/kzu/ThisAssembly/actions)
+[![CI Version](https://img.shields.io/endpoint?url=https://shields.kzu.io/vpre/ThisAssembly/main&label=nuget.ci&color=brightgreen)](https://pkg.kzu.io/index.json)
 
 
 Exposes project and assembly level information as constants in the ThisAssembly 
