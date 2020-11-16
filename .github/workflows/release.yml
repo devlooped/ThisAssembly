@@ -1,4 +1,4 @@
-name: release
+﻿name: release
 on:
   release:
     types: [created]
@@ -9,9 +9,13 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+      - name: 🤘 checkout
+        uses: actions/checkout@v2
+      - name: ⚙ dotnet 5.0.x
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.x
-      - run: dotnet build -p:version=${GITHUB_REF#refs/*/v}
-      - run: dotnet nuget push ./bin/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
+      - name: 🙏 build
+        run: dotnet build -p:version=${GITHUB_REF#refs/*/v}
+      - name: 🚀 push
+        run: dotnet nuget push ./bin/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate

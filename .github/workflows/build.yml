@@ -1,4 +1,4 @@
-name: build
+﻿name: build
 on: 
   push:
     branches: [ '*' ]
@@ -11,15 +11,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+      - name: 🤘 checkout
+        uses: actions/checkout@v2
+      - name: ⚙ dotnet 5.0.x
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.x
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 2.1.x
-      - run: dotnet build -p:versionsuffix="$(git name-rev --name-only --refs=refs/heads/* HEAD).$GITHUB_RUN_NUMBER"
-      - name: sleet
+      - name: 🙏 build
+        run: dotnet build -p:versionsuffix="$(git name-rev --name-only --refs=refs/heads/* HEAD).$GITHUB_RUN_NUMBER"
+      - name: 🚀 sleet
         run: |
           dotnet tool install -g --version 3.2.0 sleet 
           sleet push bin --config none -f --verbose -p "SLEET_FEED_CONTAINER=nuget" -p "SLEET_FEED_CONNECTIONSTRING=${{ secrets.SLEET_CONNECTION }}" -p "SLEET_FEED_TYPE=azure"
