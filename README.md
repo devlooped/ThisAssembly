@@ -19,16 +19,7 @@ Each package in turn extends this partial class too to add their own constants.
 The [ThisAssembly](https://nuget.org/packages/ThisAssembly) meta-package includes 
 all the other packages for convenience.
 
-> NOTE: as of .NET 5.0 RC1, only C# is supported for source generators
-> so even if the generators here can emit proper VB and F#, no code will be generated 
-> (yet) for those languages. When support is introduced for those languages,
-> things will Just Work without the need to update these packages.
-
-> NOTE: if intellisense isn't working properly, try closing and reopening 
-> Visual Studio. If that doesn't work, please set the *$(IncludeSourceGeneratorIntellisenseFix)* 
-> property to *true* in your project. This is a temporary workaround for a 
-> [Roslyn issue](https://github.com/dotnet/roslyn/issues/44093) that should be 
-> solved by the final release of .NET5.
+> NOTE: as of .NET 5.0, only C# is supported for source generators.
 
 ## ThisAssembly.AssemblyInfo
 
@@ -104,40 +95,6 @@ The metadata attribute can alternatively be declared using MSBuild syntax in the
     </ItemGroup>
 ```
 
-Generated code:
-
-C#:
-
-```csharp
-  partial class ThisAssembly
-  {
-      public static partial class Metadata
-      {
-          public const string Foo = "Bar";
-      }
-  }
-```
-
-VB:
-```vbnet
-  Namespace Global
-    Partial Class ThisAssembly
-          Partial Class Metadata
-              Public Const Foo = "Bar"
-          End Class
-      End Class
-  End Namespace
-```
-
-F#:
-```fsharp
-  module internal ThisAssembly
-
-  module public Metadata =
-      [<Literal>]
-      let public Foo = @"Bar"
-```
-
 ## ThisAssembly.Project
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Project.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Project)
@@ -157,40 +114,6 @@ them as `ThisAssemblyProject` MSBuild items in project file, such as:
 ```
 
 ![](img/ThisAssembly.Project.png)
-
-Generated code:
-
-C#:
-
-```csharp
-  partial class ThisAssembly
-  {
-      public static partial class Project
-      {
-          public const string Foo = "Bar";
-      }
-  }
-```
-
-VB:
-```vbnet
-  Namespace Global
-    Partial Class ThisAssembly
-          Partial Class Project
-              Public Const Foo = "Bar"
-          End Class
-      End Class
-  End Namespace
-```
-
-F#:
-```fsharp
-  module internal ThisAssembly
-
-  module public Project =
-      [<Literal>]
-      let public Foo = @"Bar"
-```
 
 ## ThisAssembly.Strings
 
