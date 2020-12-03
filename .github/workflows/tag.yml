@@ -1,0 +1,43 @@
+﻿name: tag
+on:
+  push:
+    tags: [ 'v*' ]
+env:
+  DOTNET_NOLOGO: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🤘 checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: 🏷 current
+        run: echo "CURRENT_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: 🏷 since
+        run: echo "SINCE_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))" >> $GITHUB_ENV
+      - name: 🚧 prerelease
+        run: echo "PRERELEASE=true" >> $GITHUB_ENV
+        if: contains(env.CURRENT_TAG, '-')
+
+      - name: ⚙ changelog
+        uses: faberNovel/github-changelog-generator-action@master
+        with:
+          # See https://github.com/github-changelog-generator/github-changelog-generator/wiki/Advanced-change-log-generation-examples
+          options: --token ${{ secrets.GITHUB_TOKEN }} --since-tag ${{ env.SINCE_TAG }}
+
+      - name: 😺 changelog
+        run: cat CHANGELOG.md
+
+      - name: 🖉 release
+        uses: actions/create-release@v1
+        with: 
+          release_name: ${{ env.CURRENT_TAG }}
+          tag_name: ${{ env.CURRENT_TAG }}
+          draft: true
+          prerelease: ${{ env.PRERELEASE }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
