@@ -24,6 +24,9 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
     <DefaultItemExcludes>$(DefaultItemExcludes);*.binlog;*.zip</DefaultItemExcludes>
+
+    <RestoreSources>https://pkg.kzu.io/index.json;https://api.nuget.org/v3/index.json;$(RestoreSources)</RestoreSources>
+    <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));$(RestoreSources)</RestoreSources>
   </PropertyGroup>
 
   <PropertyGroup Label="CI" Condition="'$(CI)' == ''">

@@ -1,5 +1,9 @@
 <Project>
 
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">
+    <PackageReference Update="NuGetizer" Version="42.42.42" />
+  </ItemGroup>
+
   <ItemGroup>
     <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
