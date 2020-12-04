@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
-using Scriban;
-using Microsoft.CodeAnalysis.Text;
+using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+using Scriban;
 
 namespace ThisAssembly
 {

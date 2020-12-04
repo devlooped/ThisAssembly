@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Microsoft.CodeAnalysis;
-using Scriban;
-using Microsoft.CodeAnalysis.Text;
 using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+using Scriban;
 
 namespace ThisAssembly
 {
@@ -57,7 +57,7 @@ namespace ThisAssembly
                 //        .GetText()
                 //        .ToString();
                 //}
-                
+
                 context.ApplyDesignTimeFix(output, resourceName, language);
                 context.AddSource(resourceName, SourceText.From(output, Encoding.UTF8));
             }

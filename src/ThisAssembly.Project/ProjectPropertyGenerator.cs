@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
-using Scriban;
-using Microsoft.CodeAnalysis.Text;
+using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+using Scriban;
 
 namespace ThisAssembly
 {
@@ -22,7 +22,7 @@ namespace ThisAssembly
 
             var metadata = properties.Split('|')
                 .Select(prop => new KeyValuePair<string, string>(prop,
-                    context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property." + prop, out var value) ? 
+                    context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property." + prop, out var value) ?
                     value : null))
                 .Where(pair => pair.Value != null)
                 .Distinct(new KeyValueComparer())
