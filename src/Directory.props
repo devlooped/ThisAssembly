@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)*.cs" Visible="false" />
+    <Compile Include="$(MSBuildThisFileDirectory)*.cs" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 static class EmbeddedResource
@@ -18,11 +19,17 @@ static class EmbeddedResource
             .Replace(Path.DirectorySeparatorChar, '.')
             .Replace(Path.AltDirectorySeparatorChar, '.');
 
+        var manifestResourceName = Assembly.GetExecutingAssembly()
+            .GetManifestResourceNames().FirstOrDefault(x => x.EndsWith(resourceName));
+
+        if (string.IsNullOrEmpty(manifestResourceName))
+            throw new InvalidOperationException($"Did not find required resource ending in '{resourceName}' in assembly '{baseName}'.");
+
         using var stream = Assembly.GetExecutingAssembly()
-            .GetManifestResourceStream(baseName + "." + resourceName);
+            .GetManifestResourceStream(manifestResourceName);
 
         if (stream == null)
-            throw new NotSupportedException();
+            throw new InvalidOperationException($"Did not find required resource '{manifestResourceName}' in assembly '{baseName}'.");
 
         using var reader = new StreamReader(stream);
         return reader.ReadToEnd();
