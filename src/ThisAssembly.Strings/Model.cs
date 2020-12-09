@@ -14,7 +14,7 @@ record Model(ResourceArea RootArea, string ResourceName)
 
 static class ResourceFile
 {
-    private static Regex FormatExpression = new Regex("{(?<name>[^{}]+)}", RegexOptions.Compiled);
+    static readonly Regex FormatExpression = new Regex("{(?<name>[^{}]+)}", RegexOptions.Compiled);
 
     public static ResourceArea Load(string fileName, string rootArea)
     {
@@ -109,10 +109,10 @@ public List<ResourceValue> Values { get; init; } = new List<ResourceValue>();
 }
 
 [DebuggerDisplay("{Name} = {Value}")]
-record ResourceValue(string Name, string raw)
+record ResourceValue(string Name, string? Raw)
 {
-    public string Value => raw?.Replace(Environment.NewLine, "")?.Replace("<", "&lt;")?.Replace(">", "&gt;");
-public string Comment { get; init; }
+    public string? Value => Raw?.Replace(Environment.NewLine, "")?.Replace("<", "&lt;")?.Replace(">", "&gt;");
+public string? Comment { get; init; }
 public bool HasFormat => Format != null && Format.Count > 0;
 // We either have *all* named or all indexed. Can't mix. We'll skip generating 
 // methods for mixed ones and report as an analyzer error on the Resx.

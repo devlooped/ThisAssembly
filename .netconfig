@@ -1,0 +1,92 @@
+[file]
+	url = https://github.com/kzu/oss
+[file "readme.md"]
+	url = https://github.com/kzu/oss/blob/main/readme.md
+	skip
+	etag = 1963a9db5d9ee9a89da7ec5f00c4c7daf10862f10e31583b05716697e7e75526
+	weak
+[file "src/icon.png"]
+	url = https://github.com/kzu/oss/blob/main/src/icon.png
+	skip
+	etag = 8b42109e3bd1da0fc50c67679c6d20aeac98f922870675e127cf19b8f2919971
+	weak
+[file ".editorconfig"]
+	url = https://github.com/kzu/oss/blob/main/.editorconfig
+	etag = 985aa022503959d35b03c870f07ae604cead7580d260775235ef6665aa9a6cbe
+	weak
+[file ".gitattributes"]
+	url = https://github.com/kzu/oss/blob/main/.gitattributes
+	etag = 7acb32f5fa6d4ccd9c824605a7c2b8538497f0068c165567807d393dcf4d6bb7
+	weak
+[file ".github/FUNDING.yml"]
+	url = https://github.com/kzu/oss/blob/main/.github/FUNDING.yml
+	etag = dbc0e0c56e48bf06a70f50ba2fdaf6f048bb81ac8558b743c8e919487da3bfcf
+	weak
+[file ".github/ISSUE_TEMPLATE/bug.md"]
+	url = https://github.com/kzu/oss/blob/main/.github/ISSUE_TEMPLATE/bug.md
+	etag = 026852ba1f1921f3a043bb5e09cd7a2c3d9a33ec51f48e524dc3a2ab72de3141
+	weak
+[file ".github/ISSUE_TEMPLATE/feature.md"]
+	url = https://github.com/kzu/oss/blob/main/.github/ISSUE_TEMPLATE/feature.md
+	etag = c5b7de1bc9eaf1f2ae6d1d2021e68084a5b1ab4800e9f129416d2838c128cad1
+	weak
+[file ".github/dependabot.yml"]
+	url = https://github.com/kzu/oss/blob/main/.github/dependabot.yml
+	etag = 2fc8a0d2b47091b058ae3e1f68333492044b49a684621f4939a0bce5bff869d5
+	weak
+[file ".github/workflows/build.yml"]
+	url = https://github.com/kzu/oss/blob/main/.github/workflows/build.yml
+	etag = c56db40b37f8dbcff13aea20eefc263caf825d17d86b0dc055ce504d8cb8ae9d
+	weak
+[file ".github/workflows/release.yml"]
+	url = https://github.com/kzu/oss/blob/main/.github/workflows/release.yml
+	etag = fe4eae2bf3738645bca3b8f9f90ace482802fdd818c6d6651dccbb311ebeb231
+	weak
+[file ".github/workflows/tag.yml"]
+	url = https://github.com/kzu/oss/blob/main/.github/workflows/tag.yml
+	etag = 26e271cf76e00c6922552af104b1e496103bdfa75ebef253447594207b10153e
+	weak
+[file ".github_changelog_generator"]
+	url = https://github.com/kzu/oss/blob/main/.github_changelog_generator
+	etag = a724e0cbbad99a04e6cd3738a5f3ec5416dd5f29ae7073e7afe5471e73107e42
+	weak
+[file ".gitignore"]
+	url = https://github.com/kzu/oss/blob/main/.gitignore
+	etag = 4698b35abed1f3941de6bed08bc80278c30569de3ead5b878b27b4bb79f8718a
+	weak
+[file "license.txt"]
+	url = https://github.com/kzu/oss/blob/main/license.txt
+	etag = 2c6335b37e4ae05eea7c01f5d0c9d82b49c488f868a8b5ba7bff7c6ff01f3994
+	weak
+[file "security.md"]
+	url = https://github.com/kzu/oss/blob/main/security.md
+	etag = 80070e3a380796b13d180b82f43694eac9e7a29d8d2f8549ccb2920fd5c88828
+	weak
+[file "src/Directory.Build.props"]
+	url = https://github.com/kzu/oss/blob/main/src/Directory.Build.props
+	etag = d0b93d7533832a4d62cff69c71540bad3284bf92a7d2096b1a91607d72099d2b
+	weak
+[file "src/Directory.Build.targets"]
+	url = https://github.com/kzu/oss/blob/main/src/Directory.Build.targets
+	etag = 87357cb36379ac589c3981bddec4c5f7f89c55356573bd203acbea4b66fe3427
+	weak
+[file "src/kzu.snk"]
+	url = https://github.com/kzu/oss/blob/main/src/kzu.snk
+	etag = b8d789b5b6bea017cdcc8badcea888ad78de3e34298efca922054e9fb0e7b6b9
+	weak
+[file "code-of-conduct.md"]
+	url = https://github.com/kzu/oss/blob/main/code-of-conduct.md
+	etag = 4857c01bb695f09bf6912d778951c3065d9dd565e5de3d0827f40432d0e4c613
+	weak
+[file ".netconfig"]
+	url = https://github.com/kzu/oss/blob/main/.netconfig
+	etag = 42998b33e06eb5c76b14cf6d7582ca3cc49d30421474a5f2b319865afd909dd0
+	weak
+[file "Directory.Build.rsp"]
+	url = https://github.com/kzu/oss/blob/main/Directory.Build.rsp
+	etag = 6a6c6e1d3895df953abf14c82b0899e3eea75cdcd679f6212dcfea15183d73d6
+	weak
+[file "_config.yml"]
+	url = https://github.com/kzu/oss/blob/main/_config.yml
+	etag = c7f2063ead734d0afc383a07c35da2864a221311da8e1c0c6fea8939e932d2ab
+	weak

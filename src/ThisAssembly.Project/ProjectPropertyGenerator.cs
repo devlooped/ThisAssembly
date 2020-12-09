@@ -21,7 +21,7 @@ namespace ThisAssembly
                 return;
 
             var metadata = properties.Split('|')
-                .Select(prop => new KeyValuePair<string, string>(prop,
+                .Select(prop => new KeyValuePair<string, string?>(prop,
                     context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property." + prop, out var value) ?
                     value : null))
                 .Where(pair => pair.Value != null)
@@ -38,13 +38,13 @@ namespace ThisAssembly
             context.AddSource("ThisAssembly.Project", SourceText.From(output, Encoding.UTF8));
         }
 
-        class KeyValueComparer : IEqualityComparer<KeyValuePair<string, string>>
+        class KeyValueComparer : IEqualityComparer<KeyValuePair<string, string?>>
         {
-            public bool Equals(KeyValuePair<string, string> x, KeyValuePair<string, string> y)
+            public bool Equals(KeyValuePair<string, string?> x, KeyValuePair<string, string?> y)
                 => x.Key == y.Key && x.Value == y.Value;
 
-            public int GetHashCode(KeyValuePair<string, string> obj)
-                => new HashCode().AddRange(obj.Key, obj.Value).ToHashCode();
+            public int GetHashCode(KeyValuePair<string, string?> obj)
+                => new HashCode().AddRange(obj.Key, obj.Value ?? "").ToHashCode();
         }
 
         public static string[] GetItems(GeneratorExecutionContext context)
