@@ -73,4 +73,4 @@ static Area GetArea(Area area, IEnumerable<string> areaPath)
 }
 
 [DebuggerDisplay("{Name} = {Value}")]
-record Constant(string Name, string Value, string Comment);
+record Constant(string Name, string? Value, string? Comment);

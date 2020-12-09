@@ -19,8 +19,8 @@ namespace ThisAssembly
 
             var metadata = context.Compilation.Assembly.GetAttributes()
                 .Where(x => x.AttributeClass?.Name == nameof(System.Reflection.AssemblyMetadataAttribute) &&
-                    Microsoft.CodeAnalysis.CSharp.SyntaxFacts.IsValidIdentifier((string)x.ConstructorArguments[0].Value))
-                .Select(x => new KeyValuePair<string, string>((string)x.ConstructorArguments[0].Value, (string)x.ConstructorArguments[1].Value))
+                    Microsoft.CodeAnalysis.CSharp.SyntaxFacts.IsValidIdentifier((string)x.ConstructorArguments[0].Value!))
+                .Select(x => new KeyValuePair<string, string>((string)x.ConstructorArguments[0].Value!, (string)x.ConstructorArguments[1].Value!))
                 .Distinct(new KeyValueComparer())
                 .ToDictionary(x => x.Key, x => x.Value);
 

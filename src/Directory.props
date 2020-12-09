@@ -1,0 +1,21 @@
+<Project>
+  <!-- Extend Directory.Build.props -->
+
+  <PropertyGroup Label="NuGet">
+    <PackageTags>dotnet dotnet-tool dotnet-tools tool</PackageTags>
+    <PackOnBuild>true</PackOnBuild>
+    <PackFolder>analyzers\cs</PackFolder>
+
+    <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));$(RestoreSources)</RestoreSources>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Build">
+    <SignAssembly>false</SignAssembly>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)*.cs" Visible="false" />
+  </ItemGroup>
+
+</Project>

@@ -1,65 +1,146 @@
 <Project>
+  <!-- To extend/change the defaults, create a Directory.targets alongside this file -->
 
-  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">
-    <PackageReference Update="NuGetizer" Version="42.42.42" />
-  </ItemGroup>
+  <PropertyGroup Condition="'$(IsPackable)' == ''">
+    <!-- The Sdks\NuGet.Build.Tasks.Pack\build\NuGet.Build.Tasks.Pack.targets unconditionally sets 
+        PackageId=AssemblyName if no PackageId is provided, and then defaults IsPackable=true if 
+        a PackageId is set (?!), meaning that by default everything is packable in Sdk-style 
+        projects. 
+
+        The Directory.Build.targets are imported after the user's project properties have been 
+        read, and therefore gives us a chance to inspect if an explicit PackageId was provided, 
+        before the NuGet SDK target is imported and defaults it. At this point, we can give 
+        IsPackable a more sensible default, making it false if no PackageId was provided at this 
+        point. -->
+    <IsPackable Condition="'$(PackageId)' == ''">false</IsPackable>
+    <IsPackable Condition="'$(PackageId)' != ''">true</IsPackable>
+  </PropertyGroup>
+
+  <!-- Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultAssemblyInfo.targets does this and is imported 
+       before Directory.Build.targets, but it's not imported for .msbuildproj -->
+  <PropertyGroup Condition="'$(Version)' == ''">
+    <VersionPrefix Condition="'$(VersionPrefix)' == ''">1.0.0</VersionPrefix>
+    <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition="'$(Version)' == ''">$(VersionPrefix)</Version>
+  </PropertyGroup>
+
+  <!-- Append $(PackFolder) directory to output and intermediate paths to prevent bin clashes between targets. -->
+  <PropertyGroup Condition="'$(AppendPackFolderToOutputPath)' == 'true' and '$(PackFolder)' != ''">
+    <PackFolderPath>$(PackFolder)</PackFolderPath>
+    <PackFolderPath Condition="'$(TargetFramework)' != ''">$(PackFolderPath.Replace('\$(TargetFramework)', ''))</PackFolderPath>
+    <IntermediateOutputPath>$(IntermediateOutputPath)$(PackFolderPath)\</IntermediateOutputPath>
+    <OutputPath>$(OutputPath)$(PackFolderPath)\</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Define constant for TF like NET5, NET472, NETSTANDARD2, NETSTANDARD21 -->
+    <DefineConstants Condition="'$(TargetFramework)' != '' and '$(TargetFrameworks)' != ''">$(DefineConstants);$(TargetFramework.ToUpperInvariant().TrimEnd('0').TrimEnd('.').Replace('.', ''))</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
-    <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
-    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
-    <None Update="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
-
-    <!--<_PackageFiles Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)/%(Filename)%(Extension)" />-->
-
-    <PackageFile Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
-    <PackageFile Include="*.props;*.targets" PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)" />
-    <PackageFile Include="*.props;*.targets" PackagePath="buildTransitive\$(TargetFramework)\%(Filename)%(Extension)" />
-
-    <UpToDateCheck Include="@(EmbeddedResource);@(PackageFile)" />
+    <!-- Consider the project out of date if any of these files changes -->
+    <UpToDateCheck Include="@(PackageFile);@(None);@(Content);@(EmbeddedResource)" />
+    <!-- We'll typically use ThisAssembly.Strings instead of the built-in resource manager codegen
+         The built-in one can be restored with: <EmbeddedResource Update="@(EmbeddedResource)" Generator="ResXFileCodeGenerator" -->
+    <EmbeddedResource Update="@(EmbeddedResource)"  Generator="" />
   </ItemGroup>
 
-  <Target Name="Prepare" BeforeTargets="PrepareForBuild">
-    <MakeDir Directories="$(PackageOutputPath)" Condition="'$(PackageOutputPath)' != '' And !Exists('$(PackageOutputPath)')" />
+  <Target Name="IsPackable" Returns="@(IsPackable)">
+    <ItemGroup>
+      <IsPackable Include="$(MSBuildProjectFullPath)" IsPackable="$(IsPackable)" PackageId="$(PackageId)" />
+    </ItemGroup>
   </Target>
 
-  <Target Name="UpdatePackageMetadata"
-        BeforeTargets="PrepareForBuild;GetAssemblyVersion;GetPackageMetadata;GenerateNuspec;Pack"
-        DependsOnTargets="InitializeSourceControlInformation"
-        Condition="'$(SourceControlInformationFeatureSupported)' And
-                     '$(IsPackable)' == 'true' And 
-                     '$(RepositoryUrl)' != '' And 
-                     '$(SourceRevisionId)' != ''">
-    <PropertyGroup>
-      <Description>
-        $(Description)
+  <ItemGroup>
+    <!-- Make these available via ThisAssembly.Project -->
+    <ProjectProperty Include="RepositorySha" />
+    <ProjectProperty Include="RepositoryCommit" />
+  </ItemGroup>
 
-        Built from $(RepositoryUrl)/tree/$(SourceRevisionId.Substring(0, 9))
+  <!-- Make sure the source control info is available before calling source generators -->
+  <Target Name="EnsureProjectInformation" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" DependsOnTargets="InitializeSourceControlInformation" />
+
+  <Target Name="_InitializeRepositoryProperties" 
+          DependsOnTargets="InitializeSourceControlInformation" 
+          Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
+    <PropertyGroup>
+    </PropertyGroup>    
+  </Target>
+
+  <!-- Always append the link to the direct source tree for the current build -->
+  <Target Name="UpdatePackageMetadata"
+          BeforeTargets="PrepareForBuild;GenerateMSBuildEditorConfigFileShouldRun;GetAssemblyVersion;GetPackageMetadata;GenerateNuspec;Pack"
+          DependsOnTargets="InitializeSourceControlInformation"
+          Condition="'$(SourceControlInformationFeatureSupported)' == 'true' And
+                     '$(IsPackable)' == 'true'">
+    <PropertyGroup>
+      <Description Condition="'$(SourceRevisionId)' != ''">$(Description)
+
+Built from $(RepositoryUrl)/tree/$(SourceRevisionId.Substring(0, 9))
       </Description>
       <PackageDescription>$(Description)</PackageDescription>
-      <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
-      <PackageDescription> $(Description)</PackageDescription>
+
+      <!-- The project must specify PublishRepositoryUrl=true in order to publish the URL, in order to prevent inadvertent leak of internal URL. -->
+      <RepositoryUrl Condition="'$(RepositoryUrl)' == '' and '$(PublishRepositoryUrl)' == 'true'">$(PrivateRepositoryUrl)</RepositoryUrl>
+      <PackageProjectUrl Condition="'$(PackageProjectUrl)' == '' and '$(PublishRepositoryUrl)' == 'true'">$(RepositoryUrl)</PackageProjectUrl>
+
+      <RepositoryCommit Condition="'$(RepositoryCommit)' == ''">$(SourceRevisionId)</RepositoryCommit>
+      <RepositorySha Condition="'$(SourceRevisionId)' != ''">$(SourceRevisionId.Substring(0, 9))</RepositorySha>
     </PropertyGroup>
   </Target>
 
-  <!-- For every PackageReference with Pack=true, we include the assemblies from it in the package -->
-  <Target Name="AddPackDependencies" Inputs="@(RuntimeCopyLocalItems)" Outputs="%(RuntimeCopyLocalItems.NuGetPackageId)" AfterTargets="ResolvePackageAssets">
-    <ItemGroup>
-      <NuGetPackageId Include="@(RuntimeCopyLocalItems -> '%(NuGetPackageId)')" />
-    </ItemGroup>
-    <PropertyGroup>
-      <NuGetPackageId>@(NuGetPackageId -&gt; Distinct())</NuGetPackageId>
-    </PropertyGroup>
-    <ItemGroup>
-      <PackageReferenceDependency Include="@(PackageReference -&gt; WithMetadataValue('Identity', '$(NuGetPackageId)'))" />
-    </ItemGroup>
-    <PropertyGroup>
-      <NuGetPackagePack>@(PackageReferenceDependency -> '%(Pack)')</NuGetPackagePack>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(NuGetPackagePack)' == 'true'">
-      <_PackageFiles Include="@(RuntimeCopyLocalItems)" PackagePath="$(BuildOutputTargetFolder)\$(TargetFramework)\%(Filename)%(Extension)" />
-      <RuntimeCopyLocalItems Update="@(RuntimeCopyLocalItems)" CopyLocal="true" Private="true" />
-      <ResolvedFileToPublish Include="@(RuntimeCopyLocalItems)" CopyToPublishDirectory="PreserveNewest" RelativePath="%(Filename)%(Extension)" />
-    </ItemGroup>
-  </Target>
+  <!-- Import before UsingTask because first to declare tasks wins -->
+  <Import Project="Directory.targets" Condition="Exists('Directory.targets')"/>
+
+  <!--
+  ==============================================================
+    DumpItems Task
+    Helper task useful for quickly inspecting the full metadata
+    of arbitrary items in any target.
+
+    Properties:
+    - Items: Microsoft.Build.Framework.ITaskItem[] (Input, Required)
+    - ItemName: string (Input, Optional)
+	==============================================================
+  -->
+  <UsingTask TaskName="DumpItems" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Items ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <ItemName />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="Microsoft.Build" />
+      <Reference Include="Microsoft.CSharp" />
+      <Reference Include="System" />
+      <Reference Include="System.Core" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Using Namespace="System" />
+      <Using Namespace="System.Linq" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+			  var itemName = ItemName ?? "Item";
+			  if (Items.Length == 0)
+				  Log.LogMessage(MessageImportance.High, "No {0} items received to dump.", ItemName ?? "");
+			  else
+				  Log.LogMessage(MessageImportance.High, "Dumping {0} {1} items.", Items.Length, ItemName ?? "");
+
+			  foreach (var item in Items.OrderBy(i => i.ItemSpec))
+			  {
+				  Log.LogMessage(MessageImportance.High, "{0}: {1}", itemName, item.ItemSpec);
+				  foreach (var name in item.MetadataNames.OfType<string>().OrderBy(_ => _))
+				  {
+					  try
+					  {
+						  Log.LogMessage(MessageImportance.High, "\t{0}={1}", name, item.GetMetadata(name));
+					  }
+					  catch { }
+				  }
+			  }
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
 
 </Project>

@@ -1,30 +1,75 @@
-﻿name: build
+﻿# Builds and runs tests in all three supported OSes
+# Pushes CI feed if secrets.SLEET_CONNECTION is provided
+
+name: build
 on: 
   push:
-    branches: [ '*' ]
+    branches: [ main, dev, 'feature/*', 'rel/*' ]
   pull_request:
     types: [opened, synchronize, reopened]
+
 env:
   DOTNET_NOLOGO: true
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: build-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: 🤘 checkout
         uses: actions/checkout@v2
+        with: 
+          submodules: recursive
+          fetch-depth: 0
+
       - name: ⚙ dotnet 5.0.x
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.x
+      - name: ⚙ dotnet 3.1.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
       - name: ⚙ dotnet 2.1.x
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 2.1.x
+
+      - name: ✓ check formatting
+        run: |
+          dotnet tool update -g --version 4.1.* dotnet-format >nul || dotnet tool list -g
+          dotnet format -f src --check -v:diag
+
       - name: 🙏 build
-        run: dotnet build -p:versionsuffix="$(git name-rev --name-only --refs=refs/heads/* HEAD).$GITHUB_RUN_NUMBER"
+        run: dotnet build -m:1 -bl:build.binlog -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
+
+      - name: 🧪 test
+        run: dotnet test --no-build -m:1 --blame-hang --blame-hang-timeout 5m -d $GITHUB_WORKSPACE/logs/${{ matrix.os }}.txt -r $GITHUB_WORKSPACE/logs
+
+      - name: 📦 pack
+        run: dotnet pack -m:1 -bl:pack.binlog -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
+
+      - name: 🔼 logs
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}
+          path: |
+            *.binlog
+            logs/**/*.*
+      
+      # Only push CI package to sleet feed if building on ubuntu (fastest)
       - name: 🚀 sleet
-        if: ${{ !github.event.pull_request.head.repo.fork }}
+        env:
+          SLEET_CONNECTION: ${{ secrets.SLEET_CONNECTION }}
+        if: matrix.os == 'ubuntu-latest' && env.SLEET_CONNECTION != ''
         run: |
           dotnet tool install -g --version 3.2.0 sleet 
           sleet push bin --config none -f --verbose -p "SLEET_FEED_CONTAINER=nuget" -p "SLEET_FEED_CONNECTIONSTRING=${{ secrets.SLEET_CONNECTION }}" -p "SLEET_FEED_TYPE=azure"

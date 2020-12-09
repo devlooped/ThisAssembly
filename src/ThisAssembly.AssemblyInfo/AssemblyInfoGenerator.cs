@@ -31,9 +31,9 @@ namespace ThisAssembly
             context.CheckDebugger("ThisAssemblyAssemblyInfo");
 
             var metadata = context.Compilation.Assembly.GetAttributes()
-                .Where(x => attributes.Contains(x.AttributeClass?.Name))
-                .Select(x => new KeyValuePair<string, string>(x.AttributeClass.Name.Substring(8).Replace("Attribute", ""), (string)x.ConstructorArguments[0].Value))
-                .ToDictionary(x => x.Key, x => x.Value);
+                .Where(x => !string.IsNullOrEmpty(x.AttributeClass?.Name) && attributes.Contains(x.AttributeClass!.Name))
+                .Select(x => new KeyValuePair<string, string?>(x.AttributeClass!.Name.Substring(8).Replace("Attribute", ""), (string?)x.ConstructorArguments[0].Value))
+                .ToDictionary(x => x.Key, x => x.Value ?? "");
 
             var model = new Model(metadata);
             var language = context.ParseOptions.Language;

@@ -1,0 +1,18 @@
+<Project>
+  <!-- Extend Directory.Build.targets -->
+
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">
+    <PackageReference Update="NuGetizer" Version="42.42.42" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
+    <None Update="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
+
+    <PackageFile Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
+    <PackageFile Include="*.props;*.targets" PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)" />
+    <PackageFile Include="*.props;*.targets" PackagePath="buildTransitive\$(TargetFramework)\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>
