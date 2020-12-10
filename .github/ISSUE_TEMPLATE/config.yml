@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions
+    url: https://github.com/kzu/oss/discussions?discussions_q=category%3AQ%26A
+    about: Want to know how to do something? Check out the Discussions > Q&A area!
+  - name: Ideas
+    url: https://github.com/kzu/oss/discussions?discussions_q=category%3AIdeas
+    about: Suggest an idea to make the project better through the Discussions > Ideas area!
