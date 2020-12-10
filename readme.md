@@ -133,11 +133,11 @@ or as a method with the right number of parametres if its value has a format str
 
 Given the following Resx file:
 
-| Name                          | Value                                 | Comment           |   |   |
-|-------------------------------|---------------------------------------|-------------------|---|---|
-| Infrastructure_MissingService | Service {0} is required.              | For logging only! |   |   |
-| Shopping_NoShipping           | We cannot ship {0} to {1}.            |                   |   |   |
-| Shopping_OutOfStock           | Product is out of stock at this time. |                   |   |   |
+| Name                          | Value                                 | Comment           |
+|-------------------------------|---------------------------------------|-------------------|
+| Infrastructure_MissingService | Service {0} is required.              | For logging only! |
+| Shopping_NoShipping           | We cannot ship {0} to {1}.            |                   |
+| Shopping_OutOfStock           | Product is out of stock at this time. |                   |
 
 The following code would be generated:
 
@@ -190,7 +190,7 @@ The CI feed is `https://pkg.kzu.io/index.json`.
 
 The versioning scheme for packages is:
 
-- PR builds: *42.42.42-pr*`[NUMBER]`.`[COMMITS]`
+- PR builds: *42.42.42-pr*`[NUMBER]`
 - Branch builds: *42.42.42-*`[BRANCH]`.`[COMMITS]`
 
 
