@@ -30,7 +30,6 @@ namespace ThisAssembly
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
             var output = template.Render(model, member => member.Name);
 
-            context.ApplyDesignTimeFix(output, "ThisAssembly.Metadata", language);
             context.AddSource("ThisAssembly.Metadata", SourceText.From(output, Encoding.UTF8));
         }
 

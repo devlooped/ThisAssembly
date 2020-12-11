@@ -56,7 +56,6 @@ namespace ThisAssembly
             //        .ToString();
             //}
 
-            context.ApplyDesignTimeFix(output, "ThisAssembly.Constants", language);
             context.AddSource("ThisAssembly.Constants", SourceText.From(output, Encoding.UTF8));
         }
     }

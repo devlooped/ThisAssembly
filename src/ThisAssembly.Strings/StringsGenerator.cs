@@ -58,14 +58,12 @@ namespace ThisAssembly
                 //        .ToString();
                 //}
 
-                context.ApplyDesignTimeFix(output, resourceName, language);
                 context.AddSource(resourceName, SourceText.From(output, Encoding.UTF8));
             }
 
             var extension = language == LanguageNames.CSharp ? "cs" : language == LanguageNames.VisualBasic ? "vb" : "fs";
             var strings = EmbeddedResource.GetContent("ThisAssembly.Strings." + extension);
 
-            context.ApplyDesignTimeFix(strings, "ThisAssembly.Strings", language);
             context.AddSource("ThisAssembly.Strings", SourceText.From(strings, Encoding.UTF8));
         }
     }
