@@ -17,10 +17,10 @@ namespace ThisAssembly
         {
             context.CheckDebugger("ThisAssemblyProject");
 
-            if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.ThisAssemblyProject", out var properties))
+            if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.ThisAssemblyProject", out var values))
                 return;
 
-            var metadata = properties.Split('|')
+            var properties = values.Split('|')
                 .Select(prop => new KeyValuePair<string, string?>(prop,
                     context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property." + prop, out var value) ?
                     value : null))
@@ -28,7 +28,7 @@ namespace ThisAssembly
                 .Distinct(new KeyValueComparer())
                 .ToDictionary(x => x.Key, x => x.Value);
 
-            var model = new Model(metadata);
+            var model = new Model(properties);
             var language = context.ParseOptions.Language;
             var file = language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
@@ -40,10 +40,9 @@ namespace ThisAssembly
         class KeyValueComparer : IEqualityComparer<KeyValuePair<string, string?>>
         {
             public bool Equals(KeyValuePair<string, string?> x, KeyValuePair<string, string?> y)
-                => x.Key == y.Key && x.Value == y.Value;
+                => x.Key.Equals(y.Key, StringComparison.OrdinalIgnoreCase);
 
-            public int GetHashCode(KeyValuePair<string, string?> obj)
-                => new HashCode().AddRange(obj.Key, obj.Value ?? "").ToHashCode();
+            public int GetHashCode(KeyValuePair<string, string?> obj) => obj.Key.GetHashCode();
         }
 
         public static string[] GetItems(GeneratorExecutionContext context)
