@@ -1,6 +1,23 @@
 <Project>
   <!-- To extend/change the defaults, create a Directory.props alongside this file -->
 
+  <PropertyGroup Label="CI" Condition="'$(CI)' == ''">
+    <CI>false</CI>
+    <!-- GH, CircleCI, GitLab and BitBucket already use CI -->
+    <CI Condition="'$(TF_BUILD)' == 'true' or 
+                   '$(TEAMCITY_VERSION)' != '' or 
+                   '$(APPVEYOR)' != '' or 
+                   '$(BuildRunner)' == 'MyGet' or 
+                   '$(JENKINS_URL)' != '' or 
+                   '$(TRAVIS)' == 'true' or 
+                   '$(BUDDY)' == 'true'">true</CI>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- The Microsoft.Managed.Core.targets use this property to use deterministic source paths in CI builds -->
+    <ContinuousIntegrationBuild>$(CI)</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  
   <PropertyGroup Label="NuGet">
     <Authors>kzu</Authors>
     <Copyright>Copyright (C) Daniel Cazzulino and Contributors. All rights reserved.</Copyright>
@@ -21,11 +38,10 @@
 
   <ItemGroup Label="NuGet">
     <!-- This is compatible with nugetizer and SDK pack -->
-    <Content Include="$(MSBuildThisFileDirectory)icon.png" Link="icon.png" 
-             CopyToOutputDirectory="PreserveNewest" 
-             Pack="true" 
-             Visible="false"
-             PackagePath="%(Filename)%(Extension)" />
+    <None Include="$(MSBuildThisFileDirectory)icon.png" Link="icon.png" 
+          Pack="true" 
+          Visible="false"
+          PackagePath="%(Filename)%(Extension)" />
   </ItemGroup>
 
   <PropertyGroup Label="Build">
@@ -68,7 +84,12 @@
 
     <!-- See: https://www.cazzulino.com/project-dependencies-as-project-references.html -->
     <AddSyntheticProjectReferencesForSolutionDependencies>false</AddSyntheticProjectReferencesForSolutionDependencies>
-  </PropertyGroup>
+
+    <!-- Don't warn for packages using semver 2.0 -->
+    <NoWarn>NU5105;$(NoWarn)</NoWarn>
+    <!-- Turn warnings into errors in CI or Release builds -->
+    <WarningsAsErrors Condition="$(CI) or '$(Configuration)' == 'Release'">true</WarningsAsErrors>
+</PropertyGroup>
 
   <PropertyGroup Label="Version">
     <!-- Versioning: when building locally, it's always 42.42.42. 
@@ -105,24 +126,6 @@
     <ProjectProperty Include="PublicKey" />
     <ProjectProperty Include="PublicKeyToken" />
   </ItemGroup>
-
-
-  <PropertyGroup Label="CI" Condition="'$(CI)' == ''">
-    <CI>false</CI>
-    <!-- GH, CircleCI, GitLab and BitBucket already use CI -->
-    <CI Condition="'$(TF_BUILD)' == 'true' or 
-                   '$(TEAMCITY_VERSION)' != '' or 
-                   '$(APPVEYOR)' != '' or 
-                   '$(BuildRunner)' == 'MyGet' or 
-                   '$(JENKINS_URL)' != '' or 
-                   '$(TRAVIS)' == 'true' or 
-                   '$(BUDDY)' == 'true'">true</CI>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <!-- The Microsoft.Managed.Core.targets use this property to use deterministic source paths in CI builds -->
-    <ContinuousIntegrationBuild>$(CI)</ContinuousIntegrationBuild>
-  </PropertyGroup>
 
   <Import Project="Directory.props" Condition="Exists('Directory.props')"/>
 </Project>
