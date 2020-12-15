@@ -3,8 +3,13 @@
   <Target Name="EnsureSourceGenerators" BeforeTargets="BeforeCompile;CoreCompile">
     <Error Text="ThisAssembly requires MSBuild 16.8+ or .NET SDK 5.0+."
            Condition="$(MSBuildShortVersion) &lt; '16.8'" />
-    <Error Text="ThisAssembly uses Roslyn source generators, which are only supported in C# at the moment."
-           Condition="'$(Language)' != 'C#'" />
+    <!-- See https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/langversion-compiler-option -->
+    <Error Text="ThisAssembly uses Roslyn source generators, which are only supported in C# 9.0 or greater at the moment."
+           Condition="'$(Language)' != 'C#' OR 
+                ('$(LangVersion)' != 'preview' AND
+                 '$(LangVersion)' != 'latest' AND
+                 '$(LangVersion)' != 'latestMajor' AND
+                 '$(LangVersion)' &lt; '9.0')" />
   </Target>
 
 </Project>

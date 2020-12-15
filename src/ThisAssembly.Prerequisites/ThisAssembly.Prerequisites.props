@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <MSBuildShortVersion>$(MSBuildVersion.TrimEnd('0123456789').TrimEnd('.'))</MSBuildShortVersion>
-    <!-- Remove when 16.8/C# 9 is stable -->
-    <LangVersion Condition="'$(MSBuildShortVersion)' == '16.8'">Preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

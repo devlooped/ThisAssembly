@@ -10,7 +10,7 @@
     <Description>Ensures that referencing project satisfies the prerequisites for ThisAssembly, namely:
 
 * MSBuild 16.8+: contains the Roslyn support for source generators
-* C# language: it's the only language supported by Roslyn source generators at the moment.
+* C# 9.0 or greater language: it's the only language supported by Roslyn source generators at the moment.
 </Description>
   </PropertyGroup>
 
