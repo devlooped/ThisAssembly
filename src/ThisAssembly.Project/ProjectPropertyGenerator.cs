@@ -26,7 +26,7 @@ namespace ThisAssembly
                     value : null))
                 .Where(pair => pair.Value != null)
                 .Distinct(new KeyValueComparer())
-                .ToDictionary(x => x.Key, x => x.Value);
+                .ToDictionary(x => x.Key, x => x.Value!);
 
             var model = new Model(properties);
             var language = context.ParseOptions.Language;
