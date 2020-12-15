@@ -26,17 +26,13 @@
 	url = https://github.com/kzu/oss/blob/main/.github/ISSUE_TEMPLATE/bug.md
 	etag = 026852ba1f1921f3a043bb5e09cd7a2c3d9a33ec51f48e524dc3a2ab72de3141
 	weak
-[file ".github/ISSUE_TEMPLATE/feature.md"]
-	url = https://github.com/kzu/oss/blob/main/.github/ISSUE_TEMPLATE/feature.md
-	etag = c5b7de1bc9eaf1f2ae6d1d2021e68084a5b1ab4800e9f129416d2838c128cad1
-	weak
 [file ".github/dependabot.yml"]
 	url = https://github.com/kzu/oss/blob/main/.github/dependabot.yml
 	etag = 2fc8a0d2b47091b058ae3e1f68333492044b49a684621f4939a0bce5bff869d5
 	weak
 [file ".github/workflows/build.yml"]
 	url = https://github.com/kzu/oss/blob/main/.github/workflows/build.yml
-	etag = c56db40b37f8dbcff13aea20eefc263caf825d17d86b0dc055ce504d8cb8ae9d
+	etag = 4d598303ec512578cff4b6d539929490ec844dd9c0605251bd769adbe120b50d
 	weak
 [file ".github/workflows/release.yml"]
 	url = https://github.com/kzu/oss/blob/main/.github/workflows/release.yml
@@ -64,11 +60,11 @@
 	weak
 [file "src/Directory.Build.props"]
 	url = https://github.com/kzu/oss/blob/main/src/Directory.Build.props
-	etag = d0b93d7533832a4d62cff69c71540bad3284bf92a7d2096b1a91607d72099d2b
+	etag = a74681138b2e306cce2cbfc4b73148bb5a060a040abf1d86d9116fa36601a376
 	weak
 [file "src/Directory.Build.targets"]
 	url = https://github.com/kzu/oss/blob/main/src/Directory.Build.targets
-	etag = a8ae94f091decde21c9f9b2d851647c1cb573746956c29448346d0ccb1478652
+	etag = 5493a6e0a33cf0efe11b49d71f30bbd2555c4f94924f07a3f39fa47e466b705d
 	weak
 [file "src/kzu.snk"]
 	url = https://github.com/kzu/oss/blob/main/src/kzu.snk

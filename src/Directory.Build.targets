@@ -59,29 +59,25 @@
   </ItemGroup>
 
   <!-- Make sure the source control info is available before calling source generators -->
-  <Target Name="EnsureProjectInformation" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" DependsOnTargets="InitializeSourceControlInformation" />
-
-  <Target Name="_InitializeRepositoryProperties" 
-          DependsOnTargets="InitializeSourceControlInformation" 
-          Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
-    <PropertyGroup>
+  <Target Name="EnsureProjectInformation" 
+          BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" 
+          DependsOnTargets="InitializeSourceControlInformation">
+    <PropertyGroup Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
+      <!-- The project must specify PublishRepositoryUrl=true in order to publish the URL, in order to prevent inadvertent leak of internal URL. -->
+      <RepositoryUrl Condition="'$(RepositoryUrl)' == '' and '$(PublishRepositoryUrl)' == 'true'">$(PrivateRepositoryUrl)</RepositoryUrl>
+      <RepositoryCommit Condition="'$(RepositoryCommit)' == ''">$(SourceRevisionId)</RepositoryCommit>
+      <RepositorySha Condition="'$(SourceRevisionId)' != ''">$(SourceRevisionId.Substring(0, 9))</RepositorySha>
     </PropertyGroup>    
   </Target>
 
   <!-- Always append the link to the direct source tree for the current build -->
   <Target Name="UpdatePackageMetadata"
           BeforeTargets="PrepareForBuild;GenerateMSBuildEditorConfigFileShouldRun;GetAssemblyVersion;GetPackageMetadata;GenerateNuspec;Pack"
-          DependsOnTargets="InitializeSourceControlInformation"
+          DependsOnTargets="EnsureProjectInformation"
           Condition="'$(SourceControlInformationFeatureSupported)' == 'true' And
                      '$(IsPackable)' == 'true'">
     <PropertyGroup>
-      <!-- The project must specify PublishRepositoryUrl=true in order to publish the URL, in order to prevent inadvertent leak of internal URL. -->
-      <RepositoryUrl Condition="'$(RepositoryUrl)' == '' and '$(PublishRepositoryUrl)' == 'true'">$(PrivateRepositoryUrl)</RepositoryUrl>
       <PackageProjectUrl Condition="'$(PackageProjectUrl)' == '' and '$(PublishRepositoryUrl)' == 'true'">$(RepositoryUrl)</PackageProjectUrl>
-
-      <RepositoryCommit Condition="'$(RepositoryCommit)' == ''">$(SourceRevisionId)</RepositoryCommit>
-      <RepositorySha Condition="'$(SourceRevisionId)' != ''">$(SourceRevisionId.Substring(0, 9))</RepositorySha>
-
       <Description Condition="'$(SourceRevisionId)' != '' and '$(RepositoryUrl)' != ''">$(Description)
 
 Built from $(RepositoryUrl)/tree/$(SourceRevisionId.Substring(0, 9))
