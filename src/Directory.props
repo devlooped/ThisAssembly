@@ -2,11 +2,13 @@
   <!-- Extend Directory.Build.props -->
 
   <PropertyGroup Label="NuGet">
-    <PackageTags>dotnet dotnet-tool dotnet-tools tool</PackageTags>
+    <PackageTags>dotnet roslyn</PackageTags>
     <PackOnBuild>true</PackOnBuild>
     <PackFolder>analyzers\cs</PackFolder>
 
     <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));$(RestoreSources)</RestoreSources>
+
+    <PackageProjectUrl>https://clarius.org/ThisAssembly</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Label="Build">
