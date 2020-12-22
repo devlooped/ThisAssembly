@@ -1,0 +1,17 @@
+---
+---
+
+@import "jekyll-theme-slate";
+
+.inner {
+    max-width: 960px;
+}
+
+pre, code {
+    background-color: unset;
+    font-size: unset;
+}
+
+ code {
+    font-size: 0.80em;
+}
