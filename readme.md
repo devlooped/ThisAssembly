@@ -102,14 +102,14 @@ The metadata attribute can alternatively be declared using MSBuild syntax in the
 
 This package generates a static `ThisAssembly.Project` class with public 
 constants exposing project properties that have been opted into this mechanism by adding 
-them as `ThisAssemblyProject` MSBuild items in project file, such as:
+them as `ProjectProperty` MSBuild items in project file, such as:
 
 ```xml
   <PropertyGroup>
     <Foo>Bar</Foo>
   </PropertyGroup>
   <ItemGroup>
-    <ThisAssemblyProject Include="Foo" />
+    <ProjectProperty Include="Foo" />
   </ItemGroup>
 ```
 
