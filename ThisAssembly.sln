@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Prerequisites"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Constants", "src\ThisAssembly.Constants\ThisAssembly.Constants.csproj", "{31C53CCE-13FC-4890-803A-85CD146B909B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Tests", "src\ThisAssembly.Tests\ThisAssembly.Tests.csproj", "{AD25424F-7DE0-4515-AE9F-B95414218292}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{31C53CCE-13FC-4890-803A-85CD146B909B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31C53CCE-13FC-4890-803A-85CD146B909B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31C53CCE-13FC-4890-803A-85CD146B909B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD25424F-7DE0-4515-AE9F-B95414218292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD25424F-7DE0-4515-AE9F-B95414218292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD25424F-7DE0-4515-AE9F-B95414218292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD25424F-7DE0-4515-AE9F-B95414218292}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
