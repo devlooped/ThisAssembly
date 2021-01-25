@@ -4,7 +4,7 @@
   <PropertyGroup Label="NuGet">
     <PackageTags>dotnet roslyn</PackageTags>
     <PackOnBuild>true</PackOnBuild>
-    <PackFolder>analyzers\cs</PackFolder>
+    <PackFolder>analyzers/dotnet/cs</PackFolder>
 
     <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));$(RestoreSources)</RestoreSources>
 
