@@ -9,6 +9,9 @@
     <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));$(RestoreSources)</RestoreSources>
 
     <PackageProjectUrl>https://clarius.org/ThisAssembly</PackageProjectUrl>
+
+    <!-- See https://github.com/scriban/scriban#source-embedding -->
+    <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
   </PropertyGroup>
 
   <PropertyGroup Label="Build">
