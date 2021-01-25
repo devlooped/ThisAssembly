@@ -8,15 +8,33 @@
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
   </ItemGroup>
 
+  <ItemDefinitionGroup>
+    <FileConstant>
+      <Link />
+      <AreaPath />
+      <Area />
+      <Value />
+    </FileConstant>
+  </ItemDefinitionGroup>
+
   <Target Name="_InjectConstantAdditionalFiles"
           BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
           DependsOnTargets="PrepareResourceNames">
     <ItemGroup>
-      <FileConstant>
-        <Area>$([MSBuild]::ValueOrDefault('%(RelativeDir)', '').Replace('\', '.').Replace('/', '.'))%(Filename)</Area>
-        <Value>%(RelativeDir)%(Filename)%(Extension)</Value>
+      <FileConstant Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)')) OR '%(Link)' != ''">
+        <AreaPath Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)'))">%(RelativeDir)%(Filename)</AreaPath>
+        <AreaPath Condition="'%(Link)' != ''">$([System.IO.Path]::GetDirectoryName('%(Link)'))$([System.IO.Path]::DirectorySeparatorChar)$([System.IO.Path]::GetFileNameWithoutExtension('%(Link)'))</AreaPath>
+        <FileExtension Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)'))">%(Extension)</FileExtension>
+        <FileExtension Condition="'%(Link)' != ''">$([System.IO.Path]::GetExtension('%(Link)'))</FileExtension>
       </FileConstant>
-      <Constant Include="@(FileConstant -> '%(Area)')" Value="%(FileConstant.Value)" Comment="%(FileConstant.Comment)" />
+      <FileConstant Condition="'%(AreaPath)' != ''">
+        <Area>$([MSBuild]::ValueOrDefault('%(AreaPath)', '').Replace('\', '.').Replace('/', '.'))</Area>
+        <Value>%(AreaPath)%(FileExtension)</Value>
+      </FileConstant>
+      <Constant Include="@(FileConstant -> '%(Area)')" 
+                Condition="'%(FileConstant.Area)' != '' AND '%(FileConstant.Value)' != ''" 
+                Value="%(FileConstant.Value)" 
+                Comment="%(FileConstant.Comment)" />
       <AdditionalFiles Include="@(Constant)" SourceItemType="Constant" />
     </ItemGroup>
   </Target>
