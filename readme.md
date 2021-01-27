@@ -5,7 +5,6 @@
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=green)](https://www.nuget.org/packages/ThisAssembly)
 [![License](https://img.shields.io/github/license/kzu/ThisAssembly.svg?color=blue)](https://github.com//kzu/ThisAssembly/blob/main/LICENSE)
 [![Build](https://github.com/kzu/ThisAssembly/workflows/build/badge.svg?branch=main)](https://github.com/kzu/ThisAssembly/actions)
-[![CI Version](https://img.shields.io/endpoint?url=https://shields.kzu.io/vpre/ThisAssembly/main&label=nuget.ci&color=brightgreen)](https://pkg.kzu.io/index.json)
 
 
 Exposes project and assembly level information as constants in the ThisAssembly 
@@ -182,7 +181,6 @@ partial class ThisAssembly
 
 [![CI Version](https://img.shields.io/endpoint?url=https://shields.kzu.io/vpre/Stunts/main&label=nuget.ci&color=brightgreen)](https://pkg.kzu.io/index.json)
 [![GH CI Status](https://github.com/kzu/stunts/workflows/build/badge.svg?branch=main)](https://github.com/kzu/stunts/actions?query=branch%3Amain+workflow%3Abuild+)
-[![AzDO CI Status](https://dev.azure.com/kzu/oss/_apis/build/status/stunts?branchName=main)](http://build.azdo.io/kzu/oss/45)
 
 We also produce CI packages from branches and pull requests so you can dogfood builds as quickly as they are produced. 
 
