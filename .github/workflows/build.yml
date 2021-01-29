@@ -21,14 +21,10 @@ jobs:
     steps:
       - name: 🤘 checkout
         uses: actions/checkout@v2
-      - name: ⚙ dotnet 3.1.x
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.x
       - name: ✓ ensure format
         run: |
-          dotnet tool update -g --version 4.1.* dotnet-format
-          dotnet format -f src --check -v:diag
+          dotnet tool update -g dotnet-format --version 5.0.* --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
+          dotnet format --check -v:diag
 
   build:
     name: build-${{ matrix.os }}
@@ -43,19 +39,6 @@ jobs:
         with: 
           submodules: recursive
           fetch-depth: 0
-
-      - name: ⚙ dotnet 5.0.x
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.0.x
-      - name: ⚙ dotnet 3.1.x
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.x
-      - name: ⚙ dotnet 2.1.x
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 2.1.x
 
       - name: 🙏 build
         run: dotnet build -m:1 -bl:build.binlog -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER" -p:RepositoryBranch=${GITHUB_REF#refs/*/}

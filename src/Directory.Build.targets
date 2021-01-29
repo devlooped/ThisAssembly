@@ -91,6 +91,7 @@
 Built from $(RepositoryUrl)/tree/$(RepositorySha)
       </Description>
       <PackageDescription>$(Description)</PackageDescription>
+      <PackageReleaseNotes Condition="'$(RepositoryUrl)' != '' and Exists('$(MSBuildThisFileDirectory)..\changelog.md')">$(RepositoryUrl)/blob/main/changelog.md</PackageReleaseNotes>
     </PropertyGroup>
   </Target>
 

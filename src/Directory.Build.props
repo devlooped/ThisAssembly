@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <PropertyGroup Label="Build">
+    <Configuration Condition="'$(Configuration)' == '' and $(CI)">Release</Configuration>
     <LangVersion>Latest</LangVersion>
 
     <!-- See https://docs.microsoft.com/en-us/dotnet/standard/assembly/reference-assemblies -->

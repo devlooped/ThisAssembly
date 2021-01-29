@@ -1,0 +1,27 @@
+﻿name: changelog
+on:
+  release:
+    types: [released]
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🤘 checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: ⚙ changelog
+        uses: faberNovel/github-changelog-generator-action@master
+        with:
+          options: --token ${{ secrets.GITHUB_TOKEN }} --o changelog.md
+
+      - name: 🚀 changelog
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add changelog.md
+          git commit -m "🖉 Update changelog with ${GITHUB_REF#refs/*/}"
+          git push
