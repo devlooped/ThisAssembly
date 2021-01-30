@@ -32,7 +32,7 @@ jobs:
           git add -A
           git config --local user.email "hello@clarius.org"
           git config --local user.name "GitHub Action"
-          git commit -m "Publish ${GITHUB_REPOSITORY}@${GITHUB_SHA:0:9}"
+          git commit -m "Publish pages from ${GITHUB_REPOSITORY}@${GITHUB_SHA:0:9}"
 
       - name: 🚀 push
         uses: ad-m/github-push-action@v0.6.0

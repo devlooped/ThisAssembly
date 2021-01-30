@@ -84,7 +84,7 @@
 	weak
 [file ".github/workflows/pages.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/pages.yml
-	etag = 3f1fb2481dcb41987d775eb6ed61c10adc00995f287636e7adda3ade5efc94b7
+	etag = f2bc91354dc634de00aa9f502eb69e34368c315bcdbe422cde95ddd850d31669
 	weak
 [file "Gemfile"]
 	url = https://github.com/devlooped/oss/blob/main/Gemfile
@@ -108,7 +108,7 @@
 	weak
 [file ".github/workflows/changelog.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/changelog.yml
-	etag = 01608ff4a85f7c9cdcaf92e959c3a3b5d7fd38c22cf797d9364cf1b00d304f58
+	etag = 2b5d5a96ac564a3ace130574208df792472e7e57708ec34aaeeafba66b8bbd7b
 	weak
 [file ".github/workflows/publish.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/publish.yml

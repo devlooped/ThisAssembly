@@ -3,6 +3,9 @@ on:
   release:
     types: [released]
 
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
 jobs:
   changelog:
     runs-on: ubuntu-latest
@@ -18,10 +21,16 @@ jobs:
         with:
           options: --token ${{ secrets.GITHUB_TOKEN }} --o changelog.md
 
+      - name: 🔍 GH_TOKEN
+        if: env.GH_TOKEN == ''
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+
       - name: 🚀 changelog
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config --local user.name github-actions
+          git config --local user.email github-actions@github.com
           git add changelog.md
           git commit -m "🖉 Update changelog with ${GITHUB_REF#refs/*/}"
-          git push
+          git push "https://$GITHUB_ACTOR:$GH_TOKEN@github.com/$GITHUB_REPOSITORY"
