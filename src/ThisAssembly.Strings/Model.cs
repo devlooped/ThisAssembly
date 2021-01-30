@@ -105,18 +105,18 @@ static class ResourceFile
 record ResourceArea(string Name, string Prefix)
 {
     public List<ResourceArea> NestedAreas { get; init; } = new List<ResourceArea>();
-public List<ResourceValue> Values { get; init; } = new List<ResourceValue>();
+    public List<ResourceValue> Values { get; init; } = new List<ResourceValue>();
 }
 
 [DebuggerDisplay("{Name} = {Value}")]
 record ResourceValue(string Name, string? Raw)
 {
     public string? Value => Raw?.Replace(Environment.NewLine, "")?.Replace("<", "&lt;")?.Replace(">", "&gt;");
-public string? Comment { get; init; }
-public bool HasFormat => Format != null && Format.Count > 0;
-// We either have *all* named or all indexed. Can't mix. We'll skip generating 
-// methods for mixed ones and report as an analyzer error on the Resx.
-public bool IsNamedFormat => HasFormat && Format.All(x => !int.TryParse(x, out _));
-public bool IsIndexedFormat => HasFormat && Format.All(x => int.TryParse(x, out _));
-public List<string> Format { get; } = new List<string>();
+    public string? Comment { get; init; }
+    public bool HasFormat => Format != null && Format.Count > 0;
+    // We either have *all* named or all indexed. Can't mix. We'll skip generating 
+    // methods for mixed ones and report as an analyzer error on the Resx.
+    public bool IsNamedFormat => HasFormat && Format.All(x => !int.TryParse(x, out _));
+    public bool IsIndexedFormat => HasFormat && Format.All(x => int.TryParse(x, out _));
+    public List<string> Format { get; } = new List<string>();
 }
