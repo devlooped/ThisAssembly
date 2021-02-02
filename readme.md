@@ -180,7 +180,7 @@ partial class ThisAssembly
 # Dogfooding
 
 [![CI Version](https://img.shields.io/endpoint?url=https://shields.kzu.io/vpre/Stunts/main&label=nuget.ci&color=brightgreen)](https://pkg.kzu.io/index.json)
-[![GH CI Status](https://github.com/kzu/stunts/workflows/build/badge.svg?branch=main)](https://github.com/kzu/stunts/actions?query=branch%3Amain+workflow%3Abuild+)
+[![Build](https://github.com/kzu/ThisAssembly/workflows/build/badge.svg?branch=main)](https://github.com/kzu/ThisAssembly/actions)
 
 We also produce CI packages from branches and pull requests so you can dogfood builds as quickly as they are produced. 
 
