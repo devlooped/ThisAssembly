@@ -1,9 +1,5 @@
 <Project>
 
-  <PropertyGroup>
-    <MSBuildShortVersion>$(MSBuildVersion.TrimEnd('0123456789').TrimEnd('.'))</MSBuildShortVersion>
-  </PropertyGroup>
-
   <ItemGroup>
     <CompilerVisibleProperty Include="DebugSourceGenerators" />
   </ItemGroup>
