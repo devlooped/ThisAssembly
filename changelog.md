@@ -1,5 +1,13 @@
 
 
+## [v1.0.6](https://github.com/devlooped/ThisAssembly/tree/v1.0.6) (2021-03-08)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.5...v1.0.6)
+
+**Fixed bugs:**
+
+- ThisAssembly.Prerequisites fails with VS 16.10 preview [\#50](https://github.com/devlooped/ThisAssembly/issues/50)
+
 ## [v1.0.5](https://github.com/devlooped/ThisAssembly/tree/v1.0.5) (2021-01-30)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.4...v1.0.5)
