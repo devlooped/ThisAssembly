@@ -1,5 +1,13 @@
 
 
+## [v1.0.7](https://github.com/devlooped/ThisAssembly/tree/v1.0.7) (2021-03-16)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.6...v1.0.7)
+
+**Implemented enhancements:**
+
+- Make the C\# language check a warning instead of an error [\#51](https://github.com/devlooped/ThisAssembly/issues/51)
+
 ## [v1.0.6](https://github.com/devlooped/ThisAssembly/tree/v1.0.6) (2021-03-08)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.5...v1.0.6)
