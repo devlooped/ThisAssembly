@@ -1,5 +1,13 @@
 
 
+## [v1.0.8](https://github.com/devlooped/ThisAssembly/tree/v1.0.8) (2021-04-29)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.7...v1.0.8)
+
+**Fixed bugs:**
+
+- Emitting Description can easily break compilation [\#55](https://github.com/devlooped/ThisAssembly/issues/55)
+
 ## [v1.0.7](https://github.com/devlooped/ThisAssembly/tree/v1.0.7) (2021-03-16)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.6...v1.0.7)
