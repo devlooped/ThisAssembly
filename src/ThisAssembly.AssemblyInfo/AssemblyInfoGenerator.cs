@@ -16,7 +16,6 @@ namespace ThisAssembly
             nameof(AssemblyConfigurationAttribute),
             nameof(AssemblyCompanyAttribute),
             nameof(AssemblyCopyrightAttribute),
-            nameof(AssemblyDescriptionAttribute),
             nameof(AssemblyTitleAttribute),
             nameof(AssemblyProductAttribute),
             nameof(AssemblyVersionAttribute),
