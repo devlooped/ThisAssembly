@@ -40,7 +40,7 @@ C#:
     <PackageReference Include="NuGetizer" Version="0.7.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
 
-    <PackageReference Include="Scriban" Version="3.6.0" Pack="false" IncludeAssets="build" />
+    <PackageReference Include="Scriban" Version="3.7.0" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
 
