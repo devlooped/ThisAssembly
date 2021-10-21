@@ -33,6 +33,7 @@ namespace ThisAssembly
                 .Where(x => !string.IsNullOrEmpty(x.AttributeClass?.Name) && attributes.Contains(x.AttributeClass!.Name))
                 .Where(x => x.ConstructorArguments.Length == 1)
                 .Select(x => new KeyValuePair<string, string?>(x.AttributeClass!.Name.Substring(8).Replace("Attribute", ""), (string?)x.ConstructorArguments[0].Value))
+                .Distinct(new KeyPairComparer())
                 .ToDictionary(x => x.Key, x => x.Value ?? "");
 
             var model = new Model(metadata);
@@ -42,6 +43,13 @@ namespace ThisAssembly
             var output = template.Render(model, member => member.Name);
 
             context.AddSource("ThisAssembly.Info", SourceText.From(output, Encoding.UTF8));
+        }
+
+        class KeyPairComparer : IEqualityComparer<KeyValuePair<string, string?>>
+        {
+            public bool Equals(KeyValuePair<string, string?> x, KeyValuePair<string, string?> y) => x.Key == y.Key;
+
+            public int GetHashCode(KeyValuePair<string, string?> obj) => obj.Key.GetHashCode();
         }
     }
 }
