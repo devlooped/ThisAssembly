@@ -31,6 +31,7 @@ namespace ThisAssembly
 
             var metadata = context.Compilation.Assembly.GetAttributes()
                 .Where(x => !string.IsNullOrEmpty(x.AttributeClass?.Name) && attributes.Contains(x.AttributeClass!.Name))
+                .Where(x => x.ConstructorArguments.Length == 1)
                 .Select(x => new KeyValuePair<string, string?>(x.AttributeClass!.Name.Substring(8).Replace("Attribute", ""), (string?)x.ConstructorArguments[0].Value))
                 .ToDictionary(x => x.Key, x => x.Value ?? "");
 
