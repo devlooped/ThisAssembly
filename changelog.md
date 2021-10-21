@@ -1,5 +1,14 @@
 
 
+## [v1.0.9](https://github.com/devlooped/ThisAssembly/tree/v1.0.9) (2021-10-21)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.8...v1.0.9)
+
+**Fixed bugs:**
+
+- Exception when having a second AssemblyInformationalVersion attribute [\#78](https://github.com/devlooped/ThisAssembly/issues/78)
+- Exception when typing out AssemblyInformationalVersion [\#77](https://github.com/devlooped/ThisAssembly/issues/77)
+
 ## [v1.0.8](https://github.com/devlooped/ThisAssembly/tree/v1.0.8) (2021-04-29)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.7...v1.0.8)
