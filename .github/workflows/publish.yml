@@ -24,7 +24,7 @@ jobs:
       - name: ⚙ dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '6.0.101'
 
       - name: 🙏 build
         run: dotnet build -m:1 -p:version=${GITHUB_REF#refs/*/v}

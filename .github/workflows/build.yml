@@ -34,7 +34,7 @@ jobs:
       - name: ⚙ dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '6.0.102'
 
       - name: ✓ ensure format
         run: dotnet format --verify-no-changes -v:diag --exclude ~/.nuget
@@ -55,9 +55,8 @@ jobs:
 
       - name: ⚙ dotnet
         uses: actions/setup-dotnet@v1
-        if: matrix.os != 'windows-latest'
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '6.0.101'
 
       - name: 🙏 build
         run: dotnet build -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
