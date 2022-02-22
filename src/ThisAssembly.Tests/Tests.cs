@@ -15,7 +15,7 @@ namespace ThisAssemblyTests
 
         [Fact]
         public void CanUseFileConstantLinkedFile()
-            => Assert.Equal(Path.Combine("Included", "icon.png"), ThisAssembly.Constants.Included.icon);
+            => Assert.Equal(Path.Combine("Included", "Readme.txt"), ThisAssembly.Constants.Included.Readme);
 
         [Fact]
         public void CanUseMetadata()
