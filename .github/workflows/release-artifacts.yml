@@ -19,20 +19,19 @@ jobs:
       - name: 🏷 current
         run: echo "CURRENT_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
+      - name: ⚙ dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+
       - name: 🙏 build
-        run: dotnet build -m:1 -bl:build.binlog -p:version=${GITHUB_REF#refs/*/v} -p:RepositoryBranch=${GITHUB_REF#refs/*/}
+        run: dotnet build -m:1 -p:version=${GITHUB_REF#refs/*/v}
 
       - name: 🧪 test
-        run: dotnet test --no-build -m:1
+        uses: ./.github/workflows/test
 
       - name: 📦 pack
-        run: dotnet pack -m:1 -bl:pack.binlog -p:version=${GITHUB_REF#refs/*/v} -p:RepositoryBranch=${GITHUB_REF#refs/*/}
-
-      - name: 🔼 logs
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v2
-        with:
-          path: '**/*.binlog'
+        run: dotnet pack -m:1 -p:version=${GITHUB_REF#refs/*/v}
 
       - name: 🔽 gh 
         run: |

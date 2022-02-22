@@ -1,4 +1,0 @@
-usernames-as-github-logins=true
-header-label=
-add_issues_wo_labels=false
-exclude-labels=dependencies,duplicate,question,invalid,wontfix

@@ -3,8 +3,14 @@
 
 name: build
 on: 
+  workflow_dispatch:
   push:
     branches: [ main, dev, 'feature/*', 'rel/*' ]
+    paths-ignore:
+      - changelog.md
+      - code-of-conduct.md
+      - security.md
+      - support.md
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -21,10 +27,19 @@ jobs:
     steps:
       - name: 🤘 checkout
         uses: actions/checkout@v2
+        with: 
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: ⚙ dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+
       - name: ✓ ensure format
         run: |
-          dotnet tool update -g dotnet-format --version 5.0.* --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
-          dotnet format --check -v:diag
+          dotnet restore
+          dotnet format --verify-no-changes -v:diag
 
   build:
     name: build-${{ matrix.os }}
@@ -32,7 +47,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [windows-latest, ubuntu-latest, macOS-latest]
     steps:
       - name: 🤘 checkout
         uses: actions/checkout@v2
@@ -40,29 +55,32 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: ⚙ dotnet
+        uses: actions/setup-dotnet@v1
+        if: matrix.os != 'windows-latest'
+        with:
+          dotnet-version: '6.0.x'
+
       - name: 🙏 build
-        run: dotnet build -m:1 -bl:build.binlog -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER" -p:RepositoryBranch=${GITHUB_REF#refs/*/}
+        run: dotnet build -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
+
+      - name: ⚙ GNU grep
+        if: matrix.os == 'macOS-latest'
+        run: |
+          brew install grep
+          echo 'export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"' >> .bash_profile
 
       - name: 🧪 test
-        run: dotnet test --no-build -m:1 --blame-hang --blame-hang-timeout 5m -d $GITHUB_WORKSPACE/logs/${{ matrix.os }}.txt -r $GITHUB_WORKSPACE/logs
+        uses: ./.github/workflows/test
 
       - name: 📦 pack
-        run: dotnet pack -m:1 -bl:pack.binlog -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER" -p:RepositoryBranch=${GITHUB_REF#refs/*/}
+        run: dotnet pack -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
 
-      - name: 🔼 logs
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ matrix.os }}
-          path: |
-            **/*.binlog
-            logs/**/*.*
-      
       # Only push CI package to sleet feed if building on ubuntu (fastest)
       - name: 🚀 sleet
         env:
           SLEET_CONNECTION: ${{ secrets.SLEET_CONNECTION }}
         if: matrix.os == 'ubuntu-latest' && env.SLEET_CONNECTION != ''
         run: |
-          dotnet tool install -g --version 3.2.0 sleet 
-          sleet push bin --config none -f --verbose -p "SLEET_FEED_CONTAINER=nuget" -p "SLEET_FEED_CONNECTIONSTRING=${{ secrets.SLEET_CONNECTION }}" -p "SLEET_FEED_TYPE=azure"
+          dotnet tool install -g --version 4.0.18 sleet 
+          sleet push bin --config none -f --verbose -p "SLEET_FEED_CONTAINER=nuget" -p "SLEET_FEED_CONNECTIONSTRING=${{ secrets.SLEET_CONNECTION }}" -p "SLEET_FEED_TYPE=azure" || echo "No packages found"
