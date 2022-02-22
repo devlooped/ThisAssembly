@@ -20,21 +20,26 @@ jobs:
         with: 
           submodules: recursive
           fetch-depth: 0
-          
+
+      - name: ⚙ dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+
       - name: 🙏 build
-        run: dotnet build -m:1 -bl:build.binlog -p:version=${GITHUB_REF#refs/*/v} -p:RepositoryBranch=${GITHUB_REF#refs/*/}
+        run: dotnet build -m:1 -p:version=${GITHUB_REF#refs/*/v}
+
+      - name: ⚙ GNU grep
+        if: matrix.os == 'macOS-latest'
+        run: |
+          brew install grep
+          echo 'export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"' >> .bash_profile
 
       - name: 🧪 test
-        run: dotnet test --no-build -m:1
+        uses: ./.github/workflows/test
 
       - name: 📦 pack
-        run: dotnet pack -m:1 -bl:pack.binlog -p:version=${GITHUB_REF#refs/*/v} -p:RepositoryBranch=${GITHUB_REF#refs/*/}
-
-      - name: 🔼 logs
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v2
-        with:
-          path: '**/*.binlog'
+        run: dotnet pack -m:1 -p:version=${GITHUB_REF#refs/*/v}
 
       - name: 🚀 nuget
         run: dotnet nuget push ./bin/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
