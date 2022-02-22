@@ -5,7 +5,7 @@
     <PackageTags>dotnet roslyn</PackageTags>
     <PackOnBuild>true</PackOnBuild>
     <PackFolder>analyzers/dotnet/cs</PackFolder>
-
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));$(RestoreSources)</RestoreSources>
 
     <PackageProjectUrl>https://clarius.org/ThisAssembly</PackageProjectUrl>

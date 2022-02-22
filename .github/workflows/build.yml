@@ -37,9 +37,7 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: ✓ ensure format
-        run: |
-          dotnet restore
-          dotnet format --verify-no-changes -v:diag
+        run: dotnet format --verify-no-changes -v:diag --exclude ~/.nuget
 
   build:
     name: build-${{ matrix.os }}
