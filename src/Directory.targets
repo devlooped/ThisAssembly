@@ -12,7 +12,6 @@
 
     <PackageFile Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
     <PackageFile Include="*.props;*.targets" PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)" />
-    <PackageFile Include="*.props;*.targets" PackagePath="buildTransitive\$(TargetFramework)\%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>
