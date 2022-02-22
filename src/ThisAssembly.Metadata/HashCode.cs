@@ -61,24 +61,24 @@ namespace ThisAssembly
     [ExcludeFromCodeCoverage]
     public struct HashCode
     {
-        private static readonly uint s_seed = (uint)new Random().Next();
+        static readonly uint s_seed = (uint)new Random().Next();
 
-        private const uint Prime1 = 2654435761U;
-        private const uint Prime2 = 2246822519U;
-        private const uint Prime3 = 3266489917U;
-        private const uint Prime4 = 668265263U;
-        private const uint Prime5 = 374761393U;
+        const uint Prime1 = 2654435761U;
+        const uint Prime2 = 2246822519U;
+        const uint Prime3 = 3266489917U;
+        const uint Prime4 = 668265263U;
+        const uint Prime5 = 374761393U;
 
-        private uint _v1, _v2, _v3, _v4;
-        private uint _queue1, _queue2, _queue3;
-        private uint _length;
+        uint _v1, _v2, _v3, _v4;
+        uint _queue1, _queue2, _queue3;
+        uint _length;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static uint Rol(uint value, int count)
+        static uint Rol(uint value, int count)
             => (value << count) | (value >> (32 - count));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Initialize(out uint v1, out uint v2, out uint v3, out uint v4)
+        static void Initialize(out uint v1, out uint v2, out uint v3, out uint v4)
         {
             v1 = s_seed + Prime1 + Prime2;
             v2 = s_seed + Prime2;
@@ -87,7 +87,7 @@ namespace ThisAssembly
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static uint Round(uint hash, uint input)
+        static uint Round(uint hash, uint input)
         {
             hash += input * Prime2;
             hash = Rol(hash, 13);
@@ -96,25 +96,25 @@ namespace ThisAssembly
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static uint QueueRound(uint hash, uint queuedValue)
+        static uint QueueRound(uint hash, uint queuedValue)
         {
             hash += queuedValue * Prime3;
             return Rol(hash, 17) * Prime4;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static uint MixState(uint v1, uint v2, uint v3, uint v4)
+        static uint MixState(uint v1, uint v2, uint v3, uint v4)
         {
             return Rol(v1, 1) + Rol(v2, 7) + Rol(v3, 12) + Rol(v4, 18);
         }
 
-        private static uint MixEmptyState()
+        static uint MixEmptyState()
         {
             return s_seed + Prime5;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static uint MixFinal(uint hash)
+        static uint MixFinal(uint hash)
         {
             hash ^= hash >> 15;
             hash *= Prime2;
