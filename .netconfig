@@ -1,5 +1,6 @@
 [file]
 	url = https://github.com/devlooped/oss
+	url = https://github.com/devlooped/.github
 [file "readme.md"]
 	url = https://github.com/devlooped/oss/blob/main/readme.md
 	skip
@@ -21,10 +22,10 @@
 	weak
 	sha = 0683ee777d7d878d4bf013d7deea352685135a05
 [file ".github/FUNDING.yml"]
-	url = https://github.com/devlooped/oss/blob/main/.github/FUNDING.yml
-	etag = f4d02805592d1f86c29acc9da3a40e817fb3611d6ff0f6409f547137f38f65df
+	url = https://github.com/devlooped/.github/blob/main/.github/FUNDING.yml
+	etag = a944c728facd033bbdfb4ff8d0ef10d0b3a457c277dc499458df0ffc7e6409da
 	weak
-	sha = 4c91539ec08a3f9c14ff1e8c6a7c4ae88795f5f1
+	sha = 39f4c591716ff50dd035d2fade35e5822489ab7f
 [file ".github/ISSUE_TEMPLATE/bug.md"]
 	url = https://github.com/devlooped/oss/blob/main/.github/ISSUE_TEMPLATE/bug.md
 	etag = 026852ba1f1921f3a043bb5e09cd7a2c3d9a33ec51f48e524dc3a2ab72de3141
@@ -154,4 +155,24 @@
 	url = https://github.com/devlooped/oss/blob/main/src/nuget.config
 	sha = 7d0ccab53c166b87b971040f25de06570821f8ac
 	etag = 0ef58051c4db505e16b39954b27ab9e7a903647998b959e0924634d5f01824dd
+	weak
+[file ".github/workflows/pages.yml"]
+	url = https://github.com/devlooped/.github/blob/main/.github/workflows/pages.yml
+	sha = e8f3774884afda36ac177c4193929d24d7901de9
+	etag = 42fdc888e07b492cccc6fd29972bd9ea6f13691a3fdf057e07f3f8eec9330b7a
+	weak
+[file ".github/workflows/sponsors.ps1"]
+	url = https://github.com/devlooped/.github/blob/main/.github/workflows/sponsors.ps1
+	sha = 11f5c27cfdb304436ef0b7ee27ff333cda31ef65
+	etag = 57a303125f3367b68ad0700d89ff4ba57cb29b33b303903488c9c8638d0bf735
+	weak
+[file ".github/workflows/sponsors.yml"]
+	url = https://github.com/devlooped/.github/blob/main/.github/workflows/sponsors.yml
+	sha = 514760df24bd906b9e5d3a56deac0d18cba59a6d
+	etag = 0236ed96c1d11f69b26ac0e039e74107df5731574236e2de2a83152fee5df0a6
+	weak
+[file "Gemfile"]
+	url = https://github.com/devlooped/.github/blob/main/Gemfile
+	sha = f2dc1370469bec1b2d32d82faf659b050cdc7e2a
+	etag = d45832acd078778ffebf260000f6d25172a131f51684744d7e982da2a47170ce
 	weak
