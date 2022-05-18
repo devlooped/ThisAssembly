@@ -63,9 +63,9 @@
 	sha = 2fea462dc563923800a7efad24a52aa0541a8864
 [file "src/Directory.Build.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.targets
-	etag = 87c4dff4b44072c6825b451957af6d920616d77c50152a7d99719151c3d24639
+	etag = 816dff7cb821a885da46ad200f9b8bea3438d74da3172bc43716d5670abaee6c
 	weak
-	sha = 4f57ffe1d48addf16641934e7b1e47ef70204e6e
+	sha = 024f73321ffe4e927151ff94666c52c2d425139a
 [file "src/kzu.snk"]
 	url = https://github.com/devlooped/oss/blob/main/src/kzu.snk
 	etag = b8d789b5b6bea017cdcc8badcea888ad78de3e34298efca922054e9fb0e7b6b9
@@ -148,8 +148,8 @@
 	weak
 [file ".github/workflows/test/action.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/test/action.yml
-	sha = 3b9f317fc4f3edb926b26c4e4db9773a5f95ebca
-	etag = cf89aeff5c66fd3c0d0aaa655b527d66f5e823413c7a6788a62542e93d344576
+	sha = 9a1b07589b9bde93bc12528e9325712a32dec418
+	etag = b54216ac431a83ce5477828d391f02046527e7f6fffd21da1d03324d352c3efb
 	weak
 [file "src/nuget.config"]
 	url = https://github.com/devlooped/oss/blob/main/src/nuget.config
