@@ -6,6 +6,9 @@ TestResults
 .vs
 .vscode
 
+*.DotSettings.user
+_ReSharper.*/
+
 *.suo
 *.sdf
 *.userprefs
