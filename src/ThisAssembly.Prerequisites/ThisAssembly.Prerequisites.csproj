@@ -7,11 +7,7 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Prerequisites</PackageId>
-    <Description>Ensures that referencing project satisfies the prerequisites for ThisAssembly, namely:
-
-* MSBuild 16.8+: contains the Roslyn support for source generators
-* C# 9.0 or greater language: it's the only language supported by Roslyn source generators at the moment.
-</Description>
+    <Description>DO NOT REFERENCE DIRECTLY. Ensures that referencing projects satisfy the prerequisites for ThisAssembly.</Description>
   </PropertyGroup>
 
   <ItemGroup>

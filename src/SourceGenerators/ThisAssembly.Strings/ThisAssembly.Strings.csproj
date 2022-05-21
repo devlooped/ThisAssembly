@@ -2,19 +2,7 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Strings</PackageId>
-    <Description>** C# 9.0 ONLY **
-This package generates a static `ThisAssembly.Strings` class with public 
-constants exposing string resources in .resx files or methods with the right number of 
-parameters for strings that use formatting parameters. 
-
-In addition, it groups constants and methods in nested classes according to an optional 
-underscore separator to organize strings. For example, *User_InvalidCredentials* can be
-accessed with *ThisAssembly.Strings.User.InvalidCredentials* if it contains a simple string, 
-or as a method with the right number of parametres if its value has a format string.
-
-Finally, format strings can use named parameters too to get more friendly parameter names, 
-such as "Hello {name}".
-</Description>
+    <Description>Generates a static `ThisAssembly.Strings` class with public constants or methods exposing string resources in .resx files.</Description>
   </PropertyGroup>
 
   <ItemGroup>

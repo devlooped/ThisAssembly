@@ -2,33 +2,7 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Constants</PackageId>
-    <Description>** C# 9.0 ONLY **
-This package generates a static `ThisAssembly.Constants` class with public
-constants for each Constant MSBuild item in the project.
-
-For example:
-
-  &lt;ItemGroup&gt;
-  &lt;Constant Include="Foo.Bar" Value="Baz" /&gt;
-  &lt;/ItemGroup&gt;
-
-Results in a corresponding `ThisAssembly.Constants.Foo.Bar` constant with the value `Baz`:
-
-Generated code:
-C#:
-
-  partial class ThisAssembly
-  {
-      public static partial class Constants
-      {
-          public static partial class Foo
-          {
-              public const string Bar = "Baz";
-          }
-      }
-  }
-
-    </Description>
+    <Description>Generates a static `ThisAssembly.Constants` class from `Constant` MSBuild items.</Description>
   </PropertyGroup>
 
   <ItemGroup>
