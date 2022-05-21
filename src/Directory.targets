@@ -6,4 +6,13 @@
     <PackageFile Include="*.props;*.targets" PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)" />
   </ItemGroup>
 
+  <!--
+    Suppress warning NU1507 while package mapping gets figured out
+    https://github.com/dotnet/sdk/issues/25379
+    https://docs.microsoft.com/en-us/nuget/consume-packages/package-source-mapping
+  -->
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);NU1507</NoWarn>
+  </PropertyGroup>
+
 </Project>
