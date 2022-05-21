@@ -17,16 +17,16 @@
 
   <!-- Common package references for all source generation projects -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" Pack="false" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Include="Scriban" Version="5.4.4" Pack="false" IncludeAssets="build" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Pack="false" />
+    <PackageReference Include="Microsoft.CSharp" />
+    <PackageReference Include="Scriban" Pack="false" IncludeAssets="build" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" />
   </ItemGroup>
 
   <!-- Common package references for all _packable_ source generation projects (all except CommonCode) -->
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
-    <PackageReference Include="NuGetizer" Version="0.7.5" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
+    <PackageReference Include="NuGetizer" />
   </ItemGroup>
 
   <!-- Common project references for all _packable_ source generation projects (all except CommonCode) -->
