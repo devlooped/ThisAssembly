@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>ThisAssembly.Project</PackageId>
+    <Description>** C# 9.0 ONLY **
+This package generates a static `ThisAssembly.Project` class with public 
+constants exposing project properties that have been opted into this mechanism by adding 
+them as `ProjectProperty` MSBuild items in project file, such as:
+
+    &lt;PropertyGroup&gt;
+      &lt;Foo&gt;Bar&lt;/Foo&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup&gt;
+      &lt;ProjectProperty Include="Foo" /&gt;
+    &lt;/ItemGroup&gt;
+
+A corresponding `ThisAssembly.Project.Foo` constant with the value `Bar` is provided. 
+
+Generated code:
+C#:
+
+  partial class ThisAssembly
+  {
+      public static partial class Project
+      {
+          public const string Foo = "Bar";
+      }
+  }
+
+</Description>
+  </PropertyGroup>
+
+</Project>

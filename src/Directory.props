@@ -19,8 +19,4 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)*.cs" />
-  </ItemGroup>
-
 </Project>

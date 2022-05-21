@@ -1,0 +1,37 @@
+<Project>
+
+  <!-- Extend Directory.Build.* from parent directory -->
+  <Import Project="..\$(MSBuildThisFile)" />
+
+  <!-- Common properties for all _packable_ source generation projects (all except CommonCode) -->
+  <PropertyGroup Condition="'$(IsPackable)' == 'true'">
+    <IsRoslynComponent>true</IsRoslynComponent>
+  </PropertyGroup>
+
+  <!-- Common code files are only visible in CommonCode project, to avoid cluttering the solution tree. -->
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CommonCode\**\*.cs" Visible="'$(MSBuildProjectName)' == 'CommonCode'" />
+    <Compile Remove="$(MSBuildThisFileDirectory)CommonCode\bin\**\*" />
+    <Compile Remove="$(MSBuildThisFileDirectory)CommonCode\obj\**\*" />
+  </ItemGroup>
+
+  <!-- Common package references for all source generation projects -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" Pack="false" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Scriban" Version="5.4.4" Pack="false" IncludeAssets="build" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+  </ItemGroup>
+
+  <!-- Common package references for all _packable_ source generation projects (all except CommonCode) -->
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
+    <PackageReference Include="NuGetizer" Version="0.7.5" />
+  </ItemGroup>
+
+  <!-- Common project references for all _packable_ source generation projects (all except CommonCode) -->
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
+  </ItemGroup>
+
+</Project>

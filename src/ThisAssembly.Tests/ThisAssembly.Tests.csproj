@@ -10,20 +10,29 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
-  <Import Project="..\*\*.props" />
+  <!--
+    Import .props files from source generator projects.
+    This happens automatically for package references that have <PackageName>.props in the build/ folder;
+    for project references we must do it manually.
+  -->
+  <Import Project="..\SourceGenerators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.props"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.props')" />
+  <Import Project="..\SourceGenerators\ThisAssembly.Constants\ThisAssembly.Constants.props"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.Constants\ThisAssembly.Constants.props')" />
+  <Import Project="..\SourceGenerators\ThisAssembly.Metadata\ThisAssembly.Metadata.props"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.Metadata\ThisAssembly.Metadata.props')" />
+  <Import Project="..\SourceGenerators\ThisAssembly.Project\ThisAssembly.Project.props"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.Project\ThisAssembly.Project.props')" />
+  <Import Project="..\SourceGenerators\ThisAssembly.Strings\ThisAssembly.Strings.props"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.Strings\ThisAssembly.Strings.props')" />
 
   <ItemGroup>
-    <Compile Remove="C:\Code\kzu\ThisAssembly\src\EmbeddedResource.cs" />
-    <Compile Remove="C:\Code\kzu\ThisAssembly\src\GeneratorExtension.cs" />
-    <Compile Remove="C:\Code\kzu\ThisAssembly\src\IsExternalInit.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\ThisAssembly.Constants\ThisAssembly.Constants.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\ThisAssembly.Project\ThisAssembly.Project.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\ThisAssembly.Strings\ThisAssembly.Strings.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\SourceGenerators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" />
+    <ProjectReference Include="..\SourceGenerators\ThisAssembly.Constants\ThisAssembly.Constants.csproj" />
+    <ProjectReference Include="..\SourceGenerators\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" />
+    <ProjectReference Include="..\SourceGenerators\ThisAssembly.Project\ThisAssembly.Project.csproj" />
+    <ProjectReference Include="..\SourceGenerators\ThisAssembly.Strings\ThisAssembly.Strings.csproj" />
+    <ProjectReference Update="@(ProjectReference)" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +72,20 @@
     </ItemGroup>
   </Target>
 
-  <Import Project="..\*\*.targets" />
+  <!--
+    Import .targets files from source generator projects.
+    This happens automatically for package references that have <PackageName>.props in the build/ folder;
+    for project references we must do it manually.
+  -->
+  <Import Project="..\SourceGenerators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.targets"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.targets')" />
+  <Import Project="..\SourceGenerators\ThisAssembly.Constants\ThisAssembly.Constants.targets"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.Constants\ThisAssembly.Constants.targets')" />
+  <Import Project="..\SourceGenerators\ThisAssembly.Metadata\ThisAssembly.Metadata.targets"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.Metadata\ThisAssembly.Metadata.targets')" />
+  <Import Project="..\SourceGenerators\ThisAssembly.Project\ThisAssembly.Project.targets"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.Project\ThisAssembly.Project.targets')" />
+  <Import Project="..\SourceGenerators\ThisAssembly.Strings\ThisAssembly.Strings.targets"
+          Condition="Exists('..\SourceGenerators\ThisAssembly.Strings\ThisAssembly.Strings.targets')" />
 
 </Project>

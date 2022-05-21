@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace />
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <!--
+    @rdeago 2022-05-21:
+    Without the IsPackable property, Visual Studio goes into an infinite loop of design-time builds
+    with IsPackable apparently alternating between true and false.
+    Observed on Visual Studio 20022 v17.2.1 and maybe related to the following issue:
+    https://github.com/dotnet/project-system/issues/1457
+  -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+</Project>
