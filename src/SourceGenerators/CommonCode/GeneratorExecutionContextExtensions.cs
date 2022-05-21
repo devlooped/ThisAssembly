@@ -4,9 +4,8 @@ using System.IO;
 using System.Text;
 using Microsoft.CodeAnalysis;
 
-static class GeneratorExtensions
+static class GeneratorExecutionContextExtensions
 {
-    //[Conditional("DEBUG")]
     public static void CheckDebugger(this GeneratorExecutionContext context, string generatorName)
     {
         if (context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.DebugSourceGenerators", out var debugValue) &&
