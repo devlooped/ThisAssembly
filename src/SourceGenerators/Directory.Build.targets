@@ -9,8 +9,11 @@
   </PropertyGroup>
 
   <!-- Common code files are only visible in CommonCode project, to avoid cluttering the solution tree. -->
+  <PropertyGroup>
+    <CommonCodeVisible Condition="'$(CommonCodeVisible)' != 'true'">false</CommonCodeVisible>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)CommonCode\**\*.cs" Visible="'$(MSBuildProjectName)' == 'CommonCode'" />
+    <Compile Include="$(MSBuildThisFileDirectory)CommonCode\**\*.cs" Visible="$(CommonCodeVisible)" />
     <Compile Remove="$(MSBuildThisFileDirectory)CommonCode\bin\**\*" />
     <Compile Remove="$(MSBuildThisFileDirectory)CommonCode\obj\**\*" />
   </ItemGroup>

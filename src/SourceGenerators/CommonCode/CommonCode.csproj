@@ -3,6 +3,7 @@
   <PropertyGroup>
     <RootNamespace />
     <EnableDefaultItems>false</EnableDefaultItems>
+    <CommonCodeVisible>true</CommonCodeVisible>
   </PropertyGroup>
 
   <!--
