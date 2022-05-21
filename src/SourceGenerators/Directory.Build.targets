@@ -34,4 +34,11 @@
     <ProjectReference Include="$(MSBuildThisFileDirectory)..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
   </ItemGroup>
 
+  <!-- Common items and metadata for all _packable_ source generation projects (all except CommonCode) -->
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
+    <None Update="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
+  </ItemGroup>
+
 </Project>
