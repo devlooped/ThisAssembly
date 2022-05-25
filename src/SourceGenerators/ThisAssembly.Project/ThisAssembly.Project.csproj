@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>ThisAssembly.Project</PackageId>
     <Description>Generates a static `ThisAssembly.Project` class to expose project properties as specified via `ProjectProperty` MSBuild items.</Description>
   </PropertyGroup>

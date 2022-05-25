@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>ThisAssembly.Metadata</PackageId>
     <Description>Generates a static `ThisAssembly.Metadata` class with public constants exposing each `AssemblyMetadataAttribute` either defined in code, or via `AssemblyMetadata` MSBuild items.</Description>
   </PropertyGroup>

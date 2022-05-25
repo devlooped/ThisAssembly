@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>ThisAssembly.Strings</PackageId>
     <Description>Generates a static `ThisAssembly.Strings` class with public constants or methods exposing string resources in .resx files.</Description>
   </PropertyGroup>
