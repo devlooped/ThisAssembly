@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Metadata", "src\SourceGenerators\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj", "{B5007099-8BE7-490B-9E9A-18CC50C92C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Metadata", "src\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj", "{B5007099-8BE7-490B-9E9A-18CC50C92C29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4CA0A26B-C9E5-4F5A-93EC-A1E1FE8CA389}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,23 +17,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly", "src\ThisAssembly\ThisAssembly.csproj", "{D3A47732-4937-4B6E-BCD1-66896D04E20D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Project", "src\SourceGenerators\ThisAssembly.Project\ThisAssembly.Project.csproj", "{A91C7A07-FFD6-4D19-BD78-B0BC8F9267DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Project", "src\Generators\ThisAssembly.Project\ThisAssembly.Project.csproj", "{A91C7A07-FFD6-4D19-BD78-B0BC8F9267DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.AssemblyInfo", "src\SourceGenerators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj", "{CDDF83BC-70BE-46C3-BD79-524D868A2812}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.AssemblyInfo", "src\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj", "{CDDF83BC-70BE-46C3-BD79-524D868A2812}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Strings", "src\SourceGenerators\ThisAssembly.Strings\ThisAssembly.Strings.csproj", "{3E7158B5-BFEF-4416-8226-9096C7C98268}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Strings", "src\Generators\ThisAssembly.Strings\ThisAssembly.Strings.csproj", "{3E7158B5-BFEF-4416-8226-9096C7C98268}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Prerequisites", "src\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj", "{568E5150-84AD-4619-BEA3-AA5EDF084ABC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Constants", "src\SourceGenerators\ThisAssembly.Constants\ThisAssembly.Constants.csproj", "{31C53CCE-13FC-4890-803A-85CD146B909B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Constants", "src\Generators\ThisAssembly.Constants\ThisAssembly.Constants.csproj", "{31C53CCE-13FC-4890-803A-85CD146B909B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Tests", "src\ThisAssembly.Tests\ThisAssembly.Tests.csproj", "{AD25424F-7DE0-4515-AE9F-B95414218292}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonCode", "src\SourceGenerators\CommonCode\CommonCode.csproj", "{C135AF57-4B5B-42E6-B9A8-3FD7B4546032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonCode", "src\Generators\CommonCode\CommonCode.csproj", "{C135AF57-4B5B-42E6-B9A8-3FD7B4546032}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceGenerators", "SourceGenerators", "{A2035D56-A74F-4510-BB5A-EDBF15B9004A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{A2035D56-A74F-4510-BB5A-EDBF15B9004A}"
 	ProjectSection(SolutionItems) = preProject
-		src\SourceGenerators\Directory.Build.targets = src\SourceGenerators\Directory.Build.targets
+		src\Generators\Directory.Build.targets = src\Generators\Directory.Build.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{3B248E10-21FD-43DA-9EB8-B522D6FA5950}"

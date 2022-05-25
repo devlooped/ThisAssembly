@@ -25,11 +25,11 @@
   </ItemDefinitionGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SourceGenerators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\SourceGenerators\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\SourceGenerators\ThisAssembly.Project\ThisAssembly.Project.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\SourceGenerators\ThisAssembly.Strings\ThisAssembly.Strings.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\SourceGenerators\ThisAssembly.Constants\ThisAssembly.Constants.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\Generators\ThisAssembly.Project\ThisAssembly.Project.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\Generators\ThisAssembly.Strings\ThisAssembly.Strings.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\Generators\ThisAssembly.Constants\ThisAssembly.Constants.csproj" PrivateAssets="none" />
   </ItemGroup>
 
 </Project>
