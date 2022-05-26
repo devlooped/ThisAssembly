@@ -3,19 +3,19 @@
   <!-- Extend Directory.Build.* from parent directory -->
   <Import Project="..\$(MSBuildThisFile)" />
 
-  <!-- Common properties for all _packable_ source generation projects (all except CommonCode) -->
+  <!-- Common properties for all _packable_ source generation projects (all except Common) -->
   <PropertyGroup Condition="'$(IsPackable)' == 'true'">
     <IsRoslynComponent>true</IsRoslynComponent>
   </PropertyGroup>
 
-  <!-- Common code files are only visible in CommonCode project, to avoid cluttering the solution tree. -->
+  <!-- Common code files are only visible in Common project, to avoid cluttering the solution tree. -->
   <PropertyGroup>
     <CommonCodeVisible Condition="'$(CommonCodeVisible)' != 'true'">false</CommonCodeVisible>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)CommonCode\**\*.cs" Visible="$(CommonCodeVisible)" />
-    <Compile Remove="$(MSBuildThisFileDirectory)CommonCode\bin\**\*" />
-    <Compile Remove="$(MSBuildThisFileDirectory)CommonCode\obj\**\*" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\**\*.cs" Visible="$(CommonCodeVisible)" />
+    <Compile Remove="$(MSBuildThisFileDirectory)Common\bin\**\*" />
+    <Compile Remove="$(MSBuildThisFileDirectory)Common\obj\**\*" />
   </ItemGroup>
 
   <!-- Common package references for all source generation projects -->
@@ -26,18 +26,18 @@
     <PackageReference Include="System.Threading.Tasks.Extensions" />
   </ItemGroup>
 
-  <!-- Common package references for all _packable_ source generation projects (all except CommonCode) -->
+  <!-- Common package references for all _packable_ source generation projects (all except Common) -->
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
     <PackageReference Include="NuGetizer" />
   </ItemGroup>
 
-  <!-- Common project references for all _packable_ source generation projects (all except CommonCode) -->
+  <!-- Common project references for all _packable_ source generation projects (all except Common) -->
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <ProjectReference Include="$(MSBuildThisFileDirectory)..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
   </ItemGroup>
 
-  <!-- Common items and metadata for all _packable_ source generation projects (all except CommonCode) -->
+  <!-- Common items and metadata for all _packable_ source generation projects (all except Common) -->
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />

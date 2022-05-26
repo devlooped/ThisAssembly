@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Constants", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Tests", "src\ThisAssembly.Tests\ThisAssembly.Tests.csproj", "{AD25424F-7DE0-4515-AE9F-B95414218292}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonCode", "src\Generators\CommonCode\CommonCode.csproj", "{C135AF57-4B5B-42E6-B9A8-3FD7B4546032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonCode", "src\Generators\Common\Common.csproj", "{C135AF57-4B5B-42E6-B9A8-3FD7B4546032}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{A2035D56-A74F-4510-BB5A-EDBF15B9004A}"
 	ProjectSection(SolutionItems) = preProject
