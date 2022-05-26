@@ -3,8 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace />
-    <EnableDefaultItems>false</EnableDefaultItems>
-    <CommonCodeVisible>true</CommonCodeVisible>
   </PropertyGroup>
 
   <!--
@@ -17,5 +15,9 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Pack="false" />
+  </ItemGroup>
 
 </Project>

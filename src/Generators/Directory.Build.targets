@@ -3,45 +3,63 @@
   <!-- Extend Directory.Build.* from parent directory -->
   <Import Project="..\$(MSBuildThisFile)" />
 
-  <!-- Common properties for all _packable_ source generation projects (all except Common) -->
-  <PropertyGroup Condition="'$(IsPackable)' == 'true'">
+  <!--
+    Tell Visual Studio that source generator projects can be debugged as Roslyn components -->
+  <PropertyGroup>
     <IsRoslynComponent>true</IsRoslynComponent>
   </PropertyGroup>
 
-  <!-- Common code files are only visible in Common project, to avoid cluttering the solution tree. -->
+  <!--
+    Common files are not visible in source generation projects, to avoid cluttering the solution tree.
+    You can see them in the Common project.
+  -->
   <PropertyGroup>
-    <CommonCodeVisible Condition="'$(CommonCodeVisible)' != 'true'">false</CommonCodeVisible>
+    <CommonFilesDirectory>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)..\Common'))</CommonFilesDirectory>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Common\**\*.cs" Visible="$(CommonCodeVisible)" />
-    <Compile Remove="$(MSBuildThisFileDirectory)Common\bin\**\*" />
-    <Compile Remove="$(MSBuildThisFileDirectory)Common\obj\**\*" />
+    <Compile Include="$(CommonFilesDirectory)**\*.cs" Visible="false" />
+    <Compile Remove="$(CommonFilesDirectory)bin\**\*" />
+    <Compile Remove="$(CommonFilesDirectory)obj\**\*" />
   </ItemGroup>
 
-  <!-- Common package references for all source generation projects -->
+  <!-- Ensure all auxiliary files (e.g. *.props, *.targets) are copied to the output directory -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Pack="false" />
-    <PackageReference Include="Microsoft.CSharp" />
+    <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- Ensure Scriban templates are included in NuGet packages; also embed them in source generator assemblies as resources -->
+  <ItemGroup>
+    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
+    <None Update="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
+  </ItemGroup>
+
+  <!--
+    Embed the Scriban engine in each source generator project.
+    See https://github.com/scriban/scriban#source-embedding
+  -->
+  <PropertyGroup>
+    <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
+  </PropertyGroup>
+  <ItemGroup>
     <PackageReference Include="Scriban" Pack="false" IncludeAssets="build" />
+    <PackageReference Include="Microsoft.CSharp" />
     <PackageReference Include="System.Threading.Tasks.Extensions" />
   </ItemGroup>
 
-  <!-- Common package references for all _packable_ source generation projects (all except Common) -->
-  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+  <!-- Other package references needed by C# code (should be the same as in the Common project) -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Pack="false" />
+  </ItemGroup>
+
+  <!-- Package references needed for deployment -->
+  <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
     <PackageReference Include="NuGetizer" />
   </ItemGroup>
 
-  <!-- Common project references for all _packable_ source generation projects (all except Common) -->
-  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+  <!-- Common project references for all source generator projects -->
+  <ItemGroup>
     <ProjectReference Include="$(MSBuildThisFileDirectory)..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
-  </ItemGroup>
-
-  <!-- Common items and metadata for all _packable_ source generation projects (all except Common) -->
-  <ItemGroup Condition="'$(IsPackable)' == 'true'">
-    <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
-    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
-    <None Update="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
   </ItemGroup>
 
 </Project>
