@@ -1,5 +1,11 @@
+# This file contains parameters applied to all MSBuild executions
+# for projects contained in the same directory and its subdirectories.
 # See https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-response-files
--nr:false
--m:1
--v:m
--clp:Summary;ForceNoAlign
+
+# For a list of valid parameters and an explanation of each parameter, see
+# https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference
+
+-nodeReuse:false
+-maxCpuCount:1
+-verbosity:minimal
+-consoleLoggerParameters:Summary;ForceNoAlign
