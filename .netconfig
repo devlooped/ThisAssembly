@@ -38,14 +38,14 @@
 	sha = 0683ee777d7d878d4bf013d7deea352685135a05
 [file ".github/workflows/build.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
-	etag = 6b9139f22428851c8d7329973f3d92802d25e70a5e0c1b24604c23db991ac8e2
+	etag = 4e65025ab77d15766520234d3a9953ff4f1eea91620e1080f10909de19804877
 	weak
-	sha = bbf637b2a565073a89783c9eb4ebd9c460823fe4
+	sha = e19ed3228a0ac7f64a43197241a788fb224a683f
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
-	etag = 2b49512f81b6cb44c4ee398975c0edf41bfa4137857b59770805fa7c5e49e94b
+	etag = 1c1705a3f0ed65e33c9133996ebaa100aa445a8b968b2904ad48fef938702006
 	weak
-	sha = 978c71c6afd095eaba35097fd7deed44fa09aa91
+	sha = c78868eba59a3e04602434684f9eac241fef13fb
 [file "license.txt"]
 	url = https://github.com/devlooped/oss/blob/main/license.txt
 	etag = 2c6335b37e4ae05eea7c01f5d0c9d82b49c488f868a8b5ba7bff7c6ff01f3994
@@ -123,9 +123,9 @@
 	sha = be8f625e4cf5c2c572c7e56ba6dc4c4935ab0c00
 [file ".github/workflows/publish.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/publish.yml
-	etag = 242bd273906e0cbef773b5a0696f6dccf304d044a659b68e75ede5b1f5ea94fe
+	etag = 1d6a05b7f684b4fc1bb387750b0e100406e8a0017981c4e9d39a012479f35266
 	weak
-	sha = 7ebebbdbab67d9d895a29b3d2b3f82a62a7d8c4e
+	sha = 0e5a33cc685fa85e3a81b797202f3e14e1cd84a9
 [file ".github/workflows/release-artifacts.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/release-artifacts.yml
 	etag = a22b19d3d694b2c6613ce01903a54df9324fecf62558958e677bb4d60f3a6ba4
@@ -153,8 +153,8 @@
 	weak
 [file "src/nuget.config"]
 	url = https://github.com/devlooped/oss/blob/main/src/nuget.config
-	sha = 7d0ccab53c166b87b971040f25de06570821f8ac
-	etag = 0ef58051c4db505e16b39954b27ab9e7a903647998b959e0924634d5f01824dd
+	sha = f86b51943f609f1c8bd3c692826fd937167ce0fb
+	etag = 3e536371c7a2c7866fbf1dbc878929cd78cafb7646f569c20dc6ba03b6a1685b
 	weak
 [file ".github/workflows/pages.yml"]
 	url = https://github.com/devlooped/.github/blob/main/.github/workflows/pages.yml
