@@ -3,8 +3,7 @@
   <!-- Extend Directory.Build.* from parent directory -->
   <Import Project="..\$(MSBuildThisFile)" />
 
-  <!--
-    Tell Visual Studio that source generator projects can be debugged as Roslyn components -->
+  <!-- Tell Visual Studio that source generator projects can be debugged as Roslyn components -->
   <PropertyGroup>
     <IsRoslynComponent>true</IsRoslynComponent>
   </PropertyGroup>
