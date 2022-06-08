@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
+using Utilities;
 
 namespace ThisAssembly
 {
@@ -23,7 +24,7 @@ namespace ThisAssembly
                     context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property." + prop, out var value) ?
                     value : null))
                 .Where(pair => pair.Value != null)
-                .Distinct(new KeyValueComparer())
+                .Distinct(new KeyComparer<string,string?>(StringComparer.OrdinalIgnoreCase))
                 .ToDictionary(x => x.Key, x => x.Value!);
 
             var model = new Model(properties);
@@ -33,14 +34,6 @@ namespace ThisAssembly
             var output = template.Render(model, member => member.Name);
 
             context.AddSource("ThisAssembly.Project", SourceText.From(output, Encoding.UTF8));
-        }
-
-        class KeyValueComparer : IEqualityComparer<KeyValuePair<string, string?>>
-        {
-            public bool Equals(KeyValuePair<string, string?> x, KeyValuePair<string, string?> y)
-                => x.Key.Equals(y.Key, StringComparison.OrdinalIgnoreCase);
-
-            public int GetHashCode(KeyValuePair<string, string?> obj) => obj.Key.GetHashCode();
         }
 
         public static string[] GetItems(GeneratorExecutionContext context)

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
+using Utilities;
 
 namespace ThisAssembly
 {
@@ -19,7 +19,7 @@ namespace ThisAssembly
                 .Where(x => x.AttributeClass?.Name == nameof(System.Reflection.AssemblyMetadataAttribute) &&
                     Microsoft.CodeAnalysis.CSharp.SyntaxFacts.IsValidIdentifier((string)x.ConstructorArguments[0].Value!))
                 .Select(x => new KeyValuePair<string, string>((string)x.ConstructorArguments[0].Value!, (string)x.ConstructorArguments[1].Value!))
-                .Distinct(new KeyValueComparer())
+                .Distinct(new KeyValueComparer<string,string>())
                 .ToDictionary(x => x.Key, x => x.Value);
 
             var model = new Model(metadata);
@@ -29,15 +29,6 @@ namespace ThisAssembly
             var output = template.Render(model, member => member.Name);
 
             context.AddSource("ThisAssembly.Metadata", SourceText.From(output, Encoding.UTF8));
-        }
-
-        class KeyValueComparer : IEqualityComparer<KeyValuePair<string, string>>
-        {
-            public bool Equals(KeyValuePair<string, string> x, KeyValuePair<string, string> y)
-                => x.Key == y.Key && x.Value == y.Value;
-
-            public int GetHashCode(KeyValuePair<string, string> obj)
-                => new HashCode().AddRange(obj.Key, obj.Value).ToHashCode();
         }
     }
 }
