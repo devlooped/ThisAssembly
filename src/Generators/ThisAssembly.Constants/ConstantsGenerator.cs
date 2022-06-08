@@ -15,8 +15,6 @@ namespace ThisAssembly
 
         public void Execute(GeneratorExecutionContext context)
         {
-            context.CheckDebugger("ThisAssemblyConstants");
-
             var constantFiles = context.AdditionalFiles
                     .Where(f => context.AnalyzerConfigOptions
                         .GetOptions(f)

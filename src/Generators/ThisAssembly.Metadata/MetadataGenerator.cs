@@ -15,8 +15,6 @@ namespace ThisAssembly
 
         public void Execute(GeneratorExecutionContext context)
         {
-            context.CheckDebugger("ThisAssemblyMetadata");
-
             var metadata = context.Compilation.Assembly.GetAttributes()
                 .Where(x => x.AttributeClass?.Name == nameof(System.Reflection.AssemblyMetadataAttribute) &&
                     Microsoft.CodeAnalysis.CSharp.SyntaxFacts.IsValidIdentifier((string)x.ConstructorArguments[0].Value!))

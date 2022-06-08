@@ -27,8 +27,6 @@ namespace ThisAssembly
 
         public void Execute(GeneratorExecutionContext context)
         {
-            context.CheckDebugger("ThisAssemblyAssemblyInfo");
-
             var metadata = context.Compilation.Assembly.GetAttributes()
                 .Where(x => !string.IsNullOrEmpty(x.AttributeClass?.Name) && attributes.Contains(x.AttributeClass!.Name))
                 .Where(x => x.ConstructorArguments.Length == 1)

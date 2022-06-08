@@ -13,8 +13,6 @@ namespace ThisAssembly
 
         public void Execute(GeneratorExecutionContext context)
         {
-            context.CheckDebugger("ThisAssemblyStrings");
-
             var resourceFiles = context.AdditionalFiles
                     .Where(f => context.AnalyzerConfigOptions
                         .GetOptions(f)
