@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <!--
+    Tell NuGetizer to put generator DLLs in a Roslyn-version-dependent folder.
+    NOTE TO CONTRIBUTORS: Always keep the Roslyn version below in sync
+                          with the major.minor version of Microsoft.CodeAnalysis
+                          mentioned in Directory.Packages.props.
+  -->
+  <PropertyGroup>
+    <PackFolder>analyzers/dotnet/roslyn4.2</PackFolder>
+  </PropertyGroup>
+
+  <!--
     Common files are not visible in source generation projects, to avoid cluttering the solution tree.
     You can see them in the Common project.
   -->
@@ -26,28 +36,34 @@
     <None Update="@(None)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <!-- Ensure Scriban templates are included in NuGet packages; also embed them in source generator assemblies as resources -->
-  <ItemGroup>
-    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
-    <None Update="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
-  </ItemGroup>
-
   <!--
-    Embed the Scriban engine in each source generator project.
+    Embed the Scriban engine in generator projects that require it.
     See https://github.com/scriban/scriban#source-embedding
   -->
   <PropertyGroup>
+    <EmbedScriban Condition="'$(EmbedScriban)' == ''">true</EmbedScriban>
+    <EmbedScriban Condition="'$(EmbedScriban)' != 'true'">false</EmbedScriban>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(EmbedScriban)">
     <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup Condition="$(EmbedScriban)">
     <PackageReference Include="Scriban" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" />
     <PackageReference Include="System.Threading.Tasks.Extensions" />
   </ItemGroup>
 
+  <!-- Ensure Scriban templates are included in NuGet packages; also embed them in source generator assemblies as resources -->
+  <ItemGroup Condition="$(EmbedScriban)">
+    <EmbeddedResource Include="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" />
+    <None Update="@(None -&gt; WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
+  </ItemGroup>
+
   <!-- Other package references needed by C# code (should be the same as in the Common project) -->
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Pack="false" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Pack="false" />
+    <PackageReference Include="Nullable" PrivateAssets="all" />
   </ItemGroup>
 
   <!-- Package references needed for deployment -->

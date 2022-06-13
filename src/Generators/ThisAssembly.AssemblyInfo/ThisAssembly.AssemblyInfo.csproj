@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>ThisAssembly.AssemblyInfo</PackageId>
     <Description>Exposes assembly info via public constants in a static `ThisAssembly.Info` class.</Description>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <EmbedScriban>false</EmbedScriban>
   </PropertyGroup>
-  
+
 </Project>

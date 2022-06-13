@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using CodeGeneration;
+using CodeGeneration.Model;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
-using Scriban;
 using Utilities;
 
 namespace ThisAssembly
 {
-    [Generator]
-    public class AssemblyInfoGenerator : ISourceGenerator
+    [Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
+    public class AssemblyInfoGenerator : IIncrementalGenerator
     {
-        readonly HashSet<string> attributes = new HashSet<string>(new[]
+        static readonly HashSet<string> _attributes = new(new[]
         {
             nameof(AssemblyConfigurationAttribute),
             nameof(AssemblyCompanyAttribute),
@@ -24,24 +24,46 @@ namespace ThisAssembly
             nameof(AssemblyFileVersionAttribute),
         });
 
-        public void Initialize(GeneratorInitializationContext context) { }
-
-        public void Execute(GeneratorExecutionContext context)
+        public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            var metadata = context.Compilation.Assembly.GetAttributes()
-                .Where(x => !string.IsNullOrEmpty(x.AttributeClass?.Name) && attributes.Contains(x.AttributeClass!.Name))
-                .Where(x => x.ConstructorArguments.Length == 1)
-                .Select(x => new KeyValuePair<string, string?>(x.AttributeClass!.Name.Substring(8).Replace("Attribute", ""), (string?)x.ConstructorArguments[0].Value))
-                .Distinct(new KeyComparer<string, string?>())
-                .ToDictionary(x => x.Key, x => x.Value ?? "");
+            var constantsProvider = context.CompilationProvider
+                .SelectMany(static (compilation, _) => compilation.Assembly.GetAttributes())
+                .Where(static attr => attr.ConstructorArguments.Length == 1)
+                .Where(static attr => !string.IsNullOrEmpty(attr.AttributeClass?.Name))
+                .Where(static attr => _attributes.Contains(attr.AttributeClass!.Name))
+                .Collect()
+                .Select(static (attrs, _) => attrs
+                    .Distinct(AttributeDataClassNameComparer.Instance)
+                    .Select(static x => new ClassConstant()
+                    {
+                        Name = x.AttributeClass!.Name.Substring(8).Replace("Attribute", ""),
+                        Value = x.ConstructorArguments[0].Value?.ToString()
+                    })
+                    .ToImmutableArray());
 
-            var model = new Model(metadata);
-            var language = context.ParseOptions.Language;
-            var file = language.Replace("#", "Sharp") + ".sbntxt";
-            var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-            var output = template.Render(model, member => member.Name);
+            var provider = context.ParseOptionsProvider
+                .Combine(ThisAssemblyClassFactoryOptions.GetProvider(context))
+                .Combine(constantsProvider);
 
-            context.AddSource("ThisAssembly.Info", SourceText.From(output, Encoding.UTF8));
+            context.RegisterSourceOutput(provider, (ctx, data) =>
+            {
+                var ((parseOptions, options), constants) = data;
+                var model = new ThisAssemblyClass()
+                {
+                    NestedClassList = new()
+                    {
+                        new()
+                        {
+                            Name = "Info",
+                            XmlSummary = "Provides access to current assembly information without requiring reflection.",
+                            Constants = constants,
+                        }
+                    }
+                };
+
+                var sourceText = ThisAssemblyClassFactory.Build(model, options, parseOptions);
+                ctx.AddSource("ThisAssembly.Info", sourceText);
+            });
         }
     }
 }
