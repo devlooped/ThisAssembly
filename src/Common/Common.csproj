@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Pack="false" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Pack="false" />
+    <PackageReference Include="Nullable" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
