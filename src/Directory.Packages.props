@@ -1,5 +1,12 @@
 <Project>
 
+  <!--
+    *** NOTICE TO COLLABORATORS ***
+    When updating dependencies, always check Roslyn version consistency between:
+      - Microsoft.CodeAnalysis.* packages in this file
+      - property ThisAssemblyMinRoslynVersion in src\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.props
+      - property PackFolder in src\Generators\Directory.Build.targets
+  -->
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.2.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.VisualBasic" Version="4.2.0" />
