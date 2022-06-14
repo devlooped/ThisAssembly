@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -74,6 +75,6 @@ sealed class VisualBasicThisAssemblyClassFactory : ThisAssemblyClassFactory
 
         return SyntaxFactory.ParseCompilationUnit(Text.ToString(), 0, visualBasicParseOptions)
             .NormalizeWhitespace<CompilationUnitSyntax>(true)
-            .GetText();
+            .GetText(Encoding.UTF8);
     }
 }
