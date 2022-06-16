@@ -1,35 +1,31 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.Build.NoTargets">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.0</TargetFramework>
     <IsPackable>true</IsPackable>
-    <PackBuildOutput>false</PackBuildOutput>
+    <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>ThisAssembly</PackageId>
-    <Description>Meta-package that includes all ThisAssembly.* packages. ** C# 9.0 ONLY **</Description>
+    <Description>Meta-package that includes all ThisAssembly.* packages.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" />
+    <PackageReference Include="NuGetizer" PrivateAssets="all" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
-    <Compile Remove="..\*.cs" />
   </ItemGroup>
 
-  <ItemDefinitionGroup>
-    <ProjectReference>
-      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemDefinitionGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\Generators\ThisAssembly.Project\ThisAssembly.Project.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\Generators\ThisAssembly.Strings\ThisAssembly.Strings.csproj" PrivateAssets="none" />
-    <ProjectReference Include="..\Generators\ThisAssembly.Constants\ThisAssembly.Constants.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" />
+    <ProjectReference Include="..\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" />
+    <ProjectReference Include="..\Generators\ThisAssembly.Project\ThisAssembly.Project.csproj" />
+    <ProjectReference Include="..\Generators\ThisAssembly.Strings\ThisAssembly.Strings.csproj" />
+    <ProjectReference Include="..\Generators\ThisAssembly.Constants\ThisAssembly.Constants.csproj" />
+    <ProjectReference Update="@(ProjectReference)"
+                      PrivateAssets="none"
+                      SkipGetTargetFrameworkProperties="true"
+                      ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>
