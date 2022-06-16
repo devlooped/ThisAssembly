@@ -1,7 +1,0 @@
-<Project>
-
-  <ItemGroup>
-    <CompilerVisibleProperty Include="DebugSourceGenerators" />
-  </ItemGroup>
-  
-</Project>

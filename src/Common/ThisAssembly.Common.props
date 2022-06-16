@@ -1,0 +1,21 @@
+<Project>
+
+  <PropertyGroup>
+    <ThisAssemblyCommonPropsImported>true</ThisAssemblyCommonPropsImported>
+  </PropertyGroup>
+
+  <!-- Minimum version of Roslyn supporting our source generators -->
+  <PropertyGroup>
+    <ThisAssemblyMinRoslynVersion>4.2</ThisAssemblyMinRoslynVersion>
+    <ThisAssemblyMinRoslynVersionHint>.NET SDK v6.0.300+ / Visual Studio 2022 17.2+</ThisAssemblyMinRoslynVersionHint>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="ThisAssembly_ClassName" />
+    <CompilerVisibleProperty Include="ThisAssembly_GeneratePublicClass" />
+    <CompilerVisibleProperty Include="ThisAssembly_GenerateStaticClasses" />
+    <CompilerVisibleProperty Include="ThisAssembly_GenerateAllConstantsAsFields" />
+    <CompilerVisibleProperty Include="_ThisAssembly_FirstGenerator" />
+  </ItemGroup>
+  
+</Project>

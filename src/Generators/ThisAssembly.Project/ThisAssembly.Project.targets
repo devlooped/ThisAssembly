@@ -1,5 +1,8 @@
 <Project>
 
+  <Import Project="$(MSBuildThisFileDirectory)ThisAssembly.Common.targets"
+          Condition="'$(ThisAssemblyCommonTargetsImported)' != 'true'"/>
+
   <PropertyGroup>
     <InjectThisAssemblyProjectDependsOn Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
       InitializeSourceControlInformation
@@ -16,9 +19,5 @@
       <CompilerVisibleProperty Include="ThisAssemblyProject" />
     </ItemGroup>
   </Target>
-
-  <ItemGroup>
-    <CompilerVisibleProperty Include="DebugThisAssemblyProject" />
-  </ItemGroup>
   
 </Project>

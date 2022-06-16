@@ -1,0 +1,40 @@
+<Project>
+
+  <PropertyGroup>
+    <ThisAssemblyCommonTargetsImported>true</ThisAssemblyCommonTargetsImported>
+  </PropertyGroup>
+
+  <Target Name="ThisAssembly_CheckRoslynVersion"
+          BeforeTargets="BeforeCompile;CoreCompile"
+          DependsOnTargets="ResolvePackageAssets">
+
+    <!--Evaluate warning conditons -->
+    <ItemGroup>
+      <_ThisAssemblyWarning Include="THIS001"
+                            Text="ThisAssembly uses Roslyn source generators, which are only supported in C# and Visual Basic."
+                            Condition="'$(Language)' != 'C#' And '$(Language)' != 'VB'" />
+      <!--
+        CompilerApiVersion: https://github.com/dotnet/sdk/pull/20793
+        VersionLessThan: https://github.com/dotnet/msbuild/pull/4911
+      -->
+      <_ThisAssemblyWarning Include="THIS002"
+                            Text="ThisAssembly requires Roslyn version $(ThisAssemblyMinRoslynVersion) or later ($(ThisAssemblyMinRoslynVersionHint))."
+                            Condition="!$(CompilerApiVersion.StartsWith('roslyn'))
+                                    Or $(CompilerApiVersion.Length) &lt; 9
+                                    Or $([MSBuild]::VersionLessThan('$(CompilerApiVersion.Substring(6))', '$(ThisAssemblyMinRoslynVersion)'))" />
+    </ItemGroup>
+
+    <!--Issue warnings as determined above -->
+    <Warning Condition="@(_ThisAssemblyWarning->Count()) > 0"
+             Code="%(Identity)"
+             Text="%(Text)"
+             File="$(MSBuildProjectFullPath)" />
+
+    <!--Free up some memory -->
+    <ItemGroup>
+      <_ThisAssemblyWarning Remove="@(_ThisAssemblyWarning)" />
+    </ItemGroup>
+
+  </Target>
+
+</Project>

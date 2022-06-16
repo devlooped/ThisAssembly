@@ -1,9 +1,15 @@
 <Project>
 
+  <Import Project="$(MSBuildThisFileDirectory)ThisAssembly.Common.props"
+          Condition="'$(ThisAssemblyCommonPropsImported)' != 'true'"/>
+
+  <PropertyGroup>
+    <ThisAssemblyFirstGenerator Condition="'$(ThisAssemblyFirstGenerator)' == ''">$(MSBuildThisFileName)</ThisAssemblyFirstGenerator>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectProperty Include="AssemblyName" />
     <ProjectProperty Include="RootNamespace" />
-
     <ProjectProperty Include="TargetFrameworkIdentifier" />
     <ProjectProperty Include="TargetFrameworkMoniker" />
     <ProjectProperty Include="TargetFrameworkVersion" />

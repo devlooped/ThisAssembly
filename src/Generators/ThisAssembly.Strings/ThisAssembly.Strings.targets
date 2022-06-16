@@ -1,6 +1,9 @@
 <Project>
 
-  <Target Name="_InjectRexAdditionalFiles"
+  <Import Project="$(MSBuildThisFileDirectory)ThisAssembly.Common.targets"
+          Condition="'$(ThisAssemblyCommonTargetsImported)' != 'true'"/>
+
+  <Target Name="_InjectResxAdditionalFiles"
           BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
           DependsOnTargets="PrepareResourceNames">
     <ItemGroup>

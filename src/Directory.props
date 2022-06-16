@@ -4,8 +4,9 @@
   <PropertyGroup Label="NuGet">
     <PackageTags>dotnet roslyn</PackageTags>
     <PackOnBuild>true</PackOnBuild>
-    <PackFolder>analyzers/dotnet/cs</PackFolder>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <!-- Use locally built NuGetizer if present -->
     <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));$(RestoreSources)</RestoreSources>
 
     <PackageProjectUrl>https://clarius.org/ThisAssembly</PackageProjectUrl>
@@ -17,6 +18,13 @@
   <PropertyGroup Label="Build">
     <SignAssembly>false</SignAssembly>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SourceRoot>$(MSBuildThisFileDirectory)</SourceRoot>
+    <GeneratorsRoot>$(SourceRoot)Generators\</GeneratorsRoot>
+    <TestsRoot>$(SourceRoot)Tests\</TestsRoot>
   </PropertyGroup>
 
 </Project>

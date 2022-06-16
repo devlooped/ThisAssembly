@@ -1,0 +1,25 @@
+<Project>
+
+  <Import Project="$(MSBuildThisFileDirectory)ThisAssembly.Common.props"
+          Condition="'$(ThisAssemblyCommonPropsImported)' != 'true'"/>
+
+  <PropertyGroup>
+    <ThisAssemblyFirstGenerator Condition="'$(ThisAssemblyFirstGenerator)' == ''">$(MSBuildThisFileName)</ThisAssemblyFirstGenerator>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
+    <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />
+    <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
+  </ItemGroup>
+
+  <ItemDefinitionGroup>
+    <FileConstant>
+      <Link />
+      <AreaPath />
+      <Area />
+      <Value />
+    </FileConstant>
+  </ItemDefinitionGroup>
+
+</Project>

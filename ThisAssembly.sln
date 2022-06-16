@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.AssemblyInfo",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Strings", "src\Generators\ThisAssembly.Strings\ThisAssembly.Strings.csproj", "{3E7158B5-BFEF-4416-8226-9096C7C98268}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Prerequisites", "src\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj", "{568E5150-84AD-4619-BEA3-AA5EDF084ABC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Constants", "src\Generators\ThisAssembly.Constants\ThisAssembly.Constants.csproj", "{31C53CCE-13FC-4890-803A-85CD146B909B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Tests", "src\ThisAssembly.Tests\ThisAssembly.Tests.csproj", "{AD25424F-7DE0-4515-AE9F-B95414218292}"
@@ -93,10 +91,6 @@ Global
 		{3E7158B5-BFEF-4416-8226-9096C7C98268}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7158B5-BFEF-4416-8226-9096C7C98268}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7158B5-BFEF-4416-8226-9096C7C98268}.Release|Any CPU.Build.0 = Release|Any CPU
-		{568E5150-84AD-4619-BEA3-AA5EDF084ABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{568E5150-84AD-4619-BEA3-AA5EDF084ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{568E5150-84AD-4619-BEA3-AA5EDF084ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{568E5150-84AD-4619-BEA3-AA5EDF084ABC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{31C53CCE-13FC-4890-803A-85CD146B909B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31C53CCE-13FC-4890-803A-85CD146B909B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31C53CCE-13FC-4890-803A-85CD146B909B}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -6,8 +6,6 @@
     <TargetFramework Condition="'$(BuildingInsideVisualStudio)' == 'true'">net472</TargetFramework>
     <RootNamespace>ThisAssemblyTests</RootNamespace>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <!--
@@ -15,30 +13,23 @@
     This happens automatically for package references that have <PackageName>.props in the build/ folder;
     for project references we must do it manually.
   -->
-  <Import Project="..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.props"
-          Condition="Exists('..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.props')" />
-  <Import Project="..\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.props"
-          Condition="Exists('..\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.props')" />
-  <Import Project="..\Generators\ThisAssembly.Constants\ThisAssembly.Constants.props"
-          Condition="Exists('..\Generators\ThisAssembly.Constants\ThisAssembly.Constants.props')" />
-  <Import Project="..\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.props"
-          Condition="Exists('..\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.props')" />
-  <Import Project="..\Generators\ThisAssembly.Project\ThisAssembly.Project.props"
-          Condition="Exists('..\Generators\ThisAssembly.Project\ThisAssembly.Project.props')" />
-  <Import Project="..\Generators\ThisAssembly.Strings\ThisAssembly.Strings.props"
-          Condition="Exists('..\Generators\ThisAssembly.Strings\ThisAssembly.Strings.props')" />
+  <Import Project="$(SourceRoot)Common\ThisAssembly.Common.props" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.props" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.Constants\ThisAssembly.Constants.props" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.Metadata\ThisAssembly.Metadata.props" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.Project\ThisAssembly.Project.props" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.Strings\ThisAssembly.Strings.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" />
-    <ProjectReference Include="..\Generators\ThisAssembly.Constants\ThisAssembly.Constants.csproj" />
-    <ProjectReference Include="..\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" />
-    <ProjectReference Include="..\Generators\ThisAssembly.Project\ThisAssembly.Project.csproj" />
-    <ProjectReference Include="..\Generators\ThisAssembly.Strings\ThisAssembly.Strings.csproj" />
+    <ProjectReference Include="$(GeneratorsRoot)ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" />
+    <ProjectReference Include="$(GeneratorsRoot)ThisAssembly.Constants\ThisAssembly.Constants.csproj" />
+    <ProjectReference Include="$(GeneratorsRoot)ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" />
+    <ProjectReference Include="$(GeneratorsRoot)ThisAssembly.Project\ThisAssembly.Project.csproj" />
+    <ProjectReference Include="$(GeneratorsRoot)ThisAssembly.Strings\ThisAssembly.Strings.csproj" />
     <ProjectReference Update="@(ProjectReference)" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Pack="false" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
@@ -60,36 +51,22 @@
     <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
     <Constant Include="Foo.Hello" Value="World" Comment="Comments make everything better 😍" />
     <FileConstant Include="@(None)" />
-    <FileConstant Update="@(FileConstant -&gt; WithMetadataValue('Filename', 'Readme'))">
-      <Link>Included/%(Filename)%(Extension)</Link>
+    <FileConstant Update="@(FileConstant -> WithMetadataValue('Filename', 'Readme'))">
+      <Link>Included\%(Filename)%(Extension)</Link>
     </FileConstant>
     <AssemblyMetadata Include="Foo" Value="Bar" />
   </ItemGroup>
-  
-  <Target Name="GetDependencyTargetPaths" Returns="@(TargetPathWithTargetPlatformMoniker)">
-    <ItemGroup>
-      <!--<TargetPathWithTargetPlatformMoniker Include="$(PKGCsvTextFieldParser)\lib\netstandard2.0\CsvTextFieldParser.dll" IncludeRuntimeDependency="false" />
-      <TargetPathWithTargetPlatformMoniker Include="$(PKGHandlebars_Net)\lib\netstandard2.0\Handlebars.dll" IncludeRuntimeDependency="false" />
-      <TargetPathWithTargetPlatformMoniker Include="$(PKGNewtonsoft_Json)\lib\netstandard2.0\Newtonsoft.Json.dll" IncludeRuntimeDependency="false" />-->
-    </ItemGroup>
-  </Target>
 
   <!--
     Import .targets files from source generator projects.
     This happens automatically for package references that have <PackageName>.props in the build/ folder;
     for project references we must do it manually.
   -->
-  <Import Project="..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.targets"
-          Condition="Exists('..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.targets')" />
-  <Import Project="..\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.targets"
-          Condition="Exists('..\Generators\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.targets')" />
-  <Import Project="..\Generators\ThisAssembly.Constants\ThisAssembly.Constants.targets"
-          Condition="Exists('..\Generators\ThisAssembly.Constants\ThisAssembly.Constants.targets')" />
-  <Import Project="..\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.targets"
-          Condition="Exists('..\Generators\ThisAssembly.Metadata\ThisAssembly.Metadata.targets')" />
-  <Import Project="..\Generators\ThisAssembly.Project\ThisAssembly.Project.targets"
-          Condition="Exists('..\Generators\ThisAssembly.Project\ThisAssembly.Project.targets')" />
-  <Import Project="..\Generators\ThisAssembly.Strings\ThisAssembly.Strings.targets"
-          Condition="Exists('..\Generators\ThisAssembly.Strings\ThisAssembly.Strings.targets')" />
+  <Import Project="$(SourceRoot)Common\ThisAssembly.Common.targets" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.targets" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.Constants\ThisAssembly.Constants.targets" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.Metadata\ThisAssembly.Metadata.targets" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.Project\ThisAssembly.Project.targets" />
+  <Import Project="$(GeneratorsRoot)ThisAssembly.Strings\ThisAssembly.Strings.targets" />
 
 </Project>

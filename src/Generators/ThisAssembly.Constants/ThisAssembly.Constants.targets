@@ -1,21 +1,7 @@
 <Project>
 
-  <ItemGroup>
-    <CompilerVisibleProperty Include="DebugThisAssemblyConstants" />
-
-    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
-    <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />
-    <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
-  </ItemGroup>
-
-  <ItemDefinitionGroup>
-    <FileConstant>
-      <Link />
-      <AreaPath />
-      <Area />
-      <Value />
-    </FileConstant>
-  </ItemDefinitionGroup>
+  <Import Project="$(MSBuildThisFileDirectory)ThisAssembly.Common.targets"
+          Condition="'$(ThisAssemblyCommonTargetsImported)' != 'true'"/>
 
   <Target Name="_InjectConstantAdditionalFiles"
           BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"

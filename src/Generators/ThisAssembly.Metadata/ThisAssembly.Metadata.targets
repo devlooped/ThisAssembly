@@ -1,7 +1,6 @@
 <Project>
-  
-  <ItemGroup>
-    <CompilerVisibleProperty Include="DebugThisAssemblyMetadata" />
-  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)ThisAssembly.Common.targets"
+          Condition="'$(ThisAssemblyCommonTargetsImported)' != 'true'"/>
   
 </Project>

@@ -72,9 +72,4 @@
     <PackageReference Include="NuGetizer" />
   </ItemGroup>
 
-  <!-- Common project references for all source generator projects -->
-  <ItemGroup>
-    <ProjectReference Include="$(MSBuildThisFileDirectory)..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
-  </ItemGroup>
-
 </Project>
