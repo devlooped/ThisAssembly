@@ -32,18 +32,22 @@ partial class ThisAssemblyClassFactory
     {
         BeginSourceFile();
         BeginGlobalNamespace();
-        BuildClass(Options.ThisAssemblyClassName, Options.GeneratePublicClass, thisAssemblyClass);
+        BuildClass(
+            Options.ThisAssemblyClassName,
+            thisAssemblyClass.IsMainPart && Options.GeneratePublicClass,
+            thisAssemblyClass.IsMainPart,
+            thisAssemblyClass);
         EndGlobalNamespace();
     }
 
-    void BuildClass(string name, bool isPublic, ClassBase cls)
+    void BuildClass(string name, bool isPublic, bool isStatic, ClassBase cls)
     {
         if (!string.IsNullOrWhiteSpace(cls.XmlSummary))
         {
             XmlSummary(cls.XmlSummary!);
         }
 
-        BeginClass(name, isPublic, Options.GenerateStaticClasses);
+        BeginClass(name, isPublic, isStatic && Options.GenerateStaticClasses);
         foreach (var constant in cls.Constants)
         {
             BuildClassConstant(constant);
@@ -51,7 +55,7 @@ partial class ThisAssemblyClassFactory
 
         foreach (var nestedClass in cls.NestedClasses)
         {
-            BuildClass(nestedClass.Name, true, nestedClass);
+            BuildClass(nestedClass.Name, true, true, nestedClass);
         }
 
         EndClass();
