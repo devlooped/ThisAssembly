@@ -57,7 +57,7 @@ namespace ThisAssembly
                         new()
                         {
                             Name = "Info",
-                            XmlSummary = "Provides access to current assembly information without requiring reflection.",
+                            XmlSummary = "Provides access to assembly attribute values without requiring reflection.",
                             Constants = constants,
                         }
                     }
