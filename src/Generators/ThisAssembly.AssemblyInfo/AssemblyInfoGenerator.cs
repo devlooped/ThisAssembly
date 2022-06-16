@@ -42,7 +42,7 @@ namespace ThisAssembly
                         Name = x.AttributeClass!.Name.Substring(8).Replace("Attribute", ""),
                         Value = x.ConstructorArguments[0].Value?.ToString()
                     })
-                    .ToImmutableArray());
+                    .ToList());
 
             var provider = context.ParseOptionsProvider
                 .Combine(ClassFactoryOptionsProvider)
@@ -53,7 +53,7 @@ namespace ThisAssembly
                 var ((parseOptions, options), constants) = data;
                 var model = new ThisAssemblyClass()
                 {
-                    NestedClassList = new()
+                    NestedClasses = new()
                     {
                         new()
                         {
