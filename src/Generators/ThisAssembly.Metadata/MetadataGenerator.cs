@@ -1,34 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
+using CodeGeneration;
+using CodeGeneration.Model;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
-using Scriban;
-using Utilities;
 
 namespace ThisAssembly
 {
-    [Generator]
-    public class MetadataGenerator : ISourceGenerator
+    [Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
+    public sealed class MetadataGenerator : ThisAssemblyGenerator
     {
-        public void Initialize(GeneratorInitializationContext context) { }
+        protected override string GeneratorName => "ThisAssembly.Metadata";
 
-        public void Execute(GeneratorExecutionContext context)
+        protected override void InitializeGenerator(IncrementalGeneratorInitializationContext context)
         {
-            var metadata = context.Compilation.Assembly.GetAttributes()
-                .Where(x => x.AttributeClass?.Name == nameof(System.Reflection.AssemblyMetadataAttribute) &&
-                    Microsoft.CodeAnalysis.CSharp.SyntaxFacts.IsValidIdentifier((string)x.ConstructorArguments[0].Value!))
-                .Select(x => new KeyValuePair<string, string>((string)x.ConstructorArguments[0].Value!, (string)x.ConstructorArguments[1].Value!))
-                .Distinct(new KeyValueComparer<string,string>())
-                .ToDictionary(x => x.Key, x => x.Value);
+            var constantsProvider = context.CompilationProvider
+                .SelectMany(static (compilation, _) => compilation.Assembly.GetAttributes())
+                .Where(static attr => attr.ConstructorArguments.Length == 2)
+                .Where(static attr => attr.AttributeClass!.Name == "AssemblyMetadataAttribute")
+                .Collect()
+                .Select(static (attrs, _) => attrs
+                    .Select(static x => new ClassConstant()
+                    {
+                        Name = x.ConstructorArguments[0].Value!.ToString(),
+                        Value = x.ConstructorArguments[1].Value?.ToString()
+                    })
+                    .ToList());
 
-            var model = new Model(metadata);
-            var language = context.ParseOptions.Language;
-            var file = language.Replace("#", "Sharp") + ".sbntxt";
-            var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-            var output = template.Render(model, member => member.Name);
+            var provider = context.ParseOptionsProvider
+                .Combine(ClassFactoryOptionsProvider)
+                .Combine(constantsProvider);
 
-            context.AddSource("ThisAssembly.Metadata", SourceText.From(output, Encoding.UTF8));
+            context.RegisterSourceOutput(provider, (ctx, data) =>
+            {
+                var ((parseOptions, options), constants) = data;
+                var model = new ThisAssemblyClass()
+                {
+                    NestedClasses = new()
+                    {
+                    new()
+                    {
+                        Name = "Metadata",
+                        XmlSummary = "Provides access to AssemblyMetadata attributes without requiring reflection.",
+                        Constants = constants,
+                    }
+                    }
+                };
+
+                var sourceText = ThisAssemblyClassFactory.Build(model, options, parseOptions);
+                ctx.AddSource("ThisAssembly.Metadata", sourceText);
+            });
         }
     }
 }
