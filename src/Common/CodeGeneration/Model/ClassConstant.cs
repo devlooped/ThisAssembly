@@ -5,4 +5,6 @@ sealed record ClassConstant
     public string Name { get; init; } = string.Empty;
 
     public string? Value { get; init; }
+
+    public string? XmlSummary { get; init; }
 }

@@ -63,6 +63,11 @@ partial class ThisAssemblyClassFactory
 
     void BuildClassConstant(ClassConstant constant)
     {
+        if (!string.IsNullOrWhiteSpace(constant.XmlSummary))
+        {
+            XmlSummary(constant.XmlSummary!);
+        }
+
         if (Options.GenerateAllConstantsAsFields)
         {
             PublicStaticReadOnlyField(constant.Name, constant.Value);
