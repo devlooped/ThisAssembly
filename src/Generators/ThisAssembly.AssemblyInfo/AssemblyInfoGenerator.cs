@@ -10,7 +10,7 @@ using Utilities;
 namespace ThisAssembly
 {
     [Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-    public class AssemblyInfoGenerator : IIncrementalGenerator
+    public sealed class AssemblyInfoGenerator : ThisAssemblyGenerator
     {
         static readonly HashSet<string> _attributes = new(new[]
         {
@@ -24,7 +24,9 @@ namespace ThisAssembly
             nameof(AssemblyFileVersionAttribute),
         });
 
-        public void Initialize(IncrementalGeneratorInitializationContext context)
+        protected override string GeneratorName => "ThisAssembly.AssemblyInfo";
+
+        protected override void InitializeGenerator(IncrementalGeneratorInitializationContext context)
         {
             var constantsProvider = context.CompilationProvider
                 .SelectMany(static (compilation, _) => compilation.Assembly.GetAttributes())
@@ -42,7 +44,7 @@ namespace ThisAssembly
                     .ToImmutableArray());
 
             var provider = context.ParseOptionsProvider
-                .Combine(ThisAssemblyClassFactoryOptions.GetProvider(context))
+                .Combine(ClassFactoryOptionsProvider)
                 .Combine(constantsProvider);
 
             context.RegisterSourceOutput(provider, (ctx, data) =>
