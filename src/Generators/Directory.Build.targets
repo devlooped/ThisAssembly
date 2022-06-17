@@ -23,12 +23,13 @@
     You can see them in the Common project.
   -->
   <PropertyGroup>
-    <CommonFilesDirectory>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)..\Common'))</CommonFilesDirectory>
+    <CommonFilesDirectory>$(SourceRoot)Common\</CommonFilesDirectory>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(CommonFilesDirectory)**\*.cs" Visible="false" />
     <Compile Remove="$(CommonFilesDirectory)bin\**\*" />
     <Compile Remove="$(CommonFilesDirectory)obj\**\*" />
+    <PackageFile Include="$(CommonFilesDirectory)*.props;$(CommonFilesDirectory)*.targets" PackagePath="build\%(Filename)%(Extension)" />
   </ItemGroup>
 
   <!-- Ensure all auxiliary files (e.g. *.props, *.targets) are copied to the output directory -->
