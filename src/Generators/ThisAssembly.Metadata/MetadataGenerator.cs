@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Linq;
+﻿using System.Linq;
 using CodeGeneration;
 using CodeGeneration.Model;
 using Microsoft.CodeAnalysis;
@@ -19,35 +18,28 @@ namespace ThisAssembly
                 .Where(static attr => attr.AttributeClass!.Name == "AssemblyMetadataAttribute")
                 .Collect()
                 .Select(static (attrs, _) => attrs
-                    .Select(static x => new ClassConstant()
-                    {
-                        Name = x.ConstructorArguments[0].Value!.ToString(),
-                        Value = x.ConstructorArguments[1].Value?.ToString()
-                    })
+                    .Select(static x => new Constant(
+                        x.ConstructorArguments[0].Value!.ToString(),
+                        x.ConstructorArguments[1].Value?.ToString()))
                     .ToList());
 
             var provider = context.ParseOptionsProvider
-                .Combine(ClassFactoryOptionsProvider)
+                .Combine(OptionsProvider)
                 .Combine(constantsProvider);
 
             context.RegisterSourceOutput(provider, (ctx, data) =>
             {
                 var ((parseOptions, options), constants) = data;
-                var model = new ThisAssemblyClass()
+                var metadataClass = new Class("Metadata", PartialTypeKind.MainPart)
                 {
-                    NestedClasses = new()
-                    {
-                    new()
-                    {
-                        Name = "Metadata",
-                        XmlSummary = "Provides access to AssemblyMetadata attributes without requiring reflection.",
-                        Constants = constants,
-                    }
-                    }
+                    XmlSummary = "Provides access to AssemblyMetadata attributes without requiring reflection.",
+                    Constants = constants,
                 };
 
-                var sourceText = ThisAssemblyClassFactory.Build(model, options, parseOptions);
-                ctx.AddSource("ThisAssembly.Metadata", sourceText);
+                var model = new Class(options.ThisAssemblyClassName, PartialTypeKind.OtherPart);
+                model.Add(metadataClass);
+                var sourceText = CodeFactory.Build(model, options, parseOptions);
+                ctx.AddSource(options.ThisAssemblyClassName + ".Metadata", sourceText);
             });
         }
     }

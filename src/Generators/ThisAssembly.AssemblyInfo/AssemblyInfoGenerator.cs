@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using CodeGeneration;
@@ -37,35 +36,32 @@ namespace ThisAssembly
                 .Collect()
                 .Select(static (attrs, _) => attrs
                     .Distinct(AttributeDataClassNameComparer.Instance)
-                    .Select(static x => new ClassConstant()
-                    {
-                        Name = x.AttributeClass!.Name.Substring(8).Replace("Attribute", ""),
-                        Value = x.ConstructorArguments[0].Value?.ToString()
-                    })
+                    .Select(static x => new Constant(
+                        x.AttributeClass!.Name.Substring(8).Replace("Attribute", ""),
+                        x.ConstructorArguments[0].Value?.ToString()))
                     .ToList());
 
             var provider = context.ParseOptionsProvider
-                .Combine(ClassFactoryOptionsProvider)
+                .Combine(OptionsProvider)
                 .Combine(constantsProvider);
 
             context.RegisterSourceOutput(provider, (ctx, data) =>
             {
                 var ((parseOptions, options), constants) = data;
-                var model = new ThisAssemblyClass()
+                var model = new Class(options.ThisAssemblyClassName, PartialTypeKind.OtherPart)
                 {
-                    NestedClasses = new()
+                    NestedClasses = new Class[]
                     {
-                        new()
+                        new("Info", PartialTypeKind.MainPart)
                         {
-                            Name = "Info",
                             XmlSummary = "Provides access to assembly attribute values without requiring reflection.",
                             Constants = constants,
                         }
                     }
                 };
 
-                var sourceText = ThisAssemblyClassFactory.Build(model, options, parseOptions);
-                ctx.AddSource("ThisAssembly.Info", sourceText);
+                var sourceText = CodeFactory.Build(model, options, parseOptions);
+                ctx.AddSource(options.ThisAssemblyClassName + ".Info", sourceText);
             });
         }
     }

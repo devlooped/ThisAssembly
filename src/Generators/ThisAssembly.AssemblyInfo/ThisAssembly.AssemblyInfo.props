@@ -4,7 +4,7 @@
           Condition="'$(ThisAssemblyCommonPropsImported)' != 'true'"/>
 
   <PropertyGroup>
-    <ThisAssemblyFirstGenerator Condition="'$(ThisAssemblyFirstGenerator)' == ''">$(MSBuildThisFileName)</ThisAssemblyFirstGenerator>
+    <ThisAssembly_FirstGeneratorName Condition="'$(ThisAssembly_FirstGeneratorName)' == ''">$(MSBuildThisFileName)</ThisAssembly_FirstGeneratorName>
   </PropertyGroup>
 
 </Project>
