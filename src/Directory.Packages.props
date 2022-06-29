@@ -6,6 +6,7 @@
       - Microsoft.CodeAnalysis.* packages in this file
       - property ThisAssemblyMinRoslynVersion in src\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.props
       - property PackFolder in src\Generators\Directory.Build.targets
+      - properties ThisAssemblyMinRoslynVersion and ThisAssemblyMinRoslynVersionHint in src\Common\ThisAssembly.Common.props
   -->
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.2.0" />
