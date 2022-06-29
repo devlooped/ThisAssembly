@@ -9,59 +9,64 @@ using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace CodeGeneration;
 
-partial class ThisAssemblyClassFactory
+partial class CodeFactory
 {
     public static SourceText Build(
-        ThisAssemblyClass thisAssemblyClass,
-        ThisAssemblyClassFactoryOptions options,
+        Class thisAssemblyClass,
+        ThisAssemblyOptions options,
         ParseOptions parseOptions)
     {
-        var factory = parseOptions switch
-        {
-            CSharpParseOptions => new CSharpThisAssemblyClassFactory(options) as ThisAssemblyClassFactory,
-            VisualBasicParseOptions => new VisualBasicThisAssemblyClassFactory(options),
-            null => throw new ArgumentNullException(nameof(parseOptions)),
-            _ => throw new ArgumentException($"Unsupported language '{parseOptions.Language}'.", nameof(parseOptions)),
-        };
-
+        ModelValidator.Validate(thisAssemblyClass, parseOptions);
+        var factory = Create(options, parseOptions);
         factory.BuildThisAssemblyClass(thisAssemblyClass);
         return factory.GetSourceText(parseOptions);
     }
 
-    protected void BuildThisAssemblyClass(ThisAssemblyClass thisAssemblyClass)
+    static CodeFactory Create(ThisAssemblyOptions options, ParseOptions parseOptions)
+        => parseOptions switch
+        {
+            CSharpParseOptions => new CSharpCodeFactory(options),
+            VisualBasicParseOptions => new VisualBasicCodeFactory(options),
+            null => throw new ArgumentNullException(nameof(parseOptions)),
+            _ => throw new ArgumentException($"Unsupported language '{parseOptions.Language}'.", nameof(parseOptions)),
+        };
+
+    protected void BuildThisAssemblyClass(Class thisAssemblyClass)
     {
         BeginSourceFile();
         BeginGlobalNamespace();
-        BuildClass(
-            Options.ThisAssemblyClassName,
-            thisAssemblyClass.IsMainPart && Options.GeneratePublicClass,
-            thisAssemblyClass.IsMainPart,
-            thisAssemblyClass);
+        BuildClass(thisAssemblyClass, Options.GeneratePublicClass);
         EndGlobalNamespace();
     }
 
-    void BuildClass(string name, bool isPublic, bool isStatic, ClassBase cls)
+    void BuildClass(Class cls, bool isPublic)
     {
-        if (!string.IsNullOrWhiteSpace(cls.XmlSummary))
+        if (cls.PartialTypeKind != PartialTypeKind.OtherPart && !string.IsNullOrWhiteSpace(cls.XmlSummary))
         {
             XmlSummary(cls.XmlSummary!);
         }
 
-        BeginClass(name, isPublic, isStatic && Options.GenerateStaticClasses);
+        BeginClass(
+            cls.Name,
+            cls.PartialTypeKind != PartialTypeKind.NotPartial,
+            isPublic && cls.PartialTypeKind != PartialTypeKind.OtherPart,
+            Options.GenerateStaticClasses && cls.PartialTypeKind != PartialTypeKind.OtherPart);
+
         foreach (var constant in cls.Constants)
         {
-            BuildClassConstant(constant);
+            BuildConstant(constant);
         }
 
         foreach (var nestedClass in cls.NestedClasses)
         {
-            BuildClass(nestedClass.Name, true, true, nestedClass);
+            BuildClass(nestedClass, true);
         }
 
         EndClass();
     }
 
-    void BuildClassConstant(ClassConstant constant)
+
+    void BuildConstant(Constant constant)
     {
         if (!string.IsNullOrWhiteSpace(constant.XmlSummary))
         {

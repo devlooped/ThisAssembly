@@ -4,15 +4,15 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace CodeGeneration;
 
-abstract partial class ThisAssemblyClassFactory
+abstract partial class CodeFactory
 {
-    protected ThisAssemblyClassFactory(ThisAssemblyClassFactoryOptions options)
+    protected CodeFactory(ThisAssemblyOptions options)
     {
         Text = new StringBuilder(4096);
         Options = options;
     }
 
-    protected ThisAssemblyClassFactoryOptions Options { get; }
+    protected ThisAssemblyOptions Options { get; }
     
     protected StringBuilder Text { get; }
 
@@ -24,7 +24,7 @@ abstract partial class ThisAssemblyClassFactory
 
     protected abstract void XmlSummary(string text);
 
-    protected abstract void BeginClass(string name, bool isPublic, bool isStatic);
+    protected abstract void BeginClass(string name, bool isPartial, bool isPublic, bool isStatic);
 
     protected abstract void EndClass();
 

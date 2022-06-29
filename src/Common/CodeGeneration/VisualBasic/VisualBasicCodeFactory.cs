@@ -8,9 +8,9 @@ using Utilities;
 
 namespace CodeGeneration.VisualBasic;
 
-sealed class VisualBasicThisAssemblyClassFactory : ThisAssemblyClassFactory
+sealed class VisualBasicCodeFactory : CodeFactory
 {
-    public VisualBasicThisAssemblyClassFactory(ThisAssemblyClassFactoryOptions options)
+    public VisualBasicCodeFactory(ThisAssemblyOptions options)
         : base(options)
     {
     }
@@ -42,10 +42,11 @@ sealed class VisualBasicThisAssemblyClassFactory : ThisAssemblyClassFactory
      * have only static (Shared) members anyway.
      * https://github.com/devlooped/ThisAssembly/discussions/104#discussioncomment-2853760
      */
-    protected override void BeginClass(string name, bool isPublic, bool isStatic)
+    protected override void BeginClass(string name, bool isPartial, bool isPublic, bool isStatic)
         => _ = Text
             .AppendIf(isPublic, "Public ")
-            .Append("Partial Class ")
+            .AppendIf(isPartial, "Partial ")
+            .Append("Class ")
             .AppendLine(name);
 
     protected override void EndClass() => _ = Text.AppendLine("End Class");

@@ -7,9 +7,9 @@ using Utilities;
 
 namespace CodeGeneration.CSharp;
 
-sealed class CSharpThisAssemblyClassFactory : ThisAssemblyClassFactory
+sealed class CSharpCodeFactory : CodeFactory
 {
-    public CSharpThisAssemblyClassFactory(ThisAssemblyClassFactoryOptions options)
+    public CSharpCodeFactory(ThisAssemblyOptions options)
         : base(options)
     {
     }
@@ -32,11 +32,12 @@ sealed class CSharpThisAssemblyClassFactory : ThisAssemblyClassFactory
                 (sb, line) => sb.Append("/// ").AppendLine(line))
             .AppendLine("/// </summary>");
 
-    protected override void BeginClass(string name, bool isPublic, bool isStatic)
+    protected override void BeginClass(string name, bool isPartial, bool isPublic, bool isStatic)
         => _ = Text
             .AppendIf(isPublic, "public ")
             .AppendIf(isStatic, "static ")
-            .Append("partial class ")
+            .AppendIf(isPartial, "partial ")
+            .Append("class ")
             .AppendLine(name)
             .AppendLine("{");
 
