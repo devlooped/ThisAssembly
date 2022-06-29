@@ -1,60 +1,99 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
+using CodeGeneration;
+using CodeGeneration.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
-using Scriban;
 
 namespace ThisAssembly
 {
     [Generator]
-    public class ConstantsGenerator : ISourceGenerator
+    public class ConstantsGenerator : ThisAssemblyGenerator
     {
-        public void Initialize(GeneratorInitializationContext context) { }
+        protected override string GeneratorName => "ThisAssembly.Constants";
 
-        public void Execute(GeneratorExecutionContext context)
+        protected override void InitializeGenerator(IncrementalGeneratorInitializationContext context)
         {
-            var constantFiles = context.AdditionalFiles
-                    .Where(f => context.AnalyzerConfigOptions
-                        .GetOptions(f)
-                        .TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
-                        && itemType == "Constant");
+            var constantDataProvider = context.AdditionalTextsProvider
+                .Combine(context.AnalyzerConfigOptionsProvider)
+                .Select((data, cancellationToken) =>
+                {
+                    var (file, optionsProvider) = data;
+                    var name = Path.GetFileName(file.Path);
+                    var options = optionsProvider.GetOptions(file);
+                    _ = options.TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType);
+                    if (itemType != "Constant")
+                    {
+                        // The call to Where below will filter out null values;
+                        // the ! here is for the sake of nullability analysis.
+                        return null!;
+                    }
 
-            if (!constantFiles.Any())
-                return;
+                    _ = options.TryGetValue("build_metadata.Constant.Value", out var value);
+                    _ = options.TryGetValue("build_metadata.Constant.Comment", out var comment);
+                    var xmlSummary = $"{name} = {value}";
+                    if (!string.IsNullOrWhiteSpace(comment))
+                    {
+                        xmlSummary = $"<p>{xmlSummary}</p>\n<p>{comment}</p>";
+                    }
 
-            var pairs = constantFiles.Select(f =>
+                    return new ConstantDefinition(name, value,  xmlSummary);
+                })
+                .Where(a => a is not null)
+                .Collect();
+
+            var provider = context.ParseOptionsProvider
+                .Combine(OptionsProvider)
+                .Combine(constantDataProvider);
+
+            context.RegisterSourceOutput(provider, (ctx, data) =>
             {
-                context.AnalyzerConfigOptions.GetOptions(f).TryGetValue("build_metadata.Constant.Value", out var value);
-                context.AnalyzerConfigOptions.GetOptions(f).TryGetValue("build_metadata.Constant.Comment", out var comment);
-                return new Constant(Path.GetFileName(f.Path), value, string.IsNullOrWhiteSpace(comment) ? null : comment);
-            }).Where(x => x.Value != null).ToList();
+                try
+                {
+                    var ((parseOptions, options), constantDefinitions) = data;
+                    var constantsClass = new Class("Constants", PartialTypeKind.MainPart)
+                    {
+                        XmlSummary = "Provides access to MSBuild Constant items.",
+                    };
 
-            var root = Area.Load(pairs);
-            var language = context.ParseOptions.Language;
-            var file = language.Replace("#", "Sharp") + ".sbntxt";
-            var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-            var output = template.Render(new Model(root), member => member.Name);
+                    foreach (var definition in constantDefinitions)
+                    {
+                        var names = definition.Path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (names.Length == 0)
+                        {
+                            Diagnostics.ThrowNamelessConstant(definition.Path, definition.Value);
+                        }
 
-            // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
-            // structures via functions.
-            if (language == LanguageNames.CSharp)
-            {
-                output = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseCompilationUnit(output)
-                    .NormalizeWhitespace()
-                    .GetText()
-                    .ToString();
-            }
-            //else if (language == LanguageNames.VisualBasic)
-            //{
-            //    output = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseCompilationUnit(output)
-            //        .NormalizeWhitespace()
-            //        .GetText()
-            //        .ToString();
-            //}
+                        var cls = constantsClass;
+                        for (var i = 0; i < names.Length - 1; i++)
+                        {
+                            var name = names[i];
+                            var nestedClass = cls.NestedClasses.FirstOrDefault(static c => c.Name == name);
+                            if (nestedClass is null)
+                            {
+                                nestedClass = new Class(name, PartialTypeKind.MainPart);
+                                cls.Add(nestedClass);
+                            }
 
-            context.AddSource("ThisAssembly.Constants", SourceText.From(output, Encoding.UTF8));
+                            cls = nestedClass;
+                        }
+
+                        cls.Add(new Constant(names[^1], definition.Value) { XmlSummary = definition.XmlSummary });
+                    }
+
+                    var model = new Class(options.ThisAssemblyClassName, PartialTypeKind.OtherPart);
+                    model.Add(constantsClass);
+                    var sourceText = CodeFactory.Build(model, options, parseOptions);
+                    ctx.AddSource(options.ThisAssemblyClassName + ".Constants", sourceText);
+                }
+                catch (DiagnosticException e)
+                {
+                    e.Report(ctx);
+                }
+            });
         }
     }
 }

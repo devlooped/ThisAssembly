@@ -4,14 +4,23 @@
           Condition="'$(ThisAssemblyCommonPropsImported)' != 'true'"/>
 
   <PropertyGroup>
-    <ThisAssemblyFirstGenerator Condition="'$(ThisAssemblyFirstGenerator)' == ''">$(MSBuildThisFileName)</ThisAssemblyFirstGenerator>
+    <ThisAssembly_FirstGeneratorName Condition="'$(ThisAssembly_FirstGeneratorName)' == ''">$(MSBuildThisFileName)</ThisAssembly_FirstGeneratorName>
   </PropertyGroup>
 
   <ItemGroup>
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
+    <CompilerVisibleItemMetadata Include="Constant" MetadataName="IsFileConstant" />
   </ItemGroup>
+
+  <ItemDefinitionGroup>
+    <Constant>
+      <Value />
+      <Comment />
+      <IsFileConstant>false</IsFileConstant>
+    </Constant>
+  </ItemDefinitionGroup>
 
   <ItemDefinitionGroup>
     <FileConstant>

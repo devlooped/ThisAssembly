@@ -4,15 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>ThisAssembly.Constants</PackageId>
     <Description>Generates a static `ThisAssembly.Constants` class from `Constant` MSBuild items.</Description>
+    <EmbedScriban>false</EmbedScriban>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="CSharp.sbntxt" />
-    <None Remove="ThisAssembly.Constants.targets" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="CSharp.sbntxt" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
 
 </Project>
