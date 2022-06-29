@@ -1,48 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
+using CodeGeneration;
+using CodeGeneration.Model;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
-using Scriban;
-using Utilities;
 
-namespace ThisAssembly
+namespace ThisAssembly;
+
+[Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
+public class ProjectPropertyGenerator : ThisAssemblyGenerator
 {
-    [Generator]
-    public class ProjectPropertyGenerator : ISourceGenerator
+    protected override string GeneratorName => "ThisAssembly.Project";
+
+    protected override void InitializeGenerator(IncrementalGeneratorInitializationContext context)
     {
-        public void Initialize(GeneratorInitializationContext context) { }
+        var constantsProvider = context.AnalyzerConfigOptionsProvider
+            .SelectMany((provider, _) => provider.GlobalOptions.GetValueOrDefault("build_property.ThisAssembly_ProjectProperties", string.Empty).Split('|'))
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Combine(context.AnalyzerConfigOptionsProvider)
+            .Select((tuple, _) =>
+            {
+                var (name, optionsProvider) = tuple;
+                return optionsProvider.GlobalOptions.TryGetValue("build_property." + name, out var value)
+                    ? new Constant(name, value) { XmlSummary = $"{name} = \"{value}\"" }
+                    : null!; // We will filter out nulls; the ! keeps nullability analysis happy
+            })
+            .Where(x => x != null)
+            .Collect();
 
-        public void Execute(GeneratorExecutionContext context)
+        var provider = context.ParseOptionsProvider
+            .Combine(OptionsProvider)
+            .Combine(constantsProvider);
+
+        context.RegisterSourceOutput(provider, (ctx, data) =>
         {
-            if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.ThisAssemblyProject", out var values))
-                return;
+            var ((parseOptions, options), constants) = data;
+            var projectClass = new Class("Project", PartialTypeKind.MainPart)
+            {
+                XmlSummary = "Provides access to selected MSBuild project properties.",
+                Constants = constants,
+            };
 
-            var properties = values.Split('|')
-                .Select(prop => new KeyValuePair<string, string?>(prop,
-                    context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property." + prop, out var value) ?
-                    value : null))
-                .Where(pair => pair.Value != null)
-                .Distinct(new KeyComparer<string,string?>(StringComparer.OrdinalIgnoreCase))
-                .ToDictionary(x => x.Key, x => x.Value!);
-
-            var model = new Model(properties);
-            var language = context.ParseOptions.Language;
-            var file = language.Replace("#", "Sharp") + ".sbntxt";
-            var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-            var output = template.Render(model, member => member.Name);
-
-            context.AddSource("ThisAssembly.Project", SourceText.From(output, Encoding.UTF8));
-        }
-
-        public static string[] GetItems(GeneratorExecutionContext context)
-            => context
-                .AdditionalFiles
-                .Where(f => context.AnalyzerConfigOptions
-                    .GetOptions(f)
-                    .TryGetValue("build_metadata.ThisAssemblyProject.ItemSpec", out var identity))
-                .Select(f => f.Path)
-                .ToArray();
+            var model = new Class(options.ThisAssemblyClassName, PartialTypeKind.OtherPart);
+            model.Add(projectClass);
+            var sourceText = CodeFactory.Build(model, options, parseOptions);
+            ctx.AddSource(options.ThisAssemblyClassName + ".Project", sourceText);
+        });
     }
 }
