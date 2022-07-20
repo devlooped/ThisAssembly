@@ -93,9 +93,7 @@
 	sha = fa83a5161ba52bc5d510ce0ba75ee0b1f8d4bc63
 [file ".github/ISSUE_TEMPLATE/config.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/ISSUE_TEMPLATE/config.yml
-	etag = b5ce64e6967276086eb89f86f57364da9c4deac988c7e0e04810a4f8caaa1400
-	weak
-	sha = 6f1ed274e1e168da487affb88d69774fc2f926c3
+	skip
 [file "assets/css/style.scss"]
 	url = https://github.com/devlooped/oss/blob/main/assets/css/style.scss
 	etag = f710d8919abfd5a8d00050b74ba7d0bb05c6d02e40842a3012eb96555c208504
