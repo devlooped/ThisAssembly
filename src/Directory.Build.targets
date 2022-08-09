@@ -145,7 +145,6 @@
 
   </Target>
 
-  <!-- Always append the link to the direct source tree for the current build -->
   <Target Name="UpdatePackageMetadata"
           BeforeTargets="PrepareForBuild;GenerateMSBuildEditorConfigFileShouldRun;GetAssemblyVersion;GetPackageMetadata;GenerateNuspec;Pack"
           DependsOnTargets="EnsureProjectInformation"
@@ -153,10 +152,6 @@
                      '$(IsPackable)' == 'true'">
     <PropertyGroup>
       <PackageProjectUrl Condition="'$(PackageProjectUrl)' == '' and '$(PublishRepositoryUrl)' == 'true'">$(RepositoryUrl)</PackageProjectUrl>
-      <Description Condition="'$(RepositorySha)' != '' and '$(RepositoryUrl)' != ''">$(Description)
-
-Built from $(RepositoryUrl)/tree/$(RepositorySha)
-      </Description>
       <PackageDescription>$(Description)</PackageDescription>
       <PackageReleaseNotes Condition="'$(RepositoryUrl)' != '' and Exists('$(MSBuildThisFileDirectory)..\changelog.md')">$(RepositoryUrl)/blob/main/changelog.md</PackageReleaseNotes>
     </PropertyGroup>
