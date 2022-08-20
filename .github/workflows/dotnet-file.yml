@@ -65,6 +65,8 @@ jobs:
 
       - name: +Mᐁ includes
         uses: devlooped/actions-include@v1
+        with:
+          validate: false
 
       - name: ✍ pull request
         uses: peter-evans/create-pull-request@v3
