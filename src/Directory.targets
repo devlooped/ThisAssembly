@@ -2,7 +2,7 @@
   <!-- Extend Directory.Build.targets -->
 
   <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">
-    <PackageReference Update="NuGetizer" Version="0.8.0" />
+    <PackageReference Update="NuGetizer" Version="0.9.0" />
   </ItemGroup>
 
   <ItemGroup>
