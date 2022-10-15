@@ -59,7 +59,7 @@ In addition to arbitrary constants via `<Constant ...>`, it's quite useful in pa
 ```xml
   <ItemGroup>
     <FileConstant Include="@(Content)" />
-  <ItemGroup>
+  </ItemGroup>
 ```
 
 Which results in:
