@@ -18,27 +18,27 @@
 	    /// </summary>
 {{ end }}
 {{ func render }}
-    public static partial class {{ $0.Name }}
+    public static partial class {{ $0.Id }}
     {
         {{~ for value in $0.Values ~}}
 		{{~ if!(value.HasFormat) ~}}
         {{- summary value ~}}
-	    public static string {{ value.Name }} => Strings.GetResourceManager("{{ $1 }}").GetString("{{ $0.Prefix + value.Name }}");
+	    public static string {{ value.Id }} => Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Name }}");
         {{~ else ~}}
         {{~ if value.IsIndexedFormat ~}}
         {{- summary value ~}}
-	    public static string {{ value.Name }}(
+	    public static string {{ value.Id }}(
             {{- for arg in value.Format -}}
             object arg{{~ arg ~}}{{ if !for.last }}, {{ end }}
             {{- end -}}) 
             => string.Format(
                 CultureInfo.CurrentCulture,
-                Strings.GetResourceManager("{{ $1 }}").GetString("{{ $0.Prefix + value.Name }}"),
+                Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Name }}"),
                 {{ for arg in value.Format -}}
                 arg{{- arg -}}{{- if !for.last -}}, {{ end }}{{- end -}});
         {{~ else if value.IsNamedFormat ~}}
         {{- summary value ~}}
-	    public static string {{ value.Name }}(
+	    public static string {{ value.Id }}(
             {{- for arg in value.Format -}}
             object {{ arg ~}}{{ if !for.last }}, {{ end }}
             {{- end -}}) 
@@ -46,7 +46,7 @@
                 CultureInfo.CurrentCulture,
                 Strings
                     .GetResourceManager("{{ $1 }}")
-                    .GetString("{{ $0.Prefix + value.Name }}")
+                    .GetString("{{ value.Name }}")
                     {{- for arg in value.Format }}
                     .Replace("{%{{}%}{{ arg }}{%{}}%}", "{%{{}%}{{ for.index }}{%{}}%}"){{- end -}},
                 {{ for arg in value.Format -}}

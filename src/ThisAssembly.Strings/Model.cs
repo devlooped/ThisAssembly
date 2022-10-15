@@ -15,6 +15,7 @@ record Model(ResourceArea RootArea, string ResourceName)
 static class ResourceFile
 {
     static readonly Regex FormatExpression = new Regex("{(?<name>[^{}]+)}", RegexOptions.Compiled);
+    internal static readonly Regex NameReplaceExpression = new Regex(@"\||:|;|\>|\<", RegexOptions.Compiled);
 
     public static ResourceArea Load(string fileName, string rootArea)
     {
@@ -33,17 +34,18 @@ static class ResourceFile
         {
             //  Splits: ([resouce area]_)*[resouce name]
             var nameAttribute = element.Attribute("name").Value;
+            var id = NameReplaceExpression.Replace(nameAttribute, "_");
             var valueElement = element.Element("value").Value;
             var comment = element.Element("comment")?.Value?.Replace("<", "&lt;").Replace(">", "&gt;");
-            var areaParts = nameAttribute.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
+            var areaParts = id.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
             if (areaParts.Length <= 1)
             {
-                root.Values.Add(GetValue(nameAttribute, valueElement) with { Comment = comment });
+                root.Values.Add(GetValue(id, nameAttribute, valueElement) with { Comment = comment });
             }
             else
             {
                 var area = GetArea(root, areaParts.Take(areaParts.Length - 1));
-                var value = GetValue(areaParts.Skip(areaParts.Length - 1).First(), valueElement) with { Comment = comment };
+                var value = GetValue(areaParts.Skip(areaParts.Length - 1).First(), nameAttribute, valueElement) with { Comment = comment };
 
                 area.Values.Add(value);
             }
@@ -65,13 +67,13 @@ static class ResourceFile
         var currentArea = area;
         foreach (var areaName in areaPath)
         {
-            var existing = currentArea.NestedAreas.FirstOrDefault(a => a.Name == areaName);
+            var existing = currentArea.NestedAreas.FirstOrDefault(a => a.Id == areaName);
             if (existing == null)
             {
                 if (currentArea.Values.Any(v => v.Name == areaName))
                     throw new ArgumentException(string.Format(
                         "Area name '{0}' is already in use as a value name under area '{1}'.",
-                        areaName, currentArea.Name));
+                        areaName, currentArea.Id));
 
                 existing = new ResourceArea(areaName, currentArea.Prefix + areaName + "_");
                 currentArea.NestedAreas.Add(existing);
@@ -83,9 +85,9 @@ static class ResourceFile
         return currentArea;
     }
 
-    static ResourceValue GetValue(string resourceName, string resourceValue)
+    static ResourceValue GetValue(string resourceId, string resourceName, string resourceValue)
     {
-        var value = new ResourceValue(resourceName, resourceValue);
+        var value = new ResourceValue(resourceId, resourceName, resourceValue);
 
         // Parse parameter names
         if (FormatExpression.IsMatch(resourceValue))
@@ -101,15 +103,15 @@ static class ResourceFile
     }
 }
 
-[DebuggerDisplay("Name = {Name}, NestedAreas = {NestedAreas.Count}, Values = {Values.Count}")]
-record ResourceArea(string Name, string Prefix)
+[DebuggerDisplay("Id = {Id}, NestedAreas = {NestedAreas.Count}, Values = {Values.Count}")]
+record ResourceArea(string Id, string Prefix)
 {
     public List<ResourceArea> NestedAreas { get; init; } = new List<ResourceArea>();
     public List<ResourceValue> Values { get; init; } = new List<ResourceValue>();
 }
 
-[DebuggerDisplay("{Name} = {Value}")]
-record ResourceValue(string Name, string? Raw)
+[DebuggerDisplay("{Id} = {Value}")]
+record ResourceValue(string Id, string Name, string? Raw)
 {
     public string? Value => Raw?.Replace(Environment.NewLine, "")?.Replace("<", "&lt;")?.Replace(">", "&gt;");
     public string? Comment { get; init; }

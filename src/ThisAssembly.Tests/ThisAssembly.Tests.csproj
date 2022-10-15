@@ -54,6 +54,10 @@
     </FileConstant>
     <AssemblyMetadata Include="Foo" Value="Bar" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ThisAssembly.Strings\Model.cs" Link="Model.cs" />
+  </ItemGroup>
   
   <Target Name="GetDependencyTargetPaths" Returns="@(TargetPathWithTargetPlatformMoniker)">
     <ItemGroup>
