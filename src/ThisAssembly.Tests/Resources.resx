@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Foo_Bar_Baz" xml:space="preserve">
+  <data name="Foo:Bar&gt;Baz" xml:space="preserve">
     <value>Value</value>
   </data>
   <data name="Foo_Hey" xml:space="preserve">

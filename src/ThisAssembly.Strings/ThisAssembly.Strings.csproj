@@ -43,5 +43,5 @@ such as "Hello {name}".
   <ItemGroup>
     <EmbeddedResource Include="ThisAssembly.Strings.cs" />
   </ItemGroup>
-
+  
 </Project>

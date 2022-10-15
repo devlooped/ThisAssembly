@@ -6,16 +6,20 @@ namespace ThisAssemblyTests
     public class Tests
     {
         [Fact]
+        public void CanReadResourceFile()
+            => Assert.NotNull(ResourceFile.Load("Resources.resx", "Strings"));
+
+        [Fact]
         public void CanUseConstants()
             => Assert.Equal("Baz", ThisAssembly.Constants.Foo.Bar);
 
         [Fact]
         public void CanUseFileConstants()
-            => Assert.Equal(Path.Combine("Content", "Docs", "License.md"), ThisAssembly.Constants.Content.Docs.License);
+            => Assert.Equal(ThisAssembly.Constants.Content.Docs.License, Path.Combine("Content", "Docs", "License.md"));
 
         [Fact]
         public void CanUseFileConstantLinkedFile()
-            => Assert.Equal(Path.Combine("Included", "Readme.txt"), ThisAssembly.Constants.Included.Readme);
+            => Assert.Equal(ThisAssembly.Constants.Included.Readme, Path.Combine("Included", "Readme.txt"));
 
         [Fact]
         public void CanUseMetadata()
