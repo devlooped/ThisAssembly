@@ -14,7 +14,7 @@ on:
       combineTitle:
         description: 'Title of the combined PR'
         required: true
-        default: 'Combined PRs'
+        default: '⬆️ Bump dependencies'
       combineBranchName:
         description: 'Name of the branch to combine PRs into'
         required: true
