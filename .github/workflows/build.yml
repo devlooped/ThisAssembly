@@ -37,7 +37,7 @@ jobs:
         run: |
           $path = './.github/workflows/os-matrix.json'
           $os = if (test-path $path) { cat $path } else { '["ubuntu-latest"]' }
-          echo "::set-output name=matrix::$os"
+          echo "matrix=$os" >> $env:GITHUB_OUTPUT
 
   build:
     needs: os-matrix

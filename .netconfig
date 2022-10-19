@@ -38,9 +38,9 @@
 	sha = 4f070a477b4162a280f02722ae666376ae4fcc71
 [file ".github/workflows/build.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
-	etag = 546728274c46d85038c67a385df421cb8865552673ada35fcf0b30ff4f1c7548
+	etag = 59e7663888953a1ffed92d95aae24b72528ca71f818bb5acc26c946ea5ee6421
 	weak
-	sha = cf8e33983b111d06b8e3a89fce5d8b8d97750f59
+	sha = 9dc1ae21afde1e6e8186e929068e8e4d80b3c212
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
 	etag = 1c1705a3f0ed65e33c9133996ebaa100aa445a8b968b2904ad48fef938702006
