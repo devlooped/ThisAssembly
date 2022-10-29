@@ -13,9 +13,9 @@
 	weak
 [file ".editorconfig"]
 	url = https://github.com/devlooped/oss/blob/main/.editorconfig
-	etag = 4e857df48d0abd81512350d6b3b1a1c83b78284be65bd5172a4ec8e52cd04e2d
+	etag = 897634b9ba05c00e8ef35b24533d31bc43a5299be5a64e240109ba4c00fcad15
 	weak
-	sha = 369cd2bd49ce032f616a2fcb4c997535dbe8d9aa
+	sha = 448cf45a26e068fe5d7164ea48d1dc8bf620df46
 [file ".gitattributes"]
 	url = https://github.com/devlooped/oss/blob/main/.gitattributes
 	etag = 7acb32f5fa6d4ccd9c824605a7c2b8538497f0068c165567807d393dcf4d6bb7
@@ -38,9 +38,9 @@
 	sha = 4f070a477b4162a280f02722ae666376ae4fcc71
 [file ".github/workflows/build.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
-	etag = 59e7663888953a1ffed92d95aae24b72528ca71f818bb5acc26c946ea5ee6421
+	etag = 9bddd007a54a6dacdecb11304a165c9bb15753f4b0ed2be984abc4a6dce81d4a
 	weak
-	sha = 9dc1ae21afde1e6e8186e929068e8e4d80b3c212
+	sha = 6d3dd85c36642a3694b10b467372a31331a52277
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
 	etag = 1c1705a3f0ed65e33c9133996ebaa100aa445a8b968b2904ad48fef938702006
@@ -58,9 +58,9 @@
 	sha = a0f58a6d63e48ae6e55944c556d0bc94476dc8df
 [file "src/Directory.Build.props"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.props
-	etag = 819e24ed16c1257f3c6ea3c728e1507020bacf32aeb63f5dd56f9a5cb2652275
+	etag = 89855774fe1c198b2af190cd90b5df27ffe9c2cb5e242182fc9e757a83b23274
 	weak
-	sha = 2fea462dc563923800a7efad24a52aa0541a8864
+	sha = c6f74cea5d6277e750d70886496aa1c84563bb46
 [file "src/Directory.Build.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.targets
 	etag = 852b16129d2c681ad6ec86ff56b256541e0ce0961eb3a9492e0ead89ffe5a6bd
@@ -151,8 +151,8 @@
 	weak
 [file "src/nuget.config"]
 	url = https://github.com/devlooped/oss/blob/main/src/nuget.config
-	sha = 1537aa96d3c999642d678e1143b09950f235b977
-	etag = 754274e682c3523e3ac0a142ada64abff20551dc73bf16edfbd66415dcf87fd0
+	sha = b2fa09bd9db6de89e37a8ba6705b5659e435dafd
+	etag = eb2d09e546aa1e11c0b464d9ed6ab2d3c028a1d86c3ac40a318053625fb72819
 	weak
 [file ".github/workflows/pages.yml"]
 	url = https://github.com/devlooped/.github/blob/main/.github/workflows/pages.yml
