@@ -74,6 +74,12 @@ jobs:
       - name: 📦 pack
         run: dotnet pack -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
 
+      - name: ⬆ upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: bin/
+    
       # Only push CI package to sleet feed if building on ubuntu (fastest)
       - name: 🚀 sleet
         env:
