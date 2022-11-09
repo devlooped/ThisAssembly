@@ -65,7 +65,7 @@ namespace ThisAssembly
             return new KeyValuePair<string, string>(key, value);
         }
 
-        void GenerateSource(SourceProductionContext spc, (ImmutableArray<KeyValuePair<string, string>> attributes, string language) arg2)
+        static void GenerateSource(SourceProductionContext spc, (ImmutableArray<KeyValuePair<string, string>> attributes, string language) arg2)
         {
             var (attributes, language) = arg2;
 

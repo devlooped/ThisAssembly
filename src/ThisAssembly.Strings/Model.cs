@@ -26,6 +26,15 @@ static class ResourceFile
             rootArea);
     }
 
+    public static ResourceArea LoadText(string resourceText, string rootArea)
+    {
+        return Load(
+            XDocument.Parse(resourceText)
+                .Root.Elements("data")
+                .Where(e => e.Attribute("type") == null),
+            rootArea);
+    }
+
     public static ResourceArea Load(IEnumerable<XElement> data, string rootArea)
     {
         var root = new ResourceArea(rootArea, "");
