@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,32 +10,35 @@ using Scriban;
 namespace ThisAssembly
 {
     [Generator]
-    public class ConstantsGenerator : ISourceGenerator
+    public class ConstantsGenerator : IIncrementalGenerator
     {
-        public void Initialize(GeneratorInitializationContext context) { }
-
-        public void Execute(GeneratorExecutionContext context)
+        public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            context.CheckDebugger("ThisAssemblyConstants");
+            var files = context.AdditionalTextsProvider
+                .Combine(context.AnalyzerConfigOptionsProvider)
+                .Where(x => 
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
+                    && itemType == "Constant")
+                .Where(x => x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Value", out var value) && value != null)
+                .Select((x, ct) =>
+                {
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Value", out var value);
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Comment", out var comment);
+                    return (name: Path.GetFileName(x.Left.Path), value: value!, comment: string.IsNullOrWhiteSpace(comment) ? null : comment);
+                })
+                .Combine(context.CompilationProvider.Select((p, _) => p.Language));
 
-            var constantFiles = context.AdditionalFiles
-                    .Where(f => context.AnalyzerConfigOptions
-                        .GetOptions(f)
-                        .TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
-                        && itemType == "Constant");
+            context.RegisterSourceOutput(
+                files,
+                GenerateConstant);
 
-            if (!constantFiles.Any())
-                return;
+        }
 
-            var pairs = constantFiles.Select(f =>
-            {
-                context.AnalyzerConfigOptions.GetOptions(f).TryGetValue("build_metadata.Constant.Value", out var value);
-                context.AnalyzerConfigOptions.GetOptions(f).TryGetValue("build_metadata.Constant.Comment", out var comment);
-                return new Constant(Path.GetFileName(f.Path), value, string.IsNullOrWhiteSpace(comment) ? null : comment);
-            }).Where(x => x.Value != null).ToList();
+        void GenerateConstant(SourceProductionContext spc, ((string name, string value, string? comment), string language) arg2)
+        {
+            var ((name, value, comment), language) = arg2;
 
-            var root = Area.Load(pairs);
-            var language = context.ParseOptions.Language;
+            var root = Area.Load(new List<Constant> { new Constant(name, value, comment), });
             var file = language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
             var output = template.Render(new Model(root), member => member.Name);
@@ -56,7 +60,8 @@ namespace ThisAssembly
             //        .ToString();
             //}
 
-            context.AddSource("ThisAssembly.Constants", SourceText.From(output, Encoding.UTF8));
+            spc.AddSource($"{name}.g.cs", SourceText.From(output, Encoding.UTF8));
+
         }
     }
 }
