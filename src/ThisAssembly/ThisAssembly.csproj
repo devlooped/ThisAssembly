@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly</PackageId>
-    <Description>Meta-package that includes all ThisAssembly.* packages. ** C# 9.0 ONLY **</Description>
+    <Description>Meta-package that includes all ThisAssembly.* packages. </Description>
   </PropertyGroup>
 
   <ItemGroup>
