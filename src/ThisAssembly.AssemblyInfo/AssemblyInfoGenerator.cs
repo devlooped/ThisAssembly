@@ -59,7 +59,7 @@ namespace ThisAssembly
             if (!attributes.Contains(attributeType.Name))
                 return null;
 
-            var key = attributeType.Name.Substring(8).Replace("Attribute", "");
+            var key = attributeType.Name[8..^9];
             var expr = attributeNode.ArgumentList!.Arguments[0].Expression;
             var value = ctx.SemanticModel.GetConstantValue(expr, token).ToString();
             return new KeyValuePair<string, string>(key, value);

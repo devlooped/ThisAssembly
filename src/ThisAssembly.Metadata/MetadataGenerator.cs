@@ -1,45 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
 
 namespace ThisAssembly
 {
     [Generator]
-    public class MetadataGenerator : ISourceGenerator
+    public class MetadataGenerator : IIncrementalGenerator
     {
-        public void Initialize(GeneratorInitializationContext context) { }
-
-        public void Execute(GeneratorExecutionContext context)
+        public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            context.CheckDebugger("ThisAssemblyMetadata");
+            var metadata = context.SyntaxProvider
+                .CreateSyntaxProvider(
+                    predicate: static (s, _) => s is AttributeSyntax,
+                    transform: static (ctx, token) => GetSemanticTargetForGeneration(ctx, token))
+                .Where(static m => m is not null)
+                .Select(static (m, _) => m!.Value)
+                .Collect();
 
-            var metadata = context.Compilation.Assembly.GetAttributes()
-                .Where(x => x.AttributeClass?.Name == nameof(System.Reflection.AssemblyMetadataAttribute) &&
-                    Microsoft.CodeAnalysis.CSharp.SyntaxFacts.IsValidIdentifier((string)x.ConstructorArguments[0].Value!))
-                .Select(x => new KeyValuePair<string, string>((string)x.ConstructorArguments[0].Value!, (string)x.ConstructorArguments[1].Value!))
-                .Distinct(new KeyValueComparer())
-                .ToDictionary(x => x.Key, x => x.Value);
+            context.RegisterSourceOutput(
+                metadata.Combine(context.CompilationProvider.Select((s, _) => s.Language)),
+                GenerateSource);
+        }
 
-            var model = new Model(metadata);
-            var language = context.ParseOptions.Language;
+        static KeyValuePair<string, string>? GetSemanticTargetForGeneration(GeneratorSyntaxContext ctx, CancellationToken token)
+        {
+            var attributeNode = (AttributeSyntax)ctx.Node;
+
+            if (attributeNode.ArgumentList?.Arguments.Count != 2)
+                return null;
+
+            if (ctx.SemanticModel.GetSymbolInfo(attributeNode, token).Symbol is not IMethodSymbol ctor)
+                return null;
+
+            var attributeType = ctor.ContainingType;
+            if (attributeType == null)
+                return null;
+
+            if (attributeType.Name != nameof(System.Reflection.AssemblyMetadataAttribute))
+                return null;
+
+            var keyExpr = attributeNode.ArgumentList!.Arguments[0].Expression;
+            var key = ctx.SemanticModel.GetConstantValue(keyExpr, token).ToString();
+            var valueExpr = attributeNode.ArgumentList!.Arguments[1].Expression;
+            var value = ctx.SemanticModel.GetConstantValue(valueExpr, token).ToString();
+            return new KeyValuePair<string, string>(key, value);
+        }
+
+        void GenerateSource(SourceProductionContext spc, (ImmutableArray<KeyValuePair<string, string>> attributes, string language) arg2)
+        {
+            var (attributes, language) = arg2;
+
+            var model = new Model(attributes.ToList());
             var file = language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
             var output = template.Render(model, member => member.Name);
 
-            context.AddSource("ThisAssembly.Metadata", SourceText.From(output, Encoding.UTF8));
-        }
-
-        class KeyValueComparer : IEqualityComparer<KeyValuePair<string, string>>
-        {
-            public bool Equals(KeyValuePair<string, string> x, KeyValuePair<string, string> y)
-                => x.Key == y.Key && x.Value == y.Value;
-
-            public int GetHashCode(KeyValuePair<string, string> obj)
-                => new HashCode().AddRange(obj.Key, obj.Value).ToHashCode();
+            spc.AddSource(
+                "ThisAssembly.Metadata.g.cs",
+                SourceText.From(output, Encoding.UTF8));
         }
     }
 }
