@@ -1,9 +1,5 @@
 <Project>
 
-  <PropertyGroup>
-    <EmbeddedResourceStringExtensions>.txt;.cs;.sql;.json;.md;</EmbeddedResourceStringExtensions>
-  </PropertyGroup>
-
   <ItemGroup>
     <CompilerVisibleProperty Include="EmbeddedResourceStringExtensions" />
 

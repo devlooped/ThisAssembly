@@ -19,9 +19,9 @@
         public static partial class {{ $0.Name }}
         {
             {{~ if $0.IsText ~}}
-            private static string s_text;
+            private static string text;
             public static string Text => 
-                s_text ??= EmbeddedResource.GetContent(@"{{ $0.Path }}");
+                text ??= EmbeddedResource.GetContent(@"{{ $0.Path }}");
             {{~ end ~}}
 
             public static byte[] GetBytes() => 
