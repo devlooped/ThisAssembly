@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsRoslynComponent>true</IsRoslynComponent>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Strings</PackageId>
-    <Description>** C# 9.0 ONLY **
+    <Description>** C# 9.0+ ONLY **
 This package generates a static `ThisAssembly.Strings` class with public 
 constants exposing string resources in .resx files or methods with the right number of 
 parameters for strings that use formatting parameters. 
@@ -26,10 +28,11 @@ such as "Hello {name}".
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
     <PackageReference Include="Scriban" Version="5.5.0" Pack="false" IncludeAssets="build" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
 
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" Pack="false" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" Pack="false" />
+    <PackageReference Include="PolySharp" Version="1.7.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

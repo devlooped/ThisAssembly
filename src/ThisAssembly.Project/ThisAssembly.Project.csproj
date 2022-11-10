@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsRoslynComponent>true</IsRoslynComponent>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Project</PackageId>
-    <Description>** C# 9.0 ONLY **
+    <Description>** C# 9.0+ ONLY **
 This package generates a static `ThisAssembly.Project` class with public 
 constants exposing project properties that have been opted into this mechanism by adding 
 them as `ProjectProperty` MSBuild items in project file, such as:
@@ -36,18 +38,15 @@ C#:
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\ThisAssembly.Metadata\HashCode.cs" Link="HashCode.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="NuGetizer" Version="0.9.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
     <PackageReference Include="Scriban" Version="5.5.0" Pack="false" IncludeAssets="build" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
 
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" Pack="false" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" Pack="false" />
+    <PackageReference Include="PolySharp" Version="1.7.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

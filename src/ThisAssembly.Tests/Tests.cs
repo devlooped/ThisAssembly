@@ -10,6 +10,10 @@ namespace ThisAssemblyTests
             => Assert.NotNull(ResourceFile.Load("Resources.resx", "Strings"));
 
         [Fact]
+        public void CanUseInfo()
+            => Assert.Equal("ThisAssembly.Tests", ThisAssembly.Info.Title);
+
+        [Fact]
         public void CanUseConstants()
             => Assert.Equal("Baz", ThisAssembly.Constants.Foo.Bar);
 

@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
+using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -7,64 +11,73 @@ using Scriban;
 namespace ThisAssembly
 {
     [Generator]
-    public class StringsGenerator : ISourceGenerator
+    public class StringsGenerator : IIncrementalGenerator
     {
-        public void Initialize(GeneratorInitializationContext context) { }
-
-        public void Execute(GeneratorExecutionContext context)
+        public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            context.CheckDebugger("ThisAssemblyStrings");
+            context.RegisterSourceOutput(
+                context.CompilationProvider.Select((c, _) => c.Language),
+                (spc, l) =>
+                {
+                    var extension = l switch
+                    {
+                        LanguageNames.CSharp => "cs",
+                        LanguageNames.VisualBasic => "vb",
+                        _ => throw new NotSupportedException()
+                    };
 
-            var resourceFiles = context.AdditionalFiles
-                    .Where(f => context.AnalyzerConfigOptions
-                        .GetOptions(f)
-                        .TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
-                        && itemType == "EmbeddedResource");
+                    var strings = EmbeddedResource.GetContent($"ThisAssembly.Strings.{extension}");
+                    spc.AddSource($"ThisAssembly.Strings.g.{extension}", SourceText.From(strings, Encoding.UTF8));
+                });
 
-            if (!resourceFiles.Any())
-                return;
+            var files = context.AdditionalTextsProvider
+                .Combine(context.AnalyzerConfigOptionsProvider)
+                .Where(x =>
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
+                    && itemType == "EmbeddedResource")
+                .Where(x => x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.ManifestResourceName", out var value) && value != null)
+                .Select((x, ct) =>
+                {
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.ManifestResourceName", out var resourceName);
+                    return (fileName: Path.GetFileName(x.Left.Path), text: x.Left.GetText(ct), resourceName!);
+                })
+                .Where(x => x.text != null);
 
-            var language = context.ParseOptions.Language;
+            context.RegisterSourceOutput(
+                files.Combine(context.CompilationProvider.Select((s, _) => s.Language)),
+                GenerateSource);
+        }
+
+        static void GenerateSource(SourceProductionContext spc, ((string fileName, SourceText? text, string resourceName), string language) arg2)
+        {
+            var ((fileName, resourceText, resourceName), language) = arg2;
+
             var file = language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
 
-            foreach (var resourceFile in resourceFiles)
+            var rootArea = ResourceFile.LoadText(resourceText!.ToString(), "Strings");
+            var model = new Model(rootArea, resourceName);
+
+            var output = template.Render(model, member => member.Name);
+
+            // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
+            // structures via functions.
+            if (language == LanguageNames.CSharp)
             {
-                var options = context.AnalyzerConfigOptions.GetOptions(resourceFile);
-                if (!options.TryGetValue("build_metadata.AdditionalFiles.ManifestResourceName", out var resourceName) ||
-                    string.IsNullOrEmpty(resourceName))
-                    continue;
-
-                var rootArea = ResourceFile.Load(resourceFile.Path, "Strings");
-                var model = new Model(rootArea, resourceName);
-                model = model with { ResourceName = resourceName };
-
-                var output = template.Render(model, member => member.Name);
-
-                // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
-                // structures via functions.
-                if (language == LanguageNames.CSharp)
-                {
-                    output = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseCompilationUnit(output)
-                        .NormalizeWhitespace()
-                        .GetText()
-                        .ToString();
-                }
-                //else if (language == LanguageNames.VisualBasic)
-                //{
-                //    output = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseCompilationUnit(output)
-                //        .NormalizeWhitespace()
-                //        .GetText()
-                //        .ToString();
-                //}
-
-                context.AddSource(resourceName, SourceText.From(output, Encoding.UTF8));
+                output = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseCompilationUnit(output)
+                    .NormalizeWhitespace()
+                    .GetText()
+                    .ToString();
             }
+            //else if (language == LanguageNames.VisualBasic)
+            //{
+            //    output = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseCompilationUnit(output)
+            //        .NormalizeWhitespace()
+            //        .GetText()
+            //        .ToString();
+            //}
 
-            var extension = language == LanguageNames.CSharp ? "cs" : language == LanguageNames.VisualBasic ? "vb" : "fs";
-            var strings = EmbeddedResource.GetContent("ThisAssembly.Strings." + extension);
-
-            context.AddSource("ThisAssembly.Strings", SourceText.From(strings, Encoding.UTF8));
+            spc.AddSource(resourceName, SourceText.From(output, Encoding.UTF8));
         }
     }
 }
