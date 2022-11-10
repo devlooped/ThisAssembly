@@ -44,5 +44,14 @@ namespace ThisAssemblyTests
         [Fact]
         public void CanUseStringResource()
             => Assert.Equal("Value", ThisAssembly.Strings.Foo.Bar.Baz);
+
+        [Fact]
+        public void CanUseTextResource()
+            => Assert.NotNull(ThisAssembly.Resources.Content.Styles.Custom.Text);
+
+        [Fact]
+        public void CanUseByteResource()
+            => Assert.NotNull(ThisAssembly.Resources.Content.Styles.Main.GetBytes());
+
     }
 }

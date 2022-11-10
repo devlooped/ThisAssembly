@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>ThisAssembly.Resources</PackageId>
+    <Description>
+      ** C# 9.0+ ONLY **
+      This package generates a static `ThisAssembly.Resources` class with public
+      properties exposing `string` and `Stream` shortcuts to access embedded resources.
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ThisAssembly.Resources.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGetizer" Version="0.9.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
+
+    <PackageReference Include="Scriban" Version="5.5.0" Pack="false" IncludeAssets="build" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" Pack="false" />
+    <PackageReference Include="PolySharp" Version="1.7.1" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\EmbeddedResource.cs" />
+  </ItemGroup>
+
+</Project>

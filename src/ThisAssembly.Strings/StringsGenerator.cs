@@ -34,7 +34,7 @@ namespace ThisAssembly
                 .Combine(context.AnalyzerConfigOptionsProvider)
                 .Where(x =>
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
-                    && itemType == "EmbeddedResource")
+                    && itemType == "ResourceString")
                 .Where(x => x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.ManifestResourceName", out var value) && value != null)
                 .Select((x, ct) =>
                 {

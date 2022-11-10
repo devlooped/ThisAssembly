@@ -9,9 +9,24 @@ static class EmbeddedResource
 
     public static string GetContent(string relativePath)
     {
+        using var stream = GetStream(relativePath);
+        using var reader = new StreamReader(stream);
+        return reader.ReadToEnd();
+    }
+
+    public static byte[] GetBytes(string relativePath)
+    {
+        using var stream = GetStream(relativePath);
+        var bytes = new byte[stream.Length];
+        stream.Read(bytes, 0, bytes.Length);
+        return bytes;
+    }
+
+    public static Stream GetStream(string relativePath)
+    {
         var filePath = Path.Combine(baseDir, Path.GetFileName(relativePath));
         if (File.Exists(filePath))
-            return File.ReadAllText(filePath);
+            return File.OpenRead(filePath);
 
         var baseName = Assembly.GetExecutingAssembly().GetName().Name;
         var resourceName = relativePath
@@ -25,13 +40,12 @@ static class EmbeddedResource
         if (string.IsNullOrEmpty(manifestResourceName))
             throw new InvalidOperationException($"Did not find required resource ending in '{resourceName}' in assembly '{baseName}'.");
 
-        using var stream = Assembly.GetExecutingAssembly()
+        var stream = Assembly.GetExecutingAssembly()
             .GetManifestResourceStream(manifestResourceName);
 
         if (stream == null)
             throw new InvalidOperationException($"Did not find required resource '{manifestResourceName}' in assembly '{baseName}'.");
 
-        using var reader = new StreamReader(stream);
-        return reader.ReadToEnd();
+        return stream;
     }
 }
