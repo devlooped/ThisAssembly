@@ -29,13 +29,13 @@ jobs:
         if: env.SINCE_TAG != ''
         run: |
           gem install github_changelog_generator 
-          github_changelog_generator --since-tag ${{ env.SINCE_TAG }} --user ${GITHUB_REPOSITORY%/*} --project ${GITHUB_REPOSITORY##*/} --token ${{ secrets.GITHUB_TOKEN }} --o changelog.md --config-file .github/.github_changelog_generator
+          github_changelog_generator --since-tag ${{ env.SINCE_TAG }} --user ${GITHUB_REPOSITORY%/*} --project ${GITHUB_REPOSITORY##*/} --token ${{ secrets.GITHUB_TOKEN }} --o changelog.md --config-file .github/workflows/changelog.config
 
       - name: ⚙ changelog
         if: env.SINCE_TAG == ''
         run: |
           gem install github_changelog_generator 
-          github_changelog_generator --user ${GITHUB_REPOSITORY%/*} --project ${GITHUB_REPOSITORY##*/} --token ${{ secrets.GITHUB_TOKEN }} --o changelog.md --config-file .github/.github_changelog_generator
+          github_changelog_generator --user ${GITHUB_REPOSITORY%/*} --project ${GITHUB_REPOSITORY##*/} --token ${{ secrets.GITHUB_TOKEN }} --o changelog.md --config-file .github/workflows/changelog.config
 
       - name: 🖉 release
         shell: pwsh
