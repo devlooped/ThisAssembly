@@ -23,7 +23,7 @@ record Area(string Name)
 
         //  Splits: ([area].)*[name]
         var area = root;
-        var parts = resource.Name.Split(new[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
+        var parts = resource.Name.Split(new[] { "\\", "/" }, StringSplitOptions.RemoveEmptyEntries);
         foreach (var part in parts.AsSpan()[..^1])
         {
             area.NestedArea = new Area(part);
