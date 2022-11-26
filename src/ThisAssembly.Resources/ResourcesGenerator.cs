@@ -28,9 +28,9 @@ namespace ThisAssembly
                 .Select((x, ct) =>
                 {
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.Value", out var resourceName);
-                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.Type", out var type);
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.Kind", out var kind);
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.Comment", out var comment);
-                    return (resourceName!, type, comment: string.IsNullOrWhiteSpace(comment) ? null : comment);
+                    return (resourceName!, kind, comment: string.IsNullOrWhiteSpace(comment) ? null : comment);
                 })
                 .Combine(context.AnalyzerConfigOptionsProvider
                     .Select((p, _) =>
@@ -44,14 +44,14 @@ namespace ThisAssembly
                 GenerateSource);
         }
 
-        static void GenerateSource(SourceProductionContext spc, ((string resourceName, string? type, string? comment), string extensions) arg2)
+        static void GenerateSource(SourceProductionContext spc, ((string resourceName, string? kind, string? comment), string extensions) arg2)
         {
-            var ((resourceName, type, comment), extensions) = arg2;
+            var ((resourceName, kind, comment), extensions) = arg2;
 
             var file = "CSharp.sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
 
-            var isText = type != null && type.Equals("text", StringComparison.OrdinalIgnoreCase)
+            var isText = kind != null && kind.Equals("text", StringComparison.OrdinalIgnoreCase)
                 || extensions.Split(';').Contains(Path.GetFileName(resourceName));
             var root = Area.Load(new Resource(resourceName, comment, isText));
             var model = new Model(root);

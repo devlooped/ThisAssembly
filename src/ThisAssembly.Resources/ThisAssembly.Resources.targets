@@ -4,7 +4,7 @@
     <CompilerVisibleProperty Include="EmbeddedResourceStringExtensions" />
 
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
-    <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Type" />
+    <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Kind" />
     <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Comment" />
     <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Value" />
   </ItemGroup>
