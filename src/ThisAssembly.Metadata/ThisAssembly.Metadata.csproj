@@ -39,7 +39,7 @@ C#:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="0.9.0" />
+    <PackageReference Include="NuGetizer" Version="0.9.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
     <PackageReference Include="Scriban" Version="5.5.0" Pack="false" IncludeAssets="build" />
