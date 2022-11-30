@@ -23,6 +23,7 @@
     <ProjectReference Include="..\ThisAssembly.Constants\ThisAssembly.Constants.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ThisAssembly.Project\ThisAssembly.Project.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\ThisAssembly.Resources\ThisAssembly.Resources.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ThisAssembly.Strings\ThisAssembly.Strings.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
@@ -39,6 +40,10 @@
       <Generator></Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+
+    <EmbeddedResource Include="Content/Styles/Custom.css" Kind="Text" Comment="Secondary CSS" />
+    <EmbeddedResource Include="Content/Styles/Main.css" Comment="Primary CSS" />
+    <EmbeddedResource Include="Content/Docs/*" />
   </ItemGroup>
 
   <PropertyGroup>

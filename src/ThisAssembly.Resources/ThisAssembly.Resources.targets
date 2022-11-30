@@ -1,0 +1,39 @@
+<Project>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="EmbeddedResourceStringExtensions" />
+
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
+    <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Kind" />
+    <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Comment" />
+    <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Value" />
+  </ItemGroup>
+
+  <ItemDefinitionGroup>
+    <EmbeddedResource>
+      <Link />
+      <AreaPath />
+      <Area />
+      <Value />
+    </EmbeddedResource>
+  </ItemDefinitionGroup>
+
+  <Target Name="_InjectResourcesAdditionalFiles"
+          BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
+          DependsOnTargets="PrepareResourceNames">
+    <ItemGroup>
+      <EmbeddedResource Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)')) OR '%(Link)' != ''">
+        <AreaPath Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)'))">%(RelativeDir)%(Filename)</AreaPath>
+        <AreaPath Condition="'%(Link)' != ''">$([System.IO.Path]::GetDirectoryName('%(Link)'))$([System.IO.Path]::DirectorySeparatorChar)$([System.IO.Path]::GetFileNameWithoutExtension('%(Link)'))</AreaPath>
+        <FileExtension Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)'))">%(Extension)</FileExtension>
+        <FileExtension Condition="'%(Link)' != ''">$([System.IO.Path]::GetExtension('%(Link)'))</FileExtension>
+      </EmbeddedResource>
+      <EmbeddedResource Condition="'%(AreaPath)' != ''">
+        <Area>$([MSBuild]::ValueOrDefault('%(AreaPath)', '').Replace('\', '.').Replace('/', '.'))</Area>
+        <Value>%(AreaPath)%(FileExtension)</Value>
+      </EmbeddedResource>
+      <AdditionalFiles Include="@(EmbeddedResource)" SourceItemType="EmbeddedResource" />
+    </ItemGroup>
+  </Target>
+
+</Project>

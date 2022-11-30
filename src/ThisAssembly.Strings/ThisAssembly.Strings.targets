@@ -6,7 +6,7 @@
     <ItemGroup>
       <ResxCode Include="@(EmbeddedResource)" 
                 Condition="'%(EmbeddedResource.Type)' == 'Resx' And '%(EmbeddedResource.GenerateResource)' != 'false' And '%(EmbeddedResource.ManifestResourceName)' != ''" />
-      <AdditionalFiles Include="@(ResxCode -> '%(FullPath)')" SourceItemType="EmbeddedResource" />
+      <AdditionalFiles Include="@(ResxCode -> '%(FullPath)')" SourceItemType="ResourceString" />
     </ItemGroup>
   </Target>
 

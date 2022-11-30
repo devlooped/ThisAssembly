@@ -28,6 +28,7 @@
     <ProjectReference Include="..\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" PrivateAssets="none" />
     <ProjectReference Include="..\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" PrivateAssets="none" />
     <ProjectReference Include="..\ThisAssembly.Project\ThisAssembly.Project.csproj" PrivateAssets="none" />
+    <ProjectReference Include="..\ThisAssembly.Resources\ThisAssembly.Resources.csproj" PrivateAssets="none" />
     <ProjectReference Include="..\ThisAssembly.Strings\ThisAssembly.Strings.csproj" PrivateAssets="none" />
     <ProjectReference Include="..\ThisAssembly.Constants\ThisAssembly.Constants.csproj" PrivateAssets="none" />
   </ItemGroup>

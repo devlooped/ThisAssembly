@@ -114,6 +114,23 @@ them as `ProjectProperty` MSBuild items in project file, such as:
 
 ![](img/ThisAssembly.Project.png)
 
+## ThisAssembly.Resources
+
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Resources.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Resources)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Resources.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Resources)
+
+This package generates a static `ThisAssembly.Resources` class with public 
+properties exposing shortcuts to retrieve the contents of embedded resources.
+
+
+```xml
+  <ItemGroup>
+    <EmbeddedResource Include="Content/Docs/License.md" />
+  </ItemGroup>
+```
+
+![](img/ThisAssembly.Resources.png)
+
 ## ThisAssembly.Strings
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Strings.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Strings)
