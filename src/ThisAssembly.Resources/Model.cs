@@ -14,7 +14,7 @@ record Model(Area RootArea)
 [DebuggerDisplay("Name = {Name}")]
 record Area(string Name)
 {
-    public Area? NestedArea { get; private set; } 
+    public Area? NestedArea { get; private set; }
     public Resource? Resource { get; private set; }
 
     public static Area Load(Resource resource, string rootArea = "Resources")

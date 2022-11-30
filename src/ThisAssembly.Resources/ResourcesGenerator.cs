@@ -66,7 +66,7 @@ namespace ThisAssembly
                 .ToString();
 
             spc.AddSource(
-                $"{resourceName.Replace('\\', '.').Replace('/', '.')}.g.cs", 
+                $"{resourceName.Replace('\\', '.').Replace('/', '.')}.g.cs",
                 SourceText.From(output, Encoding.UTF8));
         }
     }
