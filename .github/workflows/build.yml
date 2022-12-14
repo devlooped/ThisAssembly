@@ -53,12 +53,6 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: ⚙ dotnet
-        uses: actions/setup-dotnet@v1
-        if: matrix.os != 'windows-latest'
-        with:
-          dotnet-version: '6.0.x'
-
       - name: 🙏 build
         run: dotnet build -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
 
@@ -74,17 +68,11 @@ jobs:
       - name: 📦 pack
         run: dotnet pack -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
 
-      - name: ⬆ upload
-        uses: actions/upload-artifact@v3
-        with:
-          name: package
-          path: bin/
-    
       # Only push CI package to sleet feed if building on ubuntu (fastest)
       - name: 🚀 sleet
         env:
           SLEET_CONNECTION: ${{ secrets.SLEET_CONNECTION }}
-        if: matrix.os == 'ubuntu-latest' && env.SLEET_CONNECTION != ''
+        if: env.SLEET_CONNECTION != ''
         run: |
           dotnet tool install -g --version 4.0.18 sleet 
           sleet push bin --config none -f --verbose -p "SLEET_FEED_CONTAINER=nuget" -p "SLEET_FEED_CONNECTIONSTRING=${{ secrets.SLEET_CONNECTION }}" -p "SLEET_FEED_TYPE=azure" || echo "No packages found"
@@ -98,11 +86,6 @@ jobs:
         with: 
           submodules: recursive
           fetch-depth: 0
-
-      - name: ⚙ dotnet
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '6.0.x'
 
       - name: ✓ ensure format
         run: dotnet format --verify-no-changes -v:diag --exclude ~/.nuget

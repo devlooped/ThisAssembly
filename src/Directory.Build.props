@@ -55,7 +55,9 @@
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <Nullable>enable</Nullable>
-
+    <!-- See https://www.meziantou.net/csharp-compiler-strict-mode.htm -->
+    <Features>strict</Features>
+    
     <!-- Simplify namespaces by defaulting to the single root name -->
     <RootNamespace>$(MSBuildProjectName)</RootNamespace>
     <RootNamespaceDot>$(MSBuildProjectName.IndexOf('.'))</RootNamespaceDot>
