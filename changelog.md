@@ -1,8 +1,32 @@
 # Changelog
 
+## [v1.1.0](https://github.com/devlooped/ThisAssembly/tree/v1.1.0) (2022-12-31)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.10...v1.1.0)
+
+:sparkles: Implemented enhancements:
+
+- Add ThisAssembly.Resources [\#45](https://github.com/devlooped/ThisAssembly/issues/45)
+- Add ThisAssembly.Resources [\#134](https://github.com/devlooped/ThisAssembly/pull/134) (@viceroypenguin)
+- Modernize to Incremental Source Generators [\#132](https://github.com/devlooped/ThisAssembly/pull/132) (@viceroypenguin)
+
+:bug: Fixed bugs:
+
+- Conflicts with ThisAssembly produced by Nerdbank.GitVersioning [\#124](https://github.com/devlooped/ThisAssembly/issues/124)
+
+:twisted_rightwards_arrows: Merged:
+
+- ⛙ ⬆️ Bump dependencies [\#145](https://github.com/devlooped/ThisAssembly/pull/145) (@github-actions[bot])
+- Remove unused files and shared ones [\#138](https://github.com/devlooped/ThisAssembly/pull/138) (@kzu)
+- Build on all supported OSes [\#136](https://github.com/devlooped/ThisAssembly/pull/136) (@kzu)
+
 ## [v1.0.10](https://github.com/devlooped/ThisAssembly/tree/v1.0.10) (2022-10-18)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.9...v1.0.10)
+
+:sparkles: Implemented enhancements:
+
+- If resource name contains an invalid identifier character, replace it with underscore [\#125](https://github.com/devlooped/ThisAssembly/issues/125)
 
 :bug: Fixed bugs:
 
@@ -10,10 +34,6 @@
 - Wrong links in "New issue" page [\#102](https://github.com/devlooped/ThisAssembly/issues/102)
 - Packages should not be transitive [\#86](https://github.com/devlooped/ThisAssembly/issues/86)
 - Source Generator doesn't work anymore with .NET 6.0.200 SDK [\#85](https://github.com/devlooped/ThisAssembly/issues/85)
-
-:hammer: Other:
-
-- If resource name contains an invalid identifier character, replace it with underscore [\#125](https://github.com/devlooped/ThisAssembly/issues/125)
 
 :twisted_rightwards_arrows: Merged:
 
