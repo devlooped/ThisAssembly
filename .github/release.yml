@@ -9,6 +9,7 @@ changelog:
       - wontfix
       - need info
       - docs
+      - techdebt
     authors:
       - devlooped-bot
       - dependabot
