@@ -103,8 +103,8 @@
 	skip
 [file ".github/workflows/pages.yml"]
 	url = https://github.com/clarius/pages/blob/main/.github/workflows/pages.yml
-	sha = d3b026ee6d3772debc989c4cec72156421336f94
-	etag = 76f23752ceffc013040215aec5519e5069fec9cea1179828ef88d4e0652752f0
+	sha = afcb0421af6507eba5ceba913b8fc37261efc085
+	etag = c52b3f0463b88abf696ddf2c6902675e0bc9d1e812bb317cb758221d75330b56
 	weak
 [file "Gemfile"]
 	url = https://github.com/clarius/pages/blob/main/Gemfile
