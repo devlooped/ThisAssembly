@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Immutable;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,8 +35,11 @@ namespace ThisAssembly
                 .Combine(context.AnalyzerConfigOptionsProvider
                     .Select((p, _) =>
                     {
-                        p.GlobalOptions.TryGetValue("build_property.EmbeddedResourceStringExtensions", out var extensions);
-                        return extensions!;
+                        if (!p.GlobalOptions.TryGetValue("build_property.EmbeddedResourceStringExtensions", out var extensions) ||
+                            extensions == null)
+                            return new HashSet<string>();
+
+                        return new HashSet<string>(extensions.Split('|'), StringComparer.OrdinalIgnoreCase);
                     }));
 
             context.RegisterSourceOutput(
@@ -44,15 +47,15 @@ namespace ThisAssembly
                 GenerateSource);
         }
 
-        static void GenerateSource(SourceProductionContext spc, ((string resourceName, string? kind, string? comment), string extensions) arg2)
+        static void GenerateSource(SourceProductionContext spc, ((string resourceName, string? kind, string? comment), HashSet<string> extensions) arg2)
         {
             var ((resourceName, kind, comment), extensions) = arg2;
 
             var file = "CSharp.sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
 
-            var isText = kind != null && kind.Equals("text", StringComparison.OrdinalIgnoreCase)
-                || extensions.Split(';').Contains(Path.GetFileName(resourceName));
+            var isText = kind?.Equals("text", StringComparison.OrdinalIgnoreCase) == true ||
+                extensions.Contains(Path.GetExtension(resourceName));
             var root = Area.Load(new Resource(resourceName, comment, isText));
             var model = new Model(root);
 

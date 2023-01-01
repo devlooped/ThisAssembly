@@ -6,6 +6,7 @@
     <PackOnBuild>true</PackOnBuild>
     <PackFolder>analyzers/dotnet/cs</PackFolder>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <RestoreSources>https://api.nuget.org/v3/index.json</RestoreSources>
     <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));$(RestoreSources)</RestoreSources>
 
     <PackageProjectUrl>https://clarius.org/ThisAssembly</PackageProjectUrl>

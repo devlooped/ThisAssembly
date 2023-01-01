@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <EmbeddedResourceStringExtensions>.txt;.cs;.sql;.json;.md;</EmbeddedResourceStringExtensions>
+    <EmbeddedResourceStringExtensions>.txt|.cs|.sql|.json|.md;</EmbeddedResourceStringExtensions>
   </PropertyGroup>
 
 </Project>
