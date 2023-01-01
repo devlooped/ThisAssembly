@@ -5,6 +5,9 @@
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
     <Nullable>enable</Nullable>
+    <!-- We cannot use ThisAssembly.Resources as the assembly name, or for whatever 
+         reason, it's never added as an analyzer :/ -->
+    <AssemblyName>ThisAssembly.Resource</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup>
