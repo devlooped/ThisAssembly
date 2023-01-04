@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Project</PackageId>
-    <Description>** C# 9.0+ ONLY **
+    <Description>
 This package generates a static `ThisAssembly.Project` class with public 
 constants exposing project properties that have been opted into this mechanism by adding 
 them as `ProjectProperty` MSBuild items in project file, such as:

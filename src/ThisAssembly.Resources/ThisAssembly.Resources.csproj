@@ -13,7 +13,6 @@
   <PropertyGroup>
     <PackageId>ThisAssembly.Resources</PackageId>
     <Description>
-      ** C# 9.0+ ONLY **
       This package generates a static `ThisAssembly.Resources` class with public
       properties exposing `string` and `Stream` shortcuts to access embedded resources.
     </Description>
