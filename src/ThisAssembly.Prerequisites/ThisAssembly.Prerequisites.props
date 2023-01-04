@@ -1,7 +1,9 @@
 <Project>
 
-  <ItemGroup>
-    <CompilerVisibleProperty Include="DebugSourceGenerators" />
-  </ItemGroup>
-  
+  <PropertyGroup>
+    <!-- Incremental source generator interface appeared first on Roslyn 4.0.1, see 
+         https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.iincrementalgenerator?view=roslyn-dotnet-4.0.1 -->
+    <ThisAssemblyMinimumRoslynVersion>4.0</ThisAssemblyMinimumRoslynVersion>
+  </PropertyGroup>
+
 </Project>
