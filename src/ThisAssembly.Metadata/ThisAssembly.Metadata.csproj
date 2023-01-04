@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Metadata</PackageId>
-    <Description>** C# 9.0+ ONLY **
+    <Description>
 This package generates a static `ThisAssembly.Metadata` class with public 
 constants exposing each `[System.Reflection.AssemblyMetadata(..)]` defined for the project, 
 such as when using .NET 5.0+ support for `AssemblyMetadata` MSBuild items.
