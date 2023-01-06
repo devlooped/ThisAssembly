@@ -22,9 +22,12 @@ file extensions get treated as text files. By default, it's defined as:
 
 ```xml
   <PropertyGroup>
-    <EmbeddedResourceStringExtensions>.txt|.cs|.sql|.json|.md;</EmbeddedResourceStringExtensions>
+    <EmbeddedResourceStringExtensions>.txt|.cs|.sql|.json|.md</EmbeddedResourceStringExtensions>
   </PropertyGroup>
 ```
+
+You can append additional file extensions to this list, or override it completely.
+The list must be pipe-separated.
 
 You can always use the provided `GetStream` and `GetBytes` for more advanced scenarios (or for 
 non-text resources).
