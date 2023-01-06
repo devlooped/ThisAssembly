@@ -1,8 +1,8 @@
 # Changelog
 
-## [v1.1.1-beta](https://github.com/devlooped/ThisAssembly/tree/v1.1.1-beta) (2023-01-06)
+## [v1.1.1](https://github.com/devlooped/ThisAssembly/tree/v1.1.1) (2023-01-06)
 
-[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.0...v1.1.1-beta)
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.0...v1.1.1)
 
 :sparkles: Implemented enhancements:
 
