@@ -1,5 +1,20 @@
 # Changelog
 
+## [v1.1.1-beta](https://github.com/devlooped/ThisAssembly/tree/v1.1.1-beta) (2023-01-06)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.0...v1.1.1-beta)
+
+:sparkles: Implemented enhancements:
+
+- Include readme in each package, aggregate on project [\#153](https://github.com/devlooped/ThisAssembly/pull/153) (@kzu)
+- Ensure incremental source generators are supported [\#152](https://github.com/devlooped/ThisAssembly/pull/152) (@kzu)
+
+:bug: Fixed bugs:
+
+- Do not test LangVersion [\#101](https://github.com/devlooped/ThisAssembly/issues/101)
+- Fix ThisAssembly.Resources assembly name for analyzer [\#149](https://github.com/devlooped/ThisAssembly/pull/149) (@kzu)
+- Fix logic for determining default text resources [\#148](https://github.com/devlooped/ThisAssembly/pull/148) (@kzu)
+
 ## [v1.1.0](https://github.com/devlooped/ThisAssembly/tree/v1.1.0) (2022-12-31)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.0.10...v1.1.0)
