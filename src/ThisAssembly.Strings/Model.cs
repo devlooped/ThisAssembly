@@ -45,12 +45,12 @@ static class ResourceFile
             var nameAttribute = element.Attribute("name")?.Value;
             if (nameAttribute == null)
                 continue;
-            
+
             var id = NameReplaceExpression.Replace(nameAttribute, "_");
             var valueElement = element.Element("value")?.Value;
             if (valueElement == null)
                 continue;
-            
+
             var comment = element.Element("comment")?.Value?.Replace("<", "&lt;").Replace(">", "&gt;");
             var areaParts = id.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
             if (areaParts.Length <= 1)
