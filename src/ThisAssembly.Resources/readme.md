@@ -1,3 +1,4 @@
+<!-- #content -->
 
 This package generates a static `ThisAssembly.Resources` class with public 
 properties exposing typed APIs to retrieve the contents of embedded resources.
