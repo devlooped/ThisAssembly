@@ -9,19 +9,19 @@ using System.Xml.Linq;
 [DebuggerDisplay("ResourceName = {ResourceName}, Values = {RootArea.Values.Count}")]
 record Model(ResourceArea RootArea, string ResourceName)
 {
-    public string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+    public string? Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3);
 }
 
 static class ResourceFile
 {
-    static readonly Regex FormatExpression = new Regex("{(?<name>[^{}]+)}", RegexOptions.Compiled);
-    internal static readonly Regex NameReplaceExpression = new Regex(@"\||:|;|\>|\<", RegexOptions.Compiled);
+    static readonly Regex FormatExpression = new("{(?<name>[^{}]+)}", RegexOptions.Compiled);
+    internal static readonly Regex NameReplaceExpression = new(@"\||:|;|\>|\<", RegexOptions.Compiled);
 
     public static ResourceArea Load(string fileName, string rootArea)
     {
         return Load(
             XDocument.Load(fileName)
-                .Root.Elements("data")
+                .Root!.Elements("data")
                 .Where(e => e.Attribute("type") == null),
             rootArea);
     }
@@ -30,7 +30,7 @@ static class ResourceFile
     {
         return Load(
             XDocument.Parse(resourceText)
-                .Root.Elements("data")
+                .Root!.Elements("data")
                 .Where(e => e.Attribute("type") == null),
             rootArea);
     }
@@ -42,9 +42,15 @@ static class ResourceFile
         foreach (var element in data)
         {
             //  Splits: ([resouce area]_)*[resouce name]
-            var nameAttribute = element.Attribute("name").Value;
+            var nameAttribute = element.Attribute("name")?.Value;
+            if (nameAttribute == null)
+                continue;
+            
             var id = NameReplaceExpression.Replace(nameAttribute, "_");
-            var valueElement = element.Element("value").Value;
+            var valueElement = element.Element("value")?.Value;
+            if (valueElement == null)
+                continue;
+            
             var comment = element.Element("comment")?.Value?.Replace("<", "&lt;").Replace(">", "&gt;");
             var areaParts = id.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
             if (areaParts.Length <= 1)
