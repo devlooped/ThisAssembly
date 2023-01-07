@@ -43,6 +43,7 @@
     <EmbeddedResource Include="Content/Styles/Custom.css" Kind="Text" Comment="Secondary CSS" />
     <EmbeddedResource Include="Content/Styles/Main.css" Comment="Primary CSS" />
     <EmbeddedResource Include="Content/Docs/*" />
+    <EmbeddedResource Include="Content/Swagger/*" />
   </ItemGroup>
 
   <PropertyGroup>

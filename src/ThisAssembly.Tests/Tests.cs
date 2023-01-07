@@ -53,5 +53,8 @@ namespace ThisAssemblyTests
         public void CanUseByteResource()
             => Assert.NotNull(ThisAssembly.Resources.Content.Styles.Main.GetBytes());
 
+        [Fact]
+        public void CanUseSameNameDifferentExtensions()
+            => Assert.NotNull(ThisAssembly.Resources.Content.Swagger.swagger_ui.css.GetBytes());
     }
 }
