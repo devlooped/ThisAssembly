@@ -33,8 +33,10 @@
 {{ func render }}
 	public static partial class {{ $0.Name }}
 	{
-		{{~ if $0.Resource ~}}
-		{{- resource $0.Resource ~}}
+		{{~ if $0.Resources ~}}
+        {{~ for $r in $0.Resources ~}}
+		{{- resource $r ~}}
+        {{~ end ~}}
 		{{~ else ~}}
 		{{ render $0.NestedArea }}
 		{{~ end ~}}
