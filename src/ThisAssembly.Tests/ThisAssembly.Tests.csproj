@@ -44,6 +44,7 @@
     <EmbeddedResource Include="Content/Styles/Main.css" Comment="Primary CSS" />
     <EmbeddedResource Include="Content/Docs/*" />
     <EmbeddedResource Include="Content/Swagger/*" />
+    <None Remove="Content/Swagger/*" />
   </ItemGroup>
 
   <PropertyGroup>
