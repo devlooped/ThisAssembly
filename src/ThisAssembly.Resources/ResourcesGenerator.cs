@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,21 +33,23 @@ namespace ThisAssembly
                     return (resourceName!, kind, comment: string.IsNullOrWhiteSpace(comment) ? null : comment);
                 })
                 .Combine(context.AnalyzerConfigOptionsProvider
-                    .Select((p, _) =>
+                    .SelectMany((p, _) =>
                     {
                         if (!p.GlobalOptions.TryGetValue("build_property.EmbeddedResourceStringExtensions", out var extensions) ||
                             extensions == null)
-                            return new HashSet<string>();
+                            return Array.Empty<string>();
 
-                        return new HashSet<string>(extensions.Split('|'), StringComparer.OrdinalIgnoreCase);
-                    }));
+                        return extensions.Split('|');
+                    })
+                    .WithComparer(StringComparer.OrdinalIgnoreCase)
+                    .Collect());
 
             context.RegisterSourceOutput(
                 files,
                 GenerateSource);
         }
 
-        static void GenerateSource(SourceProductionContext spc, ((string resourceName, string? kind, string? comment), HashSet<string> extensions) arg2)
+        static void GenerateSource(SourceProductionContext spc, ((string resourceName, string? kind, string? comment), ImmutableArray<string> extensions) arg2)
         {
             var ((resourceName, kind, comment), extensions) = arg2;
 
