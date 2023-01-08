@@ -21,7 +21,6 @@ record Area(string Name)
     public static Area Load(string basePath, List<Resource> resources, string rootArea = "Resources")
     {
         var root = new Area(rootArea);
-        var invalidCharsRegex = new Regex(@"\W");
 
         //  Splits: ([area].)*[name]
         var area = root;
@@ -30,7 +29,7 @@ record Area(string Name)
 
         foreach (var part in parts.AsSpan()[..end])
         {
-            var partStr = SanitizePart(invalidCharsRegex, part);
+            var partStr = SanitizePart(part);
             area.NestedArea = new Area(partStr);
             area = area.NestedArea;
         }
@@ -39,7 +38,8 @@ record Area(string Name)
         return root;
     }
 
-    static string SanitizePart(Regex invalidCharsRegex, string? part)
+    static readonly Regex invalidCharsRegex = new(@"\W");
+    static string SanitizePart(string? part)
     {
         var partStr = invalidCharsRegex.Replace(part, "_");
         if (char.IsDigit(partStr[0]))
