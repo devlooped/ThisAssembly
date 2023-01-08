@@ -53,7 +53,7 @@ namespace ThisAssembly
         static void GenerateSource(
             SourceProductionContext spc,
             (
-                ImmutableArray<(string resourceName, string? kind, string? comment)> files, 
+                ImmutableArray<(string resourceName, string? kind, string? comment)> files,
                 ImmutableArray<string> extensions) arg2)
         {
             var (files, extensions) = arg2;
