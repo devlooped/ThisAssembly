@@ -18,11 +18,11 @@
 	    /// </summary>
 {{ end }}
 {{ func render }}
-    public static partial class {{ $0.Name }}
+    public static partial class {{ $0.Name | string.replace "-" "_" | string.replace " " "_" }}
     {
         {{~ for value in $0.Values ~}}
         {{- summary value ~}}
-	    public const string {{ value.Name }} =  @"{{ value.Value }}";
+	    public const string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} =  @"{{ value.Value }}";
         {{~ end ~}}
 
         {{ for area in $0.NestedAreas 
