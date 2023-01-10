@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,47 +30,75 @@ namespace ThisAssembly
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.Value", out var resourceName);
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.Kind", out var kind);
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.Comment", out var comment);
-                    return (resourceName!, kind, comment: string.IsNullOrWhiteSpace(comment) ? null : comment);
+                    return (resourceName: resourceName!, kind, comment: string.IsNullOrWhiteSpace(comment) ? null : comment);
                 })
+                .Collect()
                 .Combine(context.AnalyzerConfigOptionsProvider
-                    .Select((p, _) =>
+                    .SelectMany((p, _) =>
                     {
                         if (!p.GlobalOptions.TryGetValue("build_property.EmbeddedResourceStringExtensions", out var extensions) ||
                             extensions == null)
-                            return new HashSet<string>();
+                            return Array.Empty<string>();
 
-                        return new HashSet<string>(extensions.Split('|'), StringComparer.OrdinalIgnoreCase);
-                    }));
+                        return extensions.Split('|');
+                    })
+                    .WithComparer(StringComparer.OrdinalIgnoreCase)
+                    .Collect());
 
             context.RegisterSourceOutput(
                 files,
                 GenerateSource);
         }
 
-        static void GenerateSource(SourceProductionContext spc, ((string resourceName, string? kind, string? comment), HashSet<string> extensions) arg2)
+        static void GenerateSource(
+            SourceProductionContext spc,
+            (
+                ImmutableArray<(string resourceName, string? kind, string? comment)> files,
+                ImmutableArray<string> extensions) arg2)
         {
-            var ((resourceName, kind, comment), extensions) = arg2;
+            var (files, extensions) = arg2;
 
             var file = "CSharp.sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
 
-            var isText = kind?.Equals("text", StringComparison.OrdinalIgnoreCase) == true ||
-                extensions.Contains(Path.GetExtension(resourceName));
-            var root = Area.Load(new Resource(resourceName, comment, isText));
-            var model = new Model(root);
+            var groupsWithoutExtensions = files
+                .GroupBy(f => Path.Combine(
+                    Path.GetDirectoryName(f.resourceName),
+                    Path.GetFileNameWithoutExtension(f.resourceName)));
+            foreach (var group in groupsWithoutExtensions)
+            {
+                var basePath = group.Key;
+                var resources = group
+                    .Select(f =>
+                    {
+                        var isText = f.kind?.Equals("text", StringComparison.OrdinalIgnoreCase) == true ||
+                            extensions.Contains(Path.GetExtension(f.resourceName));
+                        var name = group.Count() == 1
+                            ? Path.GetFileNameWithoutExtension(f.resourceName)
+                            : Path.GetExtension(f.resourceName)[1..];
+                        return new Resource(name, f.comment, isText)
+                        {
+                            Path = f.resourceName,
+                        };
+                    })
+                    .ToList();
 
-            var output = template.Render(model, member => member.Name);
+                var root = Area.Load(basePath, resources);
+                var model = new Model(root);
 
-            // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
-            // structures via functions.
-            output = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseCompilationUnit(output)
-                .NormalizeWhitespace()
-                .GetText()
-                .ToString();
+                var output = template.Render(model, member => member.Name);
 
-            spc.AddSource(
-                $"{resourceName.Replace('\\', '.').Replace('/', '.')}.g.cs",
-                SourceText.From(output, Encoding.UTF8));
+                // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
+                // structures via functions.
+                output = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseCompilationUnit(output)
+                    .NormalizeWhitespace()
+                    .GetText()
+                    .ToString();
+
+                spc.AddSource(
+                    $"{basePath.Replace('\\', '.').Replace('/', '.')}.g.cs",
+                    SourceText.From(output, Encoding.UTF8));
+            }
         }
     }
 }

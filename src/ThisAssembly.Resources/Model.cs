@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 [DebuggerDisplay("Values = {RootArea.Values.Count}")]
 record Model(Area RootArea)
@@ -15,23 +16,35 @@ record Model(Area RootArea)
 record Area(string Name)
 {
     public Area? NestedArea { get; private set; }
-    public Resource? Resource { get; private set; }
+    public IEnumerable<Resource>? Resources { get; private set; }
 
-    public static Area Load(Resource resource, string rootArea = "Resources")
+    public static Area Load(string basePath, List<Resource> resources, string rootArea = "Resources")
     {
         var root = new Area(rootArea);
 
         //  Splits: ([area].)*[name]
         var area = root;
-        var parts = resource.Name.Split(new[] { "\\", "/" }, StringSplitOptions.RemoveEmptyEntries);
-        foreach (var part in parts.AsSpan()[..^1])
+        var parts = basePath.Split(new[] { "\\", "/" }, StringSplitOptions.RemoveEmptyEntries);
+        var end = resources.Count == 1 ? ^1 : ^0;
+
+        foreach (var part in parts.AsSpan()[..end])
         {
-            area.NestedArea = new Area(part);
+            var partStr = SanitizePart(part);
+            area.NestedArea = new Area(partStr);
             area = area.NestedArea;
         }
 
-        area.Resource = resource with { Name = Path.GetFileNameWithoutExtension(parts[^1]), Path = resource.Name, };
+        area.Resources = resources;
         return root;
+    }
+
+    static readonly Regex invalidCharsRegex = new(@"\W");
+    static string SanitizePart(string? part)
+    {
+        var partStr = invalidCharsRegex.Replace(part, "_");
+        if (char.IsDigit(partStr[0]))
+            partStr = "_" + partStr;
+        return partStr;
     }
 }
 
