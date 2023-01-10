@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.1.3](https://github.com/devlooped/ThisAssembly/tree/v1.1.3) (2023-01-10)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.2...v1.1.3)
+
+:sparkles: Implemented enhancements:
+
+- Additional sanitizing at template rendering time [\#160](https://github.com/devlooped/ThisAssembly/pull/160) (@kzu)
+
+:bug: Fixed bugs:
+
+- Problems with Resources generator generated code [\#155](https://github.com/devlooped/ThisAssembly/issues/155)
+
 ## [v1.1.2](https://github.com/devlooped/ThisAssembly/tree/v1.1.2) (2023-01-10)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.1...v1.1.2)
