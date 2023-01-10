@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.1.2](https://github.com/devlooped/ThisAssembly/tree/v1.1.2) (2023-01-10)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.1...v1.1.2)
+
+:bug: Fixed bugs:
+
+- Coverlet doesn't collect coverage for modules referencing ThisAssembly.\* [\#159](https://github.com/devlooped/ThisAssembly/issues/159)
+- Embedded resources with the same filename but different extensions will create collisions [\#156](https://github.com/devlooped/ThisAssembly/issues/156)
+- ThisAssembly.Resources Improvements [\#157](https://github.com/devlooped/ThisAssembly/pull/157) (@viceroypenguin)
+
 ## [v1.1.1](https://github.com/devlooped/ThisAssembly/tree/v1.1.1) (2023-01-06)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.0...v1.1.1)
