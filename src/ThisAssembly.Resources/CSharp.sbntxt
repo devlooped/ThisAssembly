@@ -16,7 +16,7 @@
 		/// => @"{{ $0.Path }}"
 		{{~ end ~}}
 		/// </summary>
-		public static partial class {{ $0.Name }}
+		public static partial class {{ $0.Name | string.replace "-" "_" | string.replace " " "_" }}
 		{
 			{{~ if $0.IsText ~}}
 			private static string text;
@@ -31,7 +31,7 @@
 		}
 {{ end }}
 {{ func render }}
-	public static partial class {{ $0.Name }}
+	public static partial class {{ $0.Name | string.replace "-" "_" | string.replace " " "_" }}
 	{
 		{{~ if $0.Resources ~}}
         {{~ for $r in $0.Resources ~}}
