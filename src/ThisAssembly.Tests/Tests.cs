@@ -56,5 +56,9 @@ namespace ThisAssemblyTests
         [Fact]
         public void CanUseSameNameDifferentExtensions()
             => Assert.NotNull(ThisAssembly.Resources.Content.Swagger.swagger_ui.css.GetBytes());
+
+        [Fact]
+        public void CanUseFileInvalidCharacters()
+            => Assert.NotNull(ThisAssembly.Resources.webhook_data.Text);
     }
 }
