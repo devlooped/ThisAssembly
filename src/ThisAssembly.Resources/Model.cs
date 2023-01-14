@@ -40,7 +40,4 @@ record Area(string Name)
 }
 
 [DebuggerDisplay("{Name}")]
-record Resource(string Name, string? Comment, bool IsText)
-{
-    public string? Path { get; set; }
-};
+record Resource(string Name, string? Comment, bool IsText, string Path);

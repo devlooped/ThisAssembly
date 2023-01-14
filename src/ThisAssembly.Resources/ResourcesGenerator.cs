@@ -76,10 +76,11 @@ namespace ThisAssembly
                         var name = group.Count() == 1
                             ? Path.GetFileNameWithoutExtension(f.resourceName)
                             : Path.GetExtension(f.resourceName)[1..];
-                        return new Resource(name, f.comment, isText)
-                        {
-                            Path = f.resourceName,
-                        };
+                        return new Resource(
+                            Name: PathSanitizer.Sanitize(name),
+                            Comment: f.comment,
+                            IsText: isText,
+                            Path: f.resourceName);
                     })
                     .ToList();
 
