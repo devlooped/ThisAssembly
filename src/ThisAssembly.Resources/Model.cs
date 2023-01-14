@@ -29,22 +29,13 @@ record Area(string Name)
 
         foreach (var part in parts.AsSpan()[..end])
         {
-            var partStr = SanitizePart(part);
+            var partStr = PathSanitizer.Sanitize(part);
             area.NestedArea = new Area(partStr);
             area = area.NestedArea;
         }
 
         area.Resources = resources;
         return root;
-    }
-
-    static readonly Regex invalidCharsRegex = new(@"\W");
-    static string SanitizePart(string? part)
-    {
-        var partStr = invalidCharsRegex.Replace(part, "_");
-        if (char.IsDigit(partStr[0]))
-            partStr = "_" + partStr;
-        return partStr;
     }
 }
 

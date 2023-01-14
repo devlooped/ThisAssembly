@@ -12,9 +12,7 @@
   <Import Project="..\*\*.props" />
 
   <ItemGroup>
-    <Compile Remove="..\EmbeddedResource.cs" />
-    <Compile Remove="..\GeneratorExtension.cs" />
-    <Compile Remove="..\IsExternalInit.cs" />
+    <Compile Remove="..\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
