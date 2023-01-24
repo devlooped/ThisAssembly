@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.0-beta](https://github.com/devlooped/ThisAssembly/tree/v1.2.0-beta) (2023-01-24)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.3...v1.2.0-beta)
+
+:sparkles: Implemented enhancements:
+
+- Add SponsorLink [\#166](https://github.com/devlooped/ThisAssembly/pull/166) (@kzu)
+
 ## [v1.1.3](https://github.com/devlooped/ThisAssembly/tree/v1.1.3) (2023-01-10)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.2...v1.1.3)
