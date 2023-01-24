@@ -27,14 +27,21 @@ record Area(string Name)
         var parts = basePath.Split(new[] { "\\", "/" }, StringSplitOptions.RemoveEmptyEntries);
         var end = resources.Count == 1 ? ^1 : ^0;
 
+        var parent = "Resources";
         foreach (var part in parts.AsSpan()[..end])
         {
-            var partStr = PathSanitizer.Sanitize(part);
+            var partStr = PathSanitizer.Sanitize(part, parent);
+            parent = partStr;
+
             area.NestedArea = new Area(partStr);
             area = area.NestedArea;
         }
 
-        area.Resources = resources;
+        area.Resources = resources
+            .Select(r => r with
+            {
+                Name = PathSanitizer.Sanitize(r.Name, parent),
+            });
         return root;
     }
 }

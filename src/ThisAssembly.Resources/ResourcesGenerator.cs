@@ -77,7 +77,7 @@ namespace ThisAssembly
                             ? Path.GetFileNameWithoutExtension(f.resourceName)
                             : Path.GetExtension(f.resourceName)[1..];
                         return new Resource(
-                            Name: PathSanitizer.Sanitize(name),
+                            Name: name,
                             Comment: f.comment,
                             IsText: isText,
                             Path: f.resourceName);
