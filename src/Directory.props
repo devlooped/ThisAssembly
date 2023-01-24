@@ -14,6 +14,8 @@
 
     <!-- See https://github.com/scriban/scriban#source-embedding -->
     <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
+
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
   </PropertyGroup>
 
   <PropertyGroup Label="Build">
