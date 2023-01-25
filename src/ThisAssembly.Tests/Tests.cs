@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using Xunit;
+
+[assembly: SuppressMessage("SponsorLink", "SL04")]
 
 namespace ThisAssemblyTests
 {
@@ -60,5 +63,9 @@ namespace ThisAssemblyTests
         [Fact]
         public void CanUseFileInvalidCharacters()
             => Assert.NotNull(ThisAssembly.Resources.webhook_data.Text);
+
+        [Fact]
+        public void CanUseGitConstants()
+            => Assert.NotEmpty(ThisAssembly.Git.Commit);
     }
 }

@@ -67,7 +67,8 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);*.binlog;*.zip;*.rsp;*.items;**/TestResults/**/*.*</DefaultItemExcludes>
 
     <EnableSourceLink>true</EnableSourceLink>
-    <EnableSourceControlManagerQueries>true</EnableSourceControlManagerQueries>
+    <!-- This should only be enabled on non-DTB builds, so don't turn on indiscriminately -->
+    <!--<EnableSourceControlManagerQueries>true</EnableSourceControlManagerQueries>-->
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <UseSourceLink>true</UseSourceLink>
 

@@ -1,0 +1,6 @@
+<Project>
+
+  <!-- Implemented by each SCM package in .targets, guaranteeing it's overwritten -->
+  <Target Name="InitializeSourceControlInformationFromSourceControlManager" />
+
+</Project>

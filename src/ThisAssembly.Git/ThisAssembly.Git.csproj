@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <DevelopmentDependency>true</DevelopmentDependency>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>ThisAssembly.Git</PackageId>
+    <Description>
+      This package generates a static `ThisAssembly.Git` class with public
+      constants for the following properties provided by Microsoft.SourceLink (git-based) packages:
+
+      * Commit
+      * Sha (first 9 chars from Commit)
+      * Root (normalized to forward slashes)
+      * Url (if PublishRepositoryUrl=true)
+
+      It also provides the Branch property, calculated from supported CI
+      environment variables (GitHub Actions, Azure DevOps, AppVeyor, TeamCity,
+      Travis CI, Circle CI, GitLab CI, Buddy, and Jenkins).
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ThisAssembly.Constants\ThisAssembly.Constants.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Devlooped.SponsorLink" Version="0.3.0" />
+    <PackageReference Include="NuGetizer" Version="0.9.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.SourceLink.Common" Version="1.1.1" Pack="true" ExcludeAssets="all" />
+  </ItemGroup>
+
+</Project>
