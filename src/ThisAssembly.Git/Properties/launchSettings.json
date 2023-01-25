@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ThisAssembly.Git": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\ThisAssembly.Tests\\ThisAssembly.Tests.csproj"
+    }
+  }
+}
