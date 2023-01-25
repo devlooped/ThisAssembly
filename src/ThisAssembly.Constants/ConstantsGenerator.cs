@@ -24,7 +24,12 @@ namespace ThisAssembly
                 {
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Value", out var value);
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Comment", out var comment);
-                    return (name: Path.GetFileName(x.Left.Path), value: value!, comment: string.IsNullOrWhiteSpace(comment) ? null : comment);
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Root", out var root);
+                    return (
+                        name: Path.GetFileName(x.Left.Path),
+                        value: value!,
+                        comment: string.IsNullOrWhiteSpace(comment) ? null : comment,
+                        root: string.IsNullOrWhiteSpace(root) ? "Constants" : root!);
                 })
                 .Combine(context.CompilationProvider.Select((p, _) => p.Language));
 
@@ -34,14 +39,14 @@ namespace ThisAssembly
 
         }
 
-        void GenerateConstant(SourceProductionContext spc, ((string name, string value, string? comment), string language) arg2)
+        void GenerateConstant(SourceProductionContext spc, ((string name, string value, string? comment, string root), string language) args)
         {
-            var ((name, value, comment), language) = arg2;
+            var ((name, value, comment, root), language) = args;
 
-            var root = Area.Load(new List<Constant> { new Constant(name, value, comment), });
+            var rootArea = Area.Load(new List<Constant> { new Constant(name, value, comment), }, root);
             var file = language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-            var output = template.Render(new Model(root), member => member.Name);
+            var output = template.Render(new Model(rootArea), member => member.Name);
 
             // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
             // structures via functions.
@@ -61,7 +66,6 @@ namespace ThisAssembly
             //}
 
             spc.AddSource($"{name}.g.cs", SourceText.From(output, Encoding.UTF8));
-
         }
     }
 }
