@@ -6,6 +6,7 @@
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
+    <CompilerVisibleItemMetadata Include="Constant" MetadataName="Root" />
   </ItemGroup>
 
   <ItemDefinitionGroup>
@@ -17,9 +18,8 @@
     </FileConstant>
   </ItemDefinitionGroup>
 
-  <Target Name="_InjectConstantAdditionalFiles"
-          BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
-          DependsOnTargets="PrepareResourceNames">
+  <!-- Allows extenders to run before this target to add their @(Constant) and @(FileConstant) items -->
+  <Target Name="PrepareConstants">
     <ItemGroup>
       <FileConstant Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)')) OR '%(Link)' != ''">
         <AreaPath Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)'))">%(RelativeDir)%(Filename)</AreaPath>
@@ -31,10 +31,17 @@
         <Area>$([MSBuild]::ValueOrDefault('%(AreaPath)', '').Replace('\', '.').Replace('/', '.'))</Area>
         <Value>%(AreaPath)%(FileExtension)</Value>
       </FileConstant>
-      <Constant Include="@(FileConstant -> '%(Area)')" 
-                Condition="'%(FileConstant.Area)' != '' AND '%(FileConstant.Value)' != ''" 
-                Value="%(FileConstant.Value)" 
+      <Constant Include="@(FileConstant -> '%(Area)')"
+                Condition="'%(FileConstant.Area)' != '' AND '%(FileConstant.Value)' != ''"
+                Value="%(FileConstant.Value)"
                 Comment="%(FileConstant.Comment)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="_InjectConstantAdditionalFiles"
+          BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
+          DependsOnTargets="PrepareResourceNames;PrepareConstants">
+    <ItemGroup>
       <AdditionalFiles Include="@(Constant)" SourceItemType="Constant" />
     </ItemGroup>
   </Target>
