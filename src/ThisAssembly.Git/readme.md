@@ -8,10 +8,10 @@ for the following Git properties from the current project:
 * Url (if PublishRepositoryUrl=true)
 * Branch (from CI environment variables)
 
-This package relies on your project's Microsoft.SourceLink.* package 
-reference according to you specific Git-based source control server 
-(such as GitHub, Azure DevOps, BitBucket, etc). Explore the 
-[supported source control providers](https://www.nuget.org/packages?q=Microsoft.SourceLink).
+This package relies on your project's installed
+[Microsoft.SourceLink.*](https://www.nuget.org/packages?q=Microsoft.SourceLink) 
+package reference according to your specific Git-based source control server 
+(such as GitHub, Azure DevOps, BitBucket, etc).
 
 The `Branch` property is populated from supported CI environment variables 
 for the currently supported CI systems: GitHub Actions, Azure DevOps, 
@@ -21,7 +21,7 @@ Whenever the CI system provides a pull request number, the branch name is
 `pr[NUMBER]`, such as `pr123`. This makes it easy to use it as a semver 
 metadata label.
 
-> NOTE: by default, the values of these constants are populated during 
+> Note: by default, the values of these constants are populated during 
 "real" builds (that is, not IDE/design-time builds used to populate 
 intellisense). This is to avoid negatively affecting the editor's 
 performance. This means, however, that the properties will seem to 

@@ -86,6 +86,13 @@ Which results in:
 <!-- #content -->
 <!-- src/ThisAssembly.Constants/readme.md#content -->
 
+## ThisAssembly.Git
+
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Git.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Git)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Git.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Git)
+
+<!-- include src/ThisAssembly.Git/readme.md#content -->
+
 ## ThisAssembly.Metadata
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Metadata.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Metadata)
