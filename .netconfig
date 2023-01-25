@@ -47,9 +47,9 @@
 	sha = ef8e7fa7593ded91d871d30eeebd0dc79f679159
 [file "src/Directory.Build.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.targets
-	etag = 852b16129d2c681ad6ec86ff56b256541e0ce0961eb3a9492e0ead89ffe5a6bd
+	etag = a495854b35fb101774cdfd2b2c2875ed3dd85ada5d04cbdd3b7a90c9afdbe36f
 	weak
-	sha = b9fb0a7d34d6c16fb404f9dff4aac6789ef08a00
+	sha = 96b67734de9897ae5fb99f3b87c7042e6ccd218b
 [file "src/kzu.snk"]
 	url = https://github.com/devlooped/oss/blob/main/src/kzu.snk
 	etag = b8d789b5b6bea017cdcc8badcea888ad78de3e34298efca922054e9fb0e7b6b9
