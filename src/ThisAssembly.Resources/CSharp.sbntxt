@@ -16,7 +16,7 @@
 		/// => @"{{ $0.Path }}"
 		{{~ end ~}}
 		/// </summary>
-		public static partial class {{ $0.Name | string.replace "-" "_" | string.replace " " "_" }}
+		public static partial class {{ $0.Name }}
 		{
 			{{~ if $0.IsText ~}}
 			private static string text;

@@ -27,29 +27,24 @@ record Area(string Name)
         var parts = basePath.Split(new[] { "\\", "/" }, StringSplitOptions.RemoveEmptyEntries);
         var end = resources.Count == 1 ? ^1 : ^0;
 
+        var parent = "Resources";
         foreach (var part in parts.AsSpan()[..end])
         {
-            var partStr = SanitizePart(part);
+            var partStr = PathSanitizer.Sanitize(part, parent);
+            parent = partStr;
+
             area.NestedArea = new Area(partStr);
             area = area.NestedArea;
         }
 
-        area.Resources = resources;
+        area.Resources = resources
+            .Select(r => r with
+            {
+                Name = PathSanitizer.Sanitize(r.Name, parent),
+            });
         return root;
-    }
-
-    static readonly Regex invalidCharsRegex = new(@"\W");
-    static string SanitizePart(string? part)
-    {
-        var partStr = invalidCharsRegex.Replace(part, "_");
-        if (char.IsDigit(partStr[0]))
-            partStr = "_" + partStr;
-        return partStr;
     }
 }
 
 [DebuggerDisplay("{Name}")]
-record Resource(string Name, string? Comment, bool IsText)
-{
-    public string? Path { get; set; }
-};
+record Resource(string Name, string? Comment, bool IsText, string Path);
