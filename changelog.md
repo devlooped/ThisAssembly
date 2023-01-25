@@ -1,5 +1,20 @@
 # Changelog
 
+## [v1.2.0-rc](https://github.com/devlooped/ThisAssembly/tree/v1.2.0-rc) (2023-01-25)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.0-beta...v1.2.0-rc)
+
+:sparkles: Implemented enhancements:
+
+- Add ThisAssembly.Git [\#69](https://github.com/devlooped/ThisAssembly/issues/69)
+- Add ThisAssembly.Git, leveraging Microsoft.SourceLink and ThisAssembly.Constants [\#169](https://github.com/devlooped/ThisAssembly/pull/169) (@kzu)
+- Allow constants to request a root area different than Constants [\#168](https://github.com/devlooped/ThisAssembly/pull/168) (@kzu)
+- Improve Path Sanitization [\#161](https://github.com/devlooped/ThisAssembly/pull/161) (@viceroypenguin)
+
+:bug: Fixed bugs:
+
+- Compilation fails when resource file is name `Resources.resx` [\#167](https://github.com/devlooped/ThisAssembly/issues/167)
+
 ## [v1.2.0-beta](https://github.com/devlooped/ThisAssembly/tree/v1.2.0-beta) (2023-01-24)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.1.3...v1.2.0-beta)
