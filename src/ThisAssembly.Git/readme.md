@@ -8,6 +8,8 @@ for the following Git properties from the current project:
 * Url (if PublishRepositoryUrl=true)
 * Branch (from CI environment variables)
 
+![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Git.png)
+
 This package relies on your project's installed
 [Microsoft.SourceLink.*](https://www.nuget.org/packages?q=Microsoft.SourceLink) 
 package reference according to your specific Git-based source control server 
