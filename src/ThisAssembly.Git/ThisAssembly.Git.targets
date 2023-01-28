@@ -56,6 +56,12 @@
       <RepositoryRoot>@(_ThisAssemblyGitSourceRoot)</RepositoryRoot>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(RepositoryBranch)' == '' and '$(RepositoryRoot)' != ''">
+      <!-- We may not be in CI at all. If we got a git repo root, we can directly read HEAD -->
+      <RepositoryHead>$(RepositoryRoot).git/HEAD</RepositoryHead>
+      <RepositoryBranch Condition="Exists($(RepositoryHead))">$([System.IO.File]::ReadAllText($(RepositoryHead)).TrimStart("ref: refs/heads/"))</RepositoryBranch>
+    </PropertyGroup>
+
   </Target>
 
   <Target Name="PrepareGitConstants"
