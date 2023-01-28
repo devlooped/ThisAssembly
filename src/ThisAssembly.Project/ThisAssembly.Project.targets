@@ -8,8 +8,11 @@
   
   <Target Name="InjectThisAssemblyProject" DependsOnTargets="$(InjectThisAssemblyProjectDependsOn)" 
           BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun">
+    <ItemGroup>
+      <ProjectPropertyDistinct Include="@(ProjectProperty -> Distinct())" />
+    </ItemGroup>
     <PropertyGroup>
-      <ThisAssemblyProject>@(ProjectProperty, '|')</ThisAssemblyProject>
+      <ThisAssemblyProject>@(ProjectPropertyDistinct, '|')</ThisAssemblyProject>
     </PropertyGroup>
     <ItemGroup Condition="'$(ThisAssemblyProject)' != ''">
       <CompilerVisibleProperty Include="@(ProjectProperty)" />

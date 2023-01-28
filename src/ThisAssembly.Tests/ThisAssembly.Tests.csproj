@@ -50,6 +50,7 @@
 
   <ItemGroup>
     <ProjectProperty Include="Foo" />
+    <ProjectProperty Include="Foo" />
     <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
     <Constant Include="Foo.Hello" Value="World" Comment="Comments make everything better 😍" />
     <FileConstant Include="@(None)" />
