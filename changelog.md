@@ -1,5 +1,21 @@
 # Changelog
 
+## [v1.2.0](https://github.com/devlooped/ThisAssembly/tree/v1.2.0) (2023-01-28)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.0-rc.1...v1.2.0)
+
+:sparkles: Implemented enhancements:
+
+- Deduplicate project properties before generation [\#178](https://github.com/devlooped/ThisAssembly/pull/178) (@kzu)
+- Don't generate duplicate code for localized resources [\#177](https://github.com/devlooped/ThisAssembly/pull/177) (@kzu)
+- When building locally, default branch to HEAD [\#176](https://github.com/devlooped/ThisAssembly/pull/176) (@kzu)
+- Add ThisAssembly.Git to ThisAssembly meta-package [\#174](https://github.com/devlooped/ThisAssembly/pull/174) (@kzu)
+
+:bug: Fixed bugs:
+
+- ThisAssembly.Strings doesn't cope well with localized resx [\#173](https://github.com/devlooped/ThisAssembly/issues/173)
+- Fix missing source link information in ThisAssembly.Git [\#175](https://github.com/devlooped/ThisAssembly/pull/175) (@kzu)
+
 ## [v1.2.0-rc.1](https://github.com/devlooped/ThisAssembly/tree/v1.2.0-rc.1) (2023-01-28)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.0-rc...v1.2.0-rc.1)
