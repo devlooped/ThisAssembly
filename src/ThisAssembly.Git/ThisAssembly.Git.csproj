@@ -32,7 +32,10 @@
     <PackageReference Include="Devlooped.SponsorLink" Version="0.7.0" />
     <PackageReference Include="NuGetizer" Version="0.9.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.SourceLink.Common" Version="1.1.1" Pack="true" ExcludeAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageFile Include="Microsoft.SourceLink.Common" Version="1.1.1" PackFolder="Dependency" />
   </ItemGroup>
 
 </Project>
