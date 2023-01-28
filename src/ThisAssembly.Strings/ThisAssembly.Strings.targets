@@ -1,6 +1,6 @@
 <Project>
 
-  <Target Name="_InjectRexAdditionalFiles"
+  <Target Name="_InjectResxAdditionalFiles"
           BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
           DependsOnTargets="PrepareResourceNames">
     <ItemGroup>

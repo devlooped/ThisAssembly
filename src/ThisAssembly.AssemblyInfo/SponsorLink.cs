@@ -1,14 +1,13 @@
 ﻿using Devlooped;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace ThisAssembly;
 
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 [Generator]
-class Generator : IIncrementalGenerator
+class SponsorLinker : SponsorLink
 {
-    readonly SponsorLink link;
-
-    public Generator() => link = new SponsorLink("devlooped", "ThisAssembly.AssemblyInfo");
-
-    public void Initialize(IncrementalGeneratorInitializationContext context) => link.Initialize(context);
+    public SponsorLinker() : base(SponsorLinkSettings.Create("devlooped", "ThisAssembly", "ThisAssembly.AssemblyInfo"))
+    { }
 }

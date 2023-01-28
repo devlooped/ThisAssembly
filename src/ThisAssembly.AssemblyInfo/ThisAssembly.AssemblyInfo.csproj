@@ -27,7 +27,7 @@ on the `ThisAssembly.Info` class.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Devlooped.SponsorLink" Version="0.3.0" />
+    <PackageReference Include="Devlooped.SponsorLink" Version="0.7.0" />
     <PackageReference Include="NuGetizer" Version="0.9.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
