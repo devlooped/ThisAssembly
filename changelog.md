@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.2.1](https://github.com/devlooped/ThisAssembly/tree/v1.2.1) (2023-01-28)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.0...v1.2.1)
+
+:sparkles: Implemented enhancements:
+
+- Bump to more optimal sponsorlink checks [\#180](https://github.com/devlooped/ThisAssembly/pull/180) (@kzu)
+
+:bug: Fixed bugs:
+
+- Duplicate ProjectProperty items cause build failure [\#172](https://github.com/devlooped/ThisAssembly/issues/172)
+
 ## [v1.2.0](https://github.com/devlooped/ThisAssembly/tree/v1.2.0) (2023-01-28)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.0-rc.1...v1.2.0)
