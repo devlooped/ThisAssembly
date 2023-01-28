@@ -5,7 +5,7 @@
           DependsOnTargets="PrepareResourceNames">
     <ItemGroup>
       <ResxCode Include="@(EmbeddedResource)" 
-                Condition="'%(EmbeddedResource.Type)' == 'Resx' And '%(EmbeddedResource.GenerateResource)' != 'false' And '%(EmbeddedResource.ManifestResourceName)' != ''" />
+                Condition="'%(EmbeddedResource.Type)' == 'Resx' And '%(EmbeddedResource.WithCulture)' != 'true' And '%(EmbeddedResource.GenerateResource)' != 'false' And '%(EmbeddedResource.ManifestResourceName)' != ''" />
       <AdditionalFiles Include="@(ResxCode -> '%(FullPath)')" SourceItemType="ResourceString" />
     </ItemGroup>
   </Target>
