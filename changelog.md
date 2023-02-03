@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.2](https://github.com/devlooped/ThisAssembly/tree/v1.2.2) (2023-02-03)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.1...v1.2.2)
+
+:sparkles: Implemented enhancements:
+
+- Improve experience with empty values before first build [\#181](https://github.com/devlooped/ThisAssembly/pull/181) (@kzu)
+
 ## [v1.2.1](https://github.com/devlooped/ThisAssembly/tree/v1.2.1) (2023-01-28)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.0...v1.2.1)
