@@ -67,7 +67,17 @@
   <Target Name="PrepareGitConstants"
           BeforeTargets="PrepareConstants"
           DependsOnTargets="InitializeGitInformation">
-    <ItemGroup>
+    <PropertyGroup>
+      <EmptySourceControlValue>[pending build]</EmptySourceControlValue>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(EnableSourceControlManagerQueries)' != 'true'">
+      <Constant Include="Branch" Value="[pending build]" Root="Git" />
+      <Constant Include="Commit" Value="[pending build]" Root="Git" />
+      <Constant Include="Sha" Value="[pending build]" Root="Git" />
+      <Constant Include="Root" Value="[pending build]" Root="Git" />
+      <Constant Include="Url" Value="[pending build]" Root="Git" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(EnableSourceControlManagerQueries)' == 'true'">
       <Constant Include="Branch" Value="$(RepositoryBranch)" Root="Git" />
       <Constant Include="Commit" Value="$(RepositoryCommit)" Root="Git" />
       <Constant Include="Sha" Value="$(RepositorySha)" Root="Git" />
