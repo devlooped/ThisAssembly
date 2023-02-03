@@ -27,7 +27,7 @@
     <PackageReference Include="NuGetizer" Version="0.9.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
-    <PackageReference Include="Scriban" Version="5.5.2" Pack="false" IncludeAssets="build" />
+    <PackageReference Include="Scriban" Version="5.6.0" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
 
