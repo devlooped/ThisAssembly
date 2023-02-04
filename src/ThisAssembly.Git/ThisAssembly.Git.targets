@@ -35,7 +35,7 @@
   <!-- Make sure git info is available before calling source generators -->
   <Target Name="InitializeGitInformation"
           BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
-          DependsOnTargets="InitializeSourceControlInformation">
+          DependsOnTargets="InitializeSourceControlInformation;$(SourceLinkUrlInitializerTargets)">
 
     <PropertyGroup Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
       <!-- The project must specify PublishRepositoryUrl=true in order to publish the URL, in order to prevent inadvertent leak of internal URL. -->
@@ -54,8 +54,11 @@
 
     <PropertyGroup>
       <RepositoryRoot>@(_ThisAssemblyGitSourceRoot)</RepositoryRoot>
+      <SourceLinkUrl>@(_ThisAssemblyGitSourceRoot -> '%(SourceLinkUrl)')</SourceLinkUrl>
     </PropertyGroup>
 
+    <Warning Code="THIS002" Text="A valid SourceLink provider does not seem to be installed for the current repository/project. Values will be empty." Condition="'$(SourceLinkUrl)' == ''" />
+    
     <PropertyGroup Condition="'$(RepositoryBranch)' == '' and '$(RepositoryRoot)' != ''">
       <!-- We may not be in CI at all. If we got a git repo root, we can directly read HEAD -->
       <RepositoryHead>$(RepositoryRoot).git/HEAD</RepositoryHead>

@@ -34,8 +34,4 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageFile Include="Microsoft.SourceLink.Common" Version="1.1.1" PackFolder="Dependency" Visible="false" />
-  </ItemGroup>
-
 </Project>
