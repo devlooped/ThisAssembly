@@ -8,6 +8,9 @@ namespace ThisAssembly;
 [Generator]
 class SponsorLinker : SponsorLink
 {
-    public SponsorLinker() : base(SponsorLinkSettings.Create("devlooped", "ThisAssembly", "ThisAssembly.Constants"))
+    public SponsorLinker() : base(SponsorLinkSettings.Create(
+        "devlooped", "ThisAssembly",
+        packageId: "ThisAssembly.Constants",
+         version: typeof(SponsorLinker).Assembly.GetName().Version.ToString(2)))
     { }
 }
