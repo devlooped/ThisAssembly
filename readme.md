@@ -109,8 +109,8 @@ This package relies on your project's installed
 package reference according to your specific Git-based source control server 
 (such as GitHub, Azure DevOps, BitBucket, etc).
 
-The `Branch` property is populated from supported CI environment variables 
-for the currently supported CI systems: GitHub Actions, Azure DevOps, 
+The `Branch` property is populated from environment variables provided 
+by the currently supported CI systems: GitHub Actions, Azure DevOps, 
 AppVeyor, TeamCity, Travis CI, Circle CI, GitLab CI, Buddy, and Jenkins.
 
 Whenever the CI system provides a pull request number, the branch name is 
