@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.4](https://github.com/devlooped/ThisAssembly/tree/v1.2.4) (2023-02-06)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.3...v1.2.4)
+
+:sparkles: Implemented enhancements:
+
+- Bump to CDN-optimized SponsorLink [\#189](https://github.com/devlooped/ThisAssembly/pull/189) (@kzu)
+
 ## [v1.2.3](https://github.com/devlooped/ThisAssembly/tree/v1.2.3) (2023-02-04)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.2...v1.2.3)
@@ -9,10 +17,6 @@
 - ThisAssembly.Git should add comment when properties are empty [\#179](https://github.com/devlooped/ThisAssembly/issues/179)
 - Downgrade CodeAnalysis dependency to allow running on older compilers [\#187](https://github.com/devlooped/ThisAssembly/pull/187) (@kzu)
 - Improve detection of supported SourceLink Git provider [\#185](https://github.com/devlooped/ThisAssembly/pull/185) (@kzu)
-
-:twisted_rightwards_arrows: Merged:
-
-- Bump SponsorLink [\#188](https://github.com/devlooped/ThisAssembly/pull/188) (@kzu)
 
 ## [v1.2.2](https://github.com/devlooped/ThisAssembly/tree/v1.2.2) (2023-02-03)
 
