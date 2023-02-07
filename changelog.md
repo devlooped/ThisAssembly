@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.5](https://github.com/devlooped/ThisAssembly/tree/v1.2.5) (2023-02-07)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.4...v1.2.5)
+
 ## [v1.2.4](https://github.com/devlooped/ThisAssembly/tree/v1.2.4) (2023-02-06)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.3...v1.2.4)
