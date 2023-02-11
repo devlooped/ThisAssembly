@@ -1,8 +1,14 @@
 <Project>
   <!-- Extend Directory.Build.targets -->
-
-  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\')">
-    <PackageReference Update="NuGetizer" Version="0.9.1" />
+  <PropertyGroup>
+    <FortyTwo>42</FortyTwo>
+    <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\NuGetizer.42.42.42.nupkg')">
+      $([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));
+      https://api.nuget.org/v3/index.json
+    </RestoreSources>
+  </PropertyGroup>
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\NuGetizer.42.42.42.nupkg')">
+    <PackageReference Update="NuGetizer" Version="$(FortyTwo).$(FortyTwo).$(FortyTwo)" />
   </ItemGroup>
 
   <ItemGroup>
