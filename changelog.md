@@ -1,5 +1,22 @@
 # Changelog
 
+## [v1.2.6](https://github.com/devlooped/ThisAssembly/tree/v1.2.6) (2023-02-11)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.5...v1.2.6)
+
+:sparkles: Implemented enhancements:
+
+- Only surface build and analyzer from SponsorLink [\#195](https://github.com/devlooped/ThisAssembly/pull/195) (@kzu)
+
+:bug: Fixed bugs:
+
+- Fix missing first character of local branch name [\#192](https://github.com/devlooped/ThisAssembly/pull/192) (@kzu)
+
+:twisted_rightwards_arrows: Merged:
+
+- Enable local testing of nugetizer [\#194](https://github.com/devlooped/ThisAssembly/pull/194) (@kzu)
+- Force no quiet days for local testing in debug builds [\#193](https://github.com/devlooped/ThisAssembly/pull/193) (@kzu)
+
 ## [v1.2.5](https://github.com/devlooped/ThisAssembly/tree/v1.2.5) (2023-02-07)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.4...v1.2.5)
