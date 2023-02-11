@@ -62,7 +62,8 @@
     <PropertyGroup Condition="'$(RepositoryBranch)' == '' and '$(RepositoryRoot)' != ''">
       <!-- We may not be in CI at all. If we got a git repo root, we can directly read HEAD -->
       <RepositoryHead>$(RepositoryRoot).git/HEAD</RepositoryHead>
-      <RepositoryBranch Condition="Exists($(RepositoryHead))">$([System.IO.File]::ReadAllText($(RepositoryHead)).TrimStart("ref: refs/heads/"))</RepositoryBranch>
+      <RepositoryBranch Condition="Exists($(RepositoryHead))">$([System.IO.File]::ReadAllText($(RepositoryHead)).Trim())</RepositoryBranch>
+      <RepositoryBranch Condition="$(RepositoryBranch) != ''">$(RepositoryBranch.TrimStart("ref:").Trim().TrimStart("refs").Trim("/").TrimStart("heads").Trim("/").Trim())</RepositoryBranch>
     </PropertyGroup>
 
   </Target>
