@@ -39,7 +39,7 @@ C#:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Devlooped.SponsorLink" Version="0.9.2" PackInclude="build,analyzers" PackExclude="compile,native,runtime" />
+    <PackageReference Include="Devlooped.SponsorLink" Version="0.9.4" PackInclude="build,analyzers" PackExclude="compile,native,runtime" />
     <PackageReference Include="NuGetizer" Version="0.9.2" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
