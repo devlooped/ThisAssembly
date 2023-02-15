@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.7](https://github.com/devlooped/ThisAssembly/tree/v1.2.7) (2023-02-15)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.6...v1.2.7)
+
+:sparkles: Implemented enhancements:
+
+- Bump to shorter network timeout \(250ms\) on sponsorlink check [\#196](https://github.com/devlooped/ThisAssembly/pull/196) (@kzu)
+
 ## [v1.2.6](https://github.com/devlooped/ThisAssembly/tree/v1.2.6) (2023-02-11)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.5...v1.2.6)
