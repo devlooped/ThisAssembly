@@ -23,7 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Strings", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{09733D87-085D-4857-A556-5D28796CC138}"
 	ProjectSection(SolutionItems) = preProject
-		.github_changelog_generator = .github_changelog_generator
 		.github\workflows\build.yml = .github\workflows\build.yml
 		.github\dependabot.yml = .github\dependabot.yml
 		.github\workflows\release.yml = .github\workflows\release.yml
@@ -38,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Tests", "src\T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Resources", "src\ThisAssembly.Resources\ThisAssembly.Resources.csproj", "{14D0C5BA-8410-4454-87A2-7BF5993E1EA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThisAssembly.Git", "src\ThisAssembly.Git\ThisAssembly.Git.csproj", "{F34F8470-7C60-4BB8-ACB5-569D6D0F6A46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Git", "src\ThisAssembly.Git\ThisAssembly.Git.csproj", "{F34F8470-7C60-4BB8-ACB5-569D6D0F6A46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
