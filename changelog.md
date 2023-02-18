@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.9](https://github.com/devlooped/ThisAssembly/tree/v1.2.9) (2023-02-18)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.8...v1.2.9)
+
+:sparkles: Implemented enhancements:
+
+- 💜 Bump SponsorLink for better privacy [\#198](https://github.com/devlooped/ThisAssembly/pull/198) (@kzu)
+
 ## [v1.2.8](https://github.com/devlooped/ThisAssembly/tree/v1.2.8) (2023-02-16)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.7...v1.2.8)
