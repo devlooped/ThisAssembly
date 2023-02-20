@@ -1,7 +1,7 @@
 <Project>
   <!-- Extend Directory.Build.targets -->
   <PropertyGroup>
-    <FortyTwo>42</FortyTwo>
+    <FortyTwo>0.9.3</FortyTwo>
     <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)..\..\nugetizer\bin\NuGetizer.42.42.42.nupkg')">
       $([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\nugetizer\bin'));
       https://api.nuget.org/v3/index.json
