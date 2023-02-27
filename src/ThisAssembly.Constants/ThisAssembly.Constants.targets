@@ -1,8 +1,6 @@
 <Project>
 
   <ItemGroup>
-    <CompilerVisibleProperty Include="DebugThisAssemblyConstants" />
-
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />

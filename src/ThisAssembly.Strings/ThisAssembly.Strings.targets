@@ -11,8 +11,6 @@
   </Target>
 
   <ItemGroup>
-    <CompilerVisibleProperty Include="DebugThisAssemblyStrings" />
-
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="ManifestResourceName" />
   </ItemGroup>

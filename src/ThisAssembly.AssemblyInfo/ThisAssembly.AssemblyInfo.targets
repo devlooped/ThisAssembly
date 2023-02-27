@@ -1,7 +1,0 @@
-<Project>
-  
-  <ItemGroup>
-    <CompilerVisibleProperty Include="DebugThisAssemblyAssemblyInfo" />
-  </ItemGroup>
-  
-</Project>

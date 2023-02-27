@@ -20,8 +20,4 @@
     </ItemGroup>
   </Target>
 
-  <ItemGroup>
-    <CompilerVisibleProperty Include="DebugThisAssemblyProject" />
-  </ItemGroup>
-  
 </Project>
