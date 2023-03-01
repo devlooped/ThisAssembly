@@ -92,8 +92,6 @@
     <RepositoryBranch Condition="'$(RepositoryBranch)' == '' and '$(BUDDY_EXECUTION_PULL_REQUEST_NO)' != ''">pr$(BUDDY_EXECUTION_PULL_REQUEST_NO)</RepositoryBranch>
     <RepositoryBranch Condition="'$(RepositoryBranch)' == '' and '$(BUDDY_EXECUTION_TAG)' != ''">$(BUDDY_EXECUTION_TAG)</RepositoryBranch>
     <RepositoryBranch Condition="'$(RepositoryBranch)' == '' and '$(BUDDY_EXECUTION_BRANCH)' != ''">$(BUDDY_EXECUTION_BRANCH)</RepositoryBranch>
-    <!-- Jenkins: https://plugins.jenkins.io/git/#plugin-content-environment-variables -->
-    <RepositoryBranch Condition="'$(RepositoryBranch)' == '' and '$(GIT_LOCAL_BRANCH)' != ''">$(GIT_LOCAL_BRANCH)</RepositoryBranch>
   </PropertyGroup>  
 
   <ItemGroup>
@@ -161,5 +159,6 @@
 
   <!-- Import before UsingTask because first to declare tasks wins -->
   <Import Project="Directory.targets" Condition="Exists('Directory.targets')"/>
+  <Import Project="Directory.targets.user" Condition="Exists('Directory.targets.user')" />
 
 </Project>
