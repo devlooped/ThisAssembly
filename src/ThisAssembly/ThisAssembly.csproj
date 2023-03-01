@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="0.9.2" />
+    <PackageReference Include="NuGetizer" Version="0.9.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
     <Compile Remove="..\*.cs" />
   </ItemGroup>
