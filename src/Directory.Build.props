@@ -67,8 +67,7 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);*.binlog;*.zip;*.rsp;*.items;**/TestResults/**/*.*</DefaultItemExcludes>
 
     <EnableSourceLink>true</EnableSourceLink>
-    <!-- This should only be enabled on non-DTB builds, so don't turn on indiscriminately -->
-    <!--<EnableSourceControlManagerQueries>true</EnableSourceControlManagerQueries>-->
+    <EnableSourceControlManagerQueries>true</EnableSourceControlManagerQueries>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <UseSourceLink>true</UseSourceLink>
 
@@ -113,7 +112,7 @@
          after the fixed prefix. This allows dogfooding a branch build.
          The suffix is sanitized and optionally turned into 
     -->
-    <VersionPrefix>42.42.42</VersionPrefix>
+    <VersionPrefix Condition="$(VersionPrefix) == ''">42.42.42</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup Label="Version" Condition="$(VersionLabel) != ''">
@@ -143,4 +142,5 @@
   </ItemGroup>
 
   <Import Project="Directory.props" Condition="Exists('Directory.props')"/>
+  <Import Project="Directory.props.user" Condition="Exists('Directory.props.user')" />
 </Project>
