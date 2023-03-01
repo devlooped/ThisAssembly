@@ -51,7 +51,11 @@ static class ResourceFile
             if (valueElement == null)
                 continue;
 
-            var comment = element.Element("comment")?.Value?.Replace("<", "&lt;").Replace(">", "&gt;");
+            var comment = element.Element("comment")?.Value?
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;")
+                .Replace("\r\n", " ").Replace("\n", " ");
+
             var areaParts = id.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
             if (areaParts.Length <= 1)
             {
