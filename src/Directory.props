@@ -9,6 +9,8 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <RestoreSources>https://api.nuget.org/v3/index.json;https://pkg.kzu.io/index.json;</RestoreSources>
 
+    <!-- ThisAssembly shouldn't propagate transitively by default -->
+    <DevelopmentDependency>true</DevelopmentDependency>
     <PackageProjectUrl>https://clarius.org/ThisAssembly</PackageProjectUrl>
 
     <!-- See https://github.com/scriban/scriban#source-embedding -->
