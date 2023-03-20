@@ -1,5 +1,11 @@
 <Project>
 
+  <ItemGroup>
+    <!-- Make sure we're always private to the referencing project. 
+         Prevents analyzers from "flowing out" of the referencing project. -->
+    <PackageReference Update="ThisAssembly.Git" PrivateAssets="all" PackTransitive="false" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(RepositoryBranch)' == ''">
     <!-- GitHub Actions: https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables -->
     <RepositoryBranch Condition="'$(RepositoryBranch)' == '' and '$(GITHUB_REF)' != '' and $(GITHUB_REF.Contains('refs/pull/'))">pr$(GITHUB_REF.Replace('refs/pull/', '').Replace('/merge', ''))</RepositoryBranch>

@@ -47,8 +47,8 @@ C#:
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Devlooped.SponsorLink" Version="42.42.213-main" />
-    <PackageReference Include="NuGetizer" Version="42.42.957-main" />
+    <PackageReference Include="Devlooped.SponsorLink" Version="0.10.0" />
+    <PackageReference Include="NuGetizer" Version="42.42.972-main" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
     <PackageReference Include="Scriban" Version="5.7.0" Pack="false" IncludeAssets="build" />
