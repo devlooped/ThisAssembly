@@ -12,9 +12,9 @@
 	weak
 [file ".editorconfig"]
 	url = https://github.com/devlooped/oss/blob/main/.editorconfig
-	etag = 897634b9ba05c00e8ef35b24533d31bc43a5299be5a64e240109ba4c00fcad15
+	etag = f0b411ee5aa5ddb4449d98ad73fe11c921589b8d26e4f4527d58e26d39f03958
 	weak
-	sha = 448cf45a26e068fe5d7164ea48d1dc8bf620df46
+	sha = 29818360755cdb9ba5527013a2ecc9670c437e44
 [file ".gitattributes"]
 	url = https://github.com/devlooped/oss/blob/main/.gitattributes
 	etag = 7acb32f5fa6d4ccd9c824605a7c2b8538497f0068c165567807d393dcf4d6bb7
@@ -32,9 +32,9 @@
 	sha = 543f7daf1e8a63ea0dc599ae0494df7d1a90caa4
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
-	etag = 1c1705a3f0ed65e33c9133996ebaa100aa445a8b968b2904ad48fef938702006
+	etag = 7b3f23aa88e3ed628f03677a5b0fc4587c404bd0ef97dcf9650917a48316d51c
 	weak
-	sha = c78868eba59a3e04602434684f9eac241fef13fb
+	sha = 9dff0bde290185226986f512c75fa0434bc9fe3f
 [file "license.txt"]
 	url = https://github.com/devlooped/oss/blob/main/license.txt
 	etag = 2c6335b37e4ae05eea7c01f5d0c9d82b49c488f868a8b5ba7bff7c6ff01f3994
