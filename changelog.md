@@ -1,5 +1,18 @@
 # Changelog
 
+## [v1.2.10](https://github.com/devlooped/ThisAssembly/tree/v1.2.10) (2023-03-20)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.9...v1.2.10)
+
+:sparkles: Implemented enhancements:
+
+- Bump to latest SponsorLink and ensure private assets always [\#214](https://github.com/devlooped/ThisAssembly/pull/214) (@kzu)
+
+:bug: Fixed bugs:
+
+- ThisAssembly should not propagate transitively by default [\#212](https://github.com/devlooped/ThisAssembly/pull/212) (@kzu)
+- Fix build issue when string resource has newlines [\#208](https://github.com/devlooped/ThisAssembly/pull/208) (@kzu)
+
 ## [v1.2.9](https://github.com/devlooped/ThisAssembly/tree/v1.2.9) (2023-02-18)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.8...v1.2.9)
@@ -200,7 +213,7 @@
 
 :twisted_rightwards_arrows: Merged:
 
-- Fix sample code syntax error in readme.md [\#127](https://github.com/devlooped/ThisAssembly/pull/127) (@mapolu)
+- Fix sample code syntax error in readme.md [\#127](https://github.com/devlooped/ThisAssembly/pull/127) (@makp0)
 - Improve support for invalid identifier characters [\#126](https://github.com/devlooped/ThisAssembly/pull/126) (@kzu)
 - Build with latest .NET6, no particular version [\#97](https://github.com/devlooped/ThisAssembly/pull/97) (@kzu)
 - Remove workaround for 6.0.202 breakage [\#95](https://github.com/devlooped/ThisAssembly/pull/95) (@kzu)
