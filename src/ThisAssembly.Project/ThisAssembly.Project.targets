@@ -1,5 +1,11 @@
 <Project>
 
+  <ItemGroup>
+    <!-- Make sure we're always private to the referencing project. 
+         Prevents analyzers from "flowing out" of the referencing project. -->
+    <PackageReference Update="ThisAssembly.Project" PrivateAssets="all" PackTransitive="false" />
+  </ItemGroup>
+
   <PropertyGroup>
     <InjectThisAssemblyProjectDependsOn Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
       InitializeSourceControlInformation
@@ -15,7 +21,7 @@
       <ThisAssemblyProject>@(ProjectPropertyDistinct, '|')</ThisAssemblyProject>
     </PropertyGroup>
     <ItemGroup Condition="'$(ThisAssemblyProject)' != ''">
-      <CompilerVisibleProperty Include="@(ProjectProperty)" />
+      <CompilerVisibleProperty Include="@(ProjectPropertyDistinct)" />
       <CompilerVisibleProperty Include="ThisAssemblyProject" />
     </ItemGroup>
   </Target>

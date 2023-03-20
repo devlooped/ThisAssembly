@@ -1,6 +1,12 @@
 <Project>
 
   <ItemGroup>
+    <!-- Make sure we're always private to the referencing project. 
+         Prevents analyzers from "flowing out" of the referencing project. -->
+    <PackageReference Update="ThisAssembly.Resources" PrivateAssets="all" PackTransitive="false" />
+  </ItemGroup>
+
+  <ItemGroup>
     <CompilerVisibleProperty Include="EmbeddedResourceStringExtensions" />
 
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />

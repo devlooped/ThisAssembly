@@ -1,5 +1,11 @@
 <Project>
 
+  <ItemGroup>
+    <!-- Make sure we're always private to the referencing project. 
+         Prevents analyzers from "flowing out" of the referencing project. -->
+    <PackageReference Update="ThisAssembly.Strings" PrivateAssets="all" PackTransitive="false" />
+  </ItemGroup>
+
   <Target Name="_InjectResxAdditionalFiles"
           BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
           DependsOnTargets="PrepareResourceNames">

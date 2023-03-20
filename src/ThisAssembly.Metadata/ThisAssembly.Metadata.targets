@@ -1,0 +1,9 @@
+<Project>
+
+  <ItemGroup>
+    <!-- Make sure we're always private to the referencing project. 
+         Prevents analyzers from "flowing out" of the referencing project. -->
+    <PackageReference Update="ThisAssembly.Metadata" PrivateAssets="all" PackTransitive="false" />
+  </ItemGroup>
+
+</Project>

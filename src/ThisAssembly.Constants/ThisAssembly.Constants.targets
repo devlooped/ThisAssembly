@@ -5,6 +5,10 @@
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Root" />
+
+    <!-- Make sure we're always private to the referencing project. 
+         Prevents analyzers from "flowing out" of the referencing project. -->
+    <PackageReference Update="ThisAssembly.Constants" PrivateAssets="all" PackTransitive="false" />
   </ItemGroup>
 
   <ItemDefinitionGroup>
