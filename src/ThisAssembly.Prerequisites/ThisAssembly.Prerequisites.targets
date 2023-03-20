@@ -12,10 +12,12 @@
       <RoslynVersion Condition="'$(RoslynVersion)' == ''">0.0</RoslynVersion>
     </PropertyGroup>
 
-    <!--  -->
+    <!-- Don't enforce compiler version for F#, since it's not surfacing the CompilerApiversion at all. 
+         See https://github.com/dotnet/sdk/blob/main/src/Tasks/Microsoft.NET.Build.Tasks/targets/Microsoft.PackageDependencyResolution.targets#L214 -->
     <Warning Code="THIS001"
              Text="ThisAssembly requires Compiler API (Roslyn) version $(ThisAssemblyMinimumRoslynVersion) or greater."
-             Condition="$([MSBuild]::VersionLessThan('$(RoslynVersion)', '$(ThisAssemblyMinimumRoslynVersion)'))" />
+             Condition="$([MSBuild]::VersionLessThan('$(RoslynVersion)', '$(ThisAssemblyMinimumRoslynVersion)')) and 
+                        ('$(Language)' == 'C#' Or '$(Language)' == 'VB')" />
   </Target>
 
 </Project>
