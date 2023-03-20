@@ -266,6 +266,16 @@ The list must be pipe-separated.
 You can always use the provided `GetStream` and `GetBytes` for more advanced scenarios (or for 
 non-text resources).
 
+Optionally, you can specify the `Kind` metadata for a specific `EmbeddedResource` you want 
+treated as a text file:
+
+```xml
+    <EmbeddedResource Include="query.kql" Kind="Text" />
+```
+
+You can also add a `Comment` item metadata attribute, which will be used as the `<summary>` XML 
+doc for the generated member.
+
 <!-- #content -->
 <!-- src/ThisAssembly.Resources/readme.md#content -->
 
