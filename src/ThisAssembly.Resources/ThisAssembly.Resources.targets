@@ -25,7 +25,7 @@
   </ItemDefinitionGroup>
 
   <Target Name="_InjectResourcesAdditionalFiles"
-          BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
+          BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
           DependsOnTargets="PrepareResourceNames">
     <ItemGroup>
       <EmbeddedResource Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)')) OR '%(Link)' != ''">

@@ -41,7 +41,7 @@
   </Target>
 
   <Target Name="_InjectConstantAdditionalFiles"
-          BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
+          BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
           DependsOnTargets="PrepareResourceNames;PrepareConstants">
     <ItemGroup>
       <AdditionalFiles Include="@(Constant)" SourceItemType="Constant" />
