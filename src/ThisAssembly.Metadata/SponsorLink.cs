@@ -11,7 +11,7 @@ class SponsorLinker : SponsorLink
     public SponsorLinker() : base(SponsorLinkSettings.Create(
         "devlooped", "ThisAssembly",
         packageId: "ThisAssembly.Metadata",
-         version: typeof(SponsorLinker).Assembly.GetName().Version.ToString(2)
+        version: typeof(SponsorLinker).Assembly.GetName().Version.ToString(3)
 #if DEBUG
         , quietDays: 0
 #endif
