@@ -1,5 +1,18 @@
 # Changelog
 
+## [v1.2.12](https://github.com/devlooped/ThisAssembly/tree/v1.2.12) (2023-03-22)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.11...v1.2.12)
+
+:sparkles: Implemented enhancements:
+
+- Only run targets when necessary and no earlier [\#221](https://github.com/devlooped/ThisAssembly/pull/221) (@kzu)
+- Remove dependency on Prerequisites package [\#219](https://github.com/devlooped/ThisAssembly/pull/219) (@kzu)
+
+:twisted_rightwards_arrows: Merged:
+
+- Remove obsolete \[Generator\] attribute on SponsorLink [\#220](https://github.com/devlooped/ThisAssembly/pull/220) (@kzu)
+
 ## [v1.2.11](https://github.com/devlooped/ThisAssembly/tree/v1.2.11) (2023-03-22)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.10...v1.2.11)
