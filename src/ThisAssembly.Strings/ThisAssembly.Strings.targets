@@ -21,4 +21,5 @@
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="ManifestResourceName" />
   </ItemGroup>
 
+  <Import Condition="'$(ThisAssemblyPrerequisitesImported)' != 'true'" Project="ThisAssembly.Prerequisites.targets" />
 </Project>

@@ -36,10 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="..\EmbeddedResource.cs" />
   </ItemGroup>
 

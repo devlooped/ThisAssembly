@@ -1,5 +1,11 @@
 <Project>
 
+  <PropertyGroup>
+    <!-- Incremental source generator interface appeared first on Roslyn 4.0.1, see 
+         https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.iincrementalgenerator?view=roslyn-dotnet-4.0.1 -->
+    <ThisAssemblyMinimumRoslynVersion Condition="'$(ThisAssemblyMinimumRoslynVersion)' == ''">4.0</ThisAssemblyMinimumRoslynVersion>
+  </PropertyGroup>
+
   <Target Name="_ThisAssemblyCheckCompilerVersion" BeforeTargets="CoreCompile">
 
     <!-- Version comparison functions require MSBuild 16.5+ -->
@@ -19,5 +25,9 @@
              Condition="$([MSBuild]::VersionLessThan('$(RoslynVersion)', '$(ThisAssemblyMinimumRoslynVersion)')) and 
                         ('$(Language)' == 'C#' Or '$(Language)' == 'VB')" />
   </Target>
+
+  <PropertyGroup>
+    <ThisAssemblyPrerequisitesImported>true</ThisAssemblyPrerequisitesImported>
+  </PropertyGroup>
 
 </Project>

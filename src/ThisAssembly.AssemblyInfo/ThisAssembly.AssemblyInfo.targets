@@ -6,4 +6,5 @@
     <PackageReference Update="ThisAssembly.AssemblyInfo" PrivateAssets="all" PackTransitive="false" />
   </ItemGroup>
 
+  <Import Condition="'$(ThisAssemblyPrerequisitesImported)' != 'true'" Project="ThisAssembly.Prerequisites.targets" />
 </Project>

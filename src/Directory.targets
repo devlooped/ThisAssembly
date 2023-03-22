@@ -7,6 +7,12 @@
 
     <PackageFile Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
     <PackageFile Include="*.props;*.targets" PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)" Visible="true" />
+    
+    <!-- Add prerequisites to package -->
+    <None Include="$(MSBuildThisFileDirectory)ThisAssembly.Prerequisites.targets" 
+          CopyToOutputDirectory="PreserveNewest" 
+          PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)"
+          Condition="'$(IncludePrerequisites)' != 'false'"/>
   </ItemGroup>
 
 </Project>

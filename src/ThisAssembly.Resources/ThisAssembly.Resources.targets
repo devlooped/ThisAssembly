@@ -42,4 +42,5 @@
     </ItemGroup>
   </Target>
 
+  <Import Condition="'$(ThisAssemblyPrerequisitesImported)' != 'true'" Project="ThisAssembly.Prerequisites.targets" />
 </Project>

@@ -37,10 +37,6 @@ such as "Hello {name}".
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="ThisAssembly.Strings.cs" />
   </ItemGroup>
 

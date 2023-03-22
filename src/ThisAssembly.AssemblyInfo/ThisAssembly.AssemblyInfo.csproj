@@ -39,8 +39,4 @@ on the `ThisAssembly.Info` class.
     <PackageReference Include="PolySharp" Version="1.12.1" PrivateAssets="All" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ThisAssembly.Prerequisites\ThisAssembly.Prerequisites.csproj" />
-  </ItemGroup>
-
 </Project>
