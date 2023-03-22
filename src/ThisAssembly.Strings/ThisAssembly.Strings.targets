@@ -7,7 +7,7 @@
   </ItemGroup>
 
   <Target Name="_InjectResxAdditionalFiles"
-          BeforeTargets="PrepareForBuild;CompileDesignTime;GenerateMSBuildEditorConfigFileShouldRun"
+          BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
           DependsOnTargets="PrepareResourceNames">
     <ItemGroup>
       <ResxCode Include="@(EmbeddedResource)" 
