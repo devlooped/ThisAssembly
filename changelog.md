@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.11](https://github.com/devlooped/ThisAssembly/tree/v1.2.11) (2023-03-22)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.10...v1.2.11)
+
+:bug: Fixed bugs:
+
+- Don't warn compiler API version for F\# projects [\#216](https://github.com/devlooped/ThisAssembly/pull/216) (@kzu)
+
 ## [v1.2.10](https://github.com/devlooped/ThisAssembly/tree/v1.2.10) (2023-03-20)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.9...v1.2.10)
