@@ -40,7 +40,7 @@ static class EmbeddedResource
         if (string.IsNullOrEmpty(manifestResourceName))
             throw new InvalidOperationException($"Did not find required resource ending in '{resourceName}' in assembly '{baseName}'.");
 
-        return 
+        return
             Assembly.GetExecutingAssembly().GetManifestResourceStream(manifestResourceName) ??
             throw new InvalidOperationException($"Did not find required resource '{manifestResourceName}' in assembly '{baseName}'.");
     }
