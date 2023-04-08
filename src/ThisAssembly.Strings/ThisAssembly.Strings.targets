@@ -11,14 +11,15 @@
           DependsOnTargets="PrepareResourceNames">
     <ItemGroup>
       <ResxCode Include="@(EmbeddedResource)" 
+                ThisAssemblyStrings="true" 
                 Condition="'%(EmbeddedResource.Type)' == 'Resx' And '%(EmbeddedResource.WithCulture)' != 'true' And '%(EmbeddedResource.GenerateResource)' != 'false' And '%(EmbeddedResource.ManifestResourceName)' != ''" />
-      <AdditionalFiles Include="@(ResxCode -> '%(FullPath)')" SourceItemType="ResourceString" />
+      <AdditionalFiles Include="@(ResxCode)" />
     </ItemGroup>
   </Target>
 
   <ItemGroup>
-    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
-    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="ManifestResourceName" />
+    <CompilerVisibleItemMetadata Include="ResxCode" MetadataName="ThisAssemblyStrings" />
+    <CompilerVisibleItemMetadata Include="ResxCode" MetadataName="ManifestResourceName" />
   </ItemGroup>
 
   <Import Condition="'$(ThisAssemblyPrerequisitesImported)' != 'true'" Project="ThisAssembly.Prerequisites.targets" />

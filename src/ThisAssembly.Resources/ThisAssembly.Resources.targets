@@ -9,7 +9,7 @@
   <ItemGroup>
     <CompilerVisibleProperty Include="EmbeddedResourceStringExtensions" />
 
-    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
+    <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="ThisAssemblyResource" />
     <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Kind" />
     <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Comment" />
     <CompilerVisibleItemMetadata Include="EmbeddedResource" MetadataName="Value" />
@@ -38,7 +38,8 @@
         <Area>$([MSBuild]::ValueOrDefault('%(AreaPath)', '').Replace('\', '.').Replace('/', '.'))</Area>
         <Value>%(AreaPath)%(FileExtension)</Value>
       </EmbeddedResource>
-      <AdditionalFiles Include="@(EmbeddedResource)" SourceItemType="EmbeddedResource" />
+      <EmbeddedResource ThisAssemblyResource="true" />
+      <AdditionalFiles Include="@(EmbeddedResource)" />
     </ItemGroup>
   </Target>
 
