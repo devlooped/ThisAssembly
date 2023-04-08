@@ -22,8 +22,8 @@ namespace ThisAssembly
             var files = context.AdditionalTextsProvider
                 .Combine(context.AnalyzerConfigOptionsProvider)
                 .Where(x =>
-                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
-                    && itemType == "EmbeddedResource")
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.ThisAssemblyResource", out var assemblyResource)
+                    && bool.TryParse(assemblyResource, out var isAssemblyResource) && isAssemblyResource)
                 .Where(x => x.Right.GetOptions(x.Left).TryGetValue("build_metadata.EmbeddedResource.Value", out var value) && value != null)
                 .Select((x, ct) =>
                 {

@@ -33,12 +33,12 @@ namespace ThisAssembly
             var files = context.AdditionalTextsProvider
                 .Combine(context.AnalyzerConfigOptionsProvider)
                 .Where(x =>
-                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
-                    && itemType == "ResourceString")
-                .Where(x => x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.ManifestResourceName", out var value) && value != null)
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.ResxCode.ThisAssemblyStrings", out var resourceString)
+                    && bool.TryParse(resourceString, out var isResourceString) && isResourceString)
+                .Where(x => x.Right.GetOptions(x.Left).TryGetValue("build_metadata.ResxCode.ManifestResourceName", out var value) && value != null)
                 .Select((x, ct) =>
                 {
-                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.ManifestResourceName", out var resourceName);
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.ResxCode.ManifestResourceName", out var resourceName);
                     return (fileName: Path.GetFileName(x.Left.Path), text: x.Left.GetText(ct), resourceName!);
                 })
                 .Where(x => x.text != null);
