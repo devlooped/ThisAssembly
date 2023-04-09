@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.13](https://github.com/devlooped/ThisAssembly/tree/v1.2.13) (2023-04-08)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.12...v1.2.13)
+
+:bug: Fixed bugs:
+
+- Allow using ThisAssembly.Resources and ThisAssembly.Strings SxS [\#225](https://github.com/devlooped/ThisAssembly/pull/225) (@kzu)
+
 ## [v1.2.12](https://github.com/devlooped/ThisAssembly/tree/v1.2.12) (2023-03-22)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.11...v1.2.12)
