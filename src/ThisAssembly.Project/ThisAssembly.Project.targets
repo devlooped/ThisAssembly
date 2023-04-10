@@ -11,8 +11,10 @@
       InitializeSourceControlInformation
     </InjectThisAssemblyProjectDependsOn>
   </PropertyGroup>
+
+  <Target Name="PrepareProjectProperties" />
   
-  <Target Name="InjectThisAssemblyProject" DependsOnTargets="$(InjectThisAssemblyProjectDependsOn)" 
+  <Target Name="InjectThisAssemblyProject" DependsOnTargets="$(InjectThisAssemblyProjectDependsOn);PrepareProjectProperties" 
           BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun">
     <ItemGroup>
       <ProjectPropertyDistinct Include="@(ProjectProperty -> Distinct())" />
