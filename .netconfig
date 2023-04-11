@@ -27,14 +27,14 @@
 	sha = 4f070a477b4162a280f02722ae666376ae4fcc71
 [file ".github/workflows/build.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
-	etag = 6abaf57f2624bc65517b8cc7b8a4b7e34542cf26f2ebcd1935a15a2a075c8733
+	etag = c616df0877fba60002ccfc0397e9f731ddb22acbbb195a0598fedd4cac5f3135
 	weak
-	sha = 543f7daf1e8a63ea0dc599ae0494df7d1a90caa4
+	sha = 13d67e2cf3f786c8189364fd29332aaa7dc575dc
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
-	etag = 7b3f23aa88e3ed628f03677a5b0fc4587c404bd0ef97dcf9650917a48316d51c
+	etag = 96e0860052044780f1fc9e3bdfbee09d82d5dddb8b1217d67460fc7330a64dd8
 	weak
-	sha = 9dff0bde290185226986f512c75fa0434bc9fe3f
+	sha = b87a8a795a4c2b6830602225c066c11108552a99
 [file "license.txt"]
 	url = https://github.com/devlooped/oss/blob/main/license.txt
 	etag = 2c6335b37e4ae05eea7c01f5d0c9d82b49c488f868a8b5ba7bff7c6ff01f3994
@@ -47,9 +47,9 @@
 	sha = 6ae80a175a8f926ac5d9ffb0f6afd55d85cc9320
 [file "src/Directory.Build.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.targets
-	etag = a890e3c9574327c4885f386756cba483c0f8fb2446554e4badcb6ab5b0eecfd0
+	etag = 428f80b0786ff17b836c7a5b0640948724855d17933e958642b22849ac00dadb
 	weak
-	sha = 6ae80a175a8f926ac5d9ffb0f6afd55d85cc9320
+	sha = 1514d15399a7d545ad92a0e9d57dc8295fdd6af8
 [file "src/kzu.snk"]
 	url = https://github.com/devlooped/oss/blob/main/src/kzu.snk
 	etag = b8d789b5b6bea017cdcc8badcea888ad78de3e34298efca922054e9fb0e7b6b9
