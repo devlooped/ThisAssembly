@@ -31,8 +31,8 @@ static class EmbeddedResource
         var baseName = Assembly.GetExecutingAssembly().GetName().Name;
         var resourceName = relativePath
             .TrimStart('.')
-            .Replace(Path.DirectorySeparatorChar, '.')
-            .Replace(Path.AltDirectorySeparatorChar, '.');
+            .Replace('/', '.')
+            .Replace('\\', '.');
 
         var manifestResourceName = Assembly.GetExecutingAssembly()
             .GetManifestResourceNames().FirstOrDefault(x => x.EndsWith(resourceName));
