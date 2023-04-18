@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -27,7 +27,7 @@ on the `ThisAssembly.Info` class.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Devlooped.SponsorLink" Version="0.10.2" />
+    <PackageReference Include="Devlooped.SponsorLink" Version="0.10.3" />
     <PackageReference Include="NuGetizer" Version="1.0.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
