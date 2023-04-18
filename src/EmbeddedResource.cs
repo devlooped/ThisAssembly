@@ -5,7 +5,7 @@ using System.Reflection;
 
 static class EmbeddedResource
 {
-    static readonly string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+    static readonly string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
 
     public static string GetContent(string relativePath)
     {
