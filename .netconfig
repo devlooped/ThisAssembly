@@ -12,9 +12,9 @@
 	weak
 [file ".editorconfig"]
 	url = https://github.com/devlooped/oss/blob/main/.editorconfig
-	etag = bf02d1679442e5169d03304164b8e9407997ac3132145831a91ba61fc8b50687
+	etag = 7298c6450967975a8782b5c74f3071e1910fc59686e48f9c9d5cd7c68213cf59
 	weak
-	sha = fd5b554bf3538a3c92a0b49e395c8ad2e8429158
+	sha = c779d3d4e468358106dea03e93ba2cd35bb01ecb
 [file ".gitattributes"]
 	url = https://github.com/devlooped/oss/blob/main/.gitattributes
 	etag = 7acb32f5fa6d4ccd9c824605a7c2b8538497f0068c165567807d393dcf4d6bb7
