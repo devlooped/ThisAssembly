@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <PackageReference Include="Devlooped.SponsorLink" Version="0.10.5" />
-    <PackageReference Include="NuGetizer" Version="1.0.1" />
+    <PackageReference Include="NuGetizer" Version="1.0.2" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
   </ItemGroup>
 
