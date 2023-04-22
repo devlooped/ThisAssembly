@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.2.14](https://github.com/devlooped/ThisAssembly/tree/v1.2.14) (2023-04-22)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.13...v1.2.14)
+
+:sparkles: Implemented enhancements:
+
+- Add PrepareProjectProperties as a public hook [\#226](https://github.com/devlooped/ThisAssembly/pull/226) (@kzu)
+
+:bug: Fixed bugs:
+
+- Assembly location can be null, i.e. Blazor WebAssembly [\#227](https://github.com/devlooped/ThisAssembly/pull/227) (@kzu)
+
 ## [v1.2.13](https://github.com/devlooped/ThisAssembly/tree/v1.2.13) (2023-04-08)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.12...v1.2.13)
