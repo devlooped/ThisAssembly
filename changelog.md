@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.15](https://github.com/devlooped/ThisAssembly/tree/v1.2.15) (2023-05-09)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.14...v1.2.15)
+
+:sparkles: Implemented enhancements:
+
+- Add missing constant for AssemblyDescriptionAttribute [\#235](https://github.com/devlooped/ThisAssembly/pull/235) (@kzu)
+
 ## [v1.2.14](https://github.com/devlooped/ThisAssembly/tree/v1.2.14) (2023-04-22)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.13...v1.2.14)
