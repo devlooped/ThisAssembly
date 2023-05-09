@@ -18,6 +18,11 @@ public record class Tests(ITestOutputHelper Output)
         => Assert.Equal("ThisAssembly.Tests", ThisAssembly.Info.Title);
 
     [Fact]
+    public void CanUseInfoDescription()
+        => Assert.Equal(@"A Description
+with a newline".ReplaceLineEndings(), ThisAssembly.Info.Description.ReplaceLineEndings());
+
+    [Fact]
     public void CanUseConstants()
         => Assert.Equal("Baz", ThisAssembly.Constants.Foo.Bar);
 
