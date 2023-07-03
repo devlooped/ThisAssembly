@@ -19,8 +19,13 @@ public record class Tests(ITestOutputHelper Output)
 
     [Fact]
     public void CanUseInfoDescription()
-        => Assert.Equal(@"A Description
-with a newline".ReplaceLineEndings(), ThisAssembly.Info.Description.ReplaceLineEndings());
+        => Assert.Equal(
+            """
+            A Description
+                  with a newline and
+                  * Some "things" with quotes
+                  // Some comments too.
+            """.ReplaceLineEndings(), ThisAssembly.Info.Description.ReplaceLineEndings());
 
     [Fact]
     public void CanUseConstants()

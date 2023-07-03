@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
 
@@ -30,7 +31,7 @@ namespace ThisAssembly
                         comment: string.IsNullOrWhiteSpace(comment) ? null : comment,
                         root: string.IsNullOrWhiteSpace(root) ? "Constants" : root!);
                 })
-                .Combine(context.CompilationProvider.Select((p, _) => p.Language));
+                .Combine(context.ParseOptionsProvider);
 
             context.RegisterSourceOutput(
                 files,
@@ -38,20 +39,24 @@ namespace ThisAssembly
 
         }
 
-        void GenerateConstant(SourceProductionContext spc, ((string name, string value, string? comment, string root), string language) args)
+        void GenerateConstant(SourceProductionContext spc, ((string name, string value, string? comment, string root), ParseOptions parse) args)
         {
-            var ((name, value, comment, root), language) = args;
+            var ((name, value, comment, root), parse) = args;
 
             var rootArea = Area.Load(new List<Constant> { new Constant(name, value, comment), }, root);
-            var file = language.Replace("#", "Sharp") + ".sbntxt";
+            var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-            var output = template.Render(new Model(rootArea), member => member.Name);
+            var model = new Model(rootArea);
+            if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 11)
+                model.RawStrings = true;
+
+            var output = template.Render(model, member => member.Name);
 
             // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
             // structures via functions.
-            if (language == LanguageNames.CSharp)
+            if (parse.Language == LanguageNames.CSharp)
             {
-                output = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseCompilationUnit(output)
+                output = SyntaxFactory.ParseCompilationUnit(output)
                     .NormalizeWhitespace()
                     .GetText()
                     .ToString();

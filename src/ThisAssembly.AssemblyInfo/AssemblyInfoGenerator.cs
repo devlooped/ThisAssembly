@@ -39,7 +39,7 @@ namespace ThisAssembly
                 .Collect();
 
             context.RegisterSourceOutput(
-                metadata.Combine(context.CompilationProvider.Select((s, _) => s.Language)),
+                metadata.Combine(context.ParseOptionsProvider),
                 GenerateSource);
         }
 
@@ -66,12 +66,15 @@ namespace ThisAssembly
             return new KeyValuePair<string, string>(key, value);
         }
 
-        static void GenerateSource(SourceProductionContext spc, (ImmutableArray<KeyValuePair<string, string>> attributes, string language) arg2)
+        static void GenerateSource(SourceProductionContext spc, (ImmutableArray<KeyValuePair<string, string>> attributes, ParseOptions parse) arg)
         {
-            var (attributes, language) = arg2;
+            var (attributes, parse) = arg;
 
             var model = new Model(attributes.ToList());
-            var file = language.Replace("#", "Sharp") + ".sbntxt";
+            if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 11)
+                model.RawStrings = true;
+
+            var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
             var output = template.Render(model, member => member.Name);
 

@@ -39,4 +39,8 @@ on the `ThisAssembly.Info` class.
     <PackageReference Include="PolySharp" Version="1.13.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="ThisAssembly.Tests"/>
+  </ItemGroup>
+
 </Project>
