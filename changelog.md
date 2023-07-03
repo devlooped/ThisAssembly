@@ -1,5 +1,18 @@
 # Changelog
 
+## [v1.3.0](https://github.com/devlooped/ThisAssembly/tree/v1.3.0) (2023-07-03)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.15...v1.3.0)
+
+:sparkles: Implemented enhancements:
+
+- Use raw string literals if supported by the target language options [\#243](https://github.com/devlooped/ThisAssembly/issues/243)
+- Use raw string literals if supported by the target language [\#244](https://github.com/devlooped/ThisAssembly/pull/244) (@kzu)
+
+:bug: Fixed bugs:
+
+- AssemblyDescriptionAttribute is not included in AssemblyInfoGenerator [\#234](https://github.com/devlooped/ThisAssembly/issues/234)
+
 ## [v1.2.15](https://github.com/devlooped/ThisAssembly/tree/v1.2.15) (2023-05-09)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.14...v1.2.15)
