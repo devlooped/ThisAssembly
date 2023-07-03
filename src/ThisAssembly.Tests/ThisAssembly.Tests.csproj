@@ -3,8 +3,16 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <TargetFramework>net7.0</TargetFramework>
+    <Multiline>
+      A Description
+      with a newline and
+      * Some "things" with quotes
+      // Some comments too.
+    </Multiline>
     <Description>A Description
-with a newline</Description>
+      with a newline and
+      * Some "things" with quotes
+      // Some comments too.</Description>
     <TargetFramework Condition="'$(BuildingInsideVisualStudio)' == 'true'">net472</TargetFramework>
     <RootNamespace>ThisAssemblyTests</RootNamespace>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -54,6 +62,10 @@ with a newline</Description>
   <ItemGroup>
     <ProjectProperty Include="Foo" />
     <ProjectProperty Include="Foo" />
+    <ProjectProperty Include="Description" />
+    <!-- Multiline values that go through .editorconfig will get truncated, unfortunately -->
+    <ProjectProperty Include="Multiline" />
+    <Constant Include="Foo.Raw" Value="$(Multiline)" Comment="$(Multiline)" />
     <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
     <Constant Include="Foo.Hello" Value="World" Comment="Comments make everything better 😍" />
     <FileConstant Include="@(None)" />
@@ -61,13 +73,14 @@ with a newline</Description>
       <Link>Included/%(Filename)%(Extension)</Link>
     </FileConstant>
     <AssemblyMetadata Include="Foo" Value="Bar" />
+    <AssemblyMetadata Include="Raw" Value="$(Multiline)" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\ThisAssembly.Strings\Model.cs" Link="Model.cs" />
   </ItemGroup>
 
-  <Import Project="..\ThisAssembly.Prerequisites.targets"/>
+  <Import Project="..\ThisAssembly.Prerequisites.targets" />
   <Import Project="..\*\*.targets" />
 
 </Project>

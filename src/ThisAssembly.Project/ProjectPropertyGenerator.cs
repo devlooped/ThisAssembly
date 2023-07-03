@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
 
@@ -30,16 +31,19 @@ namespace ThisAssembly
                 .Collect();
 
             context.RegisterSourceOutput(
-                properties.Combine(context.CompilationProvider.Select((s, _) => s.Language)),
+                properties.Combine(context.ParseOptionsProvider),
                 GenerateSource);
         }
 
-        void GenerateSource(SourceProductionContext spc, (ImmutableArray<KeyValuePair<string, string?>> properties, string language) arg2)
+        void GenerateSource(SourceProductionContext spc, (ImmutableArray<KeyValuePair<string, string?>> properties, ParseOptions parse) arg)
         {
-            var (properties, language) = arg2;
+            var (properties, parse) = arg;
 
             var model = new Model(properties);
-            var file = language.Replace("#", "Sharp") + ".sbntxt";
+            if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 11)
+                model.RawStrings = true;
+
+            var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
             var output = template.Render(model, member => member.Name);
 

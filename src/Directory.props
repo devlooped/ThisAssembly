@@ -17,6 +17,7 @@
     <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
 
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <NoWarn>MSB3277;$(NoWarn)</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Label="Build">

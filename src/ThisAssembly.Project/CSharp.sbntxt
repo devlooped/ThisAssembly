@@ -24,9 +24,15 @@ partial class ThisAssembly
     public static partial class Project
     {
         {{~ for prop in Properties ~}}
+        {{~ if RawStrings ~}}
+        public const string {{ prop.Key }} = 
+"""
+{{ prop.Value }}
+""";
+        {{~ else ~}}
         /// <summary>{{ prop.Key }} = {{ prop.Value }}</summary>
         public const string {{ prop.Key }} = @"{{ prop.Value }}";
-
+        {{~ end ~}}
         {{~ end ~}}
     }
 }

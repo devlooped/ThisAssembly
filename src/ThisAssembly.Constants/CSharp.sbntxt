@@ -22,7 +22,14 @@
     {
         {{~ for value in $0.Values ~}}
         {{- summary value ~}}
-	    public const string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} =  @"{{ value.Value }}";
+        {{~ if RawStrings ~}}
+	    public const string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} = 
+"""
+{{ value.Value }}
+""";
+        {{~ else ~}}
+	    public const string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} = @"{{ value.Value }}";
+        {{~ end ~}}
         {{~ end ~}}
 
         {{ for area in $0.NestedAreas 

@@ -24,8 +24,16 @@ partial class ThisAssembly
     public static partial class Metadata
     {
         {{~ for md in Metadata ~}}
-        /// <summary>{{ md.Key }} = {{ md.Value }}</summary>
+        /// <summary>{{ md.Key }} = {{ md.Value | string.split "\n" | array.first | string.replace "\r" "" | string.lstrip | string.rstrip }}</summary>
+        {{~ if RawStrings ~}}
+        public const string {{ md.Key }} = 
+"""
+{{ md.Value }}
+""";
+        {{~ else ~}}
+        /// <summary>{{ prop.Key }} = {{ prop.Value }}</summary>
         public const string {{ md.Key }} = @"{{ md.Value }}";
+        {{~ end ~}}
 
         {{~ end ~}}
     }

@@ -7,6 +7,7 @@ using System.Reflection;
 [DebuggerDisplay("Values = {RootArea.Values.Count}")]
 record Model(Area RootArea)
 {
+    public bool RawStrings { get; set; } = false;
     public string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 }
 

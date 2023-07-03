@@ -24,8 +24,14 @@ partial class ThisAssembly
     public static partial class Info
     {
         {{~ for prop in Properties ~}}
+        {{~ if RawStrings ~}}
+        public const string {{ prop.Key }} = 
+"""
+{{ prop.Value }}
+""";
+        {{~ else ~}}
         public const string {{ prop.Key }} = @"{{ prop.Value }}";
-
+        {{~ end ~}}
         {{~ end ~}}
     }
 }
