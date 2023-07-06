@@ -24,8 +24,8 @@ such as "Hello {name}".
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Devlooped.SponsorLink" Version="0.10.5" />
-    <PackageReference Include="NuGetizer" Version="1.0.4" />
+    <PackageReference Include="Devlooped.SponsorLink" Version="0.11.0" />
+    <PackageReference Include="NuGetizer" Version="1.0.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
     <PackageReference Include="Scriban" Version="5.7.0" Pack="false" IncludeAssets="build" />
