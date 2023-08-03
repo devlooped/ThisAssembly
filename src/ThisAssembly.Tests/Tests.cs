@@ -36,6 +36,10 @@ public record class Tests(ITestOutputHelper Output)
         => Assert.Equal(ThisAssembly.Constants.Content.Docs.License, Path.Combine("Content", "Docs", "License.md"));
 
     [Fact]
+    public void CanUseFileConstantInvalidIdentifier()
+        => Assert.Equal(ThisAssembly.Constants.Content.Docs._12._Readme_copy_, Path.Combine("Content", "Docs", "12. Readme (copy).txt"));
+
+    [Fact]
     public void CanUseFileConstantLinkedFile()
         => Assert.Equal(ThisAssembly.Constants.Included.Readme, Path.Combine("Included", "Readme.txt"));
 
