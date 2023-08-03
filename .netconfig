@@ -22,9 +22,9 @@
 	sha = 0683ee777d7d878d4bf013d7deea352685135a05
 [file ".github/dependabot.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/dependabot.yml
-	etag = 35f2134fff3b0235ff8dac8618a76198c8ef533ad2f29628bbb435cd1134d638
+	etag = fc84e2bb7a348609b75bb20145333306e2030083c6929edcc4f675907b8c52ad
 	weak
-	sha = 4f070a477b4162a280f02722ae666376ae4fcc71
+	sha = cba10bbf7bb08d841d2ddc990b67bc3f2c58fba0
 [file ".github/workflows/build.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
 	etag = c616df0877fba60002ccfc0397e9f731ddb22acbbb195a0598fedd4cac5f3135
