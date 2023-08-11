@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.4.0](https://github.com/devlooped/ThisAssembly/tree/v1.4.0) (2023-08-11)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.3.1...v1.4.0)
+
+:twisted_rightwards_arrows: Merged:
+
+- Remove current implementation of SponsorLink for now [\#256](https://github.com/devlooped/ThisAssembly/pull/256) (@kzu)
+
 ## [v1.3.1](https://github.com/devlooped/ThisAssembly/tree/v1.3.1) (2023-07-06)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.3.0...v1.3.1)
