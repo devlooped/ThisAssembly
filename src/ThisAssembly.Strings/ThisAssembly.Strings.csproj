@@ -24,7 +24,7 @@ such as "Hello {name}".
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Devlooped.SponsorLink" Version="1.0.0" />
+    <!--<PackageReference Include="Devlooped.SponsorLink" Version="1.0.0" />-->
     <PackageReference Include="NuGetizer" Version="1.0.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
@@ -37,11 +37,16 @@ such as "Hello {name}".
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="SponsorLink.cs" />
     <Compile Remove="ThisAssembly.Strings.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="ThisAssembly.Strings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="SponsorLink.cs" />
   </ItemGroup>
   
 </Project>
