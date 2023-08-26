@@ -57,9 +57,9 @@
 	sha = 0683ee777d7d878d4bf013d7deea352685135a05
 [file ".netconfig"]
 	url = https://github.com/devlooped/oss/blob/main/.netconfig
-	etag = 50445d8ade10a983734d0f5f46e1b5089bc8924051aebbf659c3f3e0755ee1e0
+	etag = 4e32d844a73b8275bafbf843d8b45d9f84d9735b8dc0b3f6747d9fad5bbcbb81
 	weak
-	sha = a4b66eb5f4dfb9704502f19f59ba33cb4855188c
+	sha = 1bacdabe42bc989b22227088b74ac8d9f3e88e3b
 [file "Directory.Build.rsp"]
 	url = https://github.com/devlooped/oss/blob/main/Directory.Build.rsp
 	etag = 6a6c6e1d3895df953abf14c82b0899e3eea75cdcd679f6212dcfea15183d73d6
