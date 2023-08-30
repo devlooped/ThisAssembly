@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.4.1](https://github.com/devlooped/ThisAssembly/tree/v1.4.1) (2023-08-30)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.4.0...v1.4.1)
+
+:bug: Fixed bugs:
+
+- Fix improper generation of C\# 11 raw strings [\#262](https://github.com/devlooped/ThisAssembly/pull/262) (@kzu)
+
+:twisted_rightwards_arrows: Merged:
+
+- Escape invalid identifiers for file constants [\#249](https://github.com/devlooped/ThisAssembly/pull/249) (@PhenX)
+
 ## [v1.4.0](https://github.com/devlooped/ThisAssembly/tree/v1.4.0) (2023-08-11)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.3.1...v1.4.0)
