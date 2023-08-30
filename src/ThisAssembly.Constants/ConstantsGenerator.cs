@@ -47,7 +47,7 @@ namespace ThisAssembly
             var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
             var template = Template.Parse(EmbeddedResource.GetContent(file), file);
             var model = new Model(rootArea);
-            if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 11)
+            if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 1100)
                 model.RawStrings = true;
 
             var output = template.Render(model, member => member.Name);
