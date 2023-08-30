@@ -40,7 +40,7 @@ namespace ThisAssembly
             var (properties, parse) = arg;
 
             var model = new Model(properties);
-            if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 11)
+            if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 1100)
                 model.RawStrings = true;
 
             var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
