@@ -18,14 +18,14 @@ record Area(string Name, string Prefix)
 {
     public List<Area> NestedAreas { get; init; } = new();
     public List<Constant> Values { get; init; } = new();
-    
-    private static string EscapeIdentifier(string identifier)
+
+    static string EscapeIdentifier(string identifier)
     {
         if (string.IsNullOrWhiteSpace(identifier))
         {
             return "_";
         }
-        
+
         var replaced = identifier
             .Select(c => SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_')
             .ToArray();
@@ -35,7 +35,7 @@ record Area(string Name, string Prefix)
         if (!SyntaxFacts.IsIdentifierStartCharacter(result[0]))
         {
             result = "_" + result;
-        }  
+        }
 
         return result;
     }
@@ -50,7 +50,7 @@ record Area(string Name, string Prefix)
             var parts = constant.Name.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(EscapeIdentifier)
                 .ToArray();
-            
+
             if (parts.Length <= 1)
             {
                 root.Values.Add(constant with { Name = EscapeIdentifier(constant.Name) });
