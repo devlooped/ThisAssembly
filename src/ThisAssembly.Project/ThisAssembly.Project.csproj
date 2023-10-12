@@ -47,7 +47,7 @@ C#:
 
   <ItemGroup>
     <!--<PackageReference Include="Devlooped.SponsorLink" Version="1.0.0" />-->
-    <PackageReference Include="NuGetizer" Version="1.1.1" />
+    <PackageReference Include="NuGetizer" Version="1.2.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 
     <PackageReference Include="Scriban" Version="5.7.0" Pack="false" IncludeAssets="build" />
