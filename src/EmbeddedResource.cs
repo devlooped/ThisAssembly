@@ -44,7 +44,7 @@ static class EmbeddedResource
             .Replace('\\', '.');
 
         var manifestResourceName = Assembly.GetExecutingAssembly()
-            .GetManifestResourceNames().FirstOrDefault(x => x.EndsWith(resourceName));
+            .GetManifestResourceNames().FirstOrDefault(x => x.EndsWith(resourceName, StringComparison.Ordinal));
 
         if (string.IsNullOrEmpty(manifestResourceName))
             throw new InvalidOperationException($"Did not find required resource ending in '{resourceName}' in assembly '{baseName}'.");
