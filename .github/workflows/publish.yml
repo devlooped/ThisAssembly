@@ -10,6 +10,8 @@ on:
 env:
   DOTNET_NOLOGO: true
   Configuration: Release
+  PackOnBuild: true
+  GeneratePackageOnBuild: true
 
 jobs:
   publish:
@@ -26,11 +28,6 @@ jobs:
 
       - name: 🧪 test
         uses: ./.github/workflows/test
-
-      - name: 📦 pack
-        run: |
-          dotnet build -m:1 -p:version=${GITHUB_REF#refs/*/v}
-          dotnet pack -m:1 -p:version=${GITHUB_REF#refs/*/v}
 
       - name: 🚀 nuget
         run: dotnet nuget push ./bin/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
