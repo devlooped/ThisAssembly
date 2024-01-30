@@ -21,7 +21,7 @@ env:
   VersionLabel: ${{ github.ref }}
   PackOnBuild: true
   GeneratePackageOnBuild: true
-
+  
 defaults:
   run:
     shell: bash
