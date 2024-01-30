@@ -1,5 +1,18 @@
 # Changelog
 
+## [v1.4.2](https://github.com/devlooped/ThisAssembly/tree/v1.4.2) (2024-01-30)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.4.1...v1.4.2)
+
+:bug: Fixed bugs:
+
+- ThisAssembly.Strings: If resource name is not a valid code identifier, compilation fails [\#83](https://github.com/devlooped/ThisAssembly/issues/83)
+
+:twisted_rightwards_arrows: Merged:
+
+- Specify comparer when search resource name [\#280](https://github.com/devlooped/ThisAssembly/pull/280) (@atifaziz)
+- Add auto-generated to `EmbeddedResource.cs` [\#278](https://github.com/devlooped/ThisAssembly/pull/278) (@viceroypenguin)
+
 ## [v1.4.1](https://github.com/devlooped/ThisAssembly/tree/v1.4.1) (2023-08-30)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.4.0...v1.4.1)
