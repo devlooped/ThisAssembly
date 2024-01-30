@@ -31,19 +31,23 @@
     <!-- Project-level icon/readme will already be part of None items -->
     <None Update="@(None -> WithMetadataValue('Filename', 'icon'))" 
           Pack="true" PackagePath="%(Filename)%(Extension)" 
+          CopyToOutputDirectory="PreserveNewest"
           Condition="'$(PackageIcon)' != ''" />
 
     <None Update="@(None -> WithMetadataValue('Filename', 'readme'))" 
           Pack="true" PackagePath="%(Filename)%(Extension)" 
+          CopyToOutputDirectory="PreserveNewest"
           Condition="'$(PackReadme)' != 'false' and '$(PackageReadmeFile)' != ''" />
     
     <!-- src-level will need explicit inclusion -->
     <None Include="$(MSBuildThisFileDirectory)icon.png" Link="icon.png" Visible="false" 
           Pack="true" PackagePath="%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
           Condition="Exists('$(MSBuildThisFileDirectory)icon.png') and !Exists('$(MSBuildProjectDirectory)\icon.png')" />
 
     <None Include="$(MSBuildThisFileDirectory)readme.md" Link="readme.md"  
           Pack="true" PackagePath="%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
           Condition="'$(PackReadme)' != 'false' and Exists('$(MSBuildThisFileDirectory)readme.md') and !Exists('$(MSBuildProjectDirectory)\readme.md')" />
   </ItemGroup>
 
