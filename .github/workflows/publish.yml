@@ -12,7 +12,7 @@ env:
   Configuration: Release
   PackOnBuild: true
   GeneratePackageOnBuild: true
-
+  
 jobs:
   publish:
     runs-on: ubuntu-latest
