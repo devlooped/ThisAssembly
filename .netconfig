@@ -22,19 +22,19 @@
 	sha = 0683ee777d7d878d4bf013d7deea352685135a05
 [file ".github/dependabot.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/dependabot.yml
-	etag = fc84e2bb7a348609b75bb20145333306e2030083c6929edcc4f675907b8c52ad
+	etag = f8080f8f04d87529e90d9a66751d304a7141196fb9734aa2d110784e52e66898
 	weak
-	sha = cba10bbf7bb08d841d2ddc990b67bc3f2c58fba0
+	sha = 35ca3f3405452465058d89005f8a88a65847c377
 [file ".github/workflows/build.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
-	etag = c616df0877fba60002ccfc0397e9f731ddb22acbbb195a0598fedd4cac5f3135
+	etag = a61119521fc9acb6cf8628053a28c70bf12dff61222a6c9e903be7abd3a6d302
 	weak
-	sha = 13d67e2cf3f786c8189364fd29332aaa7dc575dc
+	sha = ede013ab2cbf1050c226015fd2063e211b15497f
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
-	etag = 96e0860052044780f1fc9e3bdfbee09d82d5dddb8b1217d67460fc7330a64dd8
+	etag = a556d6108892aa8e7e63476f4fad3a898b3ec1deda94332dd4e89d2fb6b555ca
 	weak
-	sha = b87a8a795a4c2b6830602225c066c11108552a99
+	sha = ef852e7d2ec9a845dac272dfc479909c0bc6d9f3
 [file "license.txt"]
 	url = https://github.com/devlooped/oss/blob/main/license.txt
 	etag = 2c6335b37e4ae05eea7c01f5d0c9d82b49c488f868a8b5ba7bff7c6ff01f3994
@@ -42,14 +42,14 @@
 	sha = 0683ee777d7d878d4bf013d7deea352685135a05
 [file "src/Directory.Build.props"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.props
-	etag = 69d4b16c14d5047b3ed812dbf556b0b8d77deb86f73af04b9bd3640220056fa8
+	etag = 33cd19e0f599f444c320406da3452e9e84d28c3bb13c09e9190d9d2e7f129545
 	weak
-	sha = 6ae80a175a8f926ac5d9ffb0f6afd55d85cc9320
+	sha = b1d14c6379e5820eb2c30e08bedbdf6e9c8e8cb2
 [file "src/Directory.Build.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.targets
-	etag = 8e0f43f00e0c29b408d4ce5c821b44a9bf7dbc8d4917895cfc39f2964d839bf6
+	etag = 7cb1421f00d9f6f4c00f0ca98e485dcadb927cfa6b3f0b5d4fb212525d2ce9c0
 	weak
-	sha = 5cec43dd514aeb9050ea2ccbc546f7afa428c5b5
+	sha = 1bf1eacc7ac3920d52c8e7045bfa34abc7c05302
 [file "src/kzu.snk"]
 	url = https://github.com/devlooped/oss/blob/main/src/kzu.snk
 	etag = b8d789b5b6bea017cdcc8badcea888ad78de3e34298efca922054e9fb0e7b6b9
@@ -57,9 +57,9 @@
 	sha = 0683ee777d7d878d4bf013d7deea352685135a05
 [file ".netconfig"]
 	url = https://github.com/devlooped/oss/blob/main/.netconfig
-	etag = 4e32d844a73b8275bafbf843d8b45d9f84d9735b8dc0b3f6747d9fad5bbcbb81
+	etag = 4e5757ef53073214891df54379fe03d94a5fb1fe148ec312439184ee88d6427d
 	weak
-	sha = 1bacdabe42bc989b22227088b74ac8d9f3e88e3b
+	sha = e52bddf8b7894afe0f7ee4ad42ce8dea3527df40
 [file "Directory.Build.rsp"]
 	url = https://github.com/devlooped/oss/blob/main/Directory.Build.rsp
 	etag = 6a6c6e1d3895df953abf14c82b0899e3eea75cdcd679f6212dcfea15183d73d6
@@ -85,9 +85,9 @@
 	sha = a4b66eb5f4dfb9704502f19f59ba33cb4855188c
 [file ".github/workflows/publish.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/publish.yml
-	etag = 58601b5a71c805647ab26e84053acdfb8d174eaa93330487af8a5503753c5707
+	etag = 202e421a68b0e5fea1f07c8f8128c58d84a8a0b6cc18d923a42c76528dbee75a
 	weak
-	sha = d3022567c9ef2bc9461511e53b8abe065afdf03b
+	sha = ede013ab2cbf1050c226015fd2063e211b15497f
 [file ".github/workflows/dotnet-file.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/dotnet-file.yml
 	sha = f08c3f28e46e28eb31e70846d65e57aa9553ce56
