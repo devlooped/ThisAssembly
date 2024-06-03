@@ -31,23 +31,19 @@
     <!-- Project-level icon/readme will already be part of None items -->
     <None Update="@(None -> WithMetadataValue('Filename', 'icon'))" 
           Pack="true" PackagePath="%(Filename)%(Extension)" 
-          CopyToOutputDirectory="PreserveNewest"
           Condition="'$(PackageIcon)' != ''" />
 
     <None Update="@(None -> WithMetadataValue('Filename', 'readme'))" 
           Pack="true" PackagePath="%(Filename)%(Extension)" 
-          CopyToOutputDirectory="PreserveNewest"
           Condition="'$(PackReadme)' != 'false' and '$(PackageReadmeFile)' != ''" />
     
     <!-- src-level will need explicit inclusion -->
     <None Include="$(MSBuildThisFileDirectory)icon.png" Link="icon.png" Visible="false" 
           Pack="true" PackagePath="%(Filename)%(Extension)"
-          CopyToOutputDirectory="PreserveNewest"
           Condition="Exists('$(MSBuildThisFileDirectory)icon.png') and !Exists('$(MSBuildProjectDirectory)\icon.png')" />
 
     <None Include="$(MSBuildThisFileDirectory)readme.md" Link="readme.md"  
           Pack="true" PackagePath="%(Filename)%(Extension)"
-          CopyToOutputDirectory="PreserveNewest"
           Condition="'$(PackReadme)' != 'false' and Exists('$(MSBuildThisFileDirectory)readme.md') and !Exists('$(MSBuildProjectDirectory)\readme.md')" />
   </ItemGroup>
 
@@ -117,6 +113,11 @@
       <StronglyTypedNamespace Condition="'%(RelativeDir)' != ''">$(RootNamespace).$([MSBuild]::ValueOrDefault('%(RelativeDir)', '').Replace('\', '.').Replace('/', '.').TrimEnd('.'))</StronglyTypedNamespace>
       <StronglyTypedClassName>%(Filename)</StronglyTypedClassName>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup Label="Sponsors">
+    <!-- Funding.GitHub.[sponsorable] = PublicKey -->
+    <AssemblyMetadata Include="Funding.GitHub.devlooped" Value="MIIBigKCAYEA5inhv8QymaDBOihNi1eY+6+hcIB5qSONFZxbxxXAyOtxAdjFCPM+94gIZqM9CDrX3pyg1lTJfml/a/FZSU9dB1ii5mSX/mNHBFXn1/l/gi1ErdbkIF5YbW6oxWFxf3G5mwVXwnPfxHTyQdmWQ3YJR+A3EB4kaFwLqA6Ha5lb2ObGpMTQJNakD4oTAGDhqHMGhu6PupGq5ie4qZcQ7N8ANw8xH7nicTkbqEhQABHWOTmLBWq5f5F6RYGF8P7cl0IWl/w4YcIZkGm2vX2fi26F9F60cU1v13GZEVDTXpJ9kzvYeM9sYk6fWaoyY2jhE51qbv0B0u6hScZiLREtm3n7ClJbIGXhkUppFS2JlNaX3rgQ6t+4LK8gUTyLt3zDs2H8OZyCwlCpfmGmdsUMkm1xX6t2r+95U3zywynxoWZfjBCJf41leM9OMKYwNWZ6LQMyo83HWw1PBIrX4ZLClFwqBcSYsXDyT8/ZLd1cdYmPfmtllIXxZhLClwT5qbCWv73VAgMBAAE=" />
   </ItemGroup>
 
   <Target Name="IsPackable" Returns="@(IsPackable)">
