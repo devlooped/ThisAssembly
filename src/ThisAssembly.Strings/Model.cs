@@ -51,7 +51,8 @@ static class ResourceFile
             if (valueElement == null)
                 continue;
 
-            var comment = element.Element("comment")?.Value?
+            // Make sure we trim newlines and replace them with spaces for comments.
+            var comment = (element.Element("comment")?.Value ?? valueElement)
                 .Replace("<", "&lt;")
                 .Replace(">", "&gt;")
                 .Replace("\r\n", " ").Replace("\n", " ");
