@@ -132,4 +132,8 @@
   <data name="Named" xml:space="preserve">
     <value>Hello {first}, {last}. Should we call you {first}?</value>
   </data>
+  <data name="WithNewLine" xml:space="preserve">
+    <value>Hello, 
+World!</value>
+    </data>
 </root>
