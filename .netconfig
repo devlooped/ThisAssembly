@@ -201,13 +201,13 @@
 	weak
 [file "src/SponsorLink/SponsorLink/DiagnosticsManager.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/DiagnosticsManager.cs
-	sha = b03392dd5c11b3263196bdced454f160b9773152
-	etag = 3d2a70431e9c0f2117ea4d416aff37937c4006461ce3515194aebd6283a62066
+	sha = b2a11faac6c1c300bce8c1d45f95b585c19f2953
+	etag = 9f289f45169f35916fff1857840d4118ed134215639d6dae9016dc62004291a5
 	weak
 [file "src/SponsorLink/SponsorLink/ManifestStatus.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/ManifestStatus.cs
-	sha = 4fca946c3201d90d30e2183f699c850dcc1bf8d5
-	etag = 45dbc9ace7a3ea71ab724fdf41c0b4219f901abb0dda3bf6ed3f1743ab71d0cb
+	sha = b2a11faac6c1c300bce8c1d45f95b585c19f2953
+	etag = e46848f83c0436ba33a1c09a4060ad627a74db41bab66bb37ca40fce8a6532a7
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/SponsorLink.cs
@@ -231,8 +231,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLinkAnalyzer.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/SponsorLinkAnalyzer.cs
-	sha = e732f6a2c44a2f7940a1868a92cd66523f74ed24
-	etag = cc0226e83be527a9e52f87ce700bc23bd03b498d1a7d3192332c150add0fcfb3
+	sha = b2a11faac6c1c300bce8c1d45f95b585c19f2953
+	etag = fc96f7f5642cbf69b35b7e8de1756822580315f0cee61e47da3b2b1b03f68e1a
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorStatus.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/SponsorStatus.cs
@@ -246,8 +246,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/ThisAssembly.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/ThisAssembly.cs
-	sha = a0ae7272f31c766ebb129ea38c11c01df93b6b5d
-	etag = 70fd44d0e043ef00ee81d54a9f7d7fc0e0b22bd67c430b0427fbb5e21858f25d
+	sha = b2a11faac6c1c300bce8c1d45f95b585c19f2953
+	etag = 978269025f58e2bae872af25fdfd94659e234e8365e3014c18b1b20fdcd155bf
 	weak
 [file "src/SponsorLink/SponsorLink/Tracing.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/Tracing.cs

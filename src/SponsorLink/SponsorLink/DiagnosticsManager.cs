@@ -2,7 +2,6 @@
 #nullable enable
 using System;
 using System.Collections.Concurrent;
-using System.Diagnostics.CodeAnalysis;
 using Humanizer;
 using Microsoft.CodeAnalysis;
 

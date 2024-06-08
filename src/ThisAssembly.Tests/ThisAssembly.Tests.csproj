@@ -79,6 +79,6 @@
   </ItemGroup>
 
   <Import Project="..\ThisAssembly.Prerequisites.targets" />
-  <Import Project="..\*\*.targets" />
+  <Import Project="..\*\ThisAssembly*.targets" />
 
 </Project>
