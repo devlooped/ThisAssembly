@@ -51,4 +51,6 @@ on the `ThisAssembly.Info` class.
     <None Include="SponsorLink.cs" />
   </ItemGroup>
 
+  <Import Project="..\Shared\Shared.projitems" Label="Shared" />
+
 </Project>

@@ -1,0 +1,33 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Incremental source generator interface appeared first on Roslyn 4.0.1, see 
+         https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.iincrementalgenerator?view=roslyn-dotnet-4.0.1 -->
+    <ThisAssemblyMinimumRoslynVersion Condition="'$(ThisAssemblyMinimumRoslynVersion)' == ''">4.0</ThisAssemblyMinimumRoslynVersion>
+  </PropertyGroup>
+
+  <Target Name="_ThisAssemblyCheckCompilerVersion" BeforeTargets="CoreCompile">
+
+    <!-- Version comparison functions require MSBuild 16.5+ -->
+    <Error Text="ThisAssembly requires MSBuild 16.5 or greater."
+            Condition="$([System.Version]::Parse('16.5.0').CompareTo($([System.Version]::Parse($(MSBuildVersion))))) == 1" />
+
+    <PropertyGroup>
+      <!-- CompilerApiVersion comes from Microsoft.Managed.Core.CurrentVersions.targets -->
+      <RoslynVersion Condition="'$(CompilerApiVersion)' != ''">$(CompilerApiVersion.Substring(6))</RoslynVersion>
+      <RoslynVersion Condition="'$(RoslynVersion)' == ''">0.0</RoslynVersion>
+    </PropertyGroup>
+
+    <!-- Don't enforce compiler version for F#, since it's not surfacing the CompilerApiversion at all. 
+         See https://github.com/dotnet/sdk/blob/main/src/Tasks/Microsoft.NET.Build.Tasks/targets/Microsoft.PackageDependencyResolution.targets#L214 -->
+    <Warning Code="THIS001"
+             Text="ThisAssembly requires Compiler API (Roslyn) version $(ThisAssemblyMinimumRoslynVersion) or greater."
+             Condition="$([MSBuild]::VersionLessThan('$(RoslynVersion)', '$(ThisAssemblyMinimumRoslynVersion)')) and 
+                        ('$(Language)' == 'C#' Or '$(Language)' == 'VB')" />
+  </Target>
+
+  <PropertyGroup>
+    <ThisAssemblyPrerequisitesImported>true</ThisAssemblyPrerequisitesImported>
+  </PropertyGroup>
+
+</Project>

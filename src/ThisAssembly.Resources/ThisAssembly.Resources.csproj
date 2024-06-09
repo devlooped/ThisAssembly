@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -40,11 +40,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\EmbeddedResource.cs" />
+    <None Include="SponsorLink.cs" />
   </ItemGroup>
 
+  <Import Project="..\Shared\Shared.projitems" Label="Shared" />
+
   <ItemGroup>
-    <None Include="SponsorLink.cs" />
+    <EmbeddedResource Include="@(Compile -> WithMetadataValue('Filename', 'EmbeddedResource'))" />
   </ItemGroup>
 
 </Project>

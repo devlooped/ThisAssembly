@@ -48,5 +48,7 @@ such as "Hello {name}".
   <ItemGroup>
     <None Include="SponsorLink.cs" />
   </ItemGroup>
+
+  <Import Project="..\Shared\Shared.projitems" Label="Shared" />
   
 </Project>

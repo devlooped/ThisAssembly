@@ -78,7 +78,7 @@
     <Compile Include="..\ThisAssembly.Strings\Model.cs" Link="Model.cs" />
   </ItemGroup>
 
-  <Import Project="..\ThisAssembly.Prerequisites.targets" />
+  <Import Project="..\Shared\ThisAssembly.Prerequisites.targets" />
   <Import Project="..\*\ThisAssembly*.targets" />
 
 </Project>
