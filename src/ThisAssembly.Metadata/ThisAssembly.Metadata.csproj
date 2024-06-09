@@ -40,15 +40,7 @@ C#:
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="SponsorLink.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="ThisAssembly.Metadata.targets" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="SponsorLink.cs" />
   </ItemGroup>
 
   <ItemGroup>

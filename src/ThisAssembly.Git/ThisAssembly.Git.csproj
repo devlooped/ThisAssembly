@@ -26,14 +26,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="SponsorLink.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="SponsorLink.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ThisAssembly.Constants\ThisAssembly.Constants.csproj" />
   </ItemGroup>
 
