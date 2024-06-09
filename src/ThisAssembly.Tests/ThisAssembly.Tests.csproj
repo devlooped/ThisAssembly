@@ -28,7 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ThisAssembly.Constants\ThisAssembly.Constants.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ThisAssembly.Project\ThisAssembly.Project.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ThisAssembly.Resources\ThisAssembly.Resources.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ThisAssembly.Strings\ThisAssembly.Strings.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
@@ -72,6 +72,7 @@
     </FileConstant>
     <AssemblyMetadata Include="Foo" Value="Bar" />
     <AssemblyMetadata Include="Raw" Value="$(Multiline)" />
+    <AssemblyMetadata Include="Root.Foo.Bar" Value="Baz" Comment="Comment" />
   </ItemGroup>
 
   <ItemGroup>

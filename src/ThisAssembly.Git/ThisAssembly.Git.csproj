@@ -5,6 +5,7 @@
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
     <DevelopmentDependency>true</DevelopmentDependency>
+    <PackBuildOutput>false</PackBuildOutput>
   </PropertyGroup>
 
   <PropertyGroup>

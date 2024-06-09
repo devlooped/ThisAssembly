@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
+    <PackBuildOutput>false</PackBuildOutput>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -54,13 +55,10 @@ C#:
     <!--<PackageReference Include="Devlooped.SponsorLink" Version="1.0.0" />-->
     <PackageReference Include="NuGetizer" Version="1.2.2" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
+  </ItemGroup>
 
-    <PackageReference Include="Scriban" Version="5.10.0" Pack="false" IncludeAssets="build" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" Pack="false" />
-    <PackageReference Include="PolySharp" Version="1.14.1" PrivateAssets="All" />
+  <ItemGroup>
+    <ProjectReference Include="..\ThisAssembly.Constants\ThisAssembly.Constants.csproj" />
   </ItemGroup>
 
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
