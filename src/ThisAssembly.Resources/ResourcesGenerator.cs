@@ -16,7 +16,7 @@ namespace ThisAssembly
         {
             context.RegisterPostInitializationOutput(
                 spc => spc.AddSource(
-                    "ThisAssembly.Resources.EmbeddedResource.cs",
+                    "ThisAssembly.EmbeddedResource.cs",
                     SourceText.From(EmbeddedResource.GetContent("EmbeddedResource.cs"), Encoding.UTF8)));
 
             var files = context.AdditionalTextsProvider

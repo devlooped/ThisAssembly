@@ -10,9 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		src\Directory.props = src\Directory.props
 		src\Directory.targets = src\Directory.targets
-		src\Directory.targets.user = src\Directory.targets.user
 		readme.md = readme.md
-		src\ThisAssembly.Prerequisites.targets = src\ThisAssembly.Prerequisites.targets
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly", "src\ThisAssembly\ThisAssembly.csproj", "{D3A47732-4937-4B6E-BCD1-66896D04E20D}"
@@ -39,6 +37,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Resources", "src\ThisAssembly.Resources\ThisAssembly.Resources.csproj", "{14D0C5BA-8410-4454-87A2-7BF5993E1EA2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Git", "src\ThisAssembly.Git\ThisAssembly.Git.csproj", "{F34F8470-7C60-4BB8-ACB5-569D6D0F6A46}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "src\Shared\Shared.shproj", "{8E0F2A43-C9AF-4E46-BF70-CF8645371C12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,5 +91,15 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF2DC9F-5F77-4F6E-8804-CFF5892CD064}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\Shared\Shared.projitems*{14d0c5ba-8410-4454-87a2-7bf5993e1ea2}*SharedItemsImports = 5
+		src\Shared\Shared.projitems*{31c53cce-13fc-4890-803a-85cd146b909b}*SharedItemsImports = 5
+		src\Shared\Shared.projitems*{3e7158b5-bfef-4416-8226-9096c7c98268}*SharedItemsImports = 5
+		src\Shared\Shared.projitems*{8e0f2a43-c9af-4e46-bf70-cf8645371c12}*SharedItemsImports = 13
+		src\Shared\Shared.projitems*{a91c7a07-ffd6-4d19-bd78-b0bc8f9267db}*SharedItemsImports = 5
+		src\Shared\Shared.projitems*{b5007099-8be7-490b-9e9a-18cc50c92c29}*SharedItemsImports = 5
+		src\Shared\Shared.projitems*{cddf83bc-70be-46c3-bd79-524d868a2812}*SharedItemsImports = 5
+		src\Shared\Shared.projitems*{f34f8470-7c60-4bb8-acb5-569d6d0f6a46}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
