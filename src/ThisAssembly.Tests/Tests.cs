@@ -48,6 +48,10 @@ public record class Tests(ITestOutputHelper Output)
         => Assert.Equal("Bar", ThisAssembly.Metadata.Foo);
 
     [Fact]
+    public void CanUseHierarchicalMetadata()
+        => Assert.Equal("Baz", ThisAssembly.Metadata.Root.Foo.Bar);
+
+    [Fact]
     public void CanUseProjectProperty()
         => Assert.Equal("Bar", ThisAssembly.Project.Foo);
 
