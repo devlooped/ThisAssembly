@@ -19,10 +19,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="SponsorLink.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="ThisAssembly.Resources.targets" />
   </ItemGroup>
 
@@ -39,14 +35,10 @@
     <PackageReference Include="PolySharp" Version="1.14.1" PrivateAssets="All" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="SponsorLink.cs" />
-  </ItemGroup>
-
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
 
   <ItemGroup>
-    <EmbeddedResource Include="@(Compile -> WithMetadataValue('Filename', 'EmbeddedResource'))" />
+    <EmbeddedResource Include="@(Compile -&gt; WithMetadataValue('Filename', 'EmbeddedResource'))" />
   </ItemGroup>
 
 </Project>

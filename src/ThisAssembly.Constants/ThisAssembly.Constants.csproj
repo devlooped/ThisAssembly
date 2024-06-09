@@ -38,20 +38,12 @@ C#:
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="SponsorLink.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="CSharp.sbntxt" />
     <None Remove="ThisAssembly.Constants.targets" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="CSharp.sbntxt" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="SponsorLink.cs" />
   </ItemGroup>
 
   <ItemGroup>

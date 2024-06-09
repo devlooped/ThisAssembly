@@ -37,16 +37,11 @@ such as "Hello {name}".
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="SponsorLink.cs" />
     <Compile Remove="ThisAssembly.Strings.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="ThisAssembly.Strings.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="SponsorLink.cs" />
   </ItemGroup>
 
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
