@@ -28,18 +28,22 @@
         {{~ if value.IsIndexedFormat ~}}
         {{- summary value ~}}
 	    public static string {{ value.Id }}(
-            {{- for arg in value.Format -}}
+            {{- for arg in value.Args -}}
             object arg{{~ arg ~}}{{ if !for.last }}, {{ end }}
             {{- end -}}) 
             => string.Format(
                 CultureInfo.CurrentCulture,
-                Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Name }}"),
+                Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Name }}")
+                {{~ if value.HasArgFormat ~}}
+                {{- for arg in value.Format }}
+                .Replace("{{ arg.Value }}", "{%{{}%}{{ for.index }}{%{}}%}"){{- end -}}
+                {{~ end ~}},
                 {{ for arg in value.Format -}}
-                arg{{- arg -}}{{- if !for.last -}}, {{ end }}{{- end -}});
+                {{- if arg.Format -}}((IFormattable)arg{{- arg.Arg -}}).ToString("{{ arg.Format }}", CultureInfo.CurrentCulture){{- else -}}arg{{- arg.Arg -}}{{- end -}}{{- if !for.last -}}, {{ end }}{{- end -}});
         {{~ else if value.IsNamedFormat ~}}
         {{- summary value ~}}
 	    public static string {{ value.Id }}(
-            {{- for arg in value.Format -}}
+            {{- for arg in value.Args -}}
             object {{ arg ~}}{{ if !for.last }}, {{ end }}
             {{- end -}}) 
             => string.Format(
@@ -48,9 +52,9 @@
                     .GetResourceManager("{{ $1 }}")
                     .GetString("{{ value.Name }}")
                     {{- for arg in value.Format }}
-                    .Replace("{%{{}%}{{ arg }}{%{}}%}", "{%{{}%}{{ for.index }}{%{}}%}"){{- end -}},
+                    .Replace("{{ arg.Value }}", "{%{{}%}{{ for.index }}{%{}}%}"){{- end -}},
                 {{ for arg in value.Format -}}
-                {{- arg -}}{{- if !for.last -}}, {{ end }}{{- end -}});
+                {{- if arg.Format -}}((IFormattable){{- arg.Arg -}}).ToString("{{ arg.Format }}", CultureInfo.CurrentCulture){{- else -}}{{- arg.Arg -}}{{- end -}}{{- if !for.last -}}, {{ end }}{{- end -}});
 
         {{~ end ~}}
         {{~ end ~}}

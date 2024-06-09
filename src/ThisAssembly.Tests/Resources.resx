@@ -132,8 +132,14 @@
   <data name="Named" xml:space="preserve">
     <value>Hello {first}, {last}. Should we call you {first}?</value>
   </data>
+  <data name="WithIndexedFormat" xml:space="preserve">
+    <value>Year {0:yyyy}, Month {0:MM}</value>
+  </data>
+  <data name="WithNamedFormat" xml:space="preserve">
+    <value>Year {date:yyyy}, Month {date:MM}</value>
+  </data>
   <data name="WithNewLine" xml:space="preserve">
     <value>Hello, 
 World!</value>
-    </data>
+  </data>
 </root>

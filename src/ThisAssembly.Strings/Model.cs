@@ -14,7 +14,7 @@ record Model(ResourceArea RootArea, string ResourceName)
 
 static class ResourceFile
 {
-    static readonly Regex FormatExpression = new("{(?<name>[^{}]+)}", RegexOptions.Compiled);
+    static readonly Regex FormatExpression = new("{(?<arg>[^:{}]+)(?::(?<format>[^{}]+))?}", RegexOptions.Compiled);
     internal static readonly Regex NameReplaceExpression = new(@"\||:|;|\>|\<", RegexOptions.Compiled);
 
     public static ResourceArea Load(string fileName, string rootArea)
@@ -115,7 +115,12 @@ static class ResourceFile
             value.Format.AddRange(FormatExpression
                     .Matches(resourceValue)
                     .OfType<Match>()
-                    .Select(match => match.Groups["name"].Value)
+                    .Select(match =>
+                    {
+                        var arg = match.Groups["arg"].Value;
+                        var format = match.Groups["format"].Value;
+                        return new ArgFormat(match.Value, arg, string.IsNullOrWhiteSpace(format) ? null : format);
+                    })
                     .Distinct());
         }
 
@@ -135,10 +140,14 @@ record ResourceValue(string Id, string Name, string? Raw)
 {
     public string? Value => Raw?.Replace(Environment.NewLine, "")?.Replace("<", "&lt;")?.Replace(">", "&gt;");
     public string? Comment { get; init; }
-    public bool HasFormat => Format != null && Format.Count > 0;
+    public bool HasFormat => Format.Count > 0;
+    public bool HasArgFormat => Format.Any(x => x.Format != null);
     // We either have *all* named or all indexed. Can't mix. We'll skip generating 
     // methods for mixed ones and report as an analyzer error on the Resx.
-    public bool IsNamedFormat => HasFormat && Format.All(x => !int.TryParse(x, out _));
-    public bool IsIndexedFormat => HasFormat && Format.All(x => int.TryParse(x, out _));
-    public List<string> Format { get; } = new List<string>();
+    public bool IsNamedFormat => HasFormat && Format.All(x => !int.TryParse(x.Arg, out _));
+    public bool IsIndexedFormat => HasFormat && Format.All(x => int.TryParse(x.Arg, out _));
+    public List<ArgFormat> Format { get; } = [];
+    public HashSet<string> Args => new(Format.Select(x => x.Arg));
 }
+
+record ArgFormat(string Value, string Arg, string? Format);

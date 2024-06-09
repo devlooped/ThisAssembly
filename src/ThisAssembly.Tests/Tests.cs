@@ -9,6 +9,7 @@ namespace ThisAssemblyTests;
 
 public record class Tests(ITestOutputHelper Output)
 {
+    DateTime dxt = DateTime.Now;
     [Fact]
     public void CanReadResourceFile()
         => Assert.NotNull(ResourceFile.Load("Resources.resx", "Strings"));
@@ -62,6 +63,14 @@ public record class Tests(ITestOutputHelper Output)
     [Fact]
     public void CanUseStringsIndexedArguments()
         => Assert.NotNull(ThisAssembly.Strings.Indexed("hello", "world"));
+
+    [Fact]
+    public void CanUseStringsNamedFormattedArguments()
+        => Assert.Equal("Year 2020, Month 03", ThisAssembly.Strings.WithNamedFormat(new DateTime(2020, 3, 20)));
+
+    [Fact]
+    public void CanUseStringsIndexedFormattedArguments()
+        => Assert.Equal("Year 2020, Month 03", ThisAssembly.Strings.WithIndexedFormat(new DateTime(2020, 3, 20)));
 
     [Fact]
     public void CanUseStringResource()
