@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <PropertyGroup Label="SponsorLink">
-    <DevloopedJwk>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)devlooped.pub.jwk'))</DevloopedJwk>
     <!-- Default funding product the Product, which already part of ThisAssembly -->
     <FundingProduct Condition="'$(FundingProduct)' == ''">$(Product)</FundingProduct>
     <!-- Default prefix is the joined upper-case letters in the product name (i.e. for ThisAssembly, TA) -->
@@ -37,10 +36,32 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AssemblyMetadata Include="Funding.GitHub.devlooped" Value="$(DevloopedJwk)" />
     <Constant Include="Funding.Product" Value="$(FundingProduct)" />
     <Constant Include="Funding.Prefix" Value="$(FundingPrefix)" />
     <Constant Include="Funding.Grace" Value="$(FundingGrace)" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\SponsorLink.targets" Link="SponsorLink.targets" />
+  </ItemGroup>
+
+  <Target Name="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes" Inputs="$(MSBuildProjectFullPath)" Outputs="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk">
+    <Exec Command="pwsh -nop -f $(MSBuildThisFileDirectory)..\jwk.ps1" ConsoleToMSBuild="true" EchoOff="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="DevloopedJwk"/>
+      <Output TaskParameter="ExitCode" PropertyName="MSBuildLastExitCode" />
+    </Exec>
+    <Error Text="$(DevloopedJwk)" Condition="'$(MSBuildLastExitCode)' != '0'" />
+    <WriteLinesToFile File="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk" Lines="$(DevloopedJwk)" Overwrite="true" />
+  </Target>
+
+  <Target Name="ReadDevloopedJwk" DependsOnTargets="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes">
+    <PropertyGroup>
+      <!-- Read public key we validate manifests against -->
+      <DevloopedJwk>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk'))</DevloopedJwk>
+    </PropertyGroup>
+    <ItemGroup>
+      <AssemblyMetadata Include="Funding.GitHub.devlooped" Value="$(DevloopedJwk)" />
+    </ItemGroup>
+  </Target>
 
 </Project>

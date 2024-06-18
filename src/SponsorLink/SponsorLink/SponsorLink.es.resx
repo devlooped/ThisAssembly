@@ -119,16 +119,16 @@
   </resheader>
   <data name="Unknown_Description" xml:space="preserve">
     <value>Patrocinar los proyectos en que dependes asegura que se mantengan activos, y que recibas el apoyo que necesitas. También es muy económico y está disponible en todo el mundo!
-Por favor considera apoyar el proyecto patrocinando en {links} y ejecutando posteriormente 'gh sponsors sync {spaced}'.</value>
+Por favor considera apoyar el proyecto patrocinando en {links} y ejecutando posteriormente 'sponsor sync {spaced}'.</value>
   </data>
   <data name="Unknown_Message" xml:space="preserve">
-    <value>No se pudo determinar el estado de su patrocinio. Funcionalidades exclusivas para patrocinadores pueden no estar disponibles.</value>
+    <value>Por favor considere apoyar {0} patrocinando @{1} 🙏</value>
   </data>
   <data name="Unknown_Title" xml:space="preserve">
     <value>Estado de patrocinio desconocido</value>
   </data>
   <data name="Expired_Description" xml:space="preserve">
-    <value>Funcionalidades exclusivas para patrocinadores pueden no estar disponibles. Ejecuta 'gh sponsors sync {spaced}' y, opcionalmente, habilita la sincronización automática.</value>
+    <value>Funcionalidades exclusivas para patrocinadores pueden no estar disponibles. Ejecuta 'sponsor sync {spaced}' y, opcionalmente, habilita la sincronización automática.</value>
   </data>
   <data name="Expired_Message" xml:space="preserve">
     <value>El estado de patrocino ha expirado y la sincronización automática no está habilitada.</value>
@@ -140,13 +140,13 @@ Por favor considera apoyar el proyecto patrocinando en {links} y ejecutando post
     <value>Eres un verdadero héroe. Tu patrocinio ayuda a mantener el proyecto vivo y próspero 🙏.</value>
   </data>
   <data name="Sponsor_Message" xml:space="preserve">
-    <value>Gracias por apoyar a {0} con tu patrocinio de {1} 💟!</value>
+    <value>Gracias por apoyar a {0} con tu patrocinio 💟!</value>
   </data>
   <data name="Sponsor_Title" xml:space="preserve">
     <value>Eres un patrocinador del proyecto, eres lo máximo 💟!</value>
   </data>
   <data name="Expiring_Description" xml:space="preserve">
-    <value>El estado de patrocino ha expirado y estás en un período de gracia. Ejecuta 'gh sponsors sync {spaced}' y, opcionalmente, habilita la sincronización automática.</value>
+    <value>El estado de patrocino ha expirado y estás en un período de gracia. Ejecuta 'sponsor sync {spaced}' y, opcionalmente, habilita la sincronización automática.</value>
   </data>
   <data name="Expiring_Message" xml:space="preserve">
     <value>El estado de patrocino necesita actualización periódica y la sincronización automática no está habilitada.</value>

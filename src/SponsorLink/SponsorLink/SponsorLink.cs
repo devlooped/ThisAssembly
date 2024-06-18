@@ -82,7 +82,7 @@ static partial class SponsorLink
 
         foreach (var value in values)
         {
-            if (string.IsNullOrWhiteSpace(value.jwk) || string.IsNullOrEmpty(value.jwk))
+            if (string.IsNullOrWhiteSpace(value.jwt) || string.IsNullOrEmpty(value.jwk))
                 continue;
 
             if (Validate(value.jwt, value.jwk, out var token, out var claims, false) == ManifestStatus.Valid && claims != null)

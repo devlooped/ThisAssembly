@@ -15,7 +15,11 @@
 
     <!-- Roslyn caches analyzers aggressively so we are better off using a very dynamic version number 
          for local builds where a quick devloop is key. We bump version every 10 seconds -->
-    <Version>42.42.$([System.Math]::Floor($([MSBuild]::Divide($([System.DateTime]::Now.TimeOfDay.TotalSeconds), 10))))</Version>
+    <Epoc>$([System.DateTime]::Parse("2024-03-15"))</Epoc>
+    <TotalDays>$([System.DateTime]::UtcNow.Subtract($(Epoc)).TotalDays)</TotalDays>
+    <Days>$([System.Math]::Truncate($(TotalDays)))</Days>
+    <Seconds>$([System.Math]::Floor($([MSBuild]::Divide($([System.DateTime]::UtcNow.TimeOfDay.TotalSeconds), 10))))</Seconds>
+    <Version>42.$(Days).$(Seconds)</Version>
 
     <Product>SponsorableLib</Product>
   </PropertyGroup>
