@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -24,9 +25,7 @@ such as "Hello {name}".
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="Devlooped.SponsorLink" Version="1.0.0" />-->
     <PackageReference Include="NuGetizer" Version="1.2.2" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
 
     <PackageReference Include="Scriban" Version="5.10.0" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -41,6 +40,7 @@ such as "Hello {name}".
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="ThisAssembly.Strings.cs" />
     <EmbeddedResource Include="ThisAssembly.Strings.cs" />
   </ItemGroup>
 

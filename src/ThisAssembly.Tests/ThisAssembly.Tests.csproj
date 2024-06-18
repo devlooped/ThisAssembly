@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Multiline>
       A Description
       with a newline and
@@ -41,6 +41,9 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="xunit" Version="2.8.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1" />
+
+    <PackageReference Include="Humanizer.Core" Version="2.14.1" PrivateAssets="all" GeneratePathProperty="true" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" PrivateAssets="all" GeneratePathProperty="true" />
   </ItemGroup>
 
   <ItemGroup>
@@ -80,7 +83,32 @@
     <Compile Include="..\ThisAssembly.Strings\Model.cs" Link="Model.cs" />
   </ItemGroup>
 
-  <Import Project="..\Shared\ThisAssembly.Prerequisites.targets" />
+  <Target Name="AddSponsorLinkAnalyzerDependencies" BeforeTargets="CoreCompile" DependsOnTargets="ResolveLockFileCopyLocalFiles">
+    <ItemGroup>
+      <ReferenceCopyLocalAssemblies Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll' 
+        And !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase))
+        And !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('ThisAssembly', StringComparison.OrdinalIgnoreCase))" />
+      <Analyzer Include="@(ReferenceCopyLocalAssemblies)" Condition="
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CodeAnalysis', StringComparison.OrdinalIgnoreCase)) And
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase)) And
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.', StringComparison.OrdinalIgnoreCase))"
+      />
+      <!-- Brings in System/Microsoft.IdentityModel, System.Text.Encodings.Web, System.Text.Json  -->
+      <Analyzer Include="@(ReferenceCopyLocalAssemblies)" Condition="
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.Text', StringComparison.OrdinalIgnoreCase))"
+      />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="RenderVersion" AfterTargets="Build">
+    <GetVersion>
+      <Output TaskParameter="Version" PropertyName="Version2" />
+    </GetVersion>
+    <Message importance="high" Text="Version: $(Version2)" />
+  </Target>
+
   <Import Project="..\*\ThisAssembly*.targets" />
 
 </Project>

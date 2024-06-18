@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <PackageReference Include="NuGetizer" Version="1.2.2" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
     <Compile Remove="..\*.cs" />
   </ItemGroup>
 

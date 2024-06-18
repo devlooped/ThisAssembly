@@ -63,7 +63,7 @@
       <SourceLinkUrl>@(_ThisAssemblyGitSourceRoot -> '%(SourceLinkUrl)')</SourceLinkUrl>
     </PropertyGroup>
 
-    <Warning Code="THIS002" Text="A valid SourceLink provider does not seem to be installed for the current repository/project. Values will be empty." Condition="'$(SourceLinkUrl)' == ''" />
+    <Warning Code="TA001" Text="A valid SourceLink provider does not seem to be installed for the current repository/project. Some values may be empty." Condition="'$(SourceLinkUrl)' == ''" />
     
     <PropertyGroup Condition="'$(RepositoryBranch)' == '' and '$(RepositoryRoot)' != ''">
       <!-- We may not be in CI at all. If we got a git repo root, we can directly read HEAD -->
@@ -81,11 +81,11 @@
       <EmptySourceControlValue>[pending build]</EmptySourceControlValue>
     </PropertyGroup>
     <ItemGroup Condition="'$(EnableSourceControlManagerQueries)' != 'true'">
-      <Constant Include="Branch" Value="[pending build]" Root="Git" />
-      <Constant Include="Commit" Value="[pending build]" Root="Git" />
-      <Constant Include="Sha" Value="[pending build]" Root="Git" />
-      <Constant Include="Root" Value="[pending build]" Root="Git" />
-      <Constant Include="Url" Value="[pending build]" Root="Git" />
+      <Constant Include="Branch" Value="$(EmptySourceControlValue)" Root="Git" />
+      <Constant Include="Commit" Value="$(EmptySourceControlValue)" Root="Git" />
+      <Constant Include="Sha" Value="$(EmptySourceControlValue)" Root="Git" />
+      <Constant Include="Root" Value="$(EmptySourceControlValue)" Root="Git" />
+      <Constant Include="Url" Value="$(EmptySourceControlValue)" Root="Git" />
     </ItemGroup>
     <ItemGroup Condition="'$(EnableSourceControlManagerQueries)' == 'true'">
       <Constant Include="Branch" Value="$(RepositoryBranch)" Root="Git" />
@@ -96,5 +96,4 @@
     </ItemGroup>
   </Target>
 
-  <Import Condition="'$(ThisAssemblyPrerequisitesImported)' != 'true'" Project="ThisAssembly.Prerequisites.targets" />
 </Project>

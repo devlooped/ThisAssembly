@@ -1,4 +1,5 @@
 <Project>
+  <Import Project="..\buildTransitive\Devlooped.Sponsors.targets" Condition="Exists('..\buildTransitive\Devlooped.Sponsors.targets')"/>
 
   <ItemGroup>
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
@@ -53,5 +54,4 @@
     </ItemGroup>
   </Target>
 
-  <Import Condition="'$(ThisAssemblyPrerequisitesImported)' != 'true'" Project="ThisAssembly.Prerequisites.targets" />
 </Project>

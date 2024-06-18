@@ -7,10 +7,4 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.Common.props" />
   <Import Project="Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
-  <ItemGroup>
-    <PackageFile Remove="ThisAssembly.Prerequisites.targets" />
-  </ItemGroup>
-  <ItemGroup>
-    <UpToDateCheck Remove="ThisAssembly.Prerequisites.targets" />
-  </ItemGroup>
 </Project>
