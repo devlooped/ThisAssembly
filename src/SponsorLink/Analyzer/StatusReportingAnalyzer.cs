@@ -3,7 +3,6 @@ using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Devlooped.Sponsors.SponsorLink;
-using static ThisAssembly.Constants;
 
 namespace Analyzer;
 

@@ -9,6 +9,8 @@
     <MergeAnalyzerAssemblies Condition="'$(MergeAnalyzerAssemblies)' == '' and '$(Configuration)' == 'Release'">true</MergeAnalyzerAssemblies>
     <!-- If we are going to merge files, we need to copy local -->
     <CopyLocalLockFileAssemblies Condition="'$(MergeAnalyzerAssemblies)' == 'true'">true</CopyLocalLockFileAssemblies>
+    <!-- Make Resources visible to intellisense -->
+    <CoreCompileDependsOn>CoreResGen;$(CoreCompileDependsOn)</CoreCompileDependsOn>
 
     <!-- Default funding product the Product, which already part of ThisAssembly -->
     <FundingProduct Condition="'$(FundingProduct)' == ''">$(Product)</FundingProduct>
@@ -19,19 +21,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Constant Include="Funding.Product" Value="$(FundingProduct)" />
-    <Constant Include="Funding.Prefix" Value="$(FundingPrefix)" />
-    <Constant Include="Funding.Grace" Value="$(FundingGrace)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)SponsorLink/*.cs"
              Exclude="$(MSBuildThisFileDirectory)SponsorLink/bin/**;$(MSBuildThisFileDirectory)SponsorLink/obj/**"
              Source="SponsorLink"/>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)SponsorLink/*.resx"
                       Exclude="$(MSBuildThisFileDirectory)SponsorLink/bin/**;$(MSBuildThisFileDirectory)SponsorLink/obj/**"
                       Source="SponsorLink"
-                      ManifestResourceName="Devlooped.%(Filename)"/>
+                      ManifestResourceName="Devlooped.Sponsors.%(Filename)"/>
+    <EmbeddedResource Update="$(MSBuildThisFileDirectory)SponsorLink/Resources.resx" 
+                      StronglyTypedManifestPrefix="Devlooped.Sponsors" 
+                      StronglyTypedClassName="%(Filename)" 
+                      StronglyTypedNamespace="Devlooped.Sponsors" 
+                      StronglyTypedLanguage="$(Language)" />
     <None Include="$(MSBuildThisFileDirectory)SponsorLink/buildTransitive/*.*"
           Source="SponsorLink"
           PackagePath="buildTransitive/%(Filename)%(Extension)"/>
@@ -80,6 +81,27 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" PrivateAssets="all" Pack="false" />
     <PackageReference Include="ILRepack" Version="2.0.33" PrivateAssets="all"  Pack="false" />
   </ItemGroup>
+
+  <Target Name="EmitFunding" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">
+    <PropertyGroup>
+      <SponsorLinkPartial>namespace Devlooped.Sponsors%3B
+
+partial class SponsorLink
+{
+    public partial class Funding
+    {
+        public const string Product = "$(FundingProduct)"%3B
+        public const string Prefix = "$(FundingPrefix)"%3B
+        public const int Grace = $(FundingGrace)%3B
+    }
+}
+</SponsorLinkPartial>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(IntermediateOutputPath)SponsorLink.g.cs" Lines="$(SponsorLinkPartial)" WriteOnlyWhenDifferent="true" Overwrite="true" />
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)SponsorLink.g.cs" />
+    </ItemGroup>
+  </Target>
 
   <Target Name="ILRepack" AfterTargets="CoreCompile" BeforeTargets="CopyFilesToOutputDirectory"
           Inputs="@(IntermediateAssembly -&gt; '%(FullPath)')"

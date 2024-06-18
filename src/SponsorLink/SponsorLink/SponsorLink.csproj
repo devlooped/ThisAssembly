@@ -5,6 +5,7 @@
     <Product>SponsorLink</Product>
     <ImplicitUsings>disable</ImplicitUsings>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <CoreCompileDependsOn>CoreResGen;$(CoreCompileDependsOn)</CoreCompileDependsOn>
   </PropertyGroup>
 
   <PropertyGroup Label="SponsorLink">
@@ -24,30 +25,41 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" Pack="false" />
     <PackageReference Include="PolySharp" Version="1.14.1" PrivateAssets="all" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" PrivateAssets="all" />
-    <PackageReference Include="ThisAssembly.Constants" Version="1.4.3" PrivateAssets="all" />
-    <PackageReference Include="ThisAssembly.Git" Version="1.4.3" PrivateAssets="all" />
-    <PackageReference Include="ThisAssembly.Strings" Version="1.4.3" PrivateAssets="all" />
-    <PackageReference Include="ThisAssembly.Project" Version="1.4.3" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="SponsorLink.es.resx" ManifestResourceName="Devlooped.%(Filename)" />
-    <EmbeddedResource Update="SponsorLink.resx" ManifestResourceName="Devlooped.%(Filename)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Constant Include="Funding.Product" Value="$(FundingProduct)" />
-    <Constant Include="Funding.Prefix" Value="$(FundingPrefix)" />
-    <Constant Include="Funding.Grace" Value="$(FundingGrace)" />
+    <EmbeddedResource Update="Resources.es.resx" ManifestResourceName="Devlooped.Sponsors.%(Filename)"/>
+    <EmbeddedResource Update="Resources.resx" ManifestResourceName="Devlooped.Sponsors.%(Filename)" StronglyTypedManifestPrefix="Devlooped.Sponsors" StronglyTypedClassName="%(Filename)" StronglyTypedNamespace="Devlooped.Sponsors" StronglyTypedLanguage="$(Language)" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\SponsorLink.targets" Link="SponsorLink.targets" />
   </ItemGroup>
 
+  <Target Name="EmitFunding" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">
+    <PropertyGroup>
+      <SponsorLinkPartial>namespace Devlooped.Sponsors%3B
+
+partial class SponsorLink
+{
+    public partial class Funding
+    {
+        public const string Product = "$(FundingProduct)"%3B
+        public const string Prefix = "$(FundingPrefix)"%3B
+        public const int Grace = $(FundingGrace)%3B
+    }
+}
+</SponsorLinkPartial>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(IntermediateOutputPath)SponsorLink.g.cs" Lines="$(SponsorLinkPartial)" WriteOnlyWhenDifferent="true" Overwrite="true" />
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)SponsorLink.g.cs" />
+    </ItemGroup>
+  </Target>
+
   <Target Name="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes" Inputs="$(MSBuildProjectFullPath)" Outputs="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk">
     <Exec Command="pwsh -nop -f $(MSBuildThisFileDirectory)..\jwk.ps1" ConsoleToMSBuild="true" EchoOff="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="DevloopedJwk"/>
+      <Output TaskParameter="ConsoleOutput" PropertyName="DevloopedJwk" />
       <Output TaskParameter="ExitCode" PropertyName="MSBuildLastExitCode" />
     </Exec>
     <Error Text="$(DevloopedJwk)" Condition="'$(MSBuildLastExitCode)' != '0'" />

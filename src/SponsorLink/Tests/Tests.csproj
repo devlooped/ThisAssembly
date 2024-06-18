@@ -23,6 +23,21 @@
     <Analyzer Include="..\Analyzer\bin\$(Configuration)\netstandard2.0\*.dll" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
   <Target Name="Sample_GitConfig" Condition="'$(SourceControlInformationFeatureSupported)' == 'true'" DependsOnTargets="InitializeSourceControlInformation">
     <!-- Follows recommendation from Microsoft.Common.CurrentVersion.targets on how to depend on SCC info. -->
     <ItemGroup>
