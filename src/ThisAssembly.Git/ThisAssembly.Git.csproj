@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -30,9 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="Devlooped.SponsorLink" Version="1.0.0" />-->
     <PackageReference Include="NuGetizer" Version="1.2.2" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
   </ItemGroup>
 
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />

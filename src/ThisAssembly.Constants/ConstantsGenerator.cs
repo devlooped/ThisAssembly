@@ -19,7 +19,6 @@ namespace ThisAssembly
                 .Where(x =>
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
                     && itemType == "Constant")
-                .Where(x => x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Value", out var value) && value != null)
                 .Select((x, ct) =>
                 {
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Value", out var value);
@@ -32,7 +31,7 @@ namespace ThisAssembly
 
                     return (
                         name: Path.GetFileName(x.Left.Path),
-                        value: value!,
+                        value: value ?? "",
                         comment: string.IsNullOrWhiteSpace(comment) ? null : comment,
                         root: string.IsNullOrWhiteSpace(root) ? "Constants" : root!);
                 })

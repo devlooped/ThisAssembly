@@ -6,8 +6,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)**/*$(DefaultLanguageSourceExtension)" Source="Shared" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)**/*.resx" Source="Shared" />
-    <None Include="$(MSBuildThisFileDirectory)**/*" Exclude="$(MSBuildThisFileDirectory)*.projitems;$(MSBuildThisFileDirectory)*.shproj" Source="Shared" />
-    <None Remove="$(MSBuildThisFileDirectory)**/*$(DefaultLanguageSourceExtension)" />
+    <None Include="$(MSBuildThisFileDirectory)**/*" Exclude="$(MSBuildThisFileDirectory)*.projitems;$(MSBuildThisFileDirectory)*.shproj" Source="Shared" />    <None Remove="$(MSBuildThisFileDirectory)**/*$(DefaultLanguageSourceExtension)" />
     <None Remove="$(MSBuildThisFileDirectory)**/*.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -19,13 +18,6 @@
     </EmbeddedResource>
     <None Update="@(None -&gt; WithMetadataValue('Source', 'Shared'))">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <!-- Add prerequisites to package -->
-    <None Update="$(MSBuildThisFileDirectory)*.props;$(MSBuildThisFileDirectory)*.targets" Condition="'$(PackSharedTargets)' != 'false'">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <PackagePath>build\$(TargetFramework)\%(Filename)%(Extension)</PackagePath>
     </None>
   </ItemGroup>
 </Project>

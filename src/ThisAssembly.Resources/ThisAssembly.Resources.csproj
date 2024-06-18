@@ -8,6 +8,7 @@
     <!-- We cannot use ThisAssembly.Resources as the assembly name, or for whatever 
          reason, it's never added as an analyzer :/ -->
     <AssemblyName>ThisAssembly.Resource</AssemblyName>
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -19,13 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ThisAssembly.Resources.targets" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!--<PackageReference Include="Devlooped.SponsorLink" Version="1.0.0" />-->
     <PackageReference Include="NuGetizer" Version="1.2.2" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
 
     <PackageReference Include="Scriban" Version="5.10.0" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

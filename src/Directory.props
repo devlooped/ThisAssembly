@@ -4,6 +4,7 @@
   <PropertyGroup Label="NuGet">
     <PackageTags>dotnet roslyn</PackageTags>
     <PackOnBuild>true</PackOnBuild>
+    <DevelopmentDependency>true</DevelopmentDependency>
     <ThisAssemblyMinimumRoslynVersion>4.0</ThisAssemblyMinimumRoslynVersion>
     <PackFolder>analyzers/dotnet/roslyn$(ThisAssemblyMinimumRoslynVersion)/cs</PackFolder>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
@@ -18,6 +19,8 @@
 
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <NoWarn>MSB3277;$(NoWarn)</NoWarn>
+
+    <Product>ThisAssembly</Product>
   </PropertyGroup>
 
   <PropertyGroup Label="Build">
