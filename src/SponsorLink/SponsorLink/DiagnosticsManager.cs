@@ -18,9 +18,7 @@ class DiagnosticsManager
     /// Acceses the diagnostics dictionary for the current <see cref="AppDomain"/>.
     /// </summary>
     ConcurrentDictionary<string, Diagnostic> Diagnostics
-    {
-        get => AppDomainDictionary.Get<ConcurrentDictionary<string, Diagnostic>>(nameof(Diagnostics));
-    }
+        => AppDomainDictionary.Get<ConcurrentDictionary<string, Diagnostic>>(nameof(Diagnostics));
 
     /// <summary>
     /// Creates a descriptor from well-known diagnostic kinds.

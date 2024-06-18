@@ -64,18 +64,12 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                 // NOTE: even if we don't report the diagnostic, we still set the status so other analyzers can use it.
                 ctx.RegisterCompilationEndAction(ctx =>
                 {
+                    // NOTE: for multiple projects with the same product name, we only report one diagnostic, 
+                    // so it's expected to NOT get a diagnostic back. Also, we don't want to report 
+                    // multiple diagnostics for each project in a solution that uses the same product.
                     if (Diagnostics.Pop(Funding.Product) is Diagnostic diagnostic)
                     {
                         ctx.ReportDiagnostic(diagnostic);
-                    }
-                    else
-                    {
-                        // This should never happen and would be a bug.
-                        Debug.Assert(true, "We should have provided a diagnostic of some kind for " + Funding.Product);
-                        // We'll report it as unknown as a fallback for now.
-                        ctx.ReportDiagnostic(Diagnostic.Create(descriptors[SponsorStatus.Unknown], null,
-                            properties: ImmutableDictionary.Create<string, string?>().Add(nameof(SponsorStatus), nameof(SponsorStatus.Unknown)),
-                            Funding.Product, Sponsorables.Keys.Humanize(Resources.Or)));
                     }
                 });
             }
