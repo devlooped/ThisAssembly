@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>SponsorableLib.Analyzers</AssemblyName>
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsRoslynComponent>true</IsRoslynComponent>
     <PackFolder>analyzers/dotnet/roslyn4.0</PackFolder>
@@ -27,6 +28,10 @@
 
   <ItemGroup>
     <None Update="buildTransitive\SponsorableLib.targets" Pack="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="C:\Code\devlooped.oss\src\SponsorLink\SponsorLink\ThisAssembly.cs" />
   </ItemGroup>
 
 </Project>

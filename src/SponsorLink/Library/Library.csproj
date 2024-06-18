@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>SponsorableLib</AssemblyName>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackNone>true</PackNone>
     <PackageId>SponsorableLib</PackageId>

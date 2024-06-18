@@ -7,10 +7,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Humanizer;
+using Humanizer.Localisation;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Devlooped.Sponsors.SponsorLink;
-using static ThisAssembly.Constants;
 
 namespace Devlooped.Sponsors;
 
@@ -20,7 +20,6 @@ namespace Devlooped.Sponsors;
 [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
 public class SponsorLinkAnalyzer : DiagnosticAnalyzer
 {
-    static readonly int graceDays = int.Parse(Funding.Grace);
     static readonly Dictionary<SponsorStatus, DiagnosticDescriptor> descriptors = new()
     {
         // Requires:
@@ -76,7 +75,7 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                         // We'll report it as unknown as a fallback for now.
                         ctx.ReportDiagnostic(Diagnostic.Create(descriptors[SponsorStatus.Unknown], null,
                             properties: ImmutableDictionary.Create<string, string?>().Add(nameof(SponsorStatus), nameof(SponsorStatus.Unknown)),
-                            Funding.Product, Sponsorables.Keys.Humanize(ThisAssembly.Strings.Or)));
+                            Funding.Product, Sponsorables.Keys.Humanize(Resources.Or)));
                     }
                 });
             }
@@ -93,13 +92,13 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
             // report unknown, either unparsed manifest or one with no expiration (which we never emit).
             Diagnostics.Push(Funding.Product, Diagnostic.Create(descriptors[SponsorStatus.Unknown], null,
                 properties: ImmutableDictionary.Create<string, string?>().Add(nameof(SponsorStatus), nameof(SponsorStatus.Unknown)),
-                Funding.Product, Sponsorables.Keys.Humanize(ThisAssembly.Strings.Or)));
+                Funding.Product, Sponsorables.Keys.Humanize(Resources.Or)));
             return SponsorStatus.Unknown;
         }
         else if (exp < DateTime.Now)
         {
             // report expired or expiring soon if still within the configured days of grace period
-            if (exp.AddDays(graceDays) < DateTime.Now)
+            if (exp.AddDays(Funding.Grace) < DateTime.Now)
             {
                 // report expiring soon
                 Diagnostics.Push(Funding.Product, Diagnostic.Create(descriptors[SponsorStatus.Expiring], null,

@@ -2,6 +2,7 @@
 #nullable enable
 using System;
 using System.Collections.Concurrent;
+using System.Globalization;
 using Humanizer;
 using Microsoft.CodeAnalysis;
 
@@ -92,23 +93,23 @@ class DiagnosticsManager
 
     static DiagnosticDescriptor CreateSponsor(string[] sponsorable, string prefix) => new(
         $"{prefix}100",
-        ThisAssembly.Strings.Sponsor.Title,
-        ThisAssembly.Strings.Sponsor.MessageFormat,
+        Resources.Sponsor_Title,
+        Resources.Sponsor_Message,
         "SponsorLink",
         DiagnosticSeverity.Info,
         isEnabledByDefault: true,
-        description: ThisAssembly.Strings.Sponsor.Description,
+        description: Resources.Sponsor_Description,
         helpLinkUri: "https://github.com/devlooped#sponsorlink",
         "DoesNotSupportF1Help");
 
     static DiagnosticDescriptor CreateUnknown(string[] sponsorable, string product, string prefix) => new(
         $"{prefix}101",
-        ThisAssembly.Strings.Unknown.Title,
-        ThisAssembly.Strings.Unknown.MessageFormat,
+        Resources.Unknown_Title,
+        Resources.Unknown_Message,
         "SponsorLink",
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: ThisAssembly.Strings.Unknown.Description(
+        description: string.Format(CultureInfo.CurrentCulture, Resources.Unknown_Description,
             sponsorable.Humanize(x => $"https://github.com/sponsors/{x}"),
             string.Join(" ", sponsorable)),
         helpLinkUri: "https://github.com/devlooped#sponsorlink",
@@ -116,23 +117,23 @@ class DiagnosticsManager
 
     static DiagnosticDescriptor CreateExpiring(string[] sponsorable, string prefix) => new(
          $"{prefix}103",
-         ThisAssembly.Strings.Expiring.Title,
-         ThisAssembly.Strings.Expiring.MessageFormat,
+         Resources.Expiring_Title,
+         Resources.Expiring_Message,
          "SponsorLink",
          DiagnosticSeverity.Warning,
          isEnabledByDefault: true,
-         description: ThisAssembly.Strings.Expiring.Description(string.Join(" ", sponsorable)),
+         description: string.Format(CultureInfo.CurrentCulture, Resources.Expiring_Description, string.Join(" ", sponsorable)),
          helpLinkUri: "https://github.com/devlooped#autosync",
          "DoesNotSupportF1Help", WellKnownDiagnosticTags.NotConfigurable);
 
     static DiagnosticDescriptor CreateExpired(string[] sponsorable, string prefix) => new(
          $"{prefix}104",
-         ThisAssembly.Strings.Expired.Title,
-         ThisAssembly.Strings.Expired.MessageFormat,
+         Resources.Expired_Title,
+         Resources.Expired_Message,
          "SponsorLink",
          DiagnosticSeverity.Warning,
          isEnabledByDefault: true,
-         description: ThisAssembly.Strings.Expired.Description(string.Join(" ", sponsorable)),
+         description: string.Format(CultureInfo.CurrentCulture, Resources.Expired_Description, string.Join(" ", sponsorable)),
          helpLinkUri: "https://github.com/devlooped#autosync",
          "DoesNotSupportF1Help", WellKnownDiagnosticTags.NotConfigurable);
 }
