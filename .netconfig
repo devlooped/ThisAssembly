@@ -12,9 +12,9 @@
 	weak
 [file ".editorconfig"]
 	url = https://github.com/devlooped/oss/blob/main/.editorconfig
-	etag = ba2655b8b3ce5491b1c0eea5e0af201a085c48e07542bb9ec2c928084944ea86
+	etag = 7298c6450967975a8782b5c74f3071e1910fc59686e48f9c9d5cd7c68213cf59
 	weak
-	sha = f571a42eac3cad554810dad15139ff390db5e1db
+	sha = e81ab754b366d52d92bd69b24bef1d5b1c610634
 [file ".gitattributes"]
 	url = https://github.com/devlooped/oss/blob/main/.gitattributes
 	etag = 7acb32f5fa6d4ccd9c824605a7c2b8538497f0068c165567807d393dcf4d6bb7
@@ -27,9 +27,9 @@
 	sha = 49661dbf0720cde93eb5569be7523b5912351560
 [file ".github/workflows/build.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/build.yml
-	etag = 6efc7d096b25bb4bbeffe7960a1194f1ceb5d21abeda85d28b55594b648ab44a
+	etag = d9fa5d91dc601f10d19099abb55c86df065cd1c23b1f6fab98ad883cb443bf5c
 	weak
-	sha = 5fb172362c767bef7c36478f1a6bdc264723f8f9
+	sha = 14deaea5cecc64df51781d29891a2f67caf8be16
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
 	etag = a9c37ae312afac14b78436a7d018af4483d88736b5f780576f2c5a0b3f14998c
@@ -45,9 +45,9 @@
 	skip
 [file "src/Directory.Build.props"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.props
-	etag = a4925eb815bbcecc022de8d3245db069573d96ac5ecdf5f0e604f06b5577b01e
+	etag = f177eb767aaa6a347da43ff7ff419c9a0736c562cb171e17ded8007a1945a8b0
 	weak
-	sha = 6e96c592c7b44bfda10404b9f90e4b8fab299249
+	sha = 14deaea5cecc64df51781d29891a2f67caf8be16
 [file "src/Directory.Build.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/Directory.Build.targets
 	etag = 7cb1421f00d9f6f4c00f0ca98e485dcadb927cfa6b3f0b5d4fb212525d2ce9c0
@@ -88,9 +88,9 @@
 	sha = 5fb172362c767bef7c36478f1a6bdc264723f8f9
 [file ".github/workflows/publish.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/publish.yml
-	etag = 9ea4083894308a610742488923d2a44778ebba6ca73fb13424647d9a82c918b4
+	etag = 4e9a9885a28ce867fd6139e1ae23735ad0073775145af96ff7d96d047d750973
 	weak
-	sha = 5fb172362c767bef7c36478f1a6bdc264723f8f9
+	sha = 14deaea5cecc64df51781d29891a2f67caf8be16
 [file ".github/workflows/dotnet-file.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/dotnet-file.yml
 	sha = 7afe350f7e80a230e922db026d4e1198ba15cae1
@@ -166,8 +166,8 @@
 	weak
 [file "src/SponsorLink/Directory.Build.props"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/Directory.Build.props
-	sha = a0ae7272f31c766ebb129ea38c11c01df93b6b5d
-	etag = 6823e1e914ecedd174276e3d53517cc0b332bb47c56402a9512cfa6aeeeb067e
+	sha = 3b943f5aa59f33141d1c0fffcb215446d594ad53
+	etag = 0c7737411744012078642dbfc174af3f2ac7dc9f7b8ea4423981ae38753a5be4
 	weak
 [file "src/SponsorLink/Directory.Build.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/Directory.Build.targets
@@ -176,8 +176,8 @@
 	weak
 [file "src/SponsorLink/Library/Library.csproj"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/Library/Library.csproj
-	sha = a0ae7272f31c766ebb129ea38c11c01df93b6b5d
-	etag = 3720f8ae0605aa64df8f6c1d9769969162175b79c93a21024653f210a42348e6
+	sha = 55124bc610b2dcad9efb343bdffc79c959170593
+	etag = b6940fb01376a096bdbfc7dab0a89b37078c1b8581a98a2b2eea213c7e69565c
 	weak
 [file "src/SponsorLink/Library/MyClass.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/Library/MyClass.cs
@@ -191,8 +191,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink.targets
-	sha = 7cda4a18313b0b38b26c0152e1007cdbb9b6ba3a
-	etag = d725bd9cfa33f35224e91748f64237e4dc66270f7e5ec7c835b78164531ae3db
+	sha = c4830fc3b1aa78ec98d1d2ea4fed86ef0b7b803c
+	etag = d60260e2749e1ff1012b6a9bb7411f1bc717e258b6477f0751b3204a102de91a
 	weak
 [file "src/SponsorLink/SponsorLink/AppDomainDictionary.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/AppDomainDictionary.cs
@@ -211,23 +211,23 @@
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/SponsorLink.cs
-	sha = 4fca946c3201d90d30e2183f699c850dcc1bf8d5
-	etag = 96e1b1b28bfb2372bd5ffcc6bdef65ee926822b3489ce65be4e5a400884dce21
+	sha = 55124bc610b2dcad9efb343bdffc79c959170593
+	etag = 28178198489bf9b72f8a400563950194a06f7ce55ff4a016535eb1be35fa70b8
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.csproj"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/SponsorLink.csproj
-	sha = a0ae7272f31c766ebb129ea38c11c01df93b6b5d
-	etag = ffaea0b580d8dccd672e749a5efd11fda318c484ca4a34428ff81524ec80ec4b
+	sha = c4830fc3b1aa78ec98d1d2ea4fed86ef0b7b803c
+	etag = 4b33abd9075646a6272cafa55ebae6a0ef972a1953ad6eebae45163e5177d5ff
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.es.resx"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/SponsorLink.es.resx
-	sha = a0ae7272f31c766ebb129ea38c11c01df93b6b5d
-	etag = ded7de7a2624b335beb462763e3580413da21e80c8b40b4c773ca46c7af4e859
+	sha = 8d29f013595aab6d965f1b91eb8b0ecaa0246366
+	etag = 7f623861748c4e7f534fa2118eb66ad3056fd5b28cd5d1d19e9348d0236ffe29
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.resx"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/SponsorLink.resx
-	sha = a0ae7272f31c766ebb129ea38c11c01df93b6b5d
-	etag = 7d9e89ef2cf762a6119c9c6c2ed2517b71a546838151c005400301fde8def266
+	sha = 8d29f013595aab6d965f1b91eb8b0ecaa0246366
+	etag = 47a7b843e07a8ec858579f435b59548056b14d00d6653dc41ef5807613925f31
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLinkAnalyzer.cs"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/SponsorLinkAnalyzer.cs
@@ -256,13 +256,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/buildTransitive/Devlooped.Sponsors.targets"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/buildTransitive/Devlooped.Sponsors.targets
-	sha = a0ae7272f31c766ebb129ea38c11c01df93b6b5d
-	etag = 72ec691a085dc34f946627f7038a82569e44f0b63a9f4a7bd60f0f7b52fd198f
-	weak
-[file "src/SponsorLink/SponsorLink/devlooped.pub.jwk"]
-	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/devlooped.pub.jwk
-	sha = a0ae7272f31c766ebb129ea38c11c01df93b6b5d
-	etag = cf884781ff88b4d096841e3169282762a898b2050c9b5dac0013bc15bdbee267
+	sha = 55124bc610b2dcad9efb343bdffc79c959170593
+	etag = 46842d44ece3d55285bc30a6b22ac21c1c35d3b0c451aa5285d4ca4564b8698c
 	weak
 [file "src/SponsorLink/SponsorLink/sponsorable.md"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink/sponsorable.md
@@ -318,4 +313,14 @@
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/readme.md
 	sha = 827a1d18bf0245978d81bcd3d52e9e6f1584d1ef
 	etag = 079b4aedba2aa9851e609b569f25c55db8d5922e3dbb1adc22611ce4d6cfe465
+	weak
+[file "src/SponsorLink/Library/readme.md"]
+	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/Library/readme.md
+	sha = 55124bc610b2dcad9efb343bdffc79c959170593
+	etag = 5002ac8c5bbeee60c13937a32c1b6c1a5dbf0065617c8f2550e6eca6fded256d
+	weak
+[file "src/SponsorLink/jwk.ps1"]
+	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/jwk.ps1
+	sha = c4830fc3b1aa78ec98d1d2ea4fed86ef0b7b803c
+	etag = f399e05ecb56adaf41d2545171f299a319142b17dd09fc38e452ca8c5d13bd0d
 	weak

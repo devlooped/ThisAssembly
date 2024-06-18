@@ -10,9 +10,6 @@
     <!-- If we are going to merge files, we need to copy local -->
     <CopyLocalLockFileAssemblies Condition="'$(MergeAnalyzerAssemblies)' == 'true'">true</CopyLocalLockFileAssemblies>
 
-    <!-- Read public key we validate manifests against -->
-    <DevloopedJwk>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)SponsorLink/devlooped.pub.jwk'))</DevloopedJwk>
-
     <!-- Default funding product the Product, which already part of ThisAssembly -->
     <FundingProduct Condition="'$(FundingProduct)' == ''">$(Product)</FundingProduct>
     <!-- Default prefix is the joined upper-case letters in the product name (i.e. for ThisAssembly, TA) -->
@@ -22,7 +19,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AssemblyMetadata Include="Funding.GitHub.devlooped" Value="$(DevloopedJwk)" />
     <Constant Include="Funding.Product" Value="$(FundingProduct)" />
     <Constant Include="Funding.Prefix" Value="$(FundingPrefix)" />
     <Constant Include="Funding.Grace" Value="$(FundingGrace)" />
@@ -123,7 +119,7 @@
       <!--<ILRepackArgs>$(ILRepackArgs) "/lib:$(NetstandardDirectory)"</ILRepackArgs> -->
       <!-- This is needed for ilrepack to find netstandard.dll, which is referenced by the System.Text.Json assembly -->
     </PropertyGroup>
-    <Exec Command="&quot;$(ILRepack)&quot; $(ILRepackArgs)" WorkingDirectory="$(MSBuildProjectDirectory)\$(OutputPath)" StandardErrorImportance="high" StandardOutputImportance="low" ConsoleToMSBuild="true" ContinueOnError="true">
+    <Exec Command='"$(ILRepack)" $(ILRepackArgs)' WorkingDirectory="$(MSBuildProjectDirectory)\$(OutputPath)" StandardErrorImportance="high" IgnoreStandardErrorWarningFormat="true" StandardOutputImportance="low" ConsoleToMSBuild="true" ContinueOnError="true">
       <Output TaskParameter="ConsoleOutput" PropertyName="ILRepackOutput" />
       <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
     </Exec>
@@ -136,6 +132,25 @@
       <MergedAssembliesToRemove Remove="@(ReferenceToPreserve)" />
     </ItemGroup>
     <Delete Files="@(MergedAssembliesToRemove -&gt; '$(MSBuildProjectDirectory)\$(OutputPath)%(Filename)%(Extension)')" Condition="Exists('$(MSBuildProjectDirectory)\$(OutputPath)%(Filename)%(Extension)')" />
+  </Target>
+
+  <Target Name="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes" Inputs="$(MSBuildProjectFullPath)" Outputs="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk">
+    <Exec Command="pwsh -nop -f $(MSBuildThisFileDirectory)jwk.ps1" ConsoleToMSBuild="true" EchoOff="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="RawJwk"/>
+      <Output TaskParameter="ExitCode" PropertyName="MSBuildLastExitCode" />
+    </Exec>
+    <Error Text="$(RawJwk)" Condition="'$(MSBuildLastExitCode)' != '0'" />
+    <WriteLinesToFile File="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk" Lines="$(RawJwk)" Overwrite="true" />
+  </Target>
+
+  <Target Name="ReadDevloopedJwk" DependsOnTargets="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes">
+    <PropertyGroup>
+      <!-- Read public key we validate manifests against -->
+      <DevloopedJwk>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk'))</DevloopedJwk>
+    </PropertyGroup>
+    <ItemGroup>
+      <AssemblyMetadata Include="Funding.GitHub.devlooped" Value="$(DevloopedJwk)" />
+    </ItemGroup>
   </Target>
 
 </Project>
