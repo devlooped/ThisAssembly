@@ -7,8 +7,8 @@
     <ShowSponsorLinkInProject Condition="$(ShowSponsorLinkInProject) == '' and '$(TargetFramework)' == 'netstandard2.0'">true</ShowSponsorLinkInProject>
     <!-- This ensures we expose only the main assembly in the Dependencies > Analyzers node -->
     <MergeAnalyzerAssemblies Condition="'$(MergeAnalyzerAssemblies)' == '' and '$(Configuration)' == 'Release'">true</MergeAnalyzerAssemblies>
-    <!-- If we are going to merge files, we need to copy local -->
-    <CopyLocalLockFileAssemblies Condition="'$(MergeAnalyzerAssemblies)' == 'true'">true</CopyLocalLockFileAssemblies>
+    <!-- Whether we merge files or not, dependencies will need to be copy-local -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <!-- Make Resources visible to intellisense -->
     <CoreCompileDependsOn>CoreResGen;$(CoreCompileDependsOn)</CoreCompileDependsOn>
 
@@ -172,6 +172,14 @@ partial class SponsorLink
     </PropertyGroup>
     <ItemGroup>
       <AssemblyMetadata Include="Funding.GitHub.devlooped" Value="$(DevloopedJwk)" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Make sure dependencies are available in the package when not merging (i.e. local dev)  -->
+  <Target Name="PackCopyLocalLockFileAssemblies" Condition="'$(MergeAnalyzerAssemblies)' != 'true'" 
+          BeforeTargets="GetPackageContents" DependsOnTargets="ReferenceCopyLocalPathsOutputGroup">
+    <ItemGroup>
+      <PackageFile Include="@(ReferenceCopyLocalPathsOutputGroupOutput)" PackFolder="$(PackFolder)" />
     </ItemGroup>
   </Target>
 
