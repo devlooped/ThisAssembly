@@ -66,6 +66,7 @@
     <Constant Include="Foo.Raw" Value="$(Multiline)" Comment="$(Multiline)" />
     <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
     <Constant Include="Foo.Hello" Value="World" Comment="Comments make everything better 😍" />
+    <Constant Include="WithSemiColon" Value="A;B;C" />
     <FileConstant Include="@(None)" />
     <FileConstant Update="@(FileConstant -&gt; WithMetadataValue('Filename', 'Readme'))">
       <Link>Included/%(Filename)%(Extension)</Link>

@@ -102,4 +102,8 @@ public record class Tests(ITestOutputHelper Output)
         Assert.NotEmpty(ThisAssembly.Git.Branch);
         Output.WriteLine(ThisAssembly.Git.Branch);
     }
+
+    [Fact]
+    public void CanUseSemicolonsInConstant()
+        => Assert.Equal("A;B;C", ThisAssembly.Constants.WithSemiColon);
 }

@@ -25,6 +25,11 @@ namespace ThisAssembly
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Value", out var value);
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Comment", out var comment);
                     x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Root", out var root);
+
+                    // Revert auto-escaping due to https://github.com/dotnet/roslyn/issues/51692
+                    if (value != null && value.StartsWith("|") && value.EndsWith("|"))
+                        value = value[1..^1].Replace('|', ';');
+
                     return (
                         name: Path.GetFileName(x.Left.Path),
                         value: value!,
