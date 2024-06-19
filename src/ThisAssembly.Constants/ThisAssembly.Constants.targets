@@ -44,7 +44,12 @@
           BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
           DependsOnTargets="PrepareResourceNames;PrepareConstants">
     <ItemGroup>
-      <AdditionalFiles Include="@(Constant)" SourceItemType="Constant" />
+      <!-- Automatically handle escaping of ; due to https://github.com/dotnet/roslyn/issues/51692 -->
+      <Constant Update="@(Constant)" Condition="$([MSBuild]::ValueOrdefault('%(Constant.Value)', '').Contains(';'))">
+        <Value>|$([MSBuild]::ValueOrdefault('%(Constant.Value)', '').Replace(';', '|'))|</Value>
+      </Constant>
+
+      <AdditionalFiles Include="@(Constant)" SourceItemType="Constant" />      
     </ItemGroup>
   </Target>
 
