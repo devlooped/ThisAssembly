@@ -329,3 +329,8 @@
 	sha = c879f25bf483086725c8a29f104555644e6ee542
 	etag = 13d1bb8b0de32a8c9b5dbdc806a036ed89d423cd7c0be187b8c56055c9bf7783
 	weak
+[file "src/SponsorLink/SponsorLink.Tests.targets"]
+	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/SponsorLink.Tests.targets
+	sha = 81ba912310dd4b723c7a0103a76cb71b183983b1
+	etag = cf6deba5b5cdadb5b2ea6b8533331da49afd3c841db2932a45618627ffc4ff9a
+	weak
