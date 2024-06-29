@@ -8,8 +8,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.6.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.6.2" PrivateAssets="all" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="xunit" Version="2.8.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1" />
@@ -20,7 +19,7 @@
   <ItemGroup>
     <!-- This project reference allows debugging the source generator/analyzer project -->
     <ProjectReference Include="..\Analyzer\Analyzer.csproj" Aliases="Analyzer" />
-    <Analyzer Include="..\Analyzer\bin\$(Configuration)\netstandard2.0\*.dll" />
+    <Analyzer Include="..\Analyzer\bin\$(Configuration)\netstandard2.0\*.dll" NuGetPackageId="SponsorableLib" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +51,11 @@
     </ItemGroup>
   </Target>
 
+  <!-- Simulates importing SponsorableLib.targets -->
   <Import Project="..\SponsorLink\buildTransitive\Devlooped.Sponsors.targets" />
+  <ItemGroup>
+    <!-- Bring in the analyzer file to report installation time -->
+    <AdditionalFiles Include="@(Analyzer -> WithMetadataValue('NuGetPackageId', 'SponsorableLib'))" />
+  </ItemGroup>
 
 </Project>

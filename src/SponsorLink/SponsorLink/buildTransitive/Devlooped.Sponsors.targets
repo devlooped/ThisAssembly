@@ -20,31 +20,47 @@
     <!-- All GH manifests. For now, we don't support other funding platforms -->
     <SponsorManifest Include="$(SponsorLinkHome)/github/*.jwt" />
 
-    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SourceItemType" />
+    <CompilerVisibleItemMetadata Include="SponsorManifest" MetadataName="ItemType" />
+    <CompilerVisibleItemMetadata Include="Analyzer" MetadataName="ItemType" />
+    <CompilerVisibleItemMetadata Include="Analyzer" MetadataName="NuGetPackageId" />
+
     <!-- To quickly exit if true -->
     <CompilerVisibleProperty Include="DesignTimeBuild" />
   </ItemGroup>
 
   <PropertyGroup>
-    <SLDependsOn>SL_CollectDependencies</SLDependsOn>
+    <SLDependsOn>SL_CollectDependencies;SL_CollectSponsorableAnalyzer</SLDependsOn>
     <SLDependsOn Condition="'$(BuildingInsideVisualStudio)' == 'true' and '$(DesignTimeBuild)' != 'true'">$(SLDependsOn);SL_CheckAutoSync;SL_ReadAutoSyncEnabled;SL_SyncSponsors</SLDependsOn>
   </PropertyGroup>
 
   <Target Name="SL" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" DependsOnTargets="$(SLDependsOn)">
     <ItemGroup>
       <!-- Make manifests visible to analyzers -->
-      <AdditionalFiles Include="@(SponsorManifest -> Distinct())" SourceItemType="SponsorManifest" />
+      <AdditionalFiles Include="@(SponsorManifest -> Distinct())" />
     </ItemGroup>
   </Target>
 
   <Target Name="SL_CollectDependencies" DependsOnTargets="_GenerateRestoreGraph">
     <!-- Makes direct dependencies visible to the compiler, so that sponsoring checks can selectively skip indirectly referenced analyzer -->
+    <!-- An analyzer can check for the presense of a global property named after the package id (which will contain the instaled version) -->
     <ItemGroup>
       <CompilerVisibleProperty Include="$([MSBuild]::ValueOrDefault('%(_RestoreGraphEntry.Id)', '').Replace('.', '_'))" />
     </ItemGroup>
     <CreateProperty Value="%(_RestoreGraphEntry.VersionRange)" Condition="%(_RestoreGraphEntry.Type) == 'Dependency'" >
       <Output TaskParameter="Value" PropertyName="$([MSBuild]::ValueOrDefault('%(_RestoreGraphEntry.Id)', '').Replace('.', '_'))"/>
     </CreateProperty>
+  </Target>
+
+  <Target Name="SL_CollectSponsorableAnalyzer" Inputs="@(SponsorablePackageId)" Outputs="|%(SponsorablePackageId.Identity)|">
+    <PropertyGroup>
+      <SponsorablePackageId>%(SponsorablePackageId.Identity)</SponsorablePackageId>
+    </PropertyGroup>
+    <ItemGroup>
+       <!--Used to determine installation time, for example, by looking up the analyzer assembly in additional files with: 
+              build_metadata.Analyzer.ItemType = Analyzer
+              build_metadata.Analyzer.NuGetPackageId = [PackageId] -->
+      <AdditionalFiles Include="@(Analyzer -> WithMetadataValue('NuGetPackageId', '$(SponsorablePackageId)'))" />
+    </ItemGroup>
   </Target>
 
   <Target Name="SL_Clean" AfterTargets="Clean">
