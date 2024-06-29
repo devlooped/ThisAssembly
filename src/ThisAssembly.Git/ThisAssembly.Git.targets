@@ -4,6 +4,9 @@
     <!-- Make sure we're always private to the referencing project. 
          Prevents analyzers from "flowing out" of the referencing project. -->
     <PackageReference Update="ThisAssembly.Git" PrivateAssets="all" PackTransitive="false" />
+
+    <!-- Enables installation time checking -->
+    <SponsorablePackageId Include="ThisAssembly.Git" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(RepositoryBranch)' == ''">

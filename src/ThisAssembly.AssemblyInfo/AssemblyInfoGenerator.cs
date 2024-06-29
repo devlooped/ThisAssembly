@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -39,8 +40,12 @@ namespace ThisAssembly
                 .Collect();
 
             context.RegisterSourceOutput(
-                metadata.Combine(context.ParseOptionsProvider),
-                GenerateSource);
+                metadata.Combine(context.ParseOptionsProvider).Combine(context.GetSponsorManifests()),
+                (spc, source) =>
+                {
+                    var ((attributes, parse), manifests) = source;
+                    GenerateSource(spc, attributes, parse, manifests);
+                });
         }
 
         static KeyValuePair<string, string>? GetAttributes(GeneratorSyntaxContext ctx, CancellationToken token)
@@ -68,9 +73,10 @@ namespace ThisAssembly
             return new KeyValuePair<string, string>(key, value);
         }
 
-        static void GenerateSource(SourceProductionContext spc, (ImmutableArray<KeyValuePair<string, string>> attributes, ParseOptions parse) arg)
+        static void GenerateSource(SourceProductionContext spc, ImmutableArray<KeyValuePair<string, string>> attributes, ParseOptions parse, ImmutableArray<AdditionalText> manifests)
         {
-            var (attributes, parse) = arg;
+            // Showcases how to get sponsor status which could potentially change the generated output.
+            var status = SponsorLink.Diagnostics.GetOrSetStatus(manifests);
 
             var model = new Model(attributes.ToList());
             if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 1100)

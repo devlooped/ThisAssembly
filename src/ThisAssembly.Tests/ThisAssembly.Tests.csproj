@@ -81,5 +81,6 @@
 
   <Import Project="..\*\ThisAssembly*.targets" />
   <Import Project="..\SponsorLink\SponsorLink.Tests.targets" />
+  <Import Project="..\SponsorLink\SponsorLink\buildTransitive\Devlooped.Sponsors.targets"/>
 
 </Project>

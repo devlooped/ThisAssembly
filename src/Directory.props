@@ -20,7 +20,9 @@
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <NoWarn>MSB3277;$(NoWarn)</NoWarn>
 
+    <!-- SL integration -->
     <Product>ThisAssembly</Product>
+    <ShowSponsorLinkInProject>false</ShowSponsorLinkInProject>
   </PropertyGroup>
 
   <PropertyGroup Label="Build">

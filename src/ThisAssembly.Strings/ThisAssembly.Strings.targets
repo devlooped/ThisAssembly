@@ -5,6 +5,9 @@
     <!-- Make sure we're always private to the referencing project. 
          Prevents analyzers from "flowing out" of the referencing project. -->
     <PackageReference Update="ThisAssembly.Strings" PrivateAssets="all" PackTransitive="false" />
+
+    <!-- Enables installation time checking -->
+    <SponsorablePackageId Include="ThisAssembly.Strings" />
   </ItemGroup>
 
   <Target Name="_InjectResxAdditionalFiles"

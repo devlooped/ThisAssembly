@@ -5,6 +5,9 @@
     <!-- Make sure we're always private to the referencing project. 
          Prevents analyzers from "flowing out" of the referencing project. -->
     <PackageReference Update="ThisAssembly.Project" PrivateAssets="all" PackTransitive="false" />
+
+    <!-- Enables installation time checking -->
+    <SponsorablePackageId Include="ThisAssembly.Project" />
   </ItemGroup>
 
   <PropertyGroup>
