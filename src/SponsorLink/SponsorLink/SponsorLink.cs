@@ -88,7 +88,7 @@ static partial class SponsorLink
             if (Validate(value.jwt, value.jwk, out var token, out var identity, false) == ManifestStatus.Valid && identity != null)
             {
                 if (principal == null)
-                    principal = new(identity);
+                    principal = new JwtRolesPrincipal(identity);
                 else
                     principal.AddIdentity(identity);
             }
@@ -158,7 +158,7 @@ static partial class SponsorLink
         }
 
         token = result.SecurityToken;
-        identity = new ClaimsIdentity(result.ClaimsIdentity.Claims);
+        identity = new ClaimsIdentity(result.ClaimsIdentity.Claims, "JWT");
 
         if (validateExpiration && token.ValidTo == DateTime.MinValue)
             return ManifestStatus.Invalid;
@@ -168,5 +168,10 @@ static partial class SponsorLink
             return ManifestStatus.Expired;
 
         return ManifestStatus.Valid;
+    }
+
+    class JwtRolesPrincipal(ClaimsIdentity identity) : ClaimsPrincipal([identity])
+    {
+        public override bool IsInRole(string role) => HasClaim("roles", role) || base.IsInRole(role);
     }
 }
