@@ -34,7 +34,8 @@ public class StatusReportingAnalyzer : DiagnosticAnalyzer
                        packageId == "SponsorableLib";
             }).Select(x => File.GetLastWriteTime(x.Path)).OrderByDescending(x => x).FirstOrDefault();
 
-            var status = Diagnostics.GetStatus(Funding.Product);
+            var status = Diagnostics.GetOrSetStatus(() => c.Options);
+
             if (installed != default)
                 Tracing.Trace($"Status: {status}, Installed: {(DateTime.Now - installed).Humanize()} ago");
             else

@@ -2,10 +2,14 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 
@@ -58,6 +62,32 @@ static partial class SponsorLink
             .Select(long.Parse)
             .Select(DateTimeOffset.FromUnixTimeSeconds)
             .Max().DateTime is var exp && exp == DateTime.MinValue ? null : exp;
+
+    /// <summary>
+    /// Gets all sponsor manifests from the provided analyzer options.
+    /// </summary>
+    public static ImmutableArray<AdditionalText> GetSponsorManifests(this AnalyzerOptions? options) 
+        => options == null ? ImmutableArray.Create<AdditionalText>() : options.AdditionalFiles
+            .Where(x =>
+                options.AnalyzerConfigOptionsProvider.GetOptions(x).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
+                itemType == "SponsorManifest" &&
+                Sponsorables.ContainsKey(Path.GetFileNameWithoutExtension(x.Path)))
+            .ToImmutableArray();
+
+    /// <summary>
+    /// Gets all sponsor manifests from the provided analyzer options.
+    /// </summary>
+    public static IncrementalValueProvider<ImmutableArray<AdditionalText>> GetSponsorManifests(this IncrementalGeneratorInitializationContext context)
+        => context.AdditionalTextsProvider.Combine(context.AnalyzerConfigOptionsProvider)
+            .Where(source =>
+            {
+                var (text, options) = source;
+                return options.GetOptions(text).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
+                       itemType == "SponsorManifest" &&
+                       Sponsorables.ContainsKey(Path.GetFileNameWithoutExtension(text.Path));
+            })
+            .Select((source, c) => source.Left)
+            .Collect();
 
     /// <summary>
     /// Reads all manifests, validating their signatures.

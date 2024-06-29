@@ -82,7 +82,7 @@
     <PackageReference Include="ILRepack" Version="2.0.33" PrivateAssets="all"  Pack="false" />
   </ItemGroup>
 
-  <Target Name="EmitFunding" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">
+  <Target Name="EmitFunding" BeforeTargets="CompileDesignTime;CoreCompile" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">
     <PropertyGroup>
       <SponsorLinkPartial>namespace Devlooped.Sponsors%3B
 
