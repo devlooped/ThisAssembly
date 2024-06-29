@@ -51,7 +51,7 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
         {
             var manifests = ctx.Options.AdditionalFiles
                 .Where(x =>
-                    ctx.Options.AnalyzerConfigOptionsProvider.GetOptions(x).TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType) &&
+                    ctx.Options.AnalyzerConfigOptionsProvider.GetOptions(x).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
                     itemType == "SponsorManifest" &&
                     Sponsorables.ContainsKey(Path.GetFileNameWithoutExtension(x.Path)))
                 .ToImmutableArray();

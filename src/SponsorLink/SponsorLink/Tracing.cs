@@ -33,14 +33,16 @@ static class Tracing
             .AppendLine($" -> {filePath}({lineNumber})")
             .ToString();
 
-        var dir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create);
+        var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".sponsorlink");
+        Directory.CreateDirectory(dir);
+
         var tries = 0;
         // Best-effort only
         while (tries < 10)
         {
             try
             {
-                File.AppendAllText(Path.Combine(dir, "SponsorLink.log"), line);
+                File.AppendAllText(Path.Combine(dir, "trace.log"), line);
                 Debugger.Log(0, "SponsorLink", line);
                 return;
             }

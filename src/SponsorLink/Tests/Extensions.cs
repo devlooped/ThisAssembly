@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Devlooped.Sponsors;
 
@@ -21,6 +23,17 @@ static class Extensions
             hash.Add(item);
 
         return hash;
+    }
+
+    public static bool ThumbprintEquals(this SecurityKey key, RSA rsa) => key.ThumbprintEquals(new RsaSecurityKey(rsa));
+
+    public static bool ThumbprintEquals(this RSA rsa, SecurityKey key) => key.ThumbprintEquals(rsa);
+
+    public static bool ThumbprintEquals(this SecurityKey first, SecurityKey second)
+    {
+        var expectedKey = JsonWebKeyConverter.ConvertFromSecurityKey(second);
+        var actualKey = JsonWebKeyConverter.ConvertFromSecurityKey(first);
+        return expectedKey.ComputeJwkThumbprint().AsSpan().SequenceEqual(actualKey.ComputeJwkThumbprint());
     }
 
     public static Array Cast(this Array array, Type elementType)
