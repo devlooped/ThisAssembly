@@ -40,7 +40,7 @@ public class Sample(ITestOutputHelper output)
     public void RenderSponsorables()
     {
         Assert.NotEmpty(SponsorLink.Sponsorables);
-        
+
         foreach (var pair in SponsorLink.Sponsorables)
         {
             output.WriteLine($"{pair.Key} = {pair.Value}");

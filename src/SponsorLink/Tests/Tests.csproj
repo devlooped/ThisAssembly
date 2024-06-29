@@ -19,7 +19,7 @@
   <ItemGroup>
     <!-- This project reference allows debugging the source generator/analyzer project -->
     <ProjectReference Include="..\Analyzer\Analyzer.csproj" Aliases="Analyzer" />
-    <Analyzer Include="..\Analyzer\bin\$(Configuration)\netstandard2.0\*.dll" NuGetPackageId="SponsorableLib" />
+    <Analyzer Include="..\Analyzer\bin\$(Configuration)\netstandard2.0\*.dll" NuGetPackageId="SponsorableLib" Visible="false" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,8 +54,15 @@
   <!-- Simulates importing SponsorableLib.targets -->
   <Import Project="..\SponsorLink\buildTransitive\Devlooped.Sponsors.targets" />
   <ItemGroup>
-    <!-- Bring in the analyzer file to report installation time -->
-    <AdditionalFiles Include="@(Analyzer -> WithMetadataValue('NuGetPackageId', 'SponsorableLib'))" />
+    <!-- Brings in the analyzer file to report installation time -->
+    <SponsorablePackageId Include="SponsorableLib" />
   </ItemGroup>
 
+  <!-- Force immediate reporting of status, no install-time grace period -->
+  <PropertyGroup>
+    <SponsorLinkNoInstallGrace>true</SponsorLinkNoInstallGrace>
+  </PropertyGroup>
+  <ItemGroup>
+    <CompilerVisibleProperty Include="SponsorLinkNoInstallGrace" />
+  </ItemGroup>
 </Project>

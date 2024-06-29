@@ -14,14 +14,14 @@ namespace Analyzer;
 public class StatusReportingAnalyzer : DiagnosticAnalyzer
 {
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(new DiagnosticDescriptor(
-        "SL001", "Report Sponsoring Status", "Reports sponsoring status determined by SponsorLink", "Sponsors", 
+        "SL001", "Report Sponsoring Status", "Reports sponsoring status determined by SponsorLink", "Sponsors",
         DiagnosticSeverity.Warning, true));
 
     public override void Initialize(AnalysisContext context)
     {
         context.EnableConcurrentExecution();
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-        
+
         context.RegisterCompilationAction(c =>
         {
             var installed = c.Options.AdditionalFiles.Where(x =>

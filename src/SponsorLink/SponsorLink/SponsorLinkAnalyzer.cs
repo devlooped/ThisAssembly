@@ -58,10 +58,10 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
 
             // Setting the status early allows other analyzers to potentially check for it.
             var status = SetStatus(manifests);
+
             // Never report any diagnostic unless we're in an editor.
             if (IsEditor)
             {
-                // NOTE: even if we don't report the diagnostic, we still set the status so other analyzers can use it.
                 ctx.RegisterCompilationEndAction(ctx =>
                 {
                     // NOTE: for multiple projects with the same product name, we only report one diagnostic, 
@@ -69,6 +69,38 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                     // multiple diagnostics for each project in a solution that uses the same product.
                     if (Diagnostics.Pop(Funding.Product) is Diagnostic diagnostic)
                     {
+                        // For unknown (never sync'ed), only report if install grace period is over
+                        if (status == SponsorStatus.Unknown)
+                        {
+                            var noGrace = ctx.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue("build_property.SponsorLinkNoInstallGrace", out var value) &&
+                                           bool.TryParse(value, out var skipCheck) && skipCheck;
+
+                            // NOTE: we'll always report if noGrace is set to true, regardless of install time, for 
+                            // testing purposes. This can be achieved via MSBuild with:
+                            // <PropertyGroup>
+                            //   <SponsorLinkNoInstallGrace>true</SponsorLinkNoInstallGrace>
+                            // </PropertyGroup>
+                            // <ItemGroup>
+                            //   <CompilerVisibleProperty Include="SponsorLinkNoInstallGrace" />
+                            // </ItemGroup>
+                            if (noGrace == false)
+                            {
+                                var installed = ctx.Options.AdditionalFiles.Where(x =>
+                                {
+                                    var options = ctx.Options.AnalyzerConfigOptionsProvider.GetOptions(x);
+                                    // In release builds, we'll have a single such item, since we IL-merge the analyzer.
+                                    return options.TryGetValue("build_metadata.Analyzer.ItemType", out var itemType) &&
+                                           options.TryGetValue("build_metadata.Analyzer.NuGetPackageId", out var packageId) &&
+                                           itemType == "Analyzer" &&
+                                           packageId == Funding.Product;
+                                }).Select(x => File.GetLastWriteTime(x.Path)).OrderByDescending(x => x).FirstOrDefault();
+
+                                // NOTE: if we can't determine install time, we'll always report.
+                                if (installed != default && installed.AddDays(Funding.Grace) > DateTime.Now)
+                                    return;
+                            }
+                        }
+
                         ctx.ReportDiagnostic(diagnostic);
                     }
                 });

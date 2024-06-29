@@ -16,8 +16,8 @@
     <FundingProduct Condition="'$(FundingProduct)' == ''">$(Product)</FundingProduct>
     <!-- Default prefix is the joined upper-case letters in the product name (i.e. for ThisAssembly, TA) -->
     <FundingPrefix Condition="'$(FundingPrefix)' == ''">$([System.Text.RegularExpressions.Regex]::Replace("$(FundingProduct)", "[^A-Z]", ""))</FundingPrefix>
-    <!-- Default grace days for an expired sponsor manifest -->
-    <FundingGrace Condition="'$(FundingGrace)' == ''">21</FundingGrace>
+    <!-- Default grace days for an expired sponsor manifest or unknown status -->
+    <FundingGrace Condition="'$(FundingGrace)' == ''">15</FundingGrace>
   </PropertyGroup>
 
   <ItemGroup>
