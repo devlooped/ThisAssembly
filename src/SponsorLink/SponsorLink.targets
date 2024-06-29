@@ -183,4 +183,9 @@ partial class SponsorLink
     </ItemGroup>
   </Target>
 
+  <PropertyGroup>
+    <!-- Can be used in analyzer projects to detect double imports -->
+    <SponsorLinkImported>true</SponsorLinkImported>
+  </PropertyGroup>
+
 </Project>
