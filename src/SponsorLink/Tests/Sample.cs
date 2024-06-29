@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using Analyzer::Devlooped.Sponsors;
+using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -29,7 +30,7 @@ public class Sample(ITestOutputHelper output)
         Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture =
             culture == "" ? CultureInfo.InvariantCulture : CultureInfo.GetCultureInfo(culture);
 
-        var diag = new DiagnosticsManager().GetDescriptor(["foo"], "bar", "FB", kind);
+        var diag = GetDescriptor(["foo"], "bar", "FB", kind);
 
         output.WriteLine(diag.Title.ToString());
         output.WriteLine(diag.MessageFormat.ToString());
@@ -56,4 +57,13 @@ public class Sample(ITestOutputHelper output)
             });
         }
     }
+
+    DiagnosticDescriptor GetDescriptor(string[] sponsorable, string product, string prefix, SponsorStatus status) => status switch
+    {
+        SponsorStatus.Unknown => DiagnosticsManager.CreateUnknown(sponsorable, product, prefix),
+        SponsorStatus.Sponsor => DiagnosticsManager.CreateSponsor(sponsorable, prefix),
+        SponsorStatus.Expiring => DiagnosticsManager.CreateExpiring(sponsorable, prefix),
+        SponsorStatus.Expired => DiagnosticsManager.CreateExpired(sponsorable, prefix),
+        _ => throw new NotImplementedException(),
+    };
 }
