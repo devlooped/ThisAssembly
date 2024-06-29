@@ -15,8 +15,8 @@ namespace ThisAssembly
     [Generator]
     public class AssemblyInfoGenerator : IIncrementalGenerator
     {
-        static readonly HashSet<string> attributes = new()
-        {
+        static readonly HashSet<string> attributes =
+        [
             nameof(AssemblyConfigurationAttribute),
             nameof(AssemblyCompanyAttribute),
             nameof(AssemblyCopyrightAttribute),
@@ -26,14 +26,14 @@ namespace ThisAssembly
             nameof(AssemblyVersionAttribute),
             nameof(AssemblyInformationalVersionAttribute),
             nameof(AssemblyFileVersionAttribute),
-        };
+        ];
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             var metadata = context.SyntaxProvider
                 .CreateSyntaxProvider(
                     predicate: static (s, _) => s is AttributeSyntax,
-                    transform: static (ctx, token) => GetSemanticTargetForGeneration(ctx, token))
+                    transform: static (ctx, token) => GetAttributes(ctx, token))
                 .Where(static m => m is not null)
                 .Select(static (m, _) => m!.Value)
                 .Collect();
@@ -43,7 +43,7 @@ namespace ThisAssembly
                 GenerateSource);
         }
 
-        static KeyValuePair<string, string>? GetSemanticTargetForGeneration(GeneratorSyntaxContext ctx, CancellationToken token)
+        static KeyValuePair<string, string>? GetAttributes(GeneratorSyntaxContext ctx, CancellationToken token)
         {
             var attributeNode = (AttributeSyntax)ctx.Node;
 
@@ -60,9 +60,11 @@ namespace ThisAssembly
             if (!attributes.Contains(attributeType.Name))
                 return null;
 
+            // Remove the "Assembly" prefix and "Attribute" suffix.
             var key = attributeType.Name[8..^9];
             var expr = attributeNode.ArgumentList!.Arguments[0].Expression;
             var value = ctx.SemanticModel.GetConstantValue(expr, token).ToString();
+            // KeyValuePair is a struct and properly equatable for optimal caching in the generator.
             return new KeyValuePair<string, string>(key, value);
         }
 
