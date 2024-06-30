@@ -4,9 +4,12 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
+using System.Threading;
 using Humanizer;
 using Humanizer.Localisation;
 using Microsoft.CodeAnalysis;
@@ -21,6 +24,8 @@ namespace Devlooped.Sponsors;
 /// </summary>
 class DiagnosticsManager
 {
+    static readonly Guid appDomainDiagnosticsKey = new(0x8d0e2670, 0xe6c4, 0x45c8, 0x81, 0xba, 0x5a, 0x36, 0x81, 0xd3, 0x65, 0x3e);
+
     public static Dictionary<SponsorStatus, DiagnosticDescriptor> KnownDescriptors { get; } = new()
     {
         // Requires:
@@ -36,17 +41,31 @@ class DiagnosticsManager
     /// Acceses the diagnostics dictionary for the current <see cref="AppDomain"/>.
     /// </summary>
     ConcurrentDictionary<string, Diagnostic> Diagnostics
-        => AppDomainDictionary.Get<ConcurrentDictionary<string, Diagnostic>>(nameof(Diagnostics));
+        => AppDomainDictionary.Get<ConcurrentDictionary<string, Diagnostic>>(appDomainDiagnosticsKey.ToString());
 
     /// <summary>
     /// Attemps to remove a diagnostic for the given product.
     /// </summary>
     /// <param name="product">The product diagnostic that might have been pushed previously.</param>
     /// <returns>The removed diagnostic, or <see langword="null" /> if none was previously pushed.</returns>
-    public Diagnostic? Pop(string product)
+    public void ReportOnce(Action<Diagnostic> report, string product = Funding.Product)
     {
-        Diagnostics.TryRemove(product, out var diagnostic);
-        return diagnostic;
+        if (Diagnostics.TryRemove(product, out var diagnostic))
+        {
+            // Ensure only one such diagnostic is reported per product for the entire process, 
+            // so that we can avoid polluting the error list with duplicates across multiple projects.
+            var id = string.Concat(Process.GetCurrentProcess().Id, product, diagnostic.Id);
+            using var mutex = new Mutex(false, "mutex" + id);
+            mutex.WaitOne();
+            using var mmf = MemoryMappedFile.CreateOrOpen(id, 1);
+            using var accessor = mmf.CreateViewAccessor();
+            if (accessor.ReadByte(0) == 0)
+            {
+                accessor.Write(0, 1);
+                report(diagnostic);
+                Tracing.Trace($"👈{diagnostic.Severity.ToString().ToLowerInvariant()}:{Process.GetCurrentProcess().Id}:{Process.GetCurrentProcess().ProcessName}:{product}:{diagnostic.Id}");
+            }
+        }
     }
 
     /// <summary>
@@ -103,7 +122,7 @@ class DiagnosticsManager
             claims.GetExpiration() is not DateTime exp)
         {
             // report unknown, either unparsed manifest or one with no expiration (which we never emit).
-            Push(Funding.Product, Diagnostic.Create(KnownDescriptors[SponsorStatus.Unknown], null,
+            Push(Diagnostic.Create(KnownDescriptors[SponsorStatus.Unknown], null,
                 properties: ImmutableDictionary.Create<string, string?>().Add(nameof(SponsorStatus), nameof(SponsorStatus.Unknown)),
                 Funding.Product, Sponsorables.Keys.Humanize(Resources.Or)));
             return SponsorStatus.Unknown;
@@ -114,14 +133,14 @@ class DiagnosticsManager
             if (exp.AddDays(Funding.Grace) < DateTime.Now)
             {
                 // report expiring soon
-                Push(Funding.Product, Diagnostic.Create(KnownDescriptors[SponsorStatus.Expiring], null,
+                Push(Diagnostic.Create(KnownDescriptors[SponsorStatus.Expiring], null,
                     properties: ImmutableDictionary.Create<string, string?>().Add(nameof(SponsorStatus), nameof(SponsorStatus.Expiring))));
                 return SponsorStatus.Expiring;
             }
             else
             {
                 // report expired
-                Push(Funding.Product, Diagnostic.Create(KnownDescriptors[SponsorStatus.Expired], null,
+                Push(Diagnostic.Create(KnownDescriptors[SponsorStatus.Expired], null,
                     properties: ImmutableDictionary.Create<string, string?>().Add(nameof(SponsorStatus), nameof(SponsorStatus.Expired))));
                 return SponsorStatus.Expired;
             }
@@ -129,7 +148,7 @@ class DiagnosticsManager
         else
         {
             // report sponsor
-            Push(Funding.Product, Diagnostic.Create(KnownDescriptors[SponsorStatus.Sponsor], null,
+            Push(Diagnostic.Create(KnownDescriptors[SponsorStatus.Sponsor], null,
                 properties: ImmutableDictionary.Create<string, string?>().Add(nameof(SponsorStatus), nameof(SponsorStatus.Sponsor)),
                 Funding.Product));
             return SponsorStatus.Sponsor;
@@ -140,11 +159,22 @@ class DiagnosticsManager
     /// Pushes a diagnostic for the given product. 
     /// </summary>
     /// <returns>The same diagnostic that was pushed, for chained invocations.</returns>
-    Diagnostic Push(string product, Diagnostic diagnostic)
+    Diagnostic Push(Diagnostic diagnostic, string product = Funding.Product)
     {
         // We only expect to get one warning per sponsorable+product 
         // combination, and first one to set wins.
-        Diagnostics.TryAdd(product, diagnostic);
+        if (Diagnostics.TryAdd(product, diagnostic))
+        {
+            // Reset the process-wide flag for this diagnostic.
+            var id = string.Concat(Process.GetCurrentProcess().Id, product, diagnostic.Id);
+            using var mutex = new Mutex(false, "mutex" + id);
+            mutex.WaitOne();
+            using var mmf = MemoryMappedFile.CreateOrOpen(id, 1);
+            using var accessor = mmf.CreateViewAccessor();
+            accessor.Write(0, 0);
+            Tracing.Trace($"👉{diagnostic.Severity.ToString().ToLowerInvariant()}:{Process.GetCurrentProcess().Id}:{Process.GetCurrentProcess().ProcessName}:{product}:{diagnostic.Id}");
+        }
+
         return diagnostic;
     }
 
