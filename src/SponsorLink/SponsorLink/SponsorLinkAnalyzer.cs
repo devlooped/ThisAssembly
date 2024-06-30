@@ -45,7 +45,7 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                     // NOTE: for multiple projects with the same product name, we only report one diagnostic, 
                     // so it's expected to NOT get a diagnostic back. Also, we don't want to report 
                     // multiple diagnostics for each project in a solution that uses the same product.
-                    if (Diagnostics.Pop(Funding.Product) is Diagnostic diagnostic)
+                    Diagnostics.ReportOnce(diagnostic =>
                     {
                         // For unknown (never sync'ed), only report if install grace period is over
                         if (status == SponsorStatus.Unknown)
@@ -80,7 +80,7 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                         }
 
                         ctx.ReportDiagnostic(diagnostic);
-                    }
+                    });
                 });
             }
         });

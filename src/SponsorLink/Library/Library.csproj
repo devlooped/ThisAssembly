@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Analyzer\Analyzer.csproj" ReferenceOutputAssembly="false" OutputType="Analyzer" />
   </ItemGroup>
 
+  <Target Name="Version" AfterTargets="GetPackageContents" DependsOnTargets="GetPackageTargetPath">
+    <Message Importance="high" Text="$(MSBuildProjectName) &gt; $(PackageTargetPath)" />
+  </Target>
+
 </Project>
