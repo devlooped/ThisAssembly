@@ -55,7 +55,8 @@
 
     <!-- Add SourceRoot as a project property too -->
     <ItemGroup>
-      <_ThisAssemblyGitSourceRoot Include="@(SourceRoot -> WithMetadataValue('SourceControl', 'git'))" />
+      <_ThisAssemblyGitSourceRoot Include="@(SourceRoot -> WithMetadataValue('SourceControl', 'git'))"
+                                  Exclude="@(SourceRoot -> HasMetadata('NestedRoot'))" />
     </ItemGroup>
 
     <PropertyGroup>
