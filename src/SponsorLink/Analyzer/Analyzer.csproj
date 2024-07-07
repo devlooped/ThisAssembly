@@ -6,9 +6,11 @@
     <IsRoslynComponent>true</IsRoslynComponent>
     <PackFolder>analyzers/dotnet/roslyn4.0</PackFolder>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <MergeAnalyzerAssemblies>false</MergeAnalyzerAssemblies>
+    <MergeAnalyzerAssemblies Condition="'$(OS)' == 'Windows_NT'">true</MergeAnalyzerAssemblies>
     <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink.targets</CustomAfterMicrosoftCSharpTargets>
-    <MergeAnalyzerAssemblies>true</MergeAnalyzerAssemblies>
     <ImplicitUsings>disable</ImplicitUsings>
+    <FundingPackageId>SponsorableLib</FundingPackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,15 +25,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Tests" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="buildTransitive\SponsorableLib.targets" Pack="true" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="C:\Code\devlooped.oss\src\SponsorLink\SponsorLink\ThisAssembly.cs" />
+    <InternalsVisibleTo Include="Tests" />
   </ItemGroup>
+
+  <!-- To support tests, fake an extra sponsorable with the test key -->
+  <Target Name="ReadTestJwk" BeforeTargets="GetAssemblyAttributes">
+    <PropertyGroup>
+      <!-- Read public key we validate manifests against -->
+      <TestJwk>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)..\Tests\keys\kzu.pub.jwk'))</TestJwk>
+    </PropertyGroup>
+    <ItemGroup>
+      <AssemblyMetadata Include="Funding.GitHub.kzu" Value="$(TestJwk)" />
+    </ItemGroup>
+  </Target>
 
 </Project>

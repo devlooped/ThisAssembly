@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 
@@ -186,15 +187,25 @@ public class SponsorableManifest
     /// Sign the JWT claims with the provided RSA key.
     /// </summary>
     public string Sign(IEnumerable<Claim> claims, RSA rsa, TimeSpan? expiration = default)
-        => Sign(claims, new RsaSecurityKey(rsa), expiration);
-
-    public string Sign(IEnumerable<Claim> claims, RsaSecurityKey? key = default, TimeSpan? expiration = default)
     {
-        var rsa = key ?? SecurityKey as RsaSecurityKey;
-        if (rsa?.PrivateKeyStatus != PrivateKeyStatus.Exists)
+        var key = new RsaSecurityKey(rsa);
+        if (key.PrivateKeyStatus != PrivateKeyStatus.Exists)
             throw new NotSupportedException("No private key found or specified to sign the manifest.");
 
-        var signing = new SigningCredentials(rsa, SecurityAlgorithms.RsaSha256);
+        // Don't allow mismatches of public manifest key and the one used to sign, to avoid 
+        // weird run-time errors verifiying manifests that were signed with a different key.
+        if (!rsa.ThumbprintEquals(SecurityKey))
+            throw new ArgumentException($"Cannot sign with a private key that does not match the manifest public key.");
+
+        return Sign(claims, key, expiration);
+    }
+
+    /// <summary>
+    /// Sign the JWT claims, optionally overriding the <see cref="SecurityKey"/> used for signing.
+    /// </summary>
+    public string Sign(IEnumerable<Claim> claims, SecurityKey? key = default, TimeSpan? expiration = default)
+    {
+        var credentials = new SigningCredentials(key ?? SecurityKey, SecurityAlgorithms.RsaSha256);
 
         var expirationDate = expiration != null ?
             DateTime.UtcNow.Add(expiration.Value) :
@@ -240,11 +251,6 @@ public class SponsorableManifest
                 tokenClaims.Insert(1, new(JwtRegisteredClaimNames.Aud, audience));
         }
 
-        // Don't allow mismatches of public manifest key and the one used to sign, to avoid 
-        // weird run-time errors verifiying manifests that were signed with a different key.
-        if (!rsa.ThumbprintEquals(SecurityKey))
-            throw new ArgumentException($"Cannot sign with a private key that does not match the manifest public key.");
-
         return new JsonWebTokenHandler
         {
             MapInboundClaims = false,
@@ -254,7 +260,7 @@ public class SponsorableManifest
             Subject = new ClaimsIdentity(tokenClaims),
             IssuedAt = DateTime.UtcNow,
             Expires = expirationDate,
-            SigningCredentials = signing,
+            SigningCredentials = credentials,
         });
     }
 
@@ -333,7 +339,7 @@ public class SponsorableManifest
         internal set
         {
             clientId = value;
-            var thumb = JsonWebKeyConverter.ConvertFromSecurityKey(SecurityKey).ComputeJwkThumbprint();
+            var thumb = SecurityKey.ComputeJwkThumbprint();
             hashcode = new HashCode().Add(Issuer, ClientId, Convert.ToBase64String(thumb)).AddRange(Audience).ToHashCode();
         }
     }

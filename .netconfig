@@ -289,11 +289,6 @@
 	sha = 068140b6855afb9cf9f4ab02002d80ca11389314
 	etag = 17799725ad9b24eb5998365962c30b9a487bddadca37c616e35b76b8c9eb161a
 	weak
-[file "src/SponsorLink/Tests/Resources.Designer.cs"]
-	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/Tests/Resources.Designer.cs
-	sha = c879f25bf483086725c8a29f104555644e6ee542
-	etag = 69404ac09238930893fdbc225ae7839b14957e129b4c05f1ef0e7afcc4c91d63
-	weak
 [file "src/SponsorLink/Tests/Resources.resx"]
 	url = https://github.com/devlooped/oss/blob/main/src/SponsorLink/Tests/Resources.resx
 	sha = c879f25bf483086725c8a29f104555644e6ee542

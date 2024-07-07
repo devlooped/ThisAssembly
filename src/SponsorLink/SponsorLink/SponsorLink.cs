@@ -64,30 +64,37 @@ static partial class SponsorLink
             .Max().DateTime is var exp && exp == DateTime.MinValue ? null : exp;
 
     /// <summary>
-    /// Gets all sponsor manifests from the provided analyzer options.
+    /// Gets all necessary additional files to determine status.
     /// </summary>
-    public static ImmutableArray<AdditionalText> GetSponsorManifests(this AnalyzerOptions? options) 
+    public static ImmutableArray<AdditionalText> GetSponsorAdditionalFiles(this AnalyzerOptions? options) 
         => options == null ? ImmutableArray.Create<AdditionalText>() : options.AdditionalFiles
-            .Where(x =>
-                options.AnalyzerConfigOptionsProvider.GetOptions(x).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
-                itemType == "SponsorManifest" &&
-                Sponsorables.ContainsKey(Path.GetFileNameWithoutExtension(x.Path)))
+            .Where(x => x.IsSponsorManifest(options.AnalyzerConfigOptionsProvider) || x.IsSponsorableAnalyzer(options.AnalyzerConfigOptionsProvider))
             .ToImmutableArray();
 
     /// <summary>
     /// Gets all sponsor manifests from the provided analyzer options.
     /// </summary>
-    public static IncrementalValueProvider<ImmutableArray<AdditionalText>> GetSponsorManifests(this IncrementalGeneratorInitializationContext context)
+    public static IncrementalValueProvider<ImmutableArray<AdditionalText>> GetSponsorAdditionalFiles(this IncrementalGeneratorInitializationContext context)
         => context.AdditionalTextsProvider.Combine(context.AnalyzerConfigOptionsProvider)
             .Where(source =>
             {
-                var (text, options) = source;
-                return options.GetOptions(text).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
-                       itemType == "SponsorManifest" &&
-                       Sponsorables.ContainsKey(Path.GetFileNameWithoutExtension(text.Path));
+                var (text, provider) = source;
+                return text.IsSponsorManifest(provider) || text.IsSponsorableAnalyzer(provider);
             })
             .Select((source, c) => source.Left)
             .Collect();
+
+    static bool IsSponsorManifest(this AdditionalText text, AnalyzerConfigOptionsProvider provider)
+        => provider.GetOptions(text).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
+           itemType == "SponsorManifest" &&
+           Sponsorables.ContainsKey(Path.GetFileNameWithoutExtension(text.Path));
+
+    static bool IsSponsorableAnalyzer(this AdditionalText text, AnalyzerConfigOptionsProvider provider)
+        => provider.GetOptions(text) is { } options && 
+           options.TryGetValue("build_metadata.Analyzer.ItemType", out var itemType) &&
+           options.TryGetValue("build_metadata.Analyzer.NuGetPackageId", out var packageId) &&
+           itemType == "Analyzer" &&
+           packageId == Funding.PackageId;
 
     /// <summary>
     /// Reads all manifests, validating their signatures.
