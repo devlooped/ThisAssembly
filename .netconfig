@@ -196,8 +196,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink.targets"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink.targets
-	sha = f47528874a6d9192b5546f84b455f5ccc474a707
-	etag = bba2a5e8b8e3ddba2460b83a2169bcc32597bcc5f0840e48cbb074022663a487
+	sha = 92f466a4cebb59798276a498321e941d98bf5066
+	etag = ec09a25e0d1d8d5a0f74a80bd5fcb9a7ad61c0d6b52073f16f80f36ba44f472f
 	weak
 [file "src/SponsorLink/SponsorLink/AppDomainDictionary.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/AppDomainDictionary.cs
