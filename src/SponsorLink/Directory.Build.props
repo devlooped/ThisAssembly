@@ -24,24 +24,4 @@
     <Product>SponsorableLib</Product>
   </PropertyGroup>
 
-  <ItemGroup>
-    <!--<Constant Include="Funding.Product" Value="$(Product)" />
-    <Constant Include="Funding.AnalyzerPrefix" Value="SLIB" />-->
-    <!--<Constant Include="Funding.GraceDays" Value="21" />-->
-  </ItemGroup>
-
-  <!-- DOGFOODING LOCAL BUILDS -->
-  <!-- Create a Directory.targets.user alongside this file, with the following content 
-       (update the version number to the number of the built local package): -->
-  <!-- 
-  <Project>
-
-    <ItemGroup Condition="Exists('$(DevPath)')">
-      <PackageReference Update="@(PackageReference -> WithMetadataValue('Identity', 'Devlooped.SponsorLink'))" 
-                        Version="42.42.6587" />
-    </ItemGroup>
-
-  </Project>
-  -->
-
 </Project>

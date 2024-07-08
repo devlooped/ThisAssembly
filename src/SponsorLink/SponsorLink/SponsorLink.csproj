@@ -6,11 +6,13 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <CoreCompileDependsOn>CoreResGen;$(CoreCompileDependsOn)</CoreCompileDependsOn>
+    <FundingPackageId>SponsorLink</FundingPackageId>
   </PropertyGroup>
 
   <PropertyGroup Label="SponsorLink">
     <!-- Default funding product the Product, which already part of ThisAssembly -->
     <FundingProduct Condition="'$(FundingProduct)' == ''">$(Product)</FundingProduct>
+    <FundingPackageId Condition="'$(FundingPackageId)' == ''">$(PackageId)</FundingPackageId>
     <!-- Default prefix is the joined upper-case letters in the product name (i.e. for ThisAssembly, TA) -->
     <FundingPrefix Condition="'$(FundingPrefix)' == ''">$([System.Text.RegularExpressions.Regex]::Replace("$(FundingProduct)", "[^A-Z]", ""))</FundingPrefix>
     <!-- Default grace days for an expired sponsor manifest -->
@@ -37,13 +39,18 @@
   </ItemGroup>
 
   <Target Name="EmitFunding" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">
+    <Warning Condition="'$(FundingPackageId)' == ''" Code="SL001"
+             Text="Could not determine value of FundingPackageId (defaulted to PackageId). Defaulting it to FundingProduct ('$(FundingProduct)'). Make sure this matches the containing package id, or set an explicit value." />
     <PropertyGroup>
+      <!-- Default to Product, which is most common for single-package products (i.e. Moq) -->
+      <FundingPackageId Condition="'$(FundingPackageId)' == ''">$(FundingProduct)</FundingPackageId>
       <SponsorLinkPartial>namespace Devlooped.Sponsors%3B
 
 partial class SponsorLink
 {
     public partial class Funding
     {
+        public const string PackageId = "$(FundingPackageId)"%3B
         public const string Product = "$(FundingProduct)"%3B
         public const string Prefix = "$(FundingPrefix)"%3B
         public const int Grace = $(FundingGrace)%3B
