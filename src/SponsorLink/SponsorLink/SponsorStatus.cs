@@ -11,6 +11,10 @@ public enum SponsorStatus
     /// </summary>
     Unknown,
     /// <summary>
+    /// Sponsorship status is unknown, but within the grace period.
+    /// </summary>
+    Grace,
+    /// <summary>
     /// The sponsors manifest is expired but within the grace period.
     /// </summary>
     Expiring,

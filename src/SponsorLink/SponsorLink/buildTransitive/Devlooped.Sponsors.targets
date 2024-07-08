@@ -51,15 +51,15 @@
     </CreateProperty>
   </Target>
 
-  <Target Name="SL_CollectSponsorableAnalyzer" Inputs="@(SponsorablePackageId)" Outputs="|%(SponsorablePackageId.Identity)|">
+  <Target Name="SL_CollectSponsorableAnalyzer" Inputs="@(FundingPackageId)" Outputs="|%(FundingPackageId.Identity)|">
     <PropertyGroup>
-      <SponsorablePackageId>%(SponsorablePackageId.Identity)</SponsorablePackageId>
+      <FundingPackageId>%(FundingPackageId.Identity)</FundingPackageId>
     </PropertyGroup>
     <ItemGroup>
        <!--Used to determine installation time, for example, by looking up the analyzer assembly in additional files with: 
               build_metadata.Analyzer.ItemType = Analyzer
               build_metadata.Analyzer.NuGetPackageId = [PackageId] -->
-      <AdditionalFiles Include="@(Analyzer -> WithMetadataValue('NuGetPackageId', '$(SponsorablePackageId)'))" />
+      <AdditionalFiles Include="@(Analyzer -> WithMetadataValue('NuGetPackageId', '$(FundingPackageId)'))" />
     </ItemGroup>
   </Target>
 

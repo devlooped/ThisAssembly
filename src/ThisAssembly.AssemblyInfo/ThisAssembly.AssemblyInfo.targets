@@ -1,5 +1,5 @@
 <Project>
-  <Import Project="..\buildTransitive\Devlooped.Sponsors.targets" Condition="Exists('..\buildTransitive\Devlooped.Sponsors.targets')"/>
+  <Import Project="..\..\buildTransitive\Devlooped.Sponsors.targets" Condition="Exists('..\..\buildTransitive\Devlooped.Sponsors.targets')"/>
 
   <ItemGroup>
     <!-- Make sure we're always private to the referencing project. 
@@ -7,7 +7,7 @@
     <PackageReference Update="ThisAssembly.AssemblyInfo" PrivateAssets="all" PackTransitive="false" />
 
     <!-- Brings in the analyzer file to report installation time -->
-    <SponsorablePackageId Include="ThisAssembly.AssemblyInfo" />
+    <FundingPackageId Include="ThisAssembly.AssemblyInfo" />
   </ItemGroup>
 
 </Project>

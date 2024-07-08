@@ -17,7 +17,7 @@ namespace ThisAssembly
             var files = context.AdditionalTextsProvider
                 .Combine(context.AnalyzerConfigOptionsProvider)
                 .Where(x =>
-                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.SourceItemType", out var itemType)
+                    x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.ItemType", out var itemType)
                     && itemType == "Constant")
                 .Select((x, ct) =>
                 {

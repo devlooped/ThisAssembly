@@ -1,4 +1,4 @@
-# SponsorLink .NET Analyzer
+# SponsorLink .NET Analyzer Sample
 
 This is one opinionated implementation of [SponsorLink](https://devlooped.com/SponsorLink) 
 for .NET projects leveraging Roslyn analyzers.
@@ -9,8 +9,12 @@ is out of scope though, since we just use GitHub sponsors for now.
 
 ## Usage
 
-A project initializing from this template repo via [dotnet-file](https://github.com/devlooped/dotnet-file) 
-will have all the sources cloned under `src\SponsorLink`. 
+A project can include all the necessary files by using the [dotnet-file](https://github.com/devlooped/dotnet-file) 
+tool and sync all files to a folder, such as:
+
+```shell
+dotnet file add https://github.com/devlooped/SponsorLink/tree/main/samples/dotnet src/SponsorLink/
+```
 
 Including the analyzer and targets in a project involves two steps. 
 

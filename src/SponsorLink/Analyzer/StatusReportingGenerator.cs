@@ -10,10 +10,13 @@ public class StatusReportingGenerator : IIncrementalGenerator
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         context.RegisterSourceOutput(
-            context.GetSponsorManifests(),
+            // this is required to ensure status is registered properly independently 
+            // of analyzer runs.
+            context.GetSponsorAdditionalFiles().Combine(context.AnalyzerConfigOptionsProvider),
             (spc, source) =>
             {
-                var status = Diagnostics.GetOrSetStatus(source);
+                var (manifests, options) = source;
+                var status = Diagnostics.GetOrSetStatus(manifests, options);
                 spc.AddSource("StatusReporting.cs", $"// Status: {status}");
             });
     }

@@ -4,6 +4,7 @@
   <PropertyGroup Label="NuGet">
     <PackageTags>dotnet roslyn</PackageTags>
     <PackOnBuild>true</PackOnBuild>
+    <SignAssembly>false</SignAssembly>
     <DevelopmentDependency>true</DevelopmentDependency>
     <ThisAssemblyMinimumRoslynVersion>4.0</ThisAssemblyMinimumRoslynVersion>
     <PackFolder>analyzers/dotnet/roslyn$(ThisAssemblyMinimumRoslynVersion)/cs</PackFolder>
