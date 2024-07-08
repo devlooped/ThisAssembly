@@ -6,7 +6,7 @@
   <PropertyGroup>
     <ShowSponsorLinkInProject Condition="$(ShowSponsorLinkInProject) == '' and '$(TargetFramework)' == 'netstandard2.0'">true</ShowSponsorLinkInProject>
     <!-- This ensures we expose only the main assembly in the Dependencies > Analyzers node -->
-    <MergeAnalyzerAssemblies Condition="'$(MergeAnalyzerAssemblies)' == '' and '$(Configuration)' == 'Release' and '$(OS)' == 'Windows_NT'">true</MergeAnalyzerAssemblies>
+    <MergeAnalyzerAssemblies Condition="'$(MergeAnalyzerAssemblies)' == '' and '$(Configuration)' == 'Release'">true</MergeAnalyzerAssemblies>
     <MergeAnalyzerAssemblies Condition="'$(MergeAnalyzerAssemblies)' == ''">false</MergeAnalyzerAssemblies>
     <!-- Whether we merge files or not, dependencies will need to be copy-local -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -113,6 +113,20 @@ partial class SponsorLink
     <ItemGroup>
       <Compile Include="$(IntermediateOutputPath)SponsorLink.g.cs" />
     </ItemGroup>
+  </Target>
+
+  <Target Name="EnsureILRepack" BeforeTargets="ILRepack" Condition="'$(MergeAnalyzerAssemblies)' == 'true'">
+    <Exec Command="ilrepack --version" StandardErrorImportance="high" StandardOutputImportance="low" ConsoleToMSBuild="true" IgnoreExitCode="true" ContinueOnError="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="ILRepackOutput" />
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Exec>
+    <Message Importance="high" Text="Using installed dotnet-ilrepack v$(ILRepackOutput)" Condition="$(ExitCode) == '0'" />
+    <Exec Command="dotnet tool install -g dotnet-ilrepack --prerelease --add-source https://kzu.blob.core.windows.net/nuget/index.json"
+          Condition="$(ExitCode) != '0'" />
+    <Exec Command="ilrepack --version" Condition="$(ExitCode) != '0'" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="ILRepackInstalledOutput" />
+    </Exec>
+    <Message Importance="high" Text="Installed dotnet-ilrepack v$(ILRepackInstalledOutput)" Condition="$(ExitCode) != '0'" />
   </Target>
 
   <Target Name="ILRepack" AfterTargets="CoreCompile" BeforeTargets="CopyFilesToOutputDirectory"
