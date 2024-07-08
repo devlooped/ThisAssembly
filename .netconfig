@@ -1,5 +1,8 @@
 [file]
 	url = https://github.com/devlooped/oss
+[file ".netconfig"]
+	url = https://github.com/devlooped/oss/blob/main/.netconfig
+    skip
 [file "readme.md"]
 	url = https://github.com/devlooped/oss/blob/main/readme.md
 	skip
