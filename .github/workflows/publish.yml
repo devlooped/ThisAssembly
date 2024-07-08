@@ -14,7 +14,8 @@ env:
   GeneratePackageOnBuild: true
   VersionLabel: ${{ github.ref }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
-  
+  MSBUILDTERMINALLOGGER: auto
+    
 jobs:
   publish:
     runs-on: ubuntu-latest

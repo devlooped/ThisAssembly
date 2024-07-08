@@ -4,6 +4,13 @@
 name: build
 on: 
   workflow_dispatch:
+    inputs:
+      configuration:
+        type: choice
+        description: Configuration
+        options: 
+        - Release
+        - Debug
   push:
     branches: [ main, dev, 'dev/*', 'feature/*', 'rel/*' ]
     paths-ignore:
@@ -22,7 +29,9 @@ env:
   VersionPrefix: 42.42.${{ github.run_number }}
   VersionLabel: ${{ github.ref }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
-  
+  MSBUILDTERMINALLOGGER: auto
+  Configuration: ${{ github.event.inputs.configuration || 'Release' }}
+
 defaults:
   run:
     shell: bash
