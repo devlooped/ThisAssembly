@@ -364,3 +364,8 @@
 	sha = f47528874a6d9192b5546f84b455f5ccc474a707
 	etag = 89f9984ca933c7647eff583e36374ba1c21c94342649d07cd369ef0ea4f056b9
 	weak
+[file ".github/workflows/os-matrix.json"]
+	url = https://github.com/devlooped/oss/blob/main/.github/workflows/os-matrix.json
+	sha = 75d492df6589a8c2551ed35fa6466878251f639c
+	etag = 2f70be9eaffbbd21a6496910ad6e9af4119bbc20bcdf17677b03d99cbdfe5b37
+	weak
