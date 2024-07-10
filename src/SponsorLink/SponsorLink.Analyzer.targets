@@ -1,7 +1,7 @@
 <Project>
   <!-- For inclusion in analyzer projects that want to integrate SponsorLink -->
   <!-- Import using the following property: -->
-  <!--<CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.targets</CustomAfterMicrosoftCSharpTargets>-->
+  <!--<CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>-->
 
   <PropertyGroup>
     <ShowSponsorLinkInProject Condition="$(ShowSponsorLinkInProject) == '' and '$(TargetFramework)' == 'netstandard2.0'">true</ShowSponsorLinkInProject>
@@ -145,11 +145,12 @@ partial class SponsorLink
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase)) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.', StringComparison.OrdinalIgnoreCase))"
       />
-      <!-- Brings in System/Microsoft.IdentityModel, System.Text.Encodings.Web, System.Text.Json  -->
+      <!-- Brings in System/Microsoft.IdentityModel, System.Text.Encodings.Web, System.Text.Json, Humanizer  -->
       <MergedAssemblies Include="@(ReferenceCopyLocalAssemblies)" Condition="
         $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
         $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
-        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.Text', StringComparison.OrdinalIgnoreCase))"
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.Text', StringComparison.OrdinalIgnoreCase)) Or
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Humanizer', StringComparison.OrdinalIgnoreCase))"
       />
     </ItemGroup>
     <ItemGroup>

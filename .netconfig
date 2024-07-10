@@ -201,8 +201,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/DiagnosticsManager.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/DiagnosticsManager.cs
-	sha = fb3353af9d7085d73804d0f484507dc76f5b2608
-	etag = 06a241de827a7e9fb78eb21ad68c26f307d3f916f7cbf98176b6dae053d976f6
+	sha = 8ce2ffb3e833da8f6809c9c7e7b7113fec2e3046
+	etag = 3b597ea6c68c25727171bcdee45e0793268a3ec573f4c821b5ee92b776cba269
 	weak
 [file "src/SponsorLink/SponsorLink/ManifestStatus.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/ManifestStatus.cs
@@ -361,6 +361,6 @@
 	weak
 [file "src/SponsorLink/SponsorLink.Analyzer.targets"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink.Analyzer.targets
-	sha = 330f826844a5a8be0b1ed6d670e3de2804b595ae
-	etag = 8fde8a0cd161428bec1aec37a592447fdc769ea6892cf75208ebfd847c3219d4
+	sha = 06ad2df230e2de316655ae6073d493bf04805d46
+	etag = 4d2939c5005cd6136065bf2b1cd62f96351a8d94d904d141bcb11186e8c16b3b
 	weak

@@ -8,7 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Humanizer;
-using Humanizer.Localisation;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using static Devlooped.Sponsors.SponsorLink;
@@ -195,7 +194,7 @@ class DiagnosticsManager
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
         description: string.Format(CultureInfo.CurrentCulture, Resources.Unknown_Description,
-            sponsorable.Humanize(x => $"https://github.com/sponsors/{x}"),
+            string.Join(", ", sponsorable.Select(x => $"https://github.com/sponsors/{x}")),
             string.Join(" ", sponsorable)),
         helpLinkUri: "https://github.com/devlooped#sponsorlink",
         WellKnownDiagnosticTags.NotConfigurable);
