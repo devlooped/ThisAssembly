@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.targets</CustomAfterMicrosoftCSharpTargets>
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 
   <PropertyGroup>
