@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -42,6 +43,14 @@ static partial class SponsorLink
     public static bool IsRider =>
         Environment.GetEnvironmentVariable("RESHARPER_FUS_SESSION") != null ||
         Environment.GetEnvironmentVariable("IDEA_INITIAL_DIRECTORY") != null;
+
+    /// <summary>
+    /// A unique session ID associated with the current IDE or process running the analyzer.
+    /// </summary>
+    public static string SessionId => 
+        IsVisualStudio ? Environment.GetEnvironmentVariable("ServiceHubLogSessionKey") :
+        IsRider ? Environment.GetEnvironmentVariable("RESHARPER_FUS_SESSION") :
+        Process.GetCurrentProcess().Id.ToString();
 
     /// <summary>
     /// Manages the sharing and reporting of diagnostics across the source generator 

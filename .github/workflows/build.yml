@@ -15,9 +15,6 @@ on:
     branches: [ main, dev, 'dev/*', 'feature/*', 'rel/*' ]
     paths-ignore:
       - changelog.md
-      - code-of-conduct.md
-      - security.md
-      - support.md
       - readme.md
   pull_request:
     types: [opened, synchronize, reopened]
