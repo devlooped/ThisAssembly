@@ -4,13 +4,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.IO.MemoryMappedFiles;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
 using Humanizer;
 using Humanizer.Localisation;
 using Microsoft.CodeAnalysis;
@@ -45,32 +41,6 @@ class DiagnosticsManager
         => AppDomainDictionary.Get<ConcurrentDictionary<string, Diagnostic>>(appDomainDiagnosticsKey.ToString());
 
     /// <summary>
-    /// Attemps to remove a diagnostic for the given product.
-    /// </summary>
-    /// <param name="product">The product diagnostic that might have been pushed previously.</param>
-    /// <returns>The removed diagnostic, or <see langword="null" /> if none was previously pushed.</returns>
-    public void ReportOnce(Action<Diagnostic> report, string product = Funding.Product)
-    {
-        if (Diagnostics.TryRemove(product, out var diagnostic) &&
-            GetStatus(diagnostic) != SponsorStatus.Grace)
-        {
-            // Ensure only one such diagnostic is reported per product for the entire process, 
-            // so that we can avoid polluting the error list with duplicates across multiple projects.
-            var id = string.Concat(Process.GetCurrentProcess().Id, product, diagnostic.Id);
-            using var mutex = new Mutex(false, "mutex" + id);
-            mutex.WaitOne();
-            using var mmf = CreateOrOpenMemoryMappedFile(id, 1);
-            using var accessor = mmf.CreateViewAccessor();
-            if (accessor.ReadByte(0) == 0)
-            {
-                accessor.Write(0, (byte)1);
-                report(diagnostic);
-                Tracing.Trace($"👈{diagnostic.Severity.ToString().ToLowerInvariant()}:{Process.GetCurrentProcess().Id}:{Process.GetCurrentProcess().ProcessName}:{product}:{diagnostic.Id}");
-            }
-        }
-    }
-
-    /// <summary>
     /// Gets the status of the given product based on a previously stored diagnostic. 
     /// To ensure the value is always set before returning, use <see cref="GetOrSetStatus"/>.
     /// This method is safe to use (and would get a non-null value) in analyzers that run after CompilationStartAction(see 
@@ -99,6 +69,34 @@ class DiagnosticsManager
     /// </summary>
     public SponsorStatus GetOrSetStatus(Func<AnalyzerOptions?> options)
         => GetOrSetStatus(() => options().GetSponsorAdditionalFiles(), () => options()?.AnalyzerConfigOptionsProvider.GlobalOptions);
+
+    /// <summary>
+    /// Attemps to remove a diagnostic for the given product.
+    /// </summary>
+    /// <param name="product">The product diagnostic that might have been pushed previously.</param>
+    /// <returns>The removed diagnostic, or <see langword="null" /> if none was previously pushed.</returns>
+    public Diagnostic? Pop(string product = Funding.Product)
+    {
+        if (Diagnostics.TryRemove(product, out var diagnostic) &&
+            GetStatus(diagnostic) != SponsorStatus.Grace)
+        {
+            return diagnostic;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Pushes a diagnostic for the given product. 
+    /// </summary>
+    /// <returns>The same diagnostic that was pushed, for chained invocations.</returns>
+    Diagnostic Push(Diagnostic diagnostic, string product = Funding.Product)
+    {
+        // We only expect to get one warning per sponsorable+product 
+        // combination, and first one to set wins.
+        Diagnostics.TryAdd(product, diagnostic);
+        return diagnostic;
+    }
 
     SponsorStatus GetOrSetStatus(Func<ImmutableArray<AdditionalText>> getAdditionalFiles, Func<AnalyzerConfigOptions?> getGlobalOptions)
     {
@@ -166,29 +164,6 @@ class DiagnosticsManager
         }
     }
 
-    /// <summary>
-    /// Pushes a diagnostic for the given product. 
-    /// </summary>
-    /// <returns>The same diagnostic that was pushed, for chained invocations.</returns>
-    Diagnostic Push(Diagnostic diagnostic, string product = Funding.Product)
-    {
-        // We only expect to get one warning per sponsorable+product 
-        // combination, and first one to set wins.
-        if (Diagnostics.TryAdd(product, diagnostic))
-        {
-            // Reset the process-wide flag for this diagnostic.
-            var id = string.Concat(Process.GetCurrentProcess().Id, product, diagnostic.Id);
-            using var mutex = new Mutex(false, "mutex" + id);
-            mutex.WaitOne();
-            using var mmf = CreateOrOpenMemoryMappedFile(id, 1);
-            using var accessor = mmf.CreateViewAccessor();
-            accessor.Write(0, (byte)0);
-            Tracing.Trace($"👉{diagnostic.Severity.ToString().ToLowerInvariant()}:{Process.GetCurrentProcess().Id}:{Process.GetCurrentProcess().ProcessName}:{product}:{diagnostic.Id}");
-        }
-
-        return diagnostic;
-    }
-
     SponsorStatus? GetStatus(Diagnostic? diagnostic) => diagnostic?.Properties.TryGetValue(nameof(SponsorStatus), out var value) == true
         ? value switch
         {
@@ -200,23 +175,6 @@ class DiagnosticsManager
             _ => null,
         }
         : null;
-
-    static MemoryMappedFile CreateOrOpenMemoryMappedFile(string mapName, int capacity)
-    {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            return MemoryMappedFile.CreateOrOpen(mapName, capacity);
-        }
-        else
-        {
-            // On Linux, use a file-based memory-mapped file
-            string filePath = $"/tmp/{mapName}";
-            using (var fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
-                fs.Write(new byte[capacity], 0, capacity);
-
-            return MemoryMappedFile.CreateFromFile(filePath, FileMode.OpenOrCreate);
-        }
-    }
 
     internal static DiagnosticDescriptor CreateSponsor(string[] sponsorable, string prefix) => new(
             $"{prefix}100",

@@ -8,7 +8,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <MergeAnalyzerAssemblies>false</MergeAnalyzerAssemblies>
     <MergeAnalyzerAssemblies Condition="'$(CI)' == 'true'">true</MergeAnalyzerAssemblies>
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink.targets</CustomAfterMicrosoftCSharpTargets>
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
     <ImplicitUsings>disable</ImplicitUsings>
     <FundingPackageId>SponsorableLib</FundingPackageId>
   </PropertyGroup>

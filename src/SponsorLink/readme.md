@@ -13,7 +13,7 @@ A project can include all the necessary files by using the [dotnet-file](https:/
 tool and sync all files to a folder, such as:
 
 ```shell
-dotnet file add https://github.com/devlooped/SponsorLink/tree/main/samples/dotnet src/SponsorLink/
+dotnet file add https://github.com/devlooped/SponsorLink/tree/main/samples/dotnet/ src/SponsorLink/
 ```
 
 Including the analyzer and targets in a project involves two steps. 
@@ -23,7 +23,7 @@ Including the analyzer and targets in a project involves two steps.
 ```xml
   <PropertyGroup>
     ...
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.targets</CustomAfterMicrosoftCSharpTargets>
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 ```
 

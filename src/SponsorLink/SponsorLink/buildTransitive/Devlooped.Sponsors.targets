@@ -44,10 +44,15 @@
     <!-- Makes direct dependencies visible to the compiler, so that sponsoring checks can selectively skip indirectly referenced analyzer -->
     <!-- An analyzer can check for the presense of a global property named after the package id (which will contain the instaled version) -->
     <ItemGroup>
-      <CompilerVisibleProperty Include="$([MSBuild]::ValueOrDefault('%(_RestoreGraphEntry.Id)', '').Replace('.', '_'))" />
+      <DirectDependency Include="@(_RestoreGraphEntry -> HasMetadata('Id'))"
+                        Condition="'%(_RestoreGraphEntry.Type)' == 'Dependency' and
+                                   '%(_RestoreGraphEntry.ProjectUniqueName)' == '$(MSBuildProjectFullPath)'">
+        <Id>$([MSBuild]::ValueOrDefault('%(_RestoreGraphEntry.Id)', '').Replace('.', '_'))</Id>
+      </DirectDependency>
+      <CompilerVisibleProperty Include="@(DirectDependency -> '%(Id)')" />
     </ItemGroup>
-    <CreateProperty Value="%(_RestoreGraphEntry.VersionRange)" Condition="%(_RestoreGraphEntry.Type) == 'Dependency'" >
-      <Output TaskParameter="Value" PropertyName="$([MSBuild]::ValueOrDefault('%(_RestoreGraphEntry.Id)', '').Replace('.', '_'))"/>
+    <CreateProperty Condition="'@(DirectDependency)' != ''" Value="%(DirectDependency.VersionRange)">
+      <Output TaskParameter="Value" PropertyName="%(DirectDependency.Id)"/>
     </CreateProperty>
   </Target>
 

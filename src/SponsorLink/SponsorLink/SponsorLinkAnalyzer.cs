@@ -41,7 +41,16 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                 // so it's expected to NOT get a diagnostic back. Also, we don't want to report 
                 // multiple diagnostics for each project in a solution that uses the same product.
                 ctx.RegisterCompilationEndAction(ctx =>
-                    Diagnostics.ReportOnce(diagnostic => ctx.ReportDiagnostic(diagnostic)));
+                {
+                    var prop = Funding.PackageId.Replace('.', '_');
+                    // Only report if the package is directly referenced in the project. See SL_CollectDependencies in buildTransitive\Devlooped.Sponsors.targets
+                    if (ctx.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue("build_property." + prop, out var package) &&
+                        package?.Length > 0 &&
+                        Diagnostics.Pop() is { } diagnostic)
+                    {
+                        ctx.ReportDiagnostic(diagnostic);
+                    }
+                });
             }
         });
 #pragma warning restore RS1013 // Start action has no registered non-end actions

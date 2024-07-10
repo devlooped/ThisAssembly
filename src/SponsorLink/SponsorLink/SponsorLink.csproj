@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\SponsorLink.targets" Link="SponsorLink.targets" />
+    <None Include="..\SponsorLink.Analyzer.targets" Link="SponsorLink.Analyzer.targets" />
   </ItemGroup>
 
   <Target Name="EmitFunding" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">

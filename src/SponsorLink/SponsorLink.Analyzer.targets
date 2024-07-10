@@ -20,7 +20,10 @@
     <FundingPrefix Condition="'$(FundingPrefix)' == ''">$([System.Text.RegularExpressions.Regex]::Replace("$(FundingProduct)", "[^A-Z]", ""))</FundingPrefix>
     <!-- Default grace days for an expired sponsor manifest or unknown status -->
     <FundingGrace Condition="'$(FundingGrace)' == ''">15</FundingGrace>
-  </PropertyGroup>
+
+    <!-- Strong-naming analyzers is both unnecessary and additionally unsupported by ILRepack when run as a dotnet tool -->
+    <SignAssembly Condition="'$(MergeAnalyzerAssemblies)' == 'true'">false</SignAssembly>
+</PropertyGroup>
 
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)SponsorLink/*.cs"
@@ -155,7 +158,7 @@ partial class SponsorLink
       <LibDir Include="@(ReferenceCopyLocalDirs -&gt; Distinct())" />
     </ItemGroup>
     <PropertyGroup>
-      <AbsoluteAssemblyOriginatorKeyFile Condition="'$(AssemblyOriginatorKeyFile)' != ''">$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine('$(MSBuildProjectDirectory)','$(AssemblyOriginatorKeyFile)'))))</AbsoluteAssemblyOriginatorKeyFile>
+      <AbsoluteAssemblyOriginatorKeyFile Condition="'$(SignAssembly)' == 'true' and '$(AssemblyOriginatorKeyFile)' != ''">$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine('$(MSBuildProjectDirectory)','$(AssemblyOriginatorKeyFile)'))))</AbsoluteAssemblyOriginatorKeyFile>
       <ILRepackArgs Condition="'$(AbsoluteAssemblyOriginatorKeyFile)' != ''">/keyfile:"$(AbsoluteAssemblyOriginatorKeyFile)" /delaysign</ILRepackArgs>
       <ILRepackArgs>$(ILRepackArgs) /internalize</ILRepackArgs>
       <ILRepackArgs>$(ILRepackArgs) /union</ILRepackArgs>
@@ -205,7 +208,10 @@ partial class SponsorLink
   <Target Name="PackCopyLocalLockFileAssemblies" Condition="'$(MergeAnalyzerAssemblies)' != 'true'" 
           BeforeTargets="GetPackageContents" DependsOnTargets="ReferenceCopyLocalPathsOutputGroup">
     <ItemGroup>
-      <PackageFile Include="@(ReferenceCopyLocalPathsOutputGroupOutput)" PackFolder="$(PackFolder)" />
+      <PackageFile Include="@(ReferenceCopyLocalPathsOutputGroupOutput)" Condition="
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CodeAnalysis', StringComparison.OrdinalIgnoreCase)) And
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase))"
+                   PackFolder="$(PackFolder)" />
     </ItemGroup>
   </Target>
 
