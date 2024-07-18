@@ -26,11 +26,12 @@
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase)) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.', StringComparison.OrdinalIgnoreCase))"
       />
-      <!-- Brings in System/Microsoft.IdentityModel, System.Text.Encodings.Web, System.Text.Json  -->
+      <!-- Brings in System/Microsoft.IdentityModel, System.Text.Encodings.Web, System.Text.Json, Humanizer  -->
       <Analyzer Include="@(ReferenceCopyLocalAssemblies)" Condition="
         $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
         $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
-        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.Text', StringComparison.OrdinalIgnoreCase))"
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.Text', StringComparison.OrdinalIgnoreCase)) Or
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Humanizer', StringComparison.OrdinalIgnoreCase))"
       />
     </ItemGroup>
   </Target>
