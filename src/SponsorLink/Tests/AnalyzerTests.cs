@@ -44,7 +44,14 @@ public class AnalyzerTests : IDisposable
     public async Task WhenNoAdditionalFiles_ThenReportsUnknown()
     {
         var compilation = CSharpCompilation.Create("test", [CSharpSyntaxTree.ParseText("//")])
-            .WithAnalyzers([new SponsorLinkAnalyzer()]);
+            .WithAnalyzers([new SponsorLinkAnalyzer()],
+                new AnalyzerOptions([], new TestAnalyzerConfigOptionsProvider(new())
+                {
+                    // Force reporting without wait period
+                    { "build_property.SponsorLinkNoInstallGrace", "true" },
+                    // Simulate directly referenced package
+                    { "build_property.SponsorableLib", "1.0.0" },
+                }));
 
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
 
@@ -91,7 +98,9 @@ public class AnalyzerTests : IDisposable
             {
                 { "build_property.SponsorLinkNoInstallGrace", "true" },
                 { "build_metadata.Analyzer.ItemType", "Analyzer" },
-                { "build_metadata.Analyzer.NuGetPackageId", "SponsorableLib" }
+                { "build_metadata.Analyzer.NuGetPackageId", "SponsorableLib" },
+                // Simulate directly referenced package
+                { "build_property.SponsorableLib", "1.0.0" },
             }));
 
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
@@ -119,7 +128,9 @@ public class AnalyzerTests : IDisposable
             .WithAnalyzers([new SponsorLinkAnalyzer()], new AnalyzerOptions([new AdditionalTextFile(dll)], new TestAnalyzerConfigOptionsProvider(new())
             {
                 { "build_metadata.Analyzer.ItemType", "Analyzer" },
-                { "build_metadata.Analyzer.NuGetPackageId", "SponsorableLib" }
+                { "build_metadata.Analyzer.NuGetPackageId", "SponsorableLib" },
+                // Simulate directly referenced package
+                { "build_property.SponsorableLib", "1.0.0" },
             }));
 
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
@@ -144,7 +155,9 @@ public class AnalyzerTests : IDisposable
         var compilation = CSharpCompilation.Create("test", [CSharpSyntaxTree.ParseText("//")])
             .WithAnalyzers([new SponsorLinkAnalyzer()], new AnalyzerOptions([new AdditionalTextFile(jwt)], new TestAnalyzerConfigOptionsProvider(new())
             {
-                { "build_metadata.SponsorManifest.ItemType", "SponsorManifest" }
+                { "build_metadata.SponsorManifest.ItemType", "SponsorManifest" },
+                // Simulate directly referenced package
+                { "build_property.SponsorableLib", "1.0.0" },
             }));
 
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
@@ -163,20 +176,40 @@ public class AnalyzerTests : IDisposable
     public async Task WhenMultipleAnalyzers_ThenReportsOnce()
     {
         var compilation = CSharpCompilation.Create("test", [CSharpSyntaxTree.ParseText("//")])
-            .WithAnalyzers([new SponsorLinkAnalyzer(), new SponsorLinkAnalyzer()]);
+            .WithAnalyzers([new SponsorLinkAnalyzer(), new SponsorLinkAnalyzer()],
+                new AnalyzerOptions([], new TestAnalyzerConfigOptionsProvider(new())
+                {
+                    // Force reporting without wait period
+                    { "build_property.SponsorLinkNoInstallGrace", "true" },
+                    // Simulate directly referenced package
+                    { "build_property.SponsorableLib", "1.0.0" },
+                    { "build_property.SponsorLink", "1.0.0" },
+                }));
+
+        var diagnostics = (await compilation.GetAnalyzerDiagnosticsAsync())
+            .Where(x => x.Properties.TryGetValue(nameof(SponsorStatus), out var _));
+
+        Assert.NotEmpty(diagnostics);
+        Assert.Single(diagnostics.Where(x => x.Properties.TryGetValue(nameof(SponsorStatus), out var value)));
+    }
+
+    [Fact]
+    public async Task WhenAnalyzerNotDirectlyReferenced_ThenDoesNotReport()
+    {
+        var compilation = CSharpCompilation.Create("test", [CSharpSyntaxTree.ParseText("//")])
+            .WithAnalyzers([new SponsorLinkAnalyzer()],
+                new AnalyzerOptions([], new TestAnalyzerConfigOptionsProvider(new())
+                {
+                    // Force reporting if necessary without wait period
+                    { "build_property.SponsorLinkNoInstallGrace", "true" },
+                    // Directly referenced package would result in a compiler visible property like: 
+                    //{ "build_property.SponsorableLib", "1.0.0" },
+                }));
 
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
 
-        Assert.NotEmpty(diagnostics);
-
-        var diagnostic = diagnostics.Single(x => x.Properties.TryGetValue(nameof(SponsorStatus), out var value));
-
-        Assert.True(diagnostic.Properties.TryGetValue(nameof(SponsorStatus), out var value));
-        var status = Enum.Parse<SponsorStatus>(value);
-
-        Assert.Equal(SponsorStatus.Unknown, status);
+        Assert.Empty(diagnostics);
     }
-
 
     string GetTempPath([CallerMemberName] string? test = default)
     {
