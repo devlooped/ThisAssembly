@@ -82,7 +82,7 @@
 
   <Import Project="..\SponsorLink\SponsorLink\buildTransitive\Devlooped.Sponsors.targets"/>
   <Import Project="..\*\ThisAssembly*.targets" />
-  <Import Project="..\SponsorLink\SponsorLink.Tests.targets" />
+  <Import Project="..\SponsorLink\SponsorLink.Analyzer.Tests.targets" />
 
   <!-- Force immediate reporting of status, no install-time grace period -->
   <PropertyGroup>
