@@ -45,5 +45,9 @@ such as "Hello {name}".
   </ItemGroup>
 
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
-  
+
+  <Target Name="VerifySponsorLink" AfterTargets="Build">
+    <Error Condition="'$(SponsorLinkImported)' != 'true'" Text="SponsorLink was not imported." />
+  </Target>
+
 </Project>

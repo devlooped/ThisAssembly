@@ -54,6 +54,10 @@ C#:
     <PackageReference Include="PolySharp" Version="1.14.1" PrivateAssets="All" />
   </ItemGroup>
 
+  <Target Name="VerifySponsorLink" AfterTargets="Build">
+    <Error Condition="'$(SponsorLinkImported)' != 'true'" Text="SponsorLink was not imported." />
+  </Target>
+
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
 
 </Project>

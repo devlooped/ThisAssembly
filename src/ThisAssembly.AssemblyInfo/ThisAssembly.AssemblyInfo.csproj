@@ -42,6 +42,10 @@ on the `ThisAssembly.Info` class.
     <InternalsVisibleTo Include="ThisAssembly.Tests" />
   </ItemGroup>
 
+  <Target Name="VerifySponsorLink" AfterTargets="Build">
+    <Error Condition="'$(SponsorLinkImported)' != 'true'" Text="SponsorLink was not imported." />
+  </Target>
+
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
 
 </Project>
