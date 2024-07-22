@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 [DebuggerDisplay("ResourceName = {ResourceName}, Values = {RootArea.Values.Count}")]
-record Model(ResourceArea RootArea, string ResourceName)
+record Model(ResourceArea RootArea, string ResourceName, string? Namespace)
 {
     public string? Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3);
 }

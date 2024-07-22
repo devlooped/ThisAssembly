@@ -9,10 +9,12 @@
 
 using System.CodeDom.Compiler;
 using System.Runtime.CompilerServices;
+{{ if Namespace }}
+namespace {{ Namespace }};
+{{~ end ~}}
 
 /// <summary>
-/// Provides access to the current assembly information as pure constants, 
-///  without requiring reflection.
+/// Provides access to the current assembly information.
 /// </summary>
 partial class ThisAssembly
 {

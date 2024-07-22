@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
+
+namespace ThisAssembly;
 
 [DebuggerDisplay("Values = {RootArea.Values.Count}")]
-record Model(Area RootArea)
+record Model(Area RootArea, string? Namespace)
 {
     public string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 }

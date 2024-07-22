@@ -35,15 +35,6 @@ such as "Hello {name}".
     <PackageReference Include="PolySharp" Version="1.14.1" PrivateAssets="All" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="ThisAssembly.Strings.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="ThisAssembly.Strings.cs" />
-    <EmbeddedResource Include="ThisAssembly.Strings.cs" />
-  </ItemGroup>
-
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
 
   <Target Name="VerifySponsorLink" AfterTargets="Build">

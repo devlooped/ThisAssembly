@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
+    <!-- This generator supports VB too -->
+    <PackFolder>analyzers/dotnet/roslyn$(ThisAssemblyMinimumRoslynVersion)</PackFolder>
     <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 

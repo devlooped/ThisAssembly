@@ -45,8 +45,17 @@
 
 using System;
 using System.IO;
+{{ if Namespace }}
+namespace {{ Namespace }};
+{{~ end ~}}
 
+/// <summary>
+/// Provides access to the current assembly information.
+/// </summary>
 partial class ThisAssembly
 {
+    /// <summary>
+    /// Provides access to assembly resources.
+    /// </summary>
 	{{ render RootArea }}
 }
