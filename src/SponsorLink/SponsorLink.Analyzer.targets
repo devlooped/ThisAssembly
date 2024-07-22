@@ -187,7 +187,7 @@ partial class SponsorLink
   </Target>
 
   <Target Name="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes" Inputs="$(MSBuildProjectFullPath)" Outputs="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk">
-    <Exec Command="pwsh -nop -f $(MSBuildThisFileDirectory)jwk.ps1" ConsoleToMSBuild="true" EchoOff="true">
+    <Exec Command="powershell -nop -f $(MSBuildThisFileDirectory)jwk.ps1" ConsoleToMSBuild="true" EchoOff="true">
       <Output TaskParameter="ConsoleOutput" PropertyName="RawJwk"/>
       <Output TaskParameter="ExitCode" PropertyName="MSBuildLastExitCode" />
     </Exec>
