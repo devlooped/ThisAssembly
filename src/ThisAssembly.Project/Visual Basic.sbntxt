@@ -7,10 +7,13 @@
 ''' </auto-generated>
 '''------------------------------------------------------------------------------
 
+{{ if Namespace }}
+Namespace {{ Namespace }}
+{{ else }}
 Namespace Global
+{{ end }}
     ''' <summary>
-    ''' Provides access to the current assembly information as pure constants, 
-    ''' without requiring reflection.
+    ''' Provides access to the current assembly information.
     ''' </summary>
     Partial Class ThisAssembly
         ''' <summary>

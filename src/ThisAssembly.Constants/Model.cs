@@ -6,8 +6,10 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.CSharp;
 
+namespace ThisAssembly;
+
 [DebuggerDisplay("Values = {RootArea.Values.Count}")]
-record Model(Area RootArea)
+record Model(Area RootArea, string? Namespace)
 {
     public bool RawStrings { get; set; } = false;
     public string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);

@@ -2,6 +2,8 @@
   <Import Project="..\..\buildTransitive\Devlooped.Sponsors.targets" Condition="Exists('..\..\buildTransitive\Devlooped.Sponsors.targets')"/>
 
   <ItemGroup>
+    <CompilerVisibleProperty Include="ThisAssemblyNamespace" />
+
     <!-- Make sure we're always private to the referencing project. 
          Prevents analyzers from "flowing out" of the referencing project. -->
     <PackageReference Update="ThisAssembly.AssemblyInfo" PrivateAssets="all" PackTransitive="false" />

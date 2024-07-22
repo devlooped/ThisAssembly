@@ -67,6 +67,9 @@ partial class ThisAssembly
 }
 ```
 
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
+
 <!-- #content -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 # Sponsors 

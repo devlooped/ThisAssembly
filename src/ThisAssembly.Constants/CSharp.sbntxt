@@ -40,8 +40,17 @@
 
 using System;
 using System.Globalization;
+{{ if Namespace }}
+namespace {{ Namespace }};
+{{~ end ~}}
 
+/// <summary>
+/// Provides access to the current assembly information.
+/// </summary>
 partial class ThisAssembly
 {
+    /// <summary>
+    /// Provides access project-defined constants.
+    /// </summary>
     {{ render RootArea }}
 }

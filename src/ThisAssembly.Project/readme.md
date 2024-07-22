@@ -16,6 +16,9 @@ them as `ProjectProperty` MSBuild items in the project file, such as:
 
 ![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Project.png)
 
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
+
 <!-- #content -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 # Sponsors 
