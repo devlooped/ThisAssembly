@@ -47,6 +47,9 @@ on the `ThisAssembly.Info` class.
 
 ![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.AssemblyInfo.png)
 
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
+
 <!-- #content -->
 <!-- src/ThisAssembly.AssemblyInfo/readme.md#content -->
 
@@ -82,6 +85,9 @@ to generate constants for files in the project, so there's also a shorthand for 
 Which results in:
 
 ![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Constants2.png)
+
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
 <!-- #content -->
 <!-- src/ThisAssembly.Constants/readme.md#content -->
@@ -160,6 +166,9 @@ packaging experience possible:
 </Project>
 ```
 
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
+
 
 <!-- #content -->
 <!-- src/ThisAssembly.Git/readme.md#content -->
@@ -193,6 +202,9 @@ The metadata attribute can alternatively be declared using MSBuild syntax in the
   </ItemGroup>
 ```
 
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
+
 <!-- #content -->
 <!-- src/ThisAssembly.Metadata/readme.md#content -->
 
@@ -219,6 +231,9 @@ them as `ProjectProperty` MSBuild items in the project file, such as:
 ```
 
 ![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Project.png)
+
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
 <!-- #content -->
 <!-- src/ThisAssembly.Project/readme.md#content -->
@@ -275,6 +290,9 @@ treated as a text file:
 
 You can also add a `Comment` item metadata attribute, which will be used as the `<summary>` XML 
 doc for the generated member.
+
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
 <!-- #content -->
 <!-- src/ThisAssembly.Resources/readme.md#content -->
@@ -353,6 +371,9 @@ partial class ThisAssembly
     }
 }
 ```
+
+Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
+generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
 <!-- #content -->
 <!-- src/ThisAssembly.Strings/readme.md#content -->
