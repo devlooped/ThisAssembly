@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources.es.resx" ManifestResourceName="Devlooped.Sponsors.%(Filename)"/>
+    <EmbeddedResource Update="Resources.es.resx" ManifestResourceName="Devlooped.Sponsors.%(Filename)" />
     <EmbeddedResource Update="Resources.resx" ManifestResourceName="Devlooped.Sponsors.%(Filename)" StronglyTypedManifestPrefix="Devlooped.Sponsors" StronglyTypedClassName="%(Filename)" StronglyTypedNamespace="Devlooped.Sponsors" StronglyTypedLanguage="$(Language)" />
   </ItemGroup>
 
@@ -39,8 +39,7 @@
   </ItemGroup>
 
   <Target Name="EmitFunding" BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">
-    <Warning Condition="'$(FundingPackageId)' == ''" Code="SL001"
-             Text="Could not determine value of FundingPackageId (defaulted to PackageId). Defaulting it to FundingProduct ('$(FundingProduct)'). Make sure this matches the containing package id, or set an explicit value." />
+    <Warning Condition="'$(FundingPackageId)' == ''" Code="SL001" Text="Could not determine value of FundingPackageId (defaulted to PackageId). Defaulting it to FundingProduct ('$(FundingProduct)'). Make sure this matches the containing package id, or set an explicit value." />
     <PropertyGroup>
       <!-- Default to Product, which is most common for single-package products (i.e. Moq) -->
       <FundingPackageId Condition="'$(FundingPackageId)' == ''">$(FundingProduct)</FundingPackageId>
@@ -64,13 +63,9 @@ partial class SponsorLink
     </ItemGroup>
   </Target>
 
+  <!-- Keep in sync with ..\SponsorLink.Analyzer.targets -->
   <Target Name="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes" Inputs="$(MSBuildProjectFullPath)" Outputs="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk">
-    <Exec Command="pwsh -nop -f $(MSBuildThisFileDirectory)..\jwk.ps1" ConsoleToMSBuild="true" EchoOff="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="DevloopedJwk" />
-      <Output TaskParameter="ExitCode" PropertyName="MSBuildLastExitCode" />
-    </Exec>
-    <Error Text="$(DevloopedJwk)" Condition="'$(MSBuildLastExitCode)' != '0'" />
-    <WriteLinesToFile File="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk" Lines="$(DevloopedJwk)" Overwrite="true" />
+    <Exec Command="curl --silent --output $(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk https://sponsorlink.devlooped.com/jwk" />
   </Target>
 
   <Target Name="ReadDevloopedJwk" DependsOnTargets="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes">
