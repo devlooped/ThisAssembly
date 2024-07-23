@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -36,6 +35,11 @@ C#:
   }
 
 </Description>
+  </PropertyGroup>
+
+  <PropertyGroup Label="SponsorLink">
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
+    <FundingPackageId>ThisAssembly;$(PackageId)</FundingPackageId>
   </PropertyGroup>
 
   <ItemGroup>

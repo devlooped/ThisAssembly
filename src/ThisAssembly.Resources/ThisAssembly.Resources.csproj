@@ -8,7 +8,6 @@
     <!-- We cannot use ThisAssembly.Resources as the assembly name, or for whatever 
          reason, it's never added as an analyzer :/ -->
     <AssemblyName>ThisAssembly.Resource</AssemblyName>
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -17,6 +16,11 @@
       This package generates a static `ThisAssembly.Resources` class with public
       properties exposing `string` and `Stream` shortcuts to access embedded resources.
     </Description>
+  </PropertyGroup>
+
+  <PropertyGroup Label="SponsorLink">
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
+    <FundingPackageId>ThisAssembly;$(PackageId)</FundingPackageId>
   </PropertyGroup>
 
   <ItemGroup>

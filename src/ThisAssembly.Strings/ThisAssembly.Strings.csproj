@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -22,6 +21,11 @@ or as a method with the right number of parametres if its value has a format str
 Finally, format strings can use named parameters too to get more friendly parameter names, 
 such as "Hello {name}".
 </Description>
+  </PropertyGroup>
+
+  <PropertyGroup Label="SponsorLink">
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
+    <FundingPackageId>ThisAssembly;$(PackageId)</FundingPackageId>
   </PropertyGroup>
 
   <ItemGroup>
