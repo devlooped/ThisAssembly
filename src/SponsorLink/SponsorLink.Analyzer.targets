@@ -98,19 +98,34 @@
     <PropertyGroup>
       <!-- Default to Product, which is most common for single-package products (i.e. Moq) -->
       <FundingPackageId Condition="'$(FundingPackageId)' == ''">$(FundingProduct)</FundingPackageId>
-      <SponsorLinkPartial>namespace Devlooped.Sponsors%3B
+    </PropertyGroup>
+
+    <ItemGroup Condition="'@(FundingAnalyzerPackageId)' == ''">
+      <FundingAnalyzerPackageId Include="$(FundingPackageId)" />
+    </ItemGroup>
+    <ItemGroup>
+      <_FundingAnalyzerPackageId Include="@(FundingAnalyzerPackageId -> '&quot;%(Identity)&quot;')" />
+    </ItemGroup>
+    <PropertyGroup>
+      <_FundingPackageIds>@(_FundingAnalyzerPackageId, ',')</_FundingPackageIds>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <SponsorLinkPartial>using System.Collections.Generic%3B
+
+namespace Devlooped.Sponsors%3B
 
 partial class SponsorLink
 {
     public partial class Funding
     {
-        public const string PackageId = "$(FundingPackageId)"%3B
+        public static HashSet&lt;string&gt; PackageIds { get%3B } = [$(_FundingPackageIds)]%3B
         public const string Product = "$(FundingProduct)"%3B
         public const string Prefix = "$(FundingPrefix)"%3B
         public const int Grace = $(FundingGrace)%3B
     }
 }
-</SponsorLinkPartial>
+      </SponsorLinkPartial>
     </PropertyGroup>
     <WriteLinesToFile File="$(IntermediateOutputPath)SponsorLink.g.cs" Lines="$(SponsorLinkPartial)" WriteOnlyWhenDifferent="true" Overwrite="true" />
     <ItemGroup>

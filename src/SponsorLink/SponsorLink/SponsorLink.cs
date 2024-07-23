@@ -97,13 +97,13 @@ static partial class SponsorLink
         => provider.GetOptions(text).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
            itemType == "SponsorManifest" &&
            Sponsorables.ContainsKey(Path.GetFileNameWithoutExtension(text.Path));
-
+    
     static bool IsSponsorableAnalyzer(this AdditionalText text, AnalyzerConfigOptionsProvider provider)
         => provider.GetOptions(text) is { } options && 
            options.TryGetValue("build_metadata.Analyzer.ItemType", out var itemType) &&
            options.TryGetValue("build_metadata.Analyzer.NuGetPackageId", out var packageId) &&
            itemType == "Analyzer" &&
-           packageId == Funding.PackageId;
+           Funding.PackageIds.Contains(packageId);
 
     /// <summary>
     /// Reads all manifests, validating their signatures.
