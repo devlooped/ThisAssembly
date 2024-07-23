@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsRoslynComponent>true</IsRoslynComponent>
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -36,6 +35,12 @@ C#:
   }
 
     </Description>
+  </PropertyGroup>
+
+  <PropertyGroup Label="SponsorLink">
+    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
+    <!-- We also bring in the additional packages that just customize ThisAssembly.Constants -->
+    <FundingPackageId>ThisAssembly;ThisAssembly.Git;ThisAssembly.Metadata;$(PackageId)</FundingPackageId>
   </PropertyGroup>
 
   <ItemGroup>
