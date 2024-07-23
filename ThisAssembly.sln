@@ -5,14 +5,6 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Metadata", "src\ThisAssembly.Metadata\ThisAssembly.Metadata.csproj", "{B5007099-8BE7-490B-9E9A-18CC50C92C29}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4CA0A26B-C9E5-4F5A-93EC-A1E1FE8CA389}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		src\Directory.props = src\Directory.props
-		src\Directory.targets = src\Directory.targets
-		readme.md = readme.md
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly", "src\ThisAssembly\ThisAssembly.csproj", "{D3A47732-4937-4B6E-BCD1-66896D04E20D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Project", "src\ThisAssembly.Project\ThisAssembly.Project.csproj", "{A91C7A07-FFD6-4D19-BD78-B0BC8F9267DB}"
@@ -20,15 +12,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.AssemblyInfo", "src\ThisAssembly.AssemblyInfo\ThisAssembly.AssemblyInfo.csproj", "{CDDF83BC-70BE-46C3-BD79-524D868A2812}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Strings", "src\ThisAssembly.Strings\ThisAssembly.Strings.csproj", "{3E7158B5-BFEF-4416-8226-9096C7C98268}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{09733D87-085D-4857-A556-5D28796CC138}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\build.yml = .github\workflows\build.yml
-		.github\dependabot.yml = .github\dependabot.yml
-		.github\workflows\publish.yml = .github\workflows\publish.yml
-		.github\workflows\release.yml = .github\workflows\release.yml
-		.github\workflows\tag.yml = .github\workflows\tag.yml
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThisAssembly.Constants", "src\ThisAssembly.Constants\ThisAssembly.Constants.csproj", "{31C53CCE-13FC-4890-803A-85CD146B909B}"
 EndProject
@@ -85,9 +68,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{09733D87-085D-4857-A556-5D28796CC138} = {4CA0A26B-C9E5-4F5A-93EC-A1E1FE8CA389}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF2DC9F-5F77-4F6E-8804-CFF5892CD064}
