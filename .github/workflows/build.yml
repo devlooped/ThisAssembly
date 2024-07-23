@@ -67,14 +67,10 @@ jobs:
       - name: 🙏 build
         run: dotnet build -m:1 -bl:build.binlog
 
-      - name: ⚙ GNU grep
-        if: matrix.os == 'macOS-latest'
-        run: |
-          brew install grep
-          echo 'export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"' >> .bash_profile
-
       - name: 🧪 test
-        uses: ./.github/workflows/test
+        run: |
+          dotnet tool update -g dotnet-retest
+          dotnet retest -- --no-build
 
       - name: 🐛 logs
         uses: actions/upload-artifact@v3
