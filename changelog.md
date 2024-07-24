@@ -1,5 +1,71 @@
 # Changelog
 
+## [v1.5.0-rc.4](https://github.com/devlooped/ThisAssembly/tree/v1.5.0-rc.4) (2024-07-24)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0...v1.5.0-rc.4)
+
+## [v1.5.0](https://github.com/devlooped/ThisAssembly/tree/v1.5.0) (2024-07-24)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0-rc.3...v1.5.0)
+
+## [v1.5.0-rc.3](https://github.com/devlooped/ThisAssembly/tree/v1.5.0-rc.3) (2024-07-23)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0-rc.2...v1.5.0-rc.3)
+
+:sparkles: Implemented enhancements:
+
+- Detect metapackage as direct dependency too [\#360](https://github.com/devlooped/ThisAssembly/pull/360) (@kzu)
+
+## [v1.5.0-rc.2](https://github.com/devlooped/ThisAssembly/tree/v1.5.0-rc.2) (2024-07-23)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0-rc.1...v1.5.0-rc.2)
+
+:sparkles: Implemented enhancements:
+
+- Add support for setting ThisAssembly namespace [\#211](https://github.com/devlooped/ThisAssembly/issues/211)
+- Add support for ThisAssemblyNamespace to change root namespace [\#354](https://github.com/devlooped/ThisAssembly/pull/354) (@kzu)
+
+## [v1.5.0-rc.1](https://github.com/devlooped/ThisAssembly/tree/v1.5.0-rc.1) (2024-07-21)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0-rc...v1.5.0-rc.1)
+
+## [v1.5.0-rc](https://github.com/devlooped/ThisAssembly/tree/v1.5.0-rc) (2024-07-08)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0-beta...v1.5.0-rc)
+
+:bug: Fixed bugs:
+
+- ThisAssembly.Git exception when project has Git submodule [\#303](https://github.com/devlooped/ThisAssembly/issues/303)
+
+## [v1.5.0-beta](https://github.com/devlooped/ThisAssembly/tree/v1.5.0-beta) (2024-07-08)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.4.3...v1.5.0-beta)
+
+:sparkles: Implemented enhancements:
+
+- Allow format strings in ThisAssembly.Strings [\#299](https://github.com/devlooped/ThisAssembly/issues/299)
+- Allow format strings in ThisAssembly.Strings [\#313](https://github.com/devlooped/ThisAssembly/pull/313) (@kzu)
+- Simplify and redesign ThisAssembly.Metadata as a special case of Constants [\#312](https://github.com/devlooped/ThisAssembly/pull/312) (@kzu)
+
+:bug: Fixed bugs:
+
+- Constants and Metadata values containing semicolon lose data after first semicolon [\#319](https://github.com/devlooped/ThisAssembly/issues/319)
+- If resx string contains newlines, default comment breaks codegen [\#308](https://github.com/devlooped/ThisAssembly/issues/308)
+- ThisAssembly is unusable in old-style NetFX projects. error CS0122: 'ThisAssembly' is inaccessible due to its protection level [\#301](https://github.com/devlooped/ThisAssembly/issues/301)
+- ThisAssembly.Resources causes IL3000 warnings when publishing for AOT compilation in .NET 8 [\#279](https://github.com/devlooped/ThisAssembly/issues/279)
+- Fails for assembly metadata containing `.` [\#247](https://github.com/devlooped/ThisAssembly/issues/247)
+- Automatically escape and unescape constants with semicolon [\#320](https://github.com/devlooped/ThisAssembly/pull/320) (@kzu)
+- Sanitize multi-line default comment [\#309](https://github.com/devlooped/ThisAssembly/pull/309) (@kzu)
+
+:twisted_rightwards_arrows: Merged:
+
+- Fixed Git submodule issue in ThisAssembly.Git.targets [\#334](https://github.com/devlooped/ThisAssembly/pull/334) (@TibbsTerry)
+- ⬆️ Bump files with dotnet-file sync [\#332](https://github.com/devlooped/ThisAssembly/pull/332) (@kzu)
+- Update test project for simplified SL targets [\#323](https://github.com/devlooped/ThisAssembly/pull/323) (@kzu)
+- Incorporate SponsorLink v2 [\#321](https://github.com/devlooped/ThisAssembly/pull/321) (@kzu)
+- Permanently delete legacy SL implementation [\#315](https://github.com/devlooped/ThisAssembly/pull/315) (@kzu)
+- Refactor common files and resources into a shared project [\#311](https://github.com/devlooped/ThisAssembly/pull/311) (@kzu)
+
 ## [v1.4.3](https://github.com/devlooped/ThisAssembly/tree/v1.4.3) (2024-01-30)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.4.2...v1.4.3)
