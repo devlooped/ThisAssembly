@@ -26,6 +26,9 @@
 
     <!-- To quickly exit if true -->
     <CompilerVisibleProperty Include="DesignTimeBuild" />
+
+    <!-- If the user declares himself already as a hero, we don't need to remind him via Info diagnostics -->
+    <CompilerVisibleProperty Include="SponsorLinkHero" />
   </ItemGroup>
 
   <PropertyGroup>
