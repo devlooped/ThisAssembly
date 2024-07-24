@@ -43,6 +43,12 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                 // multiple diagnostics for each project in a solution that uses the same product.
                 ctx.RegisterCompilationEndAction(ctx =>
                 {
+                    // We'd never report Info/hero link if users opted out of it.
+                    if (status == SponsorStatus.Sponsor &&
+                        ctx.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue("build_property.SponsorLinkHero", out var slHero) &&
+                        bool.TryParse(slHero, out var isHero) && isHero)
+                        return;
+
                     // Only report if the package is directly referenced in the project for
                     // any of the funding packages we monitor (i.e. we could have one or more
                     // metapackages we also consider "direct references).
