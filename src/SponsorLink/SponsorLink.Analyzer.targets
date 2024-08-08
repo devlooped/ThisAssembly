@@ -139,7 +139,7 @@ partial class SponsorLink
       <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
     </Exec>
     <Message Importance="high" Text="Using installed dotnet-ilrepack v$(ILRepackOutput)" Condition="$(ExitCode) == '0'" />
-    <Exec Command="dotnet tool install -g dotnet-ilrepack --prerelease --add-source https://kzu.blob.core.windows.net/nuget/index.json"
+    <Exec Command="dotnet tool install -g dotnet-ilrepack"
           Condition="$(ExitCode) != '0'" />
     <Exec Command="ilrepack --version" Condition="$(ExitCode) != '0'" ConsoleToMSBuild="true">
       <Output TaskParameter="ConsoleOutput" PropertyName="ILRepackInstalledOutput" />
