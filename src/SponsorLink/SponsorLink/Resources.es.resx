@@ -160,4 +160,13 @@ Por favor considera apoyar el proyecto patrocinando en {0} y ejecutando posterio
   <data name="Or" xml:space="preserve">
     <value>o</value>
   </data>
+  <data name="Contributor_Description" xml:space="preserve">
+    <value>Gracias por ser parte del equipo por tu contribución 🙏.</value>
+  </data>
+  <data name="Contributor_Message" xml:space="preserve">
+    <value>Gracias por ser parte del equipo {0} con tu contribución 💟!</value>
+  </data>
+  <data name="Contributor_Title" xml:space="preserve">
+    <value>Eres un contribuidor al proyecto, eres lo máximo 💟!</value>
+  </data>
 </root>

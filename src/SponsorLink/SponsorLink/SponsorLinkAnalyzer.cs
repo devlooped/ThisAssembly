@@ -44,7 +44,7 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                 ctx.RegisterCompilationEndAction(ctx =>
                 {
                     // We'd never report Info/hero link if users opted out of it.
-                    if (status == SponsorStatus.Sponsor &&
+                    if (status.IsSponsor() &&
                         ctx.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue("build_property.SponsorLinkHero", out var slHero) &&
                         bool.TryParse(slHero, out var isHero) && isHero)
                         return;

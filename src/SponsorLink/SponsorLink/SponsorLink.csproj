@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources.es-AR.resx" ManifestResourceName="Devlooped.Sponsors.%(Filename)" />
     <EmbeddedResource Update="Resources.es.resx" ManifestResourceName="Devlooped.Sponsors.%(Filename)" />
     <EmbeddedResource Update="Resources.resx" ManifestResourceName="Devlooped.Sponsors.%(Filename)" StronglyTypedManifestPrefix="Devlooped.Sponsors" StronglyTypedClassName="%(Filename)" StronglyTypedNamespace="Devlooped.Sponsors" StronglyTypedLanguage="$(Language)" />
   </ItemGroup>
@@ -39,8 +40,7 @@
   </ItemGroup>
 
   <Target Name="EmitFunding" BeforeTargets="CompileDesignTime;CoreCompile" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">
-    <Warning Condition="'$(FundingPackageId)' == ''" Code="SL001"
-             Text="Could not determine value of FundingPackageId (defaulted to PackageId). Defaulting it to FundingProduct ('$(FundingProduct)'). Make sure this matches the containing package id, or set an explicit value." />
+    <Warning Condition="'$(FundingPackageId)' == ''" Code="SL001" Text="Could not determine value of FundingPackageId (defaulted to PackageId). Defaulting it to FundingProduct ('$(FundingProduct)'). Make sure this matches the containing package id, or set an explicit value." />
     <PropertyGroup>
       <!-- Default to Product, which is most common for single-package products (i.e. Moq) -->
       <FundingPackageId Condition="'$(FundingPackageId)' == ''">$(FundingProduct)</FundingPackageId>
