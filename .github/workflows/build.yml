@@ -79,7 +79,6 @@ jobs:
           name: logs
           path: '*.binlog'
 
-      # Only push CI package to sleet feed if building on ubuntu (fastest)
       - name: 🚀 sleet
         env:
           SLEET_CONNECTION: ${{ secrets.SLEET_CONNECTION }}
