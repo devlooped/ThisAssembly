@@ -191,8 +191,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/DiagnosticsManager.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/DiagnosticsManager.cs
-	sha = ca82a9d6298a933192c5dfd2c5881ebadb85d0fe
-	etag = 68901df18e599f2171229d39c0123629c0f37a641eac0381358732a25a63e422
+	sha = 7635caae384269b12d0b99f688775f91b21ab08b
+	etag = c40291d442d7b125d4f05207ce895a90473ec0d3e7dc3e05b27f25b04dd00e8d
 	weak
 [file "src/SponsorLink/SponsorLink/ManifestStatus.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/ManifestStatus.cs

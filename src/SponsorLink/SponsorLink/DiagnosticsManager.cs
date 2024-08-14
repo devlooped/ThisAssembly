@@ -203,7 +203,7 @@ class DiagnosticsManager
             string.Join(", ", sponsorable.Select(x => $"https://github.com/sponsors/{x}")),
             string.Join(" ", sponsorable)),
         helpLinkUri: "https://github.com/devlooped#sponsorlink",
-        WellKnownDiagnosticTags.NotConfigurable);
+        WellKnownDiagnosticTags.NotConfigurable, "CompilationEnd");
 
     internal static DiagnosticDescriptor CreateExpiring(string[] sponsorable, string prefix) => new(
          $"{prefix}101",
@@ -214,7 +214,7 @@ class DiagnosticsManager
          isEnabledByDefault: true,
          description: string.Format(CultureInfo.CurrentCulture, Resources.Expiring_Description, string.Join(" ", sponsorable)),
          helpLinkUri: "https://github.com/devlooped#autosync",
-         "DoesNotSupportF1Help", WellKnownDiagnosticTags.NotConfigurable);
+         "DoesNotSupportF1Help", WellKnownDiagnosticTags.NotConfigurable, "CompilationEnd");
 
     internal static DiagnosticDescriptor CreateExpired(string[] sponsorable, string prefix) => new(
          $"{prefix}102",
@@ -225,7 +225,7 @@ class DiagnosticsManager
          isEnabledByDefault: true,
          description: string.Format(CultureInfo.CurrentCulture, Resources.Expired_Description, string.Join(" ", sponsorable)),
          helpLinkUri: "https://github.com/devlooped#autosync",
-         "DoesNotSupportF1Help", WellKnownDiagnosticTags.NotConfigurable);
+         "DoesNotSupportF1Help", WellKnownDiagnosticTags.NotConfigurable, "CompilationEnd");
 
     internal static DiagnosticDescriptor CreateSponsor(string[] sponsorable, string prefix, bool hidden = false) => new(
             $"{prefix}105",
@@ -236,7 +236,7 @@ class DiagnosticsManager
             isEnabledByDefault: true,
             description: Resources.Sponsor_Description,
             helpLinkUri: "https://github.com/devlooped#sponsorlink",
-            "DoesNotSupportF1Help");
+            "DoesNotSupportF1Help", "CompilationEnd");
 
     internal static DiagnosticDescriptor CreateContributor(string[] sponsorable, string prefix, bool hidden = false) => new(
             $"{prefix}106",
@@ -247,5 +247,5 @@ class DiagnosticsManager
             isEnabledByDefault: true,
             description: Resources.Contributor_Description,
             helpLinkUri: "https://github.com/devlooped#sponsorlink",
-            "DoesNotSupportF1Help");
+            "DoesNotSupportF1Help", "CompilationEnd");
 }
