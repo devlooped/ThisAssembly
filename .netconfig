@@ -119,8 +119,8 @@
 	weak
 [file ".github/workflows/changelog.config"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/changelog.config
-	sha = 055a8b7c94b74ae139cce919d60b83976d2a9942
-	etag = ddb17acb5872e9e69a76f9dec0ca590f25382caa2ccf750df058dcabb674db2b
+	sha = 08d83cb510732f861416760d37702f9f55bd7f9e
+	etag = 556a28914eeeae78ca924b1105726cdaa211af365671831887aec81f5f4301b4
 	weak
 [file ".github/release.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/release.yml
@@ -363,4 +363,9 @@
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/Resources.es-AR.resx
 	sha = ca82a9d6298a933192c5dfd2c5881ebadb85d0fe
 	etag = eeaafb2886bfb0d66e6e5aa751a60f3691433ac30fdd4bf5c14138dac7174ba9
+	weak
+[file ".github/workflows/stale.yml"]
+	url = https://github.com/devlooped/oss/blob/main/.github/workflows/stale.yml
+	sha = 695ccee03855bd584a1d7e2f6a59d05e0f919ce1
+	etag = fac9da58349366f7031314cd05c8b554a262945c6e4d6bd3897906854b68153e
 	weak
