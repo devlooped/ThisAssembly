@@ -29,9 +29,13 @@ jobs:
       - name: ⌛ rate
         shell: pwsh
         if: github.event_name != 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}        
         run: |
           # add random sleep since we run on fixed schedule
-          sleep (get-random -max 60)
+          $wait = get-random -max 180
+          echo "Waiting random $wait seconds to start"          
+          sleep $wait
           # get currently authenticated user rate limit info
           $rate = gh api rate_limit | convertfrom-json | select -expandproperty rate
           # if we don't have at least 100 requests left, wait until reset
