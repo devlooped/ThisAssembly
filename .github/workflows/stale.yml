@@ -48,7 +48,8 @@ jobs:
           }
         
       - name: ✏️ label
-        uses: actions/stale@v9
+        # pending merge: https://github.com/actions/stale/pull/1176
+        uses: kzu/stale@c8450312ba97b204bf37545cb249742144d6ca69
         with:
           ascending: true # Process the oldest issues first
           stale-issue-label: 'stale'
@@ -65,3 +66,4 @@ jobs:
           exempt-all-milestones: true
           exempt-all-assignees: true
           exempt-issue-labels: priority,sponsor,backed
+          exempt-authors: kzu
