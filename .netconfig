@@ -366,6 +366,6 @@
 	weak
 [file ".github/workflows/stale.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/stale.yml
-	sha = 24c2668751adeaf0d27f60bfc964d30e64b852d0
-	etag = 1db52e72bee3748e6b9ade658c295016b1c8c2a2a51d68dda82d1f6d365b51ed
+	sha = 03b7d535f782ceaf918eeea82ca374bc8c93288a
+	etag = 1efabca4a7436d756e8d24e616a8ecda54f55b49eab623168149f042131e67d6
 	weak
