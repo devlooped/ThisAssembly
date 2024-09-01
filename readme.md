@@ -434,6 +434,7 @@ The versioning scheme for packages is:
 [![ChilliCream](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/ChilliCream.png "ChilliCream")](https://github.com/ChilliCream)
 [![4OTC](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/4OTC.png "4OTC")](https://github.com/4OTC)
 [![Vincent Limo](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/v-limo.png "Vincent Limo")](https://github.com/v-limo)
+[![Brooke Hamilton](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/brooke-hamilton.png "Brooke Hamilton")](https://github.com/brooke-hamilton)
 
 
 <!-- sponsors.md -->
