@@ -84,14 +84,14 @@ jobs:
         run: npm install --production
 
       - name: 🔒 issues locker
-        uses: ./actions/locker
+        uses: ./locker
         with:
           ignoredLabel: priority
           daysSinceClose:  ${{ fromJson(inputs.daysSinceClose  || 30) }}
           daysSinceUpdate: ${{ fromJson(inputs.daysSinceUpdate || 30) }}
 
       - name: 🔒 need info closer
-        uses: ./actions/needs-more-info-closer
+        uses: ./needs-more-info-closer
         with:
           label: 'need info'
           closeDays:  ${{ fromJson(inputs.daysBeforeClose  || 30) }}
