@@ -38,7 +38,7 @@ jobs:
         shell: pwsh
         if: github.event_name != 'workflow_dispatch'
         env:
-          GH_TOKEN: ${{ github.token }}        
+          GH_TOKEN: ${{ secrets.DEVLOOPED_TOKEN }}        
         run: |
           # add random sleep since we run on fixed schedule
           $wait = get-random -max 180
@@ -87,6 +87,7 @@ jobs:
       - name: 🔒 issues locker
         uses: ./locker
         with:
+          token: ${{ secrets.DEVLOOPED_TOKEN }}
           ignoredLabel: priority
           daysSinceClose:  ${{ fromJson(inputs.daysSinceClose  || 30) }}
           daysSinceUpdate: ${{ fromJson(inputs.daysSinceUpdate || 30) }}
@@ -94,6 +95,7 @@ jobs:
       - name: 🔒 need info closer
         uses: ./needs-more-info-closer
         with:
+          token: ${{ secrets.DEVLOOPED_TOKEN }}
           label: 'need info'
           closeDays:  ${{ fromJson(inputs.daysBeforeClose  || 30) }}
           closeComment: "This issue has been closed automatically because it needs more information and has not had recent activity.\n\nHappy Coding!"
