@@ -6,15 +6,21 @@ on:
   workflow_dispatch:
     # Manual triggering through the GitHub UI, API, or CLI
     inputs:
+      daysBeforeClose:
+        description: "Days before closing stale or need info issues"
+        required: true
+        default: "30"
       daysBeforeStale:
         required: true
         default: "180"
-      daysBeforeClose:
+      daysSinceClose:
+        description: "Days since close to lock"
         required: true
         default: "30"
-      operationsPerRun:
+      daysSinceUpdate:
+        description: "Days since update to lock"
         required: true
-        default: "4000"
+        default: "30"
 
 permissions:
   actions: write # For managing the operation state cache
@@ -47,7 +53,7 @@ jobs:
               echo "Rate limit has reset to $($rate.remaining) requests"
           }
         
-      - name: ✏️ label
+      - name: ✏️ stale labeler
         # pending merge: https://github.com/actions/stale/pull/1176
         uses: kzu/stale@c8450312ba97b204bf37545cb249742144d6ca69
         with:
@@ -62,8 +68,33 @@ jobs:
           days-before-stale: ${{ fromJson(inputs.daysBeforeStale || 180) }}  
           days-before-close: ${{ fromJson(inputs.daysBeforeClose || 30  ) }}
           days-before-pr-close: -1 # Do not close PRs labeled as 'stale'
-          operations-per-run: ${{ fromJson(inputs.operationsPerRun || 4000 )}}
           exempt-all-milestones: true
           exempt-all-assignees: true
           exempt-issue-labels: priority,sponsor,backed
           exempt-authors: kzu
+
+      - name: 🤘 checkout actions
+        uses: actions/checkout@v4
+        with:
+          repository: 'microsoft/vscode-triage-github-actions'
+          ref: v42
+
+      - name: ⚙ install actions
+        run: npm install --production
+
+      - name: 🔒 issues locker
+        uses: ./actions/locker
+        with:
+          ignoredLabel: priority
+          daysSinceClose:  ${{ fromJson(inputs.daysSinceClose  || 30) }}
+          daysSinceUpdate: ${{ fromJson(inputs.daysSinceUpdate || 30) }}
+
+      - name: 🔒 need info closer
+        uses: ./actions/needs-more-info-closer
+        with:
+          label: 'need info'
+          closeDays:  ${{ fromJson(inputs.daysBeforeClose  || 30) }}
+          closeComment: "This issue has been closed automatically because it needs more information and has not had recent activity.\n\nHappy Coding!"
+          pingDays: 80
+          pingComment: "Hey @${assignee}, this issue might need further attention.\n\n@${author}, you can help us out by closing this issue if the problem no longer exists, or adding more information."
+
