@@ -364,8 +364,8 @@
 	sha = ca82a9d6298a933192c5dfd2c5881ebadb85d0fe
 	etag = eeaafb2886bfb0d66e6e5aa751a60f3691433ac30fdd4bf5c14138dac7174ba9
 	weak
-[file ".github/workflows/stale.yml"]
-	url = https://github.com/devlooped/oss/blob/main/.github/workflows/stale.yml
-	sha = 03b7d535f782ceaf918eeea82ca374bc8c93288a
-	etag = 1efabca4a7436d756e8d24e616a8ecda54f55b49eab623168149f042131e67d6
+[file ".github/workflows/triage.yml"]
+	url = https://github.com/devlooped/oss/blob/main/.github/workflows/triage.yml
+	sha = 33000c0c4ab4eb4e0e142fa54515b811a189d55c
+	etag = 013a47739e348f06891f37c45164478cca149854e6cd5c5158e6f073f852b61a
 	weak
