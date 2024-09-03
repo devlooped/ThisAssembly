@@ -17,7 +17,14 @@ public class StatusReportingGenerator : IIncrementalGenerator
             {
                 var (manifests, options) = source;
                 var status = Diagnostics.GetOrSetStatus(manifests, options);
-                spc.AddSource("StatusReporting.cs", $"// Status: {status}");
+                spc.AddSource("StatusReporting.cs",
+                    $"""
+                    // Status: {status}
+                    // DesignTimeBuild: {options.IsDesignTimeBuild()}
+                    """);
+                spc.ReportDiagnostic(Diagnostic.Create("SL200", "Compiler", "Don't disable me!",
+                    DiagnosticSeverity.Warning,
+                    DiagnosticSeverity.Warning, true, 1));
             });
     }
 }

@@ -18,7 +18,7 @@ env:
     
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.PUBLISH_AGENT || 'ubuntu-latest' }}
     steps:
       - name: 🤘 checkout
         uses: actions/checkout@v4
@@ -44,8 +44,9 @@ jobs:
       - name: 🚀 nuget
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        if: env.NUGET_API_KEY != ''
-        run: dotnet nuget push ./bin/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
+        if: ${{ env.NUGET_API_KEY != '' && github.event.action != 'prereleased' }}
+        working-directory: bin
+        run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
 
       - name: 🚀 sleet
         env:

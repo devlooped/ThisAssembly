@@ -137,7 +137,7 @@ class DiagnosticsManager
             // report unknown, either unparsed manifest or one with no expiration (which we never emit).
             return Push(Diagnostic.Create(KnownDescriptors[SponsorStatus.Unknown], null,
                 properties: ImmutableDictionary.Create<string, string?>().Add(nameof(SponsorStatus), nameof(SponsorStatus.Unknown)),
-                Funding.Product, Sponsorables.Keys.Humanize(Resources.Or)),
+                Funding.Product, Sponsorables.Keys.Select(x => "@" + x).Humanize(Resources.Or)),
                 SponsorStatus.Unknown);
         }
         else if (exp < DateTime.Now)
@@ -201,7 +201,7 @@ class DiagnosticsManager
         isEnabledByDefault: true,
         description: string.Format(CultureInfo.CurrentCulture, Resources.Unknown_Description,
             string.Join(", ", sponsorable.Select(x => $"https://github.com/sponsors/{x}")),
-            string.Join(" ", sponsorable)),
+            string.Join(" ", sponsorable.Select(x => "@" + x))),
         helpLinkUri: "https://github.com/devlooped#sponsorlink",
         WellKnownDiagnosticTags.NotConfigurable, "CompilationEnd");
 
