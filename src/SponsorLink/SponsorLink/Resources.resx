@@ -123,7 +123,7 @@ Please consider supporting the project by sponsoring at {0} and running 'sponsor
     <comment>Unknown sponsor description</comment>
   </data>
   <data name="Unknown_Message" xml:space="preserve">
-    <value>Please consider supporting {0} by sponsoring @{1} 🙏</value>
+    <value>Please consider supporting {0} by sponsoring {1} 🙏</value>
   </data>
   <data name="Unknown_Title" xml:space="preserve">
     <value>Unknown sponsor status</value>
