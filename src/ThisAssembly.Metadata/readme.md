@@ -1,4 +1,4 @@
-<!-- #content -->
+<!-- #metadata -->
 This package provides a static `ThisAssembly.Metadata` class with public 
 constants exposing each `[System.Reflection.AssemblyMetadata(..)]` defined for 
 the project.
@@ -24,6 +24,6 @@ The metadata attribute can alternatively be declared using MSBuild syntax in the
 Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
 generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
-<!-- #content -->
+<!-- #metadata -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

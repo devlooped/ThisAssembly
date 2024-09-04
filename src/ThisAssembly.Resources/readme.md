@@ -1,4 +1,4 @@
-<!-- #content -->
+<!-- #resources -->
 
 This package generates a static `ThisAssembly.Resources` class with public 
 properties exposing typed APIs to retrieve the contents of embedded resources.
@@ -45,6 +45,6 @@ doc for the generated member.
 Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
 generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
-<!-- #content -->
+<!-- #resources -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->
