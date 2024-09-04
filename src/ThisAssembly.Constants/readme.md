@@ -1,4 +1,4 @@
-<!-- #content -->
+<!-- #constants -->
 This package generates a static `ThisAssembly.Constants` class with public
 constants for `@(Constant)` MSBuild items in the project.
 
@@ -28,6 +28,6 @@ Which results in:
 Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
 generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
-<!-- #content -->
+<!-- #constants -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

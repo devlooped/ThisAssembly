@@ -1,4 +1,4 @@
-<!-- #content -->
+<!-- #git -->
 This package generates a static `ThisAssembly.Git` class with constants 
 for the following Git properties from the current project:
 
@@ -14,6 +14,9 @@ This package relies on your project's installed
 [Microsoft.SourceLink.*](https://www.nuget.org/packages?q=Microsoft.SourceLink) 
 package reference according to your specific Git-based source control server 
 (such as GitHub, Azure DevOps, BitBucket, etc).
+
+> NOTE: from .NET 8 SDK onwards, SourceLink is included by default, so you 
+> don't need to add it manually.
 
 The `Branch` property is populated from environment variables provided 
 by the currently supported CI systems: GitHub Actions, Azure DevOps, 
@@ -70,6 +73,6 @@ Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of
 generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
 
-<!-- #content -->
+<!-- #git -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

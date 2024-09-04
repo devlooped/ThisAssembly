@@ -1,4 +1,4 @@
-<!-- #content -->
+<!-- #strings -->
 
 This package generates a static `ThisAssembly.Strings` class with public 
 constants exposing string resources in .resx files or methods with the right number of 
@@ -70,6 +70,6 @@ partial class ThisAssembly
 Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
 generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
 
-<!-- #content -->
+<!-- #strings -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

@@ -42,6 +42,7 @@
 
     <None Update="@(None -> WithMetadataValue('Filename', 'readme'))" 
           Pack="true" PackagePath="%(Filename)%(Extension)" 
+          CopyToOutputDirectory="Never"
           Condition="'$(PackReadme)' != 'false' and '$(PackageReadmeFile)' != ''" />
     
     <!-- src-level will need explicit inclusion -->
@@ -51,6 +52,7 @@
 
     <None Include="$(MSBuildThisFileDirectory)readme.md" Link="readme.md"  
           Pack="true" PackagePath="%(Filename)%(Extension)"
+          CopyToOutputDirectory="Never"
           Condition="'$(PackReadme)' != 'false' and Exists('$(MSBuildThisFileDirectory)readme.md') and !Exists('$(MSBuildProjectDirectory)\readme.md')" />
   </ItemGroup>
 
