@@ -124,8 +124,8 @@
 	weak
 [file ".github/release.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/release.yml
-	sha = 1afd173fe8f81b510c597737b0d271218e81fa73
-	etag = 482dc2c892fc7ce0cb3a01eb5d9401bee50ddfb067d8cb85873555ce63cf5438
+	sha = 0c23e24704625cf75b2cb1fdc566cef7e20af313
+	etag = 310df162242c95ed19ed12e3c96a65f77e558b46dced676ad5255eb12caafe75
 	weak
 [file "src/SponsorLink"]
 	url = https://github.com/devlooped/SponsorLink/tree/main/samples/dotnet/
