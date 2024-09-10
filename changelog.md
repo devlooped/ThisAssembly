@@ -1,8 +1,20 @@
 # Changelog
 
-## [v1.5.0-rc.4](https://github.com/devlooped/ThisAssembly/tree/v1.5.0-rc.4) (2024-07-24)
+## [v1.5.1-alpha](https://github.com/devlooped/ThisAssembly/tree/v1.5.1-alpha) (2024-09-10)
 
-[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0...v1.5.0-rc.4)
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0...v1.5.1-alpha)
+
+:sparkles: Implemented enhancements:
+
+- CS0229: Ambiguity between 'ThisAssembly.Info.Description' and 'ThisAssembly.Info.Description' when using Unclassified.NetRevisionTask [\#349](https://github.com/devlooped/ThisAssembly/issues/349)
+
+:twisted_rightwards_arrows: Merged:
+
+- Make sure all packages include the note about SponsorLink [\#377](https://github.com/devlooped/ThisAssembly/pull/377) (@kzu)
+- Aggregate individual package readmes into meta-package [\#374](https://github.com/devlooped/ThisAssembly/pull/374) (@kzu)
+- +Mᐁ includes [\#370](https://github.com/devlooped/ThisAssembly/pull/370) (@devlooped-bot)
+- Avoid expanding sponsors section via include.yml [\#369](https://github.com/devlooped/ThisAssembly/pull/369) (@kzu)
+- Update readme.md to use `[!NOTE]` syntax [\#362](https://github.com/devlooped/ThisAssembly/pull/362) (@norwd)
 
 ## [v1.5.0](https://github.com/devlooped/ThisAssembly/tree/v1.5.0) (2024-07-24)
 
@@ -24,6 +36,10 @@
 
 - Add support for setting ThisAssembly namespace [\#211](https://github.com/devlooped/ThisAssembly/issues/211)
 - Add support for ThisAssemblyNamespace to change root namespace [\#354](https://github.com/devlooped/ThisAssembly/pull/354) (@kzu)
+
+:twisted_rightwards_arrows: Merged:
+
+- +Mᐁ includes [\#355](https://github.com/devlooped/ThisAssembly/pull/355) (@devlooped-bot)
 
 ## [v1.5.0-rc.1](https://github.com/devlooped/ThisAssembly/tree/v1.5.0-rc.1) (2024-07-21)
 
@@ -177,6 +193,10 @@
 
 - Don't warn compiler API version for F\# projects [\#216](https://github.com/devlooped/ThisAssembly/pull/216) (@kzu)
 
+:twisted_rightwards_arrows: Merged:
+
+- +Mᐁ includes [\#215](https://github.com/devlooped/ThisAssembly/pull/215) (@devlooped-bot)
+
 ## [v1.2.10](https://github.com/devlooped/ThisAssembly/tree/v1.2.10) (2023-03-20)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.9...v1.2.10)
@@ -234,6 +254,10 @@
 ## [v1.2.5](https://github.com/devlooped/ThisAssembly/tree/v1.2.5) (2023-02-07)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.4...v1.2.5)
+
+:twisted_rightwards_arrows: Merged:
+
+- +Mᐁ includes [\#190](https://github.com/devlooped/ThisAssembly/pull/190) (@devlooped-bot)
 
 ## [v1.2.4](https://github.com/devlooped/ThisAssembly/tree/v1.2.4) (2023-02-06)
 
@@ -293,6 +317,10 @@
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.0-rc...v1.2.0-rc.1)
 
+:twisted_rightwards_arrows: Merged:
+
+- +Mᐁ includes [\#171](https://github.com/devlooped/ThisAssembly/pull/171) (@devlooped-bot)
+
 ## [v1.2.0-rc](https://github.com/devlooped/ThisAssembly/tree/v1.2.0-rc) (2023-01-25)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.2.0-beta...v1.2.0-rc)
@@ -307,6 +335,10 @@
 :bug: Fixed bugs:
 
 - Compilation fails when resource file is name `Resources.resx` [\#167](https://github.com/devlooped/ThisAssembly/issues/167)
+
+:twisted_rightwards_arrows: Merged:
+
+- +Mᐁ includes [\#170](https://github.com/devlooped/ThisAssembly/pull/170) (@devlooped-bot)
 
 ## [v1.2.0-beta](https://github.com/devlooped/ThisAssembly/tree/v1.2.0-beta) (2023-01-24)
 
@@ -352,6 +384,10 @@
 - Do not test LangVersion [\#101](https://github.com/devlooped/ThisAssembly/issues/101)
 - Fix ThisAssembly.Resources assembly name for analyzer [\#149](https://github.com/devlooped/ThisAssembly/pull/149) (@kzu)
 - Fix logic for determining default text resources [\#148](https://github.com/devlooped/ThisAssembly/pull/148) (@kzu)
+
+:twisted_rightwards_arrows: Merged:
+
+- +Mᐁ includes [\#154](https://github.com/devlooped/ThisAssembly/pull/154) (@devlooped-bot)
 
 ## [v1.1.0](https://github.com/devlooped/ThisAssembly/tree/v1.1.0) (2022-12-31)
 
