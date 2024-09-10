@@ -1,3 +1,4 @@
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
 <!-- include ../../readme.md#meta -->
 
 ## ThisAssembly.AssemblyInfo

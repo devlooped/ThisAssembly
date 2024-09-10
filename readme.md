@@ -6,8 +6,9 @@
 [![License](https://img.shields.io/github/license/devlooped/ThisAssembly.svg?color=blue)](https://github.com//devlooped/ThisAssembly/blob/main/license.txt)
 [![Build](https://github.com/devlooped/ThisAssembly/workflows/build/badge.svg?branch=main)](https://github.com/devlooped/ThisAssembly/actions)
 
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
 <!-- #meta -->
-Exposes project and assembly level information as constants in the ThisAssembly 
+Expose project and assembly level information as constants in the ThisAssembly 
 class using source generators powered by Roslyn.
 
 The main generated entry point type is `ThisAssembly` in the global namespace, 
