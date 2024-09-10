@@ -19,7 +19,6 @@ and members.
 The [ThisAssembly](https://nuget.org/packages/ThisAssembly) meta-package includes 
 all the other packages for convenience.
 
-> [!NOTE]
 > For now, ThisAssembly only generates C# code.
 <!-- #meta -->
 
