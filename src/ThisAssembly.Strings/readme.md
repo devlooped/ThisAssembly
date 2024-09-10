@@ -1,3 +1,4 @@
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
 <!-- #strings -->
 
 This package generates a static `ThisAssembly.Strings` class with public 

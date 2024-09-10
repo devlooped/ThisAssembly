@@ -1,3 +1,4 @@
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
 <!-- #metadata -->
 This package provides a static `ThisAssembly.Metadata` class with public 
 constants exposing each `[System.Reflection.AssemblyMetadata(..)]` defined for 
