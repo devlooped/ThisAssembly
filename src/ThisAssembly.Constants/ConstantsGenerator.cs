@@ -6,6 +6,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
+using static Devlooped.Sponsors.SponsorLink;
+using Resources = Devlooped.Sponsors.Resources;
 
 namespace ThisAssembly;
 
@@ -29,11 +31,26 @@ public class ConstantsGenerator : IIncrementalGenerator
                 if (value != null && value.StartsWith("|") && value.EndsWith("|"))
                     value = value[1..^1].Replace('|', ';');
 
-                return (
-                    name: Path.GetFileName(x.Left.Path),
-                    value: value ?? "",
-                    comment: string.IsNullOrWhiteSpace(comment) ? null : comment,
-                    root: string.IsNullOrWhiteSpace(root) ? "Constants" : root!);
+                var name = Path.GetFileName(x.Left.Path);
+                if (string.IsNullOrEmpty(root))
+                {
+                    root = "Constants";
+                }
+                else if (root == ".")
+                {
+                    var parts = name.Split(['.'], 2);
+                    if (parts.Length == 2)
+                    {
+                        // root should be the first part up to the first dot of name
+                        // and name should be the rest
+                        // note we only do this if there's an actual dot, otherwise, we 
+                        // just leave the root's default of Constants
+                        root = parts[0];
+                        name = parts[1];
+                    }
+                }
+
+                return (name, value: value ?? "", comment: string.IsNullOrWhiteSpace(comment) ? null : comment, root!);
             });
 
         // Read the ThisAssemblyNamespace property or default to null
@@ -62,7 +79,7 @@ public class ConstantsGenerator : IIncrementalGenerator
             return;
         }
 
-        var rootArea = Area.Load(new List<Constant> { new Constant(name, value, comment), }, root);
+        var rootArea = Area.Load([new(name, value, comment),], root);
         // For now, we only support C# though
         var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
@@ -89,6 +106,6 @@ public class ConstantsGenerator : IIncrementalGenerator
         //        .ToString();
         //}
 
-        spc.AddSource($"{name}.g.cs", SourceText.From(output, Encoding.UTF8));
+        spc.AddSource($"{root}.{name}.g.cs", SourceText.From(output, Encoding.UTF8));
     }
 }

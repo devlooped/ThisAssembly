@@ -18,20 +18,14 @@
     </InjectThisAssemblyProjectDependsOn>
   </PropertyGroup>
 
-  <Target Name="PrepareProjectProperties" />
-  
-  <Target Name="InjectThisAssemblyProject" DependsOnTargets="$(InjectThisAssemblyProjectDependsOn);PrepareProjectProperties" 
-          BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun">
+  <Target Name="PrepareProjectProperties" BeforeTargets="PrepareConstants">
     <ItemGroup>
       <ProjectPropertyDistinct Include="@(ProjectProperty -> Distinct())" />
     </ItemGroup>
-    <PropertyGroup>
-      <ThisAssemblyProject>@(ProjectPropertyDistinct, '|')</ThisAssemblyProject>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(ThisAssemblyProject)' != ''">
-      <CompilerVisibleProperty Include="@(ProjectPropertyDistinct)" />
-      <CompilerVisibleProperty Include="ThisAssemblyProject" />
+    <ItemGroup>
+      <!-- Collect requested properties, and eval their value -->
+      <Constant Include="@(ProjectPropertyDistinct -> 'Project.%(Identity)')" Value="$(%(ProjectPropertyDistinct.Identity))" Root="." />
     </ItemGroup>
   </Target>
-
+  
 </Project>

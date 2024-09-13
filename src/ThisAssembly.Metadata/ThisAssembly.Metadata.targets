@@ -10,7 +10,7 @@
           BeforeTargets="PrepareConstants"
           DependsOnTargets="GetAssemblyAttributes">
     <ItemGroup>
-      <Constant Include="%(AssemblyMetadata.Identity)" Value="%(AssemblyMetadata.Value)" Comment="%(AssemblyMetadata.Comment)" Root="Metadata" />
+      <Constant Include="@(AssemblyMetadata -> 'Metadata.%(Identity)')" Value="%(AssemblyMetadata.Value)" Comment="%(AssemblyMetadata.Comment)" Root="." />
     </ItemGroup>
   </Target>
 
