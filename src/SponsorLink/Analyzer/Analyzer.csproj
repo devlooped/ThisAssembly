@@ -20,7 +20,6 @@
     <PackageReference Include="ThisAssembly.AssemblyInfo" Version="1.4.3" PrivateAssets="all" />
     <PackageReference Include="ThisAssembly.Git" Version="1.4.3" PrivateAssets="all" />
     <PackageReference Include="ThisAssembly.Constants" Version="1.4.3" PrivateAssets="all" />
-    <PackageReference Include="ThisAssembly.Strings" Version="1.4.3" PrivateAssets="all" />
     <PackageReference Include="ThisAssembly.Project" Version="1.4.3" PrivateAssets="all" />
   </ItemGroup>
 

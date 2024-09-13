@@ -17,6 +17,8 @@
     <FundingPrefix Condition="'$(FundingPrefix)' == ''">$([System.Text.RegularExpressions.Regex]::Replace("$(FundingProduct)", "[^A-Z]", ""))</FundingPrefix>
     <!-- Default grace days for an expired sponsor manifest -->
     <FundingGrace Condition="'$(FundingGrace)' == ''">21</FundingGrace>
+    <!-- Url to use as the helpUrl in diagnostics, to learn more about SL -->
+    <FundingHelpUrl Condition="'$(FundingHelpUrl)' == ''">https://github.com/devlooped#sponsorlink</FundingHelpUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -68,6 +70,7 @@ partial class SponsorLink
         public static HashSet&lt;string&gt; PackageIds { get%3B } = [$(_FundingPackageIds)]%3B
         public const string Product = "$(FundingProduct)"%3B
         public const string Prefix = "$(FundingPrefix)"%3B
+        public const string HelpUrl = "$(FundingHelpUrl)"%3B
         public const int Grace = $(FundingGrace)%3B
     }
 }

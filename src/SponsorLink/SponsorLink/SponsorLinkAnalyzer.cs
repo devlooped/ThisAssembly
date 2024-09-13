@@ -57,7 +57,7 @@ public class SponsorLinkAnalyzer : DiagnosticAnalyzer
                     {
                         if (ctx.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue("build_property." + prop, out var package) &&
                             package?.Length > 0 &&
-                            Diagnostics.Pop() is { } diagnostic)
+                            Diagnostics.TryGet() is { } diagnostic)
                         {
                             ctx.ReportDiagnostic(diagnostic);
                             break;
