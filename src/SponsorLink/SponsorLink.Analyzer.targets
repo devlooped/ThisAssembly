@@ -20,10 +20,12 @@
     <FundingPrefix Condition="'$(FundingPrefix)' == ''">$([System.Text.RegularExpressions.Regex]::Replace("$(FundingProduct)", "[^A-Z]", ""))</FundingPrefix>
     <!-- Default grace days for an expired sponsor manifest or unknown status -->
     <FundingGrace Condition="'$(FundingGrace)' == ''">15</FundingGrace>
+    <!-- Url to use as the helpUrl in diagnostics, to learn more about SL -->
+    <FundingHelpUrl Condition="'$(FundingHelpUrl)' == ''">https://github.com/devlooped#sponsorlink</FundingHelpUrl>
 
     <!-- Strong-naming analyzers is both unnecessary and additionally unsupported by ILRepack when run as a dotnet tool -->
     <SignAssembly Condition="'$(MergeAnalyzerAssemblies)' == 'true'">false</SignAssembly>
-</PropertyGroup>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)SponsorLink/*.cs"
@@ -32,11 +34,12 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)SponsorLink/*.resx"
                       Exclude="$(MSBuildThisFileDirectory)SponsorLink/bin/**;$(MSBuildThisFileDirectory)SponsorLink/obj/**"
                       Source="SponsorLink"
+                      Type="Resx"
                       ManifestResourceName="Devlooped.Sponsors.%(Filename)"/>
-    <EmbeddedResource Update="$(MSBuildThisFileDirectory)SponsorLink/Resources.resx" 
-                      StronglyTypedManifestPrefix="Devlooped.Sponsors" 
-                      StronglyTypedClassName="%(Filename)" 
-                      StronglyTypedNamespace="Devlooped.Sponsors" 
+    <EmbeddedResource Update="$(MSBuildThisFileDirectory)SponsorLink/Resources.resx"
+                      StronglyTypedManifestPrefix="Devlooped.Sponsors"
+                      StronglyTypedClassName="%(Filename)"
+                      StronglyTypedNamespace="Devlooped.Sponsors"
                       StronglyTypedLanguage="$(Language)" />
     <None Include="$(MSBuildThisFileDirectory)SponsorLink/buildTransitive/*.*"
           Source="SponsorLink"
@@ -122,6 +125,7 @@ partial class SponsorLink
         public static HashSet&lt;string&gt; PackageIds { get%3B } = [$(_FundingPackageIds)]%3B
         public const string Product = "$(FundingProduct)"%3B
         public const string Prefix = "$(FundingPrefix)"%3B
+        public const string HelpUrl = "$(FundingHelpUrl)"%3B
         public const int Grace = $(FundingGrace)%3B
     }
 }

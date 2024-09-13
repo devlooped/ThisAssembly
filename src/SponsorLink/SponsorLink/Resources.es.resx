@@ -169,4 +169,14 @@ Por favor considera apoyar el proyecto patrocinando en {0} y ejecutando posterio
   <data name="Contributor_Title" xml:space="preserve">
     <value>Eres un contribuidor al proyecto, eres lo máximo 💟!</value>
   </data>
+  <data name="Grace_Description" xml:space="preserve">
+    <value>Patrocinar los proyectos en que dependes asegura que se mantengan activos, y que recibas el apoyo que necesitas. También es muy económico y está disponible en todo el mundo!
+Por favor considera apoyar el proyecto patrocinando en {0} y ejecutando posteriormente 'sponsor sync {1}'.</value>
+  </data>
+  <data name="Grace_Message" xml:space="preserve">
+    <value>El período de prueba finaliza en {0} día(s). Disfrute y por favor considere apoyar {1} patrocinando {2} 🙏</value>
+  </data>
+  <data name="Grace_Title" xml:space="preserve">
+    <value>Estado de patrocinio desconocido, período de prueba</value>
+  </data>
 </root>

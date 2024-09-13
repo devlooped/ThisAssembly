@@ -131,8 +131,8 @@
 	url = https://github.com/devlooped/SponsorLink/tree/main/samples/dotnet/
 [file "src/SponsorLink/Analyzer/Analyzer.csproj"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/Analyzer.csproj
-	sha = 7407f5b3461213ae764f53ee93651a34487e458c
-	etag = 2842ea95c956faa47e997a7d20c39df2efc5b9c4f37fe1c2eeea297ee4ba9889
+	sha = efdaa7c93cca3bed49aafdca4a1f29e85126c94f
+	etag = 3a15ca6d1eec97f5280de063a3463dd24eafe47a8a9ac193bc0ecb2603643b6e
 	weak
 [file "src/SponsorLink/Analyzer/Properties/launchSettings.json"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/Properties/launchSettings.json
@@ -191,8 +191,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/DiagnosticsManager.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/DiagnosticsManager.cs
-	sha = 076078a2747b15a61c1003552c5c2677fae08435
-	etag = 5a9692feffa3fa03fc81769ec6cd8f72460df223993c6f49584a1892cf7a6306
+	sha = 46e9abe02e5a6abadda66ef050ddc5b9859aa2b8
+	etag = 72fe901dd67f30c1b78990599303ec6f409b2021a6da20edd66cc57f5d6e299c
 	weak
 [file "src/SponsorLink/SponsorLink/ManifestStatus.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/ManifestStatus.cs
@@ -201,13 +201,13 @@
 	weak
 [file "src/SponsorLink/SponsorLink/Resources.es.resx"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/Resources.es.resx
-	sha = 076078a2747b15a61c1003552c5c2677fae08435
-	etag = d456d80074ebba8109b914aec9ca31cd6269ea56159adaa7b7bae4497e1e60f7
+	sha = 46e9abe02e5a6abadda66ef050ddc5b9859aa2b8
+	etag = b7c9ab61fd7aa4b27e5bc3b6d3c54e80fabae1f5d0816ada621c48fad7e6db06
 	weak
 [file "src/SponsorLink/SponsorLink/Resources.resx"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/Resources.resx
-	sha = 076078a2747b15a61c1003552c5c2677fae08435
-	etag = 3be4a6dc6162f52e33f01110a2739e18fcec8886ca7f4d82e9688fec684f8158
+	sha = 46e9abe02e5a6abadda66ef050ddc5b9859aa2b8
+	etag = 20564ce16ec1b437fc057f78c5e712f88d63979754cbb42b70357a320c254214
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/SponsorLink.cs
@@ -216,13 +216,13 @@
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.csproj"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/SponsorLink.csproj
-	sha = d5300a8c7cd8df9ce8ee0ef7714e17cfcc5d9454
-	etag = 88652b0720f718ecedb3768b20b7a59bf38d635b3a1c2278c7603f99cc02b517
+	sha = 46e9abe02e5a6abadda66ef050ddc5b9859aa2b8
+	etag = 9674d70c0042b3b973846d5252d6861a981e1e7b84bc806a8d20698ba0c27481
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLinkAnalyzer.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/SponsorLinkAnalyzer.cs
-	sha = ca82a9d6298a933192c5dfd2c5881ebadb85d0fe
-	etag = 2b4bf43116b7bd745e0415248c94cdae63d8d241f326117c8bcb30d3700c0e46
+	sha = 46e9abe02e5a6abadda66ef050ddc5b9859aa2b8
+	etag = 062a02b6eb45e5e49cc73c77c25d66bf2695fc365e13ce7dc39f813a030fc370
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorStatus.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/SponsorStatus.cs
@@ -351,8 +351,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink.Analyzer.targets"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink.Analyzer.targets
-	sha = 3845393462f5a89f90e2c795345d9342bf87dbe2
-	etag = 08e58ed40ea91fdbe1a798c623f1048955880575fb01e16bfd5003fc288b173b
+	sha = efdaa7c93cca3bed49aafdca4a1f29e85126c94f
+	etag = 96480c337e10cdca35957d41b651879b146da30a6e6db234f2bb6f09e88e3a7f
 	weak
 [file "src/SponsorLink/SponsorLink.Analyzer.Tests.targets"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink.Analyzer.Tests.targets
@@ -361,8 +361,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/Resources.es-AR.resx"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/Resources.es-AR.resx
-	sha = 076078a2747b15a61c1003552c5c2677fae08435
-	etag = e1bfe540f1e1a33540f79da409e4f5c24069340913966b3d4a074a83ccb7bba0
+	sha = 46e9abe02e5a6abadda66ef050ddc5b9859aa2b8
+	etag = f9ee3b0f072504f662def880b10d24865fcab110f797383066737d38980102de
 	weak
 [file ".github/workflows/triage.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/triage.yml
