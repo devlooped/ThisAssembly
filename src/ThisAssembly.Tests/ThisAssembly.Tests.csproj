@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <TargetFramework>net8.0</TargetFramework>
-    <ThisAssemblyNamespace>Devlooped</ThisAssemblyNamespace>
+    <ThisAssemblyNamespace>ThisAssemblyTests</ThisAssemblyNamespace>
     <Multiline>
       A Description
       with a newline and
@@ -17,10 +17,11 @@
     <TargetFramework Condition="'$(BuildingInsideVisualStudio)' == 'true'">net472</TargetFramework>
     <RootNamespace>ThisAssemblyTests</RootNamespace>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-    <NoWarn>CS8981;$(NoWarn)</NoWarn>
+    <NoWarn>CS0618;CS8981;TA100;$(NoWarn)</NoWarn>
+    <PackageScribanIncludeSource>false</PackageScribanIncludeSource>
   </PropertyGroup>
 
-  <Import Project="..\*\*.props" />
+  <Import Project="..\*\ThisAssembly*.props" />
 
   <ItemGroup>
     <Compile Remove="..\*.cs" />
@@ -40,6 +41,7 @@
     <PackageReference Include="PolySharp" Version="1.14.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" Pack="false" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="Scriban" Version="5.10.0" />
     <PackageReference Include="xunit" Version="2.9.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
@@ -81,7 +83,7 @@
     <Compile Include="..\ThisAssembly.Strings\Model.cs" Link="Model.cs" />
   </ItemGroup>
 
-  <Import Project="..\SponsorLink\SponsorLink\buildTransitive\Devlooped.Sponsors.targets"/>
+  <Import Project="..\SponsorLink\SponsorLink\buildTransitive\Devlooped.Sponsors.targets" />
   <Import Project="..\*\ThisAssembly*.targets" />
   <Import Project="..\SponsorLink\SponsorLink.Analyzer.Tests.targets" />
 
@@ -91,6 +93,14 @@
   </PropertyGroup>
   <ItemGroup>
     <CompilerVisibleProperty Include="SponsorLinkNoInstallGrace" />
+  </ItemGroup>
+
+  <!-- Simulate SL_CollectDependencies -->
+  <PropertyGroup>
+    <ThisAssembly>$(Version)</ThisAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <CompilerVisibleProperty Include="ThisAssembly" />
   </ItemGroup>
 
 </Project>

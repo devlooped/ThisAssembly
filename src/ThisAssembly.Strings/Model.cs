@@ -10,6 +10,9 @@ using System.Xml.Linq;
 record Model(ResourceArea RootArea, string ResourceName, string? Namespace)
 {
     public string? Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3);
+    public string Url => Devlooped.Sponsors.SponsorLink.Funding.HelpUrl;
+    public string? Warn { get; set; }
+    public string? Remarks { get; set; }
 }
 
 static class ResourceFile
@@ -131,8 +134,8 @@ static class ResourceFile
 [DebuggerDisplay("Id = {Id}, NestedAreas = {NestedAreas.Count}, Values = {Values.Count}")]
 record ResourceArea(string Id, string Prefix)
 {
-    public List<ResourceArea> NestedAreas { get; init; } = new List<ResourceArea>();
-    public List<ResourceValue> Values { get; init; } = new List<ResourceValue>();
+    public List<ResourceArea> NestedAreas { get; init; } = [];
+    public List<ResourceValue> Values { get; init; } = [];
 }
 
 [DebuggerDisplay("{Id} = {Value}")]

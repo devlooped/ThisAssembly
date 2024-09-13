@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Text;
+using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
+using static Devlooped.Sponsors.SponsorLink;
 
 namespace ThisAssembly;
 
@@ -46,24 +50,37 @@ public class StringsGenerator : IIncrementalGenerator
 
 
         context.RegisterSourceOutput(
-            files.Combine(right),
+            files.Combine(right).Combine(context.ParseOptionsProvider.Combine(context.GetStatusOptions())),
             GenerateSource);
     }
 
     static void GenerateSource(SourceProductionContext spc,
-        ((string fileName, SourceText? text, string resourceName), (string? ns, string language)) arg)
+        (((string fileName, SourceText? text, string resourceName), (string? ns, string language)), (ParseOptions parse, StatusOptions options)) arg)
     {
-        var ((fileName, resourceText, resourceName), (ns, language)) = arg;
+        var (((fileName, resourceText, resourceName), (ns, language)), (parse, options)) = arg;
 
         var file = language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
 
         var rootArea = ResourceFile.LoadText(resourceText!.ToString(), "Strings");
         var model = new Model(rootArea, resourceName, ns);
+        if (IsEditor)
+        {
+            var status = Diagnostics.GetOrSetStatus(options);
+            if (status == SponsorStatus.Unknown || status == SponsorStatus.Expired)
+            {
+                model.Warn = string.Format(CultureInfo.CurrentCulture, Resources.Editor_Disabled, Funding.Product, Funding.HelpUrl);
+                model.Remarks = Resources.Editor_DisabledRemarks;
+            }
+            else if (status == SponsorStatus.Grace && Diagnostics.TryGet() is { } grace && grace.Properties.TryGetValue(nameof(SponsorStatus.Grace), out var days))
+            {
+                model.Remarks = string.Format(CultureInfo.CurrentCulture, Resources.Editor_GraceRemarks, days);
+            }
+        }
 
         var output = template.Render(model, member => member.Name);
 
-        output = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseCompilationUnit(output)
+        output = SyntaxFactory.ParseCompilationUnit(output, options: parse as CSharpParseOptions)
             .NormalizeWhitespace()
             .GetText()
             .ToString();

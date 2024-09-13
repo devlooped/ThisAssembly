@@ -5,6 +5,7 @@
     
 > This project uses SponsorLink and may issue IDE-only warnings if no active sponsorship is detected. Learn more at https://github.com/devlooped#sponsorlink.
 </Description>
+    <IsAnalyzer>$(PackFolder.StartsWith('analyzers/'))</IsAnalyzer>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,12 +13,14 @@
     <None Update="@(NoneWithoutCopyToOutputDirectory)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="@(None -> WithMetadataValue('Extension', '.sbntxt'))" />
     <None Update="@(None -> WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
+  </ItemGroup>
 
+  <ItemGroup Condition="'$(IsAnalyzer)' == 'true'">
     <PackageFile Include="$(MSBuildThisFileDirectory)_._" PackagePath="lib/netstandard2.0/_._" />
     <PackageFile Include="*.props;*.targets" PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)" Visible="true" />
   </ItemGroup>
 
-  <Target Name="PackCopyLocalLockFileAssemblies" Condition="'$(MergeAnalyzerAssemblies)' != 'true'" BeforeTargets="GetPackageContents" DependsOnTargets="ReferenceCopyLocalPathsOutputGroup">
+  <Target Name="PackCopyLocalLockFileAssemblies" Condition="'$(IsAnalyzer)' == 'true' and '$(MergeAnalyzerAssemblies)' != 'true'" BeforeTargets="GetPackageContents" DependsOnTargets="ReferenceCopyLocalPathsOutputGroup">
     <ItemGroup>
       <ReferenceCopyLocalAssemblies Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll' 
         And !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase))

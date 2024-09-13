@@ -13,6 +13,9 @@ public class Model
     public string? Namespace { get; }
     public bool RawStrings { get; set; } = false;
     public string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+    public string Url => Devlooped.Sponsors.SponsorLink.Funding.HelpUrl;
+    public string? Warn { get; set; }
+    public string? Remarks { get; set; }
 
     public List<KeyValuePair<string, string>> Properties { get; }
 }

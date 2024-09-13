@@ -4,12 +4,18 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-static class EmbeddedResource
+/// <summary>
+/// Allows easy access to embedded resources.
+/// </summary>
+public static class EmbeddedResource
 {
 #if DEBUG
     static readonly string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
 #endif
 
+    /// <summary>
+    /// Gets the content of the embedded resource at the specified relative path.
+    /// </summary>
     public static string GetContent(string relativePath)
     {
         using var stream = GetStream(relativePath);
@@ -17,6 +23,9 @@ static class EmbeddedResource
         return reader.ReadToEnd();
     }
 
+    /// <summary>
+    /// Gets the bytes of the embedded resource at the specified relative path.
+    /// </summary>
     public static byte[] GetBytes(string relativePath)
     {
         using var stream = GetStream(relativePath);
@@ -25,6 +34,10 @@ static class EmbeddedResource
         return bytes;
     }
 
+    /// <summary>
+    /// Gets the stream of the embedded resource at the specified relative path.
+    /// </summary>
+    /// <exception cref="InvalidOperationException"></exception>
     public static Stream GetStream(string relativePath)
     {
 #if DEBUG

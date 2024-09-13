@@ -1,8 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using Devlooped;
 using Xunit;
 using Xunit.Abstractions;
+//using ThisAssembly = ThisAssemblyTests
 
 [assembly: SuppressMessage("SponsorLink", "SL04")]
 
@@ -10,7 +11,6 @@ namespace ThisAssemblyTests;
 
 public record class Tests(ITestOutputHelper Output)
 {
-    DateTime dxt = DateTime.Now;
     [Fact]
     public void CanReadResourceFile()
         => Assert.NotNull(ResourceFile.Load("Resources.resx", "Strings"));

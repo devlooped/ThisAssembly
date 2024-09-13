@@ -13,6 +13,9 @@ record Model(Area RootArea, string? Namespace)
 {
     public bool RawStrings { get; set; } = false;
     public string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+    public string Url => Devlooped.Sponsors.SponsorLink.Funding.HelpUrl;
+    public string? Warn { get; set; }
+    public string? Remarks { get; set; }
 }
 
 [DebuggerDisplay("Name = {Name}, NestedAreas = {NestedAreas.Count}, Values = {Values.Count}")]
