@@ -8,7 +8,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-{{ func summary }}
+{{- func summary -}}
 	    /// <summary>
         {{~ if $0.Comment ~}}
         /// {{ $0.Comment }}
@@ -16,12 +16,30 @@
 	    /// => @"{{ $0.Value }}"
         {{~ end ~}}
 	    /// </summary>
+{{- end -}}
+{{ func obsolete }}
+{{~ if Warn ~}}
+[Obsolete("{{ Warn }}", false
+#if NET6_0_OR_GREATER
+    , UrlFormat = "{{ Url }}"
+#endif
+)]
+
+{{~ end }}
+{{ end }}
+{{ func remarks }}
+{{~ if Remarks ~}}
+{{ Remarks }}
+/// <see cref="{{ Url }}"/>
+{{~ end ~}}
 {{ end }}
 {{ func render }}
     public static partial class {{ $0.Name | string.replace "-" "_" | string.replace " " "_" }}
     {
         {{~ for value in $0.Values ~}}
-        {{- summary value ~}}
+        {{- summary value -}}
+        {{- remarks -}}
+        {{ obsolete }}
         {{~ if RawStrings ~}}
 	    public const string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} = 
 """

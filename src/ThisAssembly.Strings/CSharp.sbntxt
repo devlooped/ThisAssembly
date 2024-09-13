@@ -16,11 +16,22 @@
 	    /// = "{{ $0.Value }}"
         {{~ end ~}}
 	    /// </summary>
+        {{~ if Remarks ~}}
+        {{ Remarks }}
+        /// <see cref="{{ Url }}"/>
+        {{~ end ~}}
+        {{~ if Warn ~}}
+        [Obsolete("{{ Warn }}", false
+        #if NET6_0_OR_GREATER
+            , UrlFormat = "{{ Url }}"
+        #endif
+        )]
+        {{~ end ~}}
 {{ end }}
 {{ func render }}
     public static partial class {{ $0.Id }}
     {
-        {{~ for value in $0.Values ~}}
+        {{~ for value in $0.Values }}
 		{{~ if!(value.HasFormat) ~}}
         {{- summary value ~}}
 	    public static string {{ value.Id }} => Strings.GetResourceManager("{{ $1 }}").GetString("{{ value.Name }}");
@@ -70,7 +81,7 @@ using System;
 using System.Globalization;
 {{ if Namespace }}
 namespace {{ Namespace }};
-{{~ end ~}}
+{{ end }}
 
 /// <summary>
 /// Provides access to the current assembly information.
@@ -80,5 +91,6 @@ partial class ThisAssembly
     /// <summary>
     /// Provides access to the assembly strings.
     /// </summary>
+    {{- remarks -}}
     {{ render RootArea ResourceName }}
 }

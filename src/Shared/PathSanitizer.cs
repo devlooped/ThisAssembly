@@ -1,8 +1,15 @@
 ﻿using System.Text.RegularExpressions;
 
-static class PathSanitizer
+/// <summary>
+/// Sanitizes paths for use as identifiers.
+/// </summary>
+public static class PathSanitizer
 {
     static readonly Regex invalidCharsRegex = new(@"\W");
+
+    /// <summary>
+    /// Sanitizes the specified path for use as an identifier.
+    /// </summary>
     public static string Sanitize(string path, string parent)
     {
         var partStr = invalidCharsRegex.Replace(path, "_");

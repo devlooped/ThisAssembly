@@ -1,14 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
+using static Devlooped.Sponsors.SponsorLink;
+using Resources = Devlooped.Sponsors.Resources;
 
 namespace ThisAssembly;
 
@@ -41,7 +46,7 @@ public class AssemblyInfoGenerator : IIncrementalGenerator
         // Read the ThisAssemblyNamespace property or default to null
         var right = context.AnalyzerConfigOptionsProvider
             .Select((c, t) => c.GlobalOptions.TryGetValue("build_property.ThisAssemblyNamespace", out var ns) && !string.IsNullOrEmpty(ns) ? ns : null)
-            .Combine(context.ParseOptionsProvider);
+            .Combine(context.ParseOptionsProvider.Combine(context.GetStatusOptions()));
 
         context.RegisterSourceOutput(
             metadata.Combine(right),
@@ -74,11 +79,24 @@ public class AssemblyInfoGenerator : IIncrementalGenerator
     }
 
     static void GenerateSource(SourceProductionContext spc,
-        (ImmutableArray<KeyValuePair<string, string>> attributes, (string? ns, ParseOptions parse)) arg)
+        (ImmutableArray<KeyValuePair<string, string>> attributes, (string? ns, (ParseOptions parse, StatusOptions options))) arg)
     {
-        var (attributes, (ns, parse)) = arg;
+        var (attributes, (ns, (parse, options))) = arg;
+        var model = new Model([.. attributes], ns);
+        if (IsEditor)
+        {
+            var status = Diagnostics.GetOrSetStatus(options);
+            if (status == SponsorStatus.Unknown || status == SponsorStatus.Expired)
+            {
+                model.Warn = string.Format(CultureInfo.CurrentCulture, Resources.Editor_Disabled, Funding.Product, Funding.HelpUrl);
+                model.Remarks = Resources.Editor_DisabledRemarks;
+            }
+            else if (status == SponsorStatus.Grace && Diagnostics.TryGet() is { } grace && grace.Properties.TryGetValue(nameof(SponsorStatus.Grace), out var days))
+            {
+                model.Remarks = string.Format(CultureInfo.CurrentCulture, Resources.Editor_GraceRemarks, days);
+            }
+        }
 
-        var model = new Model(attributes.ToList(), ns);
         if (parse is CSharpParseOptions cs && (int)cs.LanguageVersion >= 1100)
             model.RawStrings = true;
 

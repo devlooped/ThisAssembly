@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
 using System.CodeDom.Compiler;
 using System.Runtime.CompilerServices;
 {{ if Namespace }}
@@ -21,16 +22,32 @@ partial class ThisAssembly
     /// <summary>
     /// Gets the AssemblyInfo attributes.
     /// </summary>
+    {{~ if Remarks ~}}
+    {{ Remarks }}
+    /// <see cref="{{ Url }}"/>
+    {{~ end ~}}
     [GeneratedCode("ThisAssembly.AssemblyInfo", "{{ Version }}")]
     [CompilerGenerated]
     public static partial class Info
     {
-        {{~ for prop in Properties ~}}
+        {{- for prop in Properties ~}}
+
+        {{~ if Remarks ~}}
+        {{ Remarks }}
+        /// <see cref="{{ Url }}"/>
+        {{~ end ~}}
+        {{~ if Warn ~}}
+        [Obsolete("{{ Warn }}", false
+        #if NET6_0_OR_GREATER
+            , UrlFormat = "{{ Url }}"
+        #endif
+        )]
+        {{~ end ~}}
         {{~ if RawStrings ~}}
         public const string {{ prop.Key }} = 
-"""
-{{ prop.Value }}
-""";
+            """
+            {{ prop.Value }}
+            """;
         {{~ else ~}}
         public const string {{ prop.Key }} = @"{{ prop.Value }}";
         {{~ end ~}}
