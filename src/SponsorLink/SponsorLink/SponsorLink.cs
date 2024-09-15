@@ -18,6 +18,12 @@ namespace Devlooped.Sponsors;
 
 static partial class SponsorLink
 {
+    public record StatusOptions(ImmutableArray<AdditionalText> AdditionalFiles, AnalyzerConfigOptions GlobalOptions);
+
+    /// <summary>
+    /// Statically cached dictionary of sponsorable accounts and their public key (in JWK format), 
+    /// retrieved from assembly metadata attributes starting with "Funding.GitHub.".
+    /// </summary>
     public static Dictionary<string, string> Sponsorables { get; } = typeof(SponsorLink).Assembly
         .GetCustomAttributes<AssemblyMetadataAttribute>()
         .Where(x => x.Key.StartsWith("Funding.GitHub."))
@@ -92,6 +98,14 @@ static partial class SponsorLink
             })
             .Select((source, c) => source.Left)
             .Collect();
+
+    /// <summary>
+    /// Gets the status options for use within an incremental generator, to avoid depending on 
+    /// analyzer runs. Used in combination with <see cref="DiagnosticsManager.GetOrSetStatus(StatusOptions)"/>.
+    /// </summary>
+    public static IncrementalValueProvider<StatusOptions> GetStatusOptions(this IncrementalGeneratorInitializationContext context)
+        => context.GetSponsorAdditionalFiles().Combine(context.AnalyzerConfigOptionsProvider)
+            .Select((source, _) => new StatusOptions(source.Left, source.Right.GlobalOptions));
 
     static bool IsSponsorManifest(this AdditionalText text, AnalyzerConfigOptionsProvider provider)
         => provider.GetOptions(text).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
