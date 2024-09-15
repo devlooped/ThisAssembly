@@ -194,7 +194,7 @@ Please consider supporting the project by sponsoring at {0} and running 'sponsor
 /// If so, just run: 
 ///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
 ///     
-/// Subsequently, this [Obsolete] attribute will be removed. 
+/// Subsequently, the [Obsolete] attribute will be removed. 
 /// Thanks! 🙏
 /// &lt;/remarks&gt;</value>
   </data>
