@@ -193,4 +193,20 @@ Por favor considerá apoyar el proyecto patrocinando en {0} y ejecutando posteri
 /// Y el atributo [Obsolete] vuela de una. Gracias totales! 🙏
 /// &lt;/remarks&gt;</value>
   </data>
+  <data name="Editor_GraceRemarks" xml:space="preserve">
+    <value>/// &lt;remarks&gt;
+/// Esta API requiere patrocinio. Tu período de yapa termina en {0} día(s).
+/// 
+/// GitHub Sponsors es una excelente manera de apoyar proyectos de código abierto, y está disponible en la mayor parte del mundo.
+/// Sos considerado patrocinador si:
+/// - Contribuiste con código a cualquiera de los proyectos de Devlooped.
+/// - Pertenecés a una organización de GitHub que está patrocinando a Devlooped.
+/// - Bancás directamente a Devlooped 💪.
+/// 
+/// En este caso, simplemente ejecutá:
+///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
+///     
+/// ¡Gracias totales! 🙏
+/// &lt;/remarks&gt;</value>
+  </data>
 </root>
