@@ -190,7 +190,7 @@ Por favor considera apoyar el proyecto patrocinando en {0} y ejecutando posterio
 /// Si es así, simplemente ejecuta:
 ///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
 ///     
-/// Posteriormente, este atributo [Obsolete] será eliminado.
+/// Posteriormente, el atributo [Obsolete] será eliminado.
 /// ¡Gracias! 🙏
 /// &lt;/remarks&gt;</value>
   </data>
