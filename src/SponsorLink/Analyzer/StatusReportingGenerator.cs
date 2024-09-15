@@ -12,15 +12,14 @@ public class StatusReportingGenerator : IIncrementalGenerator
         context.RegisterSourceOutput(
             // this is required to ensure status is registered properly independently 
             // of analyzer runs.
-            context.GetSponsorAdditionalFiles().Combine(context.AnalyzerConfigOptionsProvider),
+            context.GetStatusOptions(),
             (spc, source) =>
             {
-                var (manifests, options) = source;
-                var status = Diagnostics.GetOrSetStatus(manifests, options);
+                var status = Diagnostics.GetOrSetStatus(source);
                 spc.AddSource("StatusReporting.cs",
                     $"""
                     // Status: {status}
-                    // DesignTimeBuild: {options.IsDesignTimeBuild()}
+                    // DesignTimeBuild: {source.GlobalOptions.IsDesignTimeBuild()}
                     """);
                 spc.ReportDiagnostic(Diagnostic.Create("SL200", "Compiler", "Don't disable me!",
                     DiagnosticSeverity.Warning,

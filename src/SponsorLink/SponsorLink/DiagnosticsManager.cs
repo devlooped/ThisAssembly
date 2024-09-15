@@ -70,6 +70,13 @@ class DiagnosticsManager
 
     /// <summary>
     /// Gets the status of the <see cref="Funding.Product"/>, or sets it from 
+    /// the given set of <paramref name="options"/> if not already set.
+    /// </summary>
+    public SponsorStatus GetOrSetStatus(StatusOptions options)
+        => GetOrSetStatus(() => options.AdditionalFiles, () => options.GlobalOptions);
+
+    /// <summary>
+    /// Gets the status of the <see cref="Funding.Product"/>, or sets it from 
     /// the given analyzer <paramref name="options"/> if not already set.
     /// </summary>
     public SponsorStatus GetOrSetStatus(Func<AnalyzerOptions?> options)
