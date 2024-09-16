@@ -15,8 +15,10 @@ and may issue IDE-only warnings if no active sponsorship is detected.*
 Expose project and assembly level information as constants in the ThisAssembly 
 class using source generators powered by Roslyn.
 
-The main generated entry point type is `ThisAssembly` in the global namespace, 
+The main generated entry point type is `ThisAssembly` in the global namespace (by default), 
 and is declared as partial so you can extend it too with manually created members.
+
+> Use `$(ThisAssemblyNamespace)` MSBuild property to set a root namespace for `ThisAssembly`.
 
 Each package in turn extends this partial class to add their own nestes types 
 and members.
