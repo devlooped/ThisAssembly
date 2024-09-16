@@ -1,6 +1,4 @@
 <Project>
-  <Import Project="..\..\buildTransitive\Devlooped.Sponsors.targets" Condition="Exists('..\..\buildTransitive\Devlooped.Sponsors.targets')"/>
-
   <ItemGroup>
     <CompilerVisibleProperty Include="ThisAssemblyNamespace" />
 
@@ -11,5 +9,20 @@
     <!-- Brings in the analyzer file to report installation time -->
     <FundingPackageId Include="ThisAssembly.AssemblyInfo" />
   </ItemGroup>
+
+  <Target Name="PrepareAssemblyInfoConstants"
+          BeforeTargets="PrepareConstants"
+          DependsOnTargets="GetAssemblyAttributes">
+    <ItemGroup>
+      <AssemblyInfoAttribute Include="@(AssemblyAttribute)"
+                             Exclude="System.Reflection.AssemblyMetadataAttribute;System.Reflection.AssemblyMetadata"
+                             Condition="$([MSBuild]::ValueOrDefault('%(Identity)', '').StartsWith('System.Reflection.Assembly')) == 'true'">
+        <Name>$([MSBuild]::ValueOrDefault('%(Identity)', '').Substring(26).Replace('Attribute', ''))</Name>
+      </AssemblyInfoAttribute>
+    </ItemGroup>
+    <ItemGroup>
+      <Constant Include="@(AssemblyInfoAttribute -> 'Info.%(Name)')" Value="%(AssemblyInfoAttribute._Parameter1)" Root="." />
+    </ItemGroup>
+  </Target>
 
 </Project>
