@@ -191,7 +191,7 @@ class DiagnosticsManager
                 claims.IsInRole("contrib") ?
                 SponsorStatus.Contributor :
                 claims.IsInRole("org") ?
-                SponsorStatus.Organization : 
+                SponsorStatus.Organization :
                 SponsorStatus.Unknown;
 
             if (KnownDescriptors.TryGetValue(status, out var descriptor))
@@ -242,7 +242,7 @@ class DiagnosticsManager
         WellKnownDiagnosticTags.NotConfigurable);
 
     internal static DiagnosticDescriptor CreateExpiring(string[] sponsorable, string prefix) => new(
-         $"{prefix}101",
+         $"{prefix}102",
          Resources.Expiring_Title,
          Resources.Expiring_Message,
          "SponsorLink",
@@ -253,7 +253,7 @@ class DiagnosticsManager
          "DoesNotSupportF1Help", WellKnownDiagnosticTags.NotConfigurable, "CompilationEnd");
 
     internal static DiagnosticDescriptor CreateExpired(string[] sponsorable, string prefix) => new(
-         $"{prefix}102",
+         $"{prefix}103",
          Resources.Expired_Title,
          Resources.Expired_Message,
          "SponsorLink",
@@ -264,7 +264,7 @@ class DiagnosticsManager
          "DoesNotSupportF1Help", WellKnownDiagnosticTags.NotConfigurable, "CompilationEnd");
 
     internal static DiagnosticDescriptor CreateSponsor(string[] sponsorable, string prefix, bool hidden = false) => new(
-            $"{prefix}105",
+            $"{prefix}110",
             Resources.Sponsor_Title,
             Resources.Sponsor_Message,
             "SponsorLink",
@@ -275,7 +275,7 @@ class DiagnosticsManager
             "DoesNotSupportF1Help", "CompilationEnd");
 
     internal static DiagnosticDescriptor CreateContributor(string[] sponsorable, string prefix, bool hidden = false) => new(
-            $"{prefix}106",
+            $"{prefix}111",
             Resources.Contributor_Title,
             Resources.Contributor_Message,
             "SponsorLink",
