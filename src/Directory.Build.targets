@@ -34,10 +34,12 @@
   
   <ItemGroup Condition="'$(IsPackable)' == 'true'" Label="NuGet">
     <!-- This is compatible with nugetizer and SDK pack -->
+    <!-- Only difference is we don't copy either to output directory -->
 
     <!-- Project-level icon/readme will already be part of None items -->
     <None Update="@(None -> WithMetadataValue('Filename', 'icon'))" 
           Pack="true" PackagePath="%(Filename)%(Extension)" 
+          CopyToOutputDirectory="Never"
           Condition="'$(PackageIcon)' != ''" />
 
     <None Update="@(None -> WithMetadataValue('Filename', 'readme'))" 
@@ -48,6 +50,7 @@
     <!-- src-level will need explicit inclusion -->
     <None Include="$(MSBuildThisFileDirectory)icon.png" Link="icon.png" Visible="false" 
           Pack="true" PackagePath="%(Filename)%(Extension)"
+          CopyToOutputDirectory="Never"
           Condition="Exists('$(MSBuildThisFileDirectory)icon.png') and !Exists('$(MSBuildProjectDirectory)\icon.png')" />
 
     <None Include="$(MSBuildThisFileDirectory)readme.md" Link="readme.md"  
