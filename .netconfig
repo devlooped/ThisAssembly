@@ -141,18 +141,18 @@
 	weak
 [file "src/SponsorLink/Analyzer/StatusReportingAnalyzer.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/StatusReportingAnalyzer.cs
-	sha = f47528874a6d9192b5546f84b455f5ccc474a707
-	etag = 27d85baa35ecd8be15105ec370a44a68d6ba611eb2616c070e0375b706a04a17
+	sha = eceeb2c5596285c95db4d1a031cc36238a7cd22d
+	etag = db37e051eeea1a0e368ccc8bfdf59c373486a583c57ad8301d6be9ab21da4e0d
 	weak
 [file "src/SponsorLink/Analyzer/StatusReportingGenerator.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/StatusReportingGenerator.cs
-	sha = efda32a6eaaeffa485fb480e31adfd2f8130bd48
-	etag = 34dd69526941ce9c6eb8fe259020333b2b55c8422d1d620eb431a8ba7125b3f9
+	sha = 08d80dd734525b1e6f46adbffd2aab77d73afb71
+	etag = 09f466f0a23877a980ec01a7b15330c6c36c44960028188d826a8ef48f8756aa
 	weak
 [file "src/SponsorLink/Analyzer/buildTransitive/SponsorableLib.targets"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/buildTransitive/SponsorableLib.targets
-	sha = f47528874a6d9192b5546f84b455f5ccc474a707
-	etag = 3ab7309d005cfac33bf52d139692911a4e494db749a8c401b692ce28fa2ae45e
+	sha = eceeb2c5596285c95db4d1a031cc36238a7cd22d
+	etag = 727bd941b7a8be190c7f17a41c791ef2248be5e25a36460a0457bc080a7d4503
 	weak
 [file "src/SponsorLink/Directory.Build.props"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Directory.Build.props
@@ -191,8 +191,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/DiagnosticsManager.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/DiagnosticsManager.cs
-	sha = efda32a6eaaeffa485fb480e31adfd2f8130bd48
-	etag = 76c240a3677af6c7f474ec65f0d883a746137a122ad986f8356753e2d03372c3
+	sha = 040db4d1600367813d37d5e802e7efbb2de839f7
+	etag = 16abe935147080f29e81331fbe7ea384ddcf931b3e81eb07ac8983ecd574850e
 	weak
 [file "src/SponsorLink/SponsorLink/ManifestStatus.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/ManifestStatus.cs
@@ -301,8 +301,8 @@
 	weak
 [file "src/SponsorLink/Tests/Tests.csproj"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Tests/Tests.csproj
-	sha = f47528874a6d9192b5546f84b455f5ccc474a707
-	etag = 2be5d70bc8f03845aa4fe84209628fc5d32ea1fd6db89ce32bf72813a4138347
+	sha = eceeb2c5596285c95db4d1a031cc36238a7cd22d
+	etag = ce125080f1a10d94caecf0c93840a3e2878bf73b83526aaa9a569f91414cf2be
 	weak
 [file "src/SponsorLink/Tests/keys/kzu.key"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Tests/keys/kzu.key
@@ -373,4 +373,9 @@
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/AnalyzerOptionsExtensions.cs
 	sha = 38a11504cc9cbd994fb7380fd580102e7514b3b5
 	etag = 9d0e3495b4db00915f79f7e0549b20f2ffff38865741a69810251550686102cc
+	weak
+[file "src/SponsorLink/Analyzer/GraceApiAnalyzer.cs"]
+	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/GraceApiAnalyzer.cs
+	sha = 29f78d5b9b502b445f123dfa52d9926a7136687a
+	etag = dc9d18da8e3ced503d2a1499c6b8c00420cce9c35e9bc0952272f05958b65f3c
 	weak

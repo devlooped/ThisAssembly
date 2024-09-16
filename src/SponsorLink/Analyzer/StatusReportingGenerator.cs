@@ -21,9 +21,6 @@ public class StatusReportingGenerator : IIncrementalGenerator
                     // Status: {status}
                     // DesignTimeBuild: {source.GlobalOptions.IsDesignTimeBuild()}
                     """);
-                spc.ReportDiagnostic(Diagnostic.Create("SL200", "Compiler", "Don't disable me!",
-                    DiagnosticSeverity.Warning,
-                    DiagnosticSeverity.Warning, true, 1));
             });
     }
 }
