@@ -40,12 +40,6 @@ public static class EmbeddedResource
     /// <exception cref="InvalidOperationException"></exception>
     public static Stream GetStream(string relativePath)
     {
-#if DEBUG
-        var filePath = Path.Combine(baseDir, Path.GetFileName(relativePath));
-        if (File.Exists(filePath))
-            return File.OpenRead(filePath);
-#endif
-
         var baseName = Assembly.GetExecutingAssembly().GetName().Name;
         var resourceName = relativePath
             .TrimStart('.')

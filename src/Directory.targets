@@ -12,7 +12,7 @@
     <NoneWithoutCopyToOutputDirectory Include="@(None)" Exclude="@(None -> HasMetadata('CopyToOutputDirectory'))" />
     <None Update="@(NoneWithoutCopyToOutputDirectory)" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="@(None -> WithMetadataValue('Extension', '.sbntxt'))" />
-    <None Update="@(None -> WithMetadataValue('Extension', '.sbntxt'))" Pack="true" />
+    <None Update="@(None -> WithMetadataValue('Extension', '.sbntxt'))" Pack="false" CopyToOutputDirectory="Never" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsAnalyzer)' == 'true'">
