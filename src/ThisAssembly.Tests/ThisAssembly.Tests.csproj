@@ -64,7 +64,6 @@
     <ProjectProperty Include="Foo" />
     <ProjectProperty Include="Foo" />
     <ProjectProperty Include="Description" />
-    <!-- Multiline values that go through .editorconfig will get truncated, unfortunately -->
     <ProjectProperty Include="Multiline" />
     <Constant Include="Foo.Raw" Value="$(Multiline)" Comment="$(Multiline)" />
     <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
