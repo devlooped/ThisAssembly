@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Tracing;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -65,15 +65,6 @@ public class ConstantsGenerator : IIncrementalGenerator
         var options = context.GetStatusOptions();
 
         context.RegisterSourceOutput(inputs.Combine(options), GenerateConstant);
-        //(spc, source) =>
-        //{
-        //    var status = Diagnostics.GetOrSetStatus(source.Right);
-        //    var warn = IsEditor &&
-        //        (status == Devlooped.Sponsors.SponsorStatus.Unknown || status == Devlooped.Sponsors.SponsorStatus.Expired);
-
-        //    GenerateConstant(spc, source.Left, warn ? string.Format(
-        //        CultureInfo.CurrentCulture, Resources.Editor_Disabled, Funding.Product, Funding.HelpUrl) : null);
-        //});
     }
 
     void GenerateConstant(SourceProductionContext spc,
@@ -92,7 +83,13 @@ public class ConstantsGenerator : IIncrementalGenerator
             return;
         }
 
-        var rootArea = Area.Load([new(name, value, comment),], root);
+        if (comment != null)
+            comment = "/// " + string.Join(Environment.NewLine + "/// ", comment.Trim().Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
+        else
+            comment = "/// " + string.Join(Environment.NewLine + "/// ", value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
+
+        // Revert normalization of newlines performed in MSBuild to workaround the limitation in editorconfig.
+        var rootArea = Area.Load([new(name, value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']), comment),], root);
         // For now, we only support C# though
         var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);

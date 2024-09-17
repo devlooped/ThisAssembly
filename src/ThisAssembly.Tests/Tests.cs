@@ -30,6 +30,16 @@ public record class Tests(ITestOutputHelper Output)
             """.ReplaceLineEndings(), ThisAssembly.Info.Description.ReplaceLineEndings());
 
     [Fact]
+    public void CanUseMultilineProjectProperty()
+        => Assert.Equal(
+            """
+                  A Description
+                  with a newline and
+                  * Some "things" with quotes
+                  // Some comments too.
+            """.ReplaceLineEndings(), ThisAssembly.Project.Multiline.ReplaceLineEndings());
+
+    [Fact]
     public void CanUseConstants()
         => Assert.Equal("Baz", ThisAssembly.Constants.Foo.Bar);
 
