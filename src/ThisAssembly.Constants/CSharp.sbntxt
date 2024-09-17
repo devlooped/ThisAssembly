@@ -11,7 +11,7 @@
 {{- func summary -}}
 	    /// <summary>
         {{~ if $0.Comment ~}}
-        /// {{ $0.Comment }}
+        {{ $0.Comment }}
         {{~ else ~}}
 	    /// => @"{{ $0.Value }}"
         {{~ end ~}}
