@@ -189,8 +189,8 @@ Please consider supporting the project by sponsoring at {0} and running 'sponsor
 /// You are considered a sponsor if:
 /// - You are directly sponsoring Devlooped
 /// - You contributed code to any of Devlooped's projects.
-/// - You belong to a GitHub organization that is sponsoring Devlooped
-/// - You contributed to active and popular nuget packages that are OSS
+/// - You belong to a GitHub organization that is sponsoring Devlooped.
+/// - You contributed to active and popular nuget packages that are OSS.
 /// 
 /// If so, just run: 
 ///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
@@ -207,8 +207,8 @@ Please consider supporting the project by sponsoring at {0} and running 'sponsor
 /// You are considered a sponsor if:
 /// - You are directly sponsoring Devlooped
 /// - You contributed code to any of Devlooped's projects.
-/// - You belong to a GitHub organization that is sponsoring Devlooped
-/// - You contributed to active and popular nuget packages that are OSS
+/// - You belong to a GitHub organization that is sponsoring Devlooped.
+/// - You contributed to active and popular nuget packages that are OSS.
 /// 
 /// If so, just run: 
 ///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
