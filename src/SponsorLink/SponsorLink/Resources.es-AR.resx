@@ -182,10 +182,11 @@ Por favor considerá apoyar el proyecto patrocinando en {0} y ejecutando posteri
   <data name="Editor_DisabledRemarks" xml:space="preserve">
     <value>/// &lt;remarks&gt;
 /// GitHub Sponsors es una excelente manera de apoyar proyectos de código abierto, y está disponible en la mayor parte del mundo.
-/// Sos considerado patrocinador si:
+/// Sos considerado sponsor si:
+/// - Bancás directamente a Devlooped 💪.
 /// - Contribuiste con código a cualquiera de los proyectos de Devlooped.
 /// - Pertenecés a una organización de GitHub que está patrocinando a Devlooped.
-/// - Bancás directamente a Devlooped 💪.
+/// - Contribuiste a nugets activos y populares que son open-source.
 /// 
 /// En este caso, simplemente ejecutá:
 ///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
@@ -198,10 +199,11 @@ Por favor considerá apoyar el proyecto patrocinando en {0} y ejecutando posteri
 /// Esta API requiere patrocinio. Tu período de yapa termina en {0} día(s).
 /// 
 /// GitHub Sponsors es una excelente manera de apoyar proyectos de código abierto, y está disponible en la mayor parte del mundo.
-/// Sos considerado patrocinador si:
+/// Sos considerado sponsor si:
+/// - Bancás directamente a Devlooped 💪.
 /// - Contribuiste con código a cualquiera de los proyectos de Devlooped.
 /// - Pertenecés a una organización de GitHub que está patrocinando a Devlooped.
-/// - Bancás directamente a Devlooped 💪.
+/// - Contribuiste a nugets activos y populares que son open-source.
 /// 
 /// En este caso, simplemente ejecutá:
 ///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
