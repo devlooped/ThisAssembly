@@ -201,13 +201,13 @@
 	weak
 [file "src/SponsorLink/SponsorLink/Resources.es.resx"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/Resources.es.resx
-	sha = 904ddb3ff6794f5cb3dfb0b469b403b8636da3e0
-	etag = e2668cfd882dbf10fbf46f513a6cda29bf22ba31e7ec90dc436b076f744d92e7
+	sha = 586398c3e650495f36601ecc8983a14ed745e058
+	etag = afa80a038b6752b4e5221273fe3609a8ae2f96d96eee928632f50029dad0d2ed
 	weak
 [file "src/SponsorLink/SponsorLink/Resources.resx"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/Resources.resx
-	sha = 904ddb3ff6794f5cb3dfb0b469b403b8636da3e0
-	etag = b57ac4125509b0f8ae46277d3fdee2405c95bd2f73484b43f3059402dbbf9084
+	sha = 586398c3e650495f36601ecc8983a14ed745e058
+	etag = e0d4247667d50651f7862b387de5fd3c8beb00417011bc3bccc1435ed4688973
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/SponsorLink.cs
@@ -361,8 +361,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/Resources.es-AR.resx"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/Resources.es-AR.resx
-	sha = 576c20b13595dc4829aa9b657fd5c30daa561a3f
-	etag = 12720d5850e22752bd19f27ff8d270ed30787606b320db28ffc8c0ee243c410e
+	sha = 586398c3e650495f36601ecc8983a14ed745e058
+	etag = 1d6ca61601815a20581fc13f9efdad151ee0e5cf952318723265d5c183d3e1cc
 	weak
 [file ".github/workflows/triage.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/triage.yml
@@ -376,6 +376,6 @@
 	weak
 [file "src/SponsorLink/Analyzer/GraceApiAnalyzer.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/GraceApiAnalyzer.cs
-	sha = 29f78d5b9b502b445f123dfa52d9926a7136687a
-	etag = dc9d18da8e3ced503d2a1499c6b8c00420cce9c35e9bc0952272f05958b65f3c
+	sha = 4638da914b0527c156227f3705ca60a85c1871e4
+	etag = 6603b004f41e023d03b86f175d9fc4e0a462d1b2519406e46b4831e36c378e6f
 	weak

@@ -1,7 +1,6 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Devlooped.Sponsors;
-using Humanizer;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;

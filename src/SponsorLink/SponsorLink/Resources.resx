@@ -187,9 +187,10 @@ Please consider supporting the project by sponsoring at {0} and running 'sponsor
     <value>/// &lt;remarks&gt;
 /// GitHub Sponsors is a great way to support open source projects, and it's available throughout most of the world.
 /// You are considered a sponsor if:
+/// - You are directly sponsoring Devlooped
 /// - You contributed code to any of Devlooped's projects.
 /// - You belong to a GitHub organization that is sponsoring Devlooped
-/// - You are directly sponsoring Devlooped
+/// - You contributed to active and popular nuget packages that are OSS
 /// 
 /// If so, just run: 
 ///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
@@ -204,9 +205,10 @@ Please consider supporting the project by sponsoring at {0} and running 'sponsor
 /// 
 /// GitHub Sponsors is a great way to support open source projects, and it's available throughout most of the world.
 /// You are considered a sponsor if:
+/// - You are directly sponsoring Devlooped
 /// - You contributed code to any of Devlooped's projects.
 /// - You belong to a GitHub organization that is sponsoring Devlooped
-/// - You are directly sponsoring Devlooped
+/// - You contributed to active and popular nuget packages that are OSS
 /// 
 /// If so, just run: 
 ///     &gt; dotnet tool install -g dotnet-sponsor; sponsor sync devlooped
