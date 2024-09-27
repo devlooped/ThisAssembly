@@ -106,8 +106,7 @@ public HttpClient CreateHttpClient(string name, int? timeout = default)
 Note how the constant is typed to `int` as specified in the `Type` attribute in MSBuild. 
 The generated code uses the specified `Type` as-is, as well as the `Value` attribute in that 
 case, so it's up to the user to ensure they match and result in valid C# code. For example, 
-you can emit a boolean, long, double, etc., but a `DateTime` wouldn't be a valid constant even 
-if you set the `Value` to `DateTime.Now`. If no type is provided, `string` is assumed. Values 
+you can emit a boolean, long, double, etc.. If no type is provided, `string` is assumed. Values 
 can also be multi-line and will use [C# raw string literals](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/raw-string) 
 if supported by the target language version (11+).
 
