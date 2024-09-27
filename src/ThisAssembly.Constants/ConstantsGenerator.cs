@@ -26,6 +26,7 @@ public class ConstantsGenerator : IIncrementalGenerator
             .Select((x, ct) =>
             {
                 x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Value", out var value);
+                x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Type", out var type);
                 x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Comment", out var comment);
                 x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Root", out var root);
 
@@ -52,7 +53,7 @@ public class ConstantsGenerator : IIncrementalGenerator
                     }
                 }
 
-                return (name, value: value ?? "", comment: string.IsNullOrWhiteSpace(comment) ? null : comment, root!);
+                return (name, value: value ?? "", type: string.IsNullOrWhiteSpace(type) ? null : type, comment: string.IsNullOrWhiteSpace(comment) ? null : comment, root!);
             });
 
         // Read the ThisAssemblyNamespace property or default to null
@@ -68,9 +69,9 @@ public class ConstantsGenerator : IIncrementalGenerator
     }
 
     void GenerateConstant(SourceProductionContext spc,
-        (((string name, string value, string? comment, string root), (string? ns, ParseOptions parse)), StatusOptions options) args)
+        (((string name, string value, string? type, string? comment, string root), (string? ns, ParseOptions parse)), StatusOptions options) args)
     {
-        var (((name, value, comment, root), (ns, parse)), options) = args;
+        var (((name, value, type, comment, root), (ns, parse)), options) = args;
         var cs = (CSharpParseOptions)parse;
 
         if (!string.IsNullOrWhiteSpace(ns) &&
@@ -89,7 +90,7 @@ public class ConstantsGenerator : IIncrementalGenerator
             comment = "/// " + string.Join(Environment.NewLine + "/// ", value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
 
         // Revert normalization of newlines performed in MSBuild to workaround the limitation in editorconfig.
-        var rootArea = Area.Load([new(name, value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']), comment),], root);
+        var rootArea = Area.Load([new(name, value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']), comment, type ?? "string"),], root);
         // For now, we only support C# though
         var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
