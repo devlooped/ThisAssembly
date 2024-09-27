@@ -323,6 +323,15 @@ treated as a text file:
 You can also add a `Comment` item metadata attribute, which will be used as the `<summary>` XML 
 doc for the generated member.
 
+## Customizing the generated code
+
+The following MSBuild properties can be used to customize the generated code:
+
+| Property                | Description                                                                                          |
+|-------------------------|------------------------------------------------------------------------------------------------------|
+| ThisAssemblyNamespace   | Sets the namespace of the generated `ThisAssembly` root class. If not set, it will be in the global namespace. |
+| ThisAssemblyVisibility  | Sets the visibility modifier of the generated `ThisAssembly` root class. If not set, it will be internal. |
+
 <!-- #resources -->
 <!-- src/ThisAssembly.Resources/readme.md#resources -->
 
@@ -401,24 +410,75 @@ partial class ThisAssembly
 }
 ```
 
+## Customizing the generated code
+
+The following MSBuild properties can be used to customize the generated code:
+
+| Property                | Description                                                                                          |
+|-------------------------|------------------------------------------------------------------------------------------------------|
+| ThisAssemblyNamespace   | Sets the namespace of the generated `ThisAssembly` root class. If not set, it will be in the global namespace. |
+| ThisAssemblyVisibility  | Sets the visibility modifier of the generated `ThisAssembly` root class. If not set, it will be internal. |
+
 <!-- #strings -->
 <!-- src/ThisAssembly.Strings/readme.md#strings -->
 
 <!-- include src/visibility.md -->
-## Customizing the generated class
+## Customizing the generated code
 
 Set the `$(ThisAssemblyNamespace)` MSBuild property to set the namespace of the 
 generated `ThisAssembly` root class. Otherwise, it will be generated in the global namespace.
 
-All generated classes are partial and have no visibility modifier, so they can be extended 
-manually with another partial that can add members or modify their visibility to make them 
-public, if needed. The C# default for this case is for all classes to be internal.
+The generated root `ThisAssembly` class is partial and has no visibility modifier by default, 
+making it internal by default in C#.
+
+You can set the `$(ThisAssemblyVisibility)` MSBuild property to `public` to make it public. 
+This will also change all constants to be static readonly properties instead. 
+
+Default:
+```csharp
+partial class ThisAssembly
+{
+    public partial class Constants
+    {
+        public const string Hello = "World";
+    }
+}
+```
+
+In this case, the compiler will inline the constants directly into the consuming code at 
+the call site, which is optimal for performance for the common usage of constants.
+
+Public:
+```csharp
+public partial class ThisAssembly
+{
+    public partial class Constants
+    {
+        public static string Hello => "World";
+    }
+}
+```
+
+This makes it possible for consuming code to remain unchanged and not require 
+a recompile when the the values of `ThisAssembly` are changed in a referenced assembly.
+
+If you want to keep the properties as constants, you can instead extend the generated 
+code by defining a another partial that can modify its visibility as needed (or add 
+new members). 
 
 ```csharp
-// makes the generated classes public
+// makes the generated class public
 public partial ThisAssembly 
 {
-    public partial class Constants { }
+    // Nested classes are always public since the outer class 
+    // already limits their visibility
+    partial class Constants 
+    {
+        // add some custom constants
+        public const string MyConstant = "This isn't configurable via MSBuild";
+
+        // generated code will remain as constants
+    }
 }
 ```
 
