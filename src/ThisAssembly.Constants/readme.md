@@ -1,4 +1,4 @@
-<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink+.md -->
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlinkr.md -->
 <!-- #constants -->
 This package generates a static `ThisAssembly.Constants` class with public
 constants for `@(Constant)` MSBuild items in the project.
