@@ -43,9 +43,7 @@ treated as a text file:
 You can also add a `Comment` item metadata attribute, which will be used as the `<summary>` XML 
 doc for the generated member.
 
-Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
-generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
-
 <!-- #resources -->
+<!-- include ../visibility.md -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

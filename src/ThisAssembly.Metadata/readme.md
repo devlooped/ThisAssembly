@@ -22,9 +22,7 @@ The metadata attribute can alternatively be declared using MSBuild syntax in the
   </ItemGroup>
 ```
 
-Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
-generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
-
 <!-- #metadata -->
+<!-- include ../visibility.md -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

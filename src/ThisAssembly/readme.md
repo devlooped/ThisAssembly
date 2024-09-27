@@ -22,5 +22,6 @@
 ## ThisAssembly.Strings
 <!-- include ../ThisAssembly.Strings/readme.md#strings -->
 
+<!-- include ../visibility.md -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

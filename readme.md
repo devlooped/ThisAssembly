@@ -388,6 +388,8 @@ generated `ThisAssembly` class. Otherwise, it will be generated in the global na
 <!-- #strings -->
 <!-- src/ThisAssembly.Strings/readme.md#strings -->
 
+<!-- include ../visibility.md -->
+
 # Dogfooding
 
 [![CI Version](https://img.shields.io/endpoint?url=https://shields.kzu.io/vpre/Stunts/main&label=nuget.ci&color=brightgreen)](https://pkg.kzu.io/index.json)
