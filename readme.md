@@ -388,7 +388,7 @@ generated `ThisAssembly` class. Otherwise, it will be generated in the global na
 <!-- #strings -->
 <!-- src/ThisAssembly.Strings/readme.md#strings -->
 
-<!-- include ../visibility.md -->
+<!-- include src/visibility.md -->
 
 # Dogfooding
 
