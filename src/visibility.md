@@ -1,4 +1,4 @@
-## Customizing the generated class
+## Customizing the generated code
 
 Set the `$(ThisAssemblyNamespace)` MSBuild property to set the namespace of the 
 generated `ThisAssembly` root class. Otherwise, it will be generated in the global namespace.
