@@ -6,11 +6,11 @@
 [![License](https://img.shields.io/github/license/devlooped/ThisAssembly.svg?color=blue)](https://github.com//devlooped/ThisAssembly/blob/main/license.txt)
 [![Build](https://github.com/devlooped/ThisAssembly/workflows/build/badge.svg?branch=main)](https://github.com/devlooped/ThisAssembly/actions)
 
-<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink+.md -->
 *This project uses [SponsorLink](https://github.com/devlooped#sponsorlink) 
 and may issue IDE-only warnings if no active sponsorship is detected.*
 
-<!-- https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
+<!-- https://github.com/devlooped/.github/raw/main/sponsorlink+.md -->
 <!-- #meta -->
 Expose project and assembly level information as constants in the ThisAssembly 
 class using source generators powered by Roslyn.
