@@ -70,10 +70,7 @@ packaging experience possible:
 </Project>
 ```
 
-Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
-generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
-
-
 <!-- #git -->
+<!-- include ../visibility.md -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

@@ -30,7 +30,6 @@ via environment variables or command line arguments. For example:
 The C# code could consume this constant as follows:
 
 ```csharp
-
 public HttpClient CreateHttpClient(string name, int? timeout = default)
 {
     HttpClient client = httpClientFactory.CreateClient(name);
@@ -65,9 +64,7 @@ Which results in:
 
 ![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Constants2.png)
 
-Set the `$(ThisAssemblyNamespace)` MSBuild property to set the root namespace of the 
-generated `ThisAssembly` class. Otherwise, it will be generated in the global namespace.
-
 <!-- #constants -->
+<!-- include ../visibility.md -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->
