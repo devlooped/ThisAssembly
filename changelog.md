@@ -1,5 +1,29 @@
 # Changelog
 
+## [v2.0.0-alpha](https://github.com/devlooped/ThisAssembly/tree/v2.0.0-alpha) (2024-09-27)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.1-alpha...v2.0.0-alpha)
+
+:sparkles: Implemented enhancements:
+
+- Add support for non-string constants [\#150](https://github.com/devlooped/ThisAssembly/issues/150)
+- Allow switching to static readonly properties instead of constants [\#64](https://github.com/devlooped/ThisAssembly/issues/64)
+- Add support for ThisAssemblyVisibility for public and static readonly constants [\#400](https://github.com/devlooped/ThisAssembly/pull/400) (@kzu)
+- Reuse doc on root namespace and add visibility doc [\#398](https://github.com/devlooped/ThisAssembly/pull/398) (@kzu)
+- Add support for typed constants [\#396](https://github.com/devlooped/ThisAssembly/pull/396) (@kzu)
+- Fix multiline values being truncated [\#392](https://github.com/devlooped/ThisAssembly/pull/392) (@kzu)
+- Unify and future-proof Assembly\*Attributes with Constants [\#391](https://github.com/devlooped/ThisAssembly/pull/391) (@kzu)
+- Make project constants a special case of Constants [\#380](https://github.com/devlooped/ThisAssembly/pull/380) (@kzu)
+
+:bug: Fixed bugs:
+
+- Multiline item values get truncated [\#390](https://github.com/devlooped/ThisAssembly/issues/390)
+
+:twisted_rightwards_arrows: Merged:
+
+- After grace period, emit code with warnings [\#383](https://github.com/devlooped/ThisAssembly/pull/383) (@kzu)
+- Make sure SponsorLink disclaimer exists in package description [\#378](https://github.com/devlooped/ThisAssembly/pull/378) (@kzu)
+
 ## [v1.5.1-alpha](https://github.com/devlooped/ThisAssembly/tree/v1.5.1-alpha) (2024-09-10)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.0...v1.5.1-alpha)
