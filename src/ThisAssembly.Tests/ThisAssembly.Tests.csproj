@@ -17,7 +17,7 @@
       // Some comments too.</Description>
     <TargetFramework Condition="'$(BuildingInsideVisualStudio)' == 'true'">net472</TargetFramework>
     <RootNamespace>ThisAssemblyTests</RootNamespace>
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
     <NoWarn>CS0618;CS8981;TA100;$(NoWarn)</NoWarn>
     <PackageScribanIncludeSource>false</PackageScribanIncludeSource>
   </PropertyGroup>
@@ -82,6 +82,8 @@
     <Constant Include="TypedLong" Value="123" Type="long" />
     <Constant Include="TypedDouble" Value="1.23" Type="double" />
     <Constant Include="TypedBoolean" Value="true" Type="bool" />
+    <!-- Since use use ThisAssemblyVisibility=public, this will turn into a static readonly prop with a lambda, so it works -->
+    <Constant Include="TypedTimeSpan" Value="TimeSpan.FromSeconds(5)" Type="TimeSpan" />
   </ItemGroup>
 
   <ItemGroup>
