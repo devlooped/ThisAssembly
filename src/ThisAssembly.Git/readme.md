@@ -1,4 +1,4 @@
-<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink+.md -->
 <!-- #git -->
 This package generates a static `ThisAssembly.Git` class with constants 
 for the following Git properties from the current project:

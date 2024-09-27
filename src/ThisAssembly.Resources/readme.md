@@ -1,4 +1,4 @@
-<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink+.md -->
 <!-- #resources -->
 
 This package generates a static `ThisAssembly.Resources` class with public 
