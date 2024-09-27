@@ -3,6 +3,7 @@
 
   <ItemGroup>
     <CompilerVisibleProperty Include="ThisAssemblyNamespace" />
+    <CompilerVisibleProperty Include="ThisAssemblyVisibility" />
 
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="ItemType" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />

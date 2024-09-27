@@ -41,13 +41,13 @@
         {{- remarks -}}
         {{ obsolete }}
         {{~ if RawStrings && value.IsText ~}}
-	    public const string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} = 
+	    public {{ Modifier }} string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} ={{ Lambda }} 
 
 """
 {{ value.Value }}
 """;
         {{~ else ~}}
-	    public const {{ value.Type }} {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} = 
+	    public {{ Modifier }} {{ value.Type }} {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} ={{ Lambda }} 
             {{~ if value.IsText ~}}
             @"{{ value.Value }}";
             {{~ else ~}}
@@ -71,7 +71,7 @@ namespace {{ Namespace }};
 /// <summary>
 /// Provides access to the current assembly information.
 /// </summary>
-partial class ThisAssembly
+{{ Visibility }}partial class ThisAssembly
 {
     /// <summary>
     /// Provides access project-defined constants.

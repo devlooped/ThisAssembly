@@ -52,7 +52,7 @@ namespace {{ Namespace }};
 /// <summary>
 /// Provides access to the current assembly information.
 /// </summary>
-partial class ThisAssembly
+{{ Visibility }}partial class ThisAssembly
 {
     /// <summary>
     /// Provides access to assembly resources.

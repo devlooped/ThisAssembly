@@ -58,7 +58,10 @@ public class ConstantsGenerator : IIncrementalGenerator
 
         // Read the ThisAssemblyNamespace property or default to null
         var right = context.AnalyzerConfigOptionsProvider
-            .Select((c, t) => c.GlobalOptions.TryGetValue("build_property.ThisAssemblyNamespace", out var ns) && !string.IsNullOrEmpty(ns) ? ns : null)
+            .Select((c, t) => (
+                c.GlobalOptions.TryGetValue("build_property.ThisAssemblyNamespace", out var ns) && !string.IsNullOrEmpty(ns) ? ns : null,
+                c.GlobalOptions.TryGetValue("build_property.ThisAssemblyVisibility", out var visibility) && !string.IsNullOrEmpty(visibility) ? visibility : null
+              ))
             .Combine(context.ParseOptionsProvider);
 
         var inputs = files.Combine(right);
@@ -69,9 +72,9 @@ public class ConstantsGenerator : IIncrementalGenerator
     }
 
     void GenerateConstant(SourceProductionContext spc,
-        (((string name, string value, string? type, string? comment, string root), (string? ns, ParseOptions parse)), StatusOptions options) args)
+        (((string name, string value, string? type, string? comment, string root), ((string? ns, string? visibility), ParseOptions parse)), StatusOptions options) args)
     {
-        var (((name, value, type, comment, root), (ns, parse)), options) = args;
+        var (((name, value, type, comment, root), ((ns, visibility), parse)), options) = args;
         var cs = (CSharpParseOptions)parse;
 
         if (!string.IsNullOrWhiteSpace(ns) &&
@@ -94,7 +97,7 @@ public class ConstantsGenerator : IIncrementalGenerator
         // For now, we only support C# though
         var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-        var model = new Model(rootArea, ns);
+        var model = new Model(rootArea, ns, "public".Equals(visibility, StringComparison.OrdinalIgnoreCase));
         if ((int)cs.LanguageVersion >= 1100)
             model.RawStrings = true;
 

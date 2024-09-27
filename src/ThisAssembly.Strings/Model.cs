@@ -7,12 +7,13 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 [DebuggerDisplay("ResourceName = {ResourceName}, Values = {RootArea.Values.Count}")]
-record Model(ResourceArea RootArea, string ResourceName, string? Namespace)
+record Model(ResourceArea RootArea, string ResourceName, string? Namespace, bool IsPublic)
 {
     public string? Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3);
     public string Url => Devlooped.Sponsors.SponsorLink.Funding.HelpUrl;
     public string? Warn { get; set; }
     public string? Remarks { get; set; }
+    public string Visibility => IsPublic ? "public " : "";
 }
 
 static class ResourceFile
