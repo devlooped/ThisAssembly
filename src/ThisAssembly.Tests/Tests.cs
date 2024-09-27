@@ -64,6 +64,10 @@ public record class Tests(ITestOutputHelper Output)
         => Assert.Equal(1.23, ThisAssembly.Constants.TypedDouble);
 
     [Fact]
+    public void CanUseTypedTimeSpanStaticProp()
+        => Assert.Equal(TimeSpan.FromSeconds(5), ThisAssembly.Constants.TypedTimeSpan);
+
+    [Fact]
     public void CanUseFileConstants()
         => Assert.Equal(ThisAssembly.Constants.Content.Docs.License, Path.Combine("Content", "Docs", "License.md"));
 
