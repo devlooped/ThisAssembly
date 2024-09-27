@@ -7,6 +7,7 @@
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="ItemType" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Comment" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
+    <CompilerVisibleItemMetadata Include="Constant" MetadataName="Type" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Root" />
 
     <!-- Make sure we're always private to the referencing project. 

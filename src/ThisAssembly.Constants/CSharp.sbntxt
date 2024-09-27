@@ -40,13 +40,19 @@
         {{- summary value -}}
         {{- remarks -}}
         {{ obsolete }}
-        {{~ if RawStrings ~}}
+        {{~ if RawStrings && value.IsText ~}}
 	    public const string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} = 
+
 """
 {{ value.Value }}
 """;
         {{~ else ~}}
-	    public const string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} = @"{{ value.Value }}";
+	    public const {{ value.Type }} {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} = 
+            {{~ if value.IsText ~}}
+            @"{{ value.Value }}";
+            {{~ else ~}}
+            {{ value.Value }};
+            {{~ end ~}}
         {{~ end ~}}
         {{~ end ~}}
 

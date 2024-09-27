@@ -76,6 +76,11 @@
     <AssemblyMetadata Include="Foo" Value="Bar" />
     <AssemblyMetadata Include="Raw" Value="$(Multiline)" />
     <AssemblyMetadata Include="Root.Foo.Bar" Value="Baz" Comment="Comment" />
+    <Constant Include="TypedInt" Value="123" Type="int" />
+    <Constant Include="TypedInt64" Value="123" Type="Int64" />
+    <Constant Include="TypedLong" Value="123" Type="long" />
+    <Constant Include="TypedDouble" Value="1.23" Type="double" />
+    <Constant Include="TypedBoolean" Value="true" Type="bool" />
   </ItemGroup>
 
   <ItemGroup>

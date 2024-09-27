@@ -44,6 +44,26 @@ public record class Tests(ITestOutputHelper Output)
         => Assert.Equal("Baz", ThisAssembly.Constants.Foo.Bar);
 
     [Fact]
+    public void CanUseTypedIntConstant()
+        => Assert.Equal(123, ThisAssembly.Constants.TypedInt);
+
+    [Fact]
+    public void CanUseTypedInt64Constant()
+        => Assert.Equal(123, ThisAssembly.Constants.TypedInt64);
+
+    [Fact]
+    public void CanUseTypedLongConstant()
+        => Assert.Equal(123, ThisAssembly.Constants.TypedLong);
+
+    [Fact]
+    public void CanUseTypedBoolConstant()
+        => Assert.True(ThisAssembly.Constants.TypedBoolean);
+
+    [Fact]
+    public void CanUseTypedDoubleConstant()
+        => Assert.Equal(1.23, ThisAssembly.Constants.TypedDouble);
+
+    [Fact]
     public void CanUseFileConstants()
         => Assert.Equal(ThisAssembly.Constants.Content.Docs.License, Path.Combine("Content", "Docs", "License.md"));
 
