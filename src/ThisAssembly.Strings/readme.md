@@ -68,7 +68,15 @@ partial class ThisAssembly
 }
 ```
 
+## Customizing the generated code
+
+The following MSBuild properties can be used to customize the generated code:
+
+| Property                | Description                                                                                          |
+|-------------------------|------------------------------------------------------------------------------------------------------|
+| ThisAssemblyNamespace   | Sets the namespace of the generated `ThisAssembly` root class. If not set, it will be in the global namespace. |
+| ThisAssemblyVisibility  | Sets the visibility modifier of the generated `ThisAssembly` root class. If not set, it will be internal. |
+
 <!-- #strings -->
-<!-- include ../visibility.md -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->

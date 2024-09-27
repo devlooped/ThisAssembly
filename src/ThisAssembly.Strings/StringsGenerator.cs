@@ -20,14 +20,17 @@ public class StringsGenerator : IIncrementalGenerator
     {
         // Read the ThisAssemblyNamespace property or default to null
         var right = context.AnalyzerConfigOptionsProvider
-            .Select((c, t) => c.GlobalOptions.TryGetValue("build_property.ThisAssemblyNamespace", out var ns) && !string.IsNullOrEmpty(ns) ? ns : null)
+            .Select((c, t) => (
+                c.GlobalOptions.TryGetValue("build_property.ThisAssemblyNamespace", out var ns) && !string.IsNullOrEmpty(ns) ? ns : null,
+                c.GlobalOptions.TryGetValue("build_property.ThisAssemblyVisibility", out var visibility) && !string.IsNullOrEmpty(visibility) ? visibility : null
+              ))
             .Combine(context.CompilationProvider.Select((s, _) => s.Language));
 
         context.RegisterSourceOutput(
             right,
             (spc, args) =>
             {
-                var (ns, _) = args;
+                var ((ns, _), _) = args;
 
                 var strings = EmbeddedResource.GetContent($"ThisAssembly.Strings.sbntxt");
                 var template = Template.Parse(strings);
@@ -55,15 +58,15 @@ public class StringsGenerator : IIncrementalGenerator
     }
 
     static void GenerateSource(SourceProductionContext spc,
-        (((string fileName, SourceText? text, string resourceName), (string? ns, string language)), (ParseOptions parse, StatusOptions options)) arg)
+        (((string fileName, SourceText? text, string resourceName), ((string? ns, string? visibility), string language)), (ParseOptions parse, StatusOptions options)) arg)
     {
-        var (((fileName, resourceText, resourceName), (ns, language)), (parse, options)) = arg;
+        var (((fileName, resourceText, resourceName), ((ns, visibility), language)), (parse, options)) = arg;
 
         var file = language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
 
         var rootArea = ResourceFile.LoadText(resourceText!.ToString(), "Strings");
-        var model = new Model(rootArea, resourceName, ns);
+        var model = new Model(rootArea, resourceName, ns, "public".Equals(visibility, StringComparison.OrdinalIgnoreCase));
         if (IsEditor)
         {
             var status = Diagnostics.GetOrSetStatus(options);

@@ -47,7 +47,10 @@ public class ResourcesGenerator : IIncrementalGenerator
 
         // Read the ThisAssemblyNamespace property or default to null
         var right = context.AnalyzerConfigOptionsProvider
-            .Select((c, t) => c.GlobalOptions.TryGetValue("build_property.ThisAssemblyNamespace", out var ns) && !string.IsNullOrEmpty(ns) ? ns : null);
+            .Select((c, t) => (
+                c.GlobalOptions.TryGetValue("build_property.ThisAssemblyNamespace", out var ns) && !string.IsNullOrEmpty(ns) ? ns : null,
+                c.GlobalOptions.TryGetValue("build_property.ThisAssemblyVisibility", out var visibility) && !string.IsNullOrEmpty(visibility) ? visibility : null
+              ));
 
         context.RegisterSourceOutput(
             files.Combine(right),
@@ -56,9 +59,9 @@ public class ResourcesGenerator : IIncrementalGenerator
 
     static void GenerateSource(SourceProductionContext spc,
         ((ImmutableArray<(string resourceName, string? kind, string? comment)> files,
-            ImmutableArray<string> extensions), string? ns) args)
+            ImmutableArray<string> extensions), (string? ns, string? visibility)) args)
     {
-        var ((files, extensions), ns) = args;
+        var ((files, extensions), (ns, visibility)) = args;
 
         var file = "CSharp.sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
@@ -87,7 +90,7 @@ public class ResourcesGenerator : IIncrementalGenerator
                 .ToList();
 
             var root = Area.Load(basePath, resources);
-            var model = new Model(root, ns);
+            var model = new Model(root, ns, "public".Equals(visibility, StringComparison.OrdinalIgnoreCase));
 
             var output = template.Render(model, member => member.Name);
 
