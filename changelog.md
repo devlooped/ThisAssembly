@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.0](https://github.com/devlooped/ThisAssembly/tree/v2.0.0) (2024-09-27)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.0-alpha...v2.0.0)
+
+:twisted_rightwards_arrows: Merged:
+
+- Remove doc on DateTime being invalid [\#402](https://github.com/devlooped/ThisAssembly/pull/402) (@kzu)
+
 ## [v2.0.0-alpha](https://github.com/devlooped/ThisAssembly/tree/v2.0.0-alpha) (2024-09-27)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v1.5.1-alpha...v2.0.0-alpha)
