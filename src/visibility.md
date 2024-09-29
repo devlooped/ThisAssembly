@@ -38,7 +38,7 @@ This makes it possible for consuming code to remain unchanged and not require
 a recompile when the the values of `ThisAssembly` are changed in a referenced assembly.
 
 If you want to keep the properties as constants, you can instead extend the generated 
-code by defining a another partial that can modify its visibility as needed (or add 
+code by defining another partial that can modify its visibility as needed (or add 
 new members). 
 
 ```csharp
