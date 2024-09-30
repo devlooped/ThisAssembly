@@ -1,5 +1,22 @@
 # Changelog
 
+## [v2.0.3](https://github.com/devlooped/ThisAssembly/tree/v2.0.3) (2024-09-30)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.2...v2.0.3)
+
+:sparkles: Implemented enhancements:
+
+- Add ThisAssembly.Vsix [\#405](https://github.com/devlooped/ThisAssembly/issues/405)
+- Avoid non-Git constants conflict, update root comment [\#415](https://github.com/devlooped/ThisAssembly/pull/415) (@kzu)
+- Allow constants to define custom root comment summary [\#414](https://github.com/devlooped/ThisAssembly/pull/414) (@kzu)
+- Add ThisAssembly.Vsix for VSIX extensibility projects [\#412](https://github.com/devlooped/ThisAssembly/pull/412) (@kzu)
+
+:twisted_rightwards_arrows: Merged:
+
+- Provide custom Metadata class summary [\#418](https://github.com/devlooped/ThisAssembly/pull/418) (@kzu)
+- Provide custom AssemblyInfo class summary [\#417](https://github.com/devlooped/ThisAssembly/pull/417) (@kzu)
+- Provide custom Vsix class summary [\#416](https://github.com/devlooped/ThisAssembly/pull/416) (@kzu)
+
 ## [v2.0.2](https://github.com/devlooped/ThisAssembly/tree/v2.0.2) (2024-09-30)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.0...v2.0.2)
