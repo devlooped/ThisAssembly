@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -17,8 +16,6 @@ namespace ThisAssembly;
 [Generator(LanguageNames.CSharp)]
 public class ResourcesGenerator : IIncrementalGenerator
 {
-    static readonly Regex SeeExpr = new("<see.+sponsorlink\"/>", RegexOptions.Compiled);
-
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         context.RegisterPostInitializationOutput(
@@ -124,12 +121,11 @@ public class ResourcesGenerator : IIncrementalGenerator
             };
             var output = template.Render(model, member => member.Name);
 
-            output = SeeExpr.Replace(SyntaxFactory
+            output = SyntaxFactory
                 .ParseCompilationUnit(output, options: parse as CSharpParseOptions)
                 .NormalizeWhitespace()
                 .GetText()
-                .ToString(),
-                $"<see cref=\"{Funding.HelpUrl}\"/>");
+                .ToString();
 
             spc.AddSource(
                 $"{basePath.Replace('\\', '.').Replace('/', '.')}.g.cs",
