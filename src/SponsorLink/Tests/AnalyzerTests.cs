@@ -160,6 +160,10 @@ public class AnalyzerTests : IDisposable
     [InlineData("org,contrib", SponsorStatus.Contributor)]
     // team trumps contrib (since team members will typically also be contributors
     [InlineData("contrib,team", SponsorStatus.Team)]
+    [InlineData("contrib,oss", SponsorStatus.Contributor)]
+    [InlineData("user,oss", SponsorStatus.User)]
+    [InlineData("org,oss", SponsorStatus.Organization)]
+    [InlineData("oss", SponsorStatus.OpenSource)]
     public async Task WhenSponsoringRole_ThenEnsureStatus(string roles, SponsorStatus status)
     {
         var sponsor = sponsorable.Sign(roles.Split(',').Select(x => new Claim("roles", x)), expiration: TimeSpan.FromMinutes(5));
@@ -202,6 +206,7 @@ public class AnalyzerTests : IDisposable
                     // Simulate directly referenced package
                     { "build_property.SponsorableLib", "1.0.0" },
                     { "build_property.SponsorLink", "1.0.0" },
+                    { "build_metadata.SponsorManifest.ItemType", "SponsorManifest" }
                 }));
 
         var diagnostics = (await compilation.GetAnalyzerDiagnosticsAsync())

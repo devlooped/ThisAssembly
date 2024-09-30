@@ -30,7 +30,9 @@ class DiagnosticsManager
         { SponsorStatus.Unknown, CreateUnknown([.. Sponsorables.Keys], Funding.Product, Funding.Prefix) },
         { SponsorStatus.Grace, CreateGrace([.. Sponsorables.Keys], Funding.Product, Funding.Prefix) },
         { SponsorStatus.User, CreateSponsor([.. Sponsorables.Keys], Funding.Prefix) },
-        { SponsorStatus.Contributor, CreateContributor([.. Sponsorables.Keys], Funding.Prefix) },
+        { SponsorStatus.Contributor, CreateContributor([.. Sponsorables.Keys], Funding.Prefix, hidden: true) },
+        // NOTE: similar to contributor, we don't show OSS author membership in the IDE.
+        { SponsorStatus.OpenSource, CreateOpenSource([.. Sponsorables.Keys], Funding.Prefix) },
         // NOTE: organization is a special case of sponsor, but we report it as hidden since the user isn't directly involved.
         { SponsorStatus.Organization, CreateSponsor([.. Sponsorables.Keys], Funding.Prefix, hidden: true) },
         // NOTE: similar to organization, we don't show team membership in the IDE.
@@ -192,6 +194,8 @@ class DiagnosticsManager
                 SponsorStatus.Contributor :
                 claims.IsInRole("org") ?
                 SponsorStatus.Organization :
+                claims.IsInRole("oss") ?
+                SponsorStatus.OpenSource :
                 SponsorStatus.Unknown;
 
             if (KnownDescriptors.TryGetValue(status, out var descriptor))
@@ -282,6 +286,17 @@ class DiagnosticsManager
             hidden ? DiagnosticSeverity.Hidden : DiagnosticSeverity.Info,
             isEnabledByDefault: true,
             description: Resources.Contributor_Description,
+            helpLinkUri: Funding.HelpUrl,
+            "DoesNotSupportF1Help", "CompilationEnd");
+
+    internal static DiagnosticDescriptor CreateOpenSource(string[] sponsorable, string prefix, bool hidden = false) => new(
+            $"{prefix}112",
+            Resources.OpenSource_Title,
+            Resources.OpenSource_Message,
+            "SponsorLink",
+            hidden ? DiagnosticSeverity.Hidden : DiagnosticSeverity.Info,
+            isEnabledByDefault: true,
+            description: Resources.OpenSource_Description,
             helpLinkUri: Funding.HelpUrl,
             "DoesNotSupportF1Help", "CompilationEnd");
 }
