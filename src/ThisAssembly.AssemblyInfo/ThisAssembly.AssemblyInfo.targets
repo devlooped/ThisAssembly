@@ -21,7 +21,7 @@
       </AssemblyInfoAttribute>
     </ItemGroup>
     <ItemGroup>
-      <Constant Include="@(AssemblyInfoAttribute -> 'Info.%(Name)')" Value="%(AssemblyInfoAttribute._Parameter1)" Root="." />
+      <Constant Include="@(AssemblyInfoAttribute -> 'Info.%(Name)')" Value="%(AssemblyInfoAttribute._Parameter1)" Root="." RootComment="Provides access to assembly attributes defined in the project as constants." />
     </ItemGroup>
   </Target>
 
