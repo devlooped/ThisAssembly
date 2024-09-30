@@ -40,16 +40,16 @@ For example, the following `source.extension.vsixmanifest` uses values from MSBu
 
 The available properties and their default values are:
 
-| Name              | Default Value                     |
-|-------------------|-----------------------------------|
-| VsixID            | $(PackageId) or $(AssemblyName)   |
-| VsixVersion       | $(Version)                        |
-| VsixDisplayName   | $(Title)                          |
-| VsixDescription   | $(Description)                    |
-| VsixProduct       | $(Product)                        |
-| VsixPublisher     | $(Company)                        |
-| VsixLanguage      | $(NeutralLanguage) or 'en-US'     |
-| VsixDescription   | $(Description)                    |
+| Name              | Default Value                       |
+|-------------------|-------------------------------------|
+| VsixID            | `$(PackageId)` or `$(AssemblyName)` |
+| VsixVersion       | `$(Version)`                        |
+| VsixDisplayName   | `$(Title)`                          |
+| VsixDescription   | `$(Description)`                    |
+| VsixProduct       | `$(Product)`                        |
+| VsixPublisher     | `$(Company)`                        |
+| VsixLanguage      | `$(NeutralLanguage)` or 'en-US'     |
+| VsixDescription   | `$(Description)`                    |
 
 As shown in the example above, the syntax for using these properties from the `.vsxmanifest` is 
 `|%CurrentProject%;[PROPERTY]|`. This is because the package defines a corresponding target to 
