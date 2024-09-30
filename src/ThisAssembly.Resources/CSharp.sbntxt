@@ -16,6 +16,17 @@
 		/// => @"{{ $0.Path }}"
 		{{~ end ~}}
 		/// </summary>
+        {{~ if Remarks ~}}
+        {{ Remarks }}
+        /// <see cref="{{ Url }}"/>
+        {{~ end ~}}
+        {{~ if Warn ~}}
+        [Obsolete("{{ Warn }}", false
+        #if NET6_0_OR_GREATER
+            , UrlFormat = "{{ Url }}"
+        #endif
+        )]
+        {{~ end ~}}
 		public static partial class {{ $0.Name }}
 		{
 			{{~ if $0.IsText ~}}
@@ -57,16 +68,5 @@ namespace {{ Namespace }};
     /// <summary>
     /// Provides access to assembly resources.
     /// </summary>
-    {{~ if Remarks ~}}
-    {{ Remarks }}
-    /// <see cref="{{ Url }}"/>
-    {{~ end ~}}
-    {{~ if Warn ~}}
-    [Obsolete("{{ Warn }}", false
-    #if NET6_0_OR_GREATER
-        , UrlFormat = "{{ Url }}"
-    #endif
-    )]
-    {{~ end ~}}
 	{{ render RootArea }}
 }
