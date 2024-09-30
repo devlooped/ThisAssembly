@@ -216,4 +216,13 @@ Please consider supporting the project by sponsoring at {0} and running 'sponsor
 /// Thanks! 🙏
 /// &lt;/remarks&gt;</value>
   </data>
+  <data name="OpenSource_Description" xml:space="preserve">
+    <value>Thanks for being part of the open source community with your contributions 🙏.</value>
+  </data>
+  <data name="OpenSource_Message" xml:space="preserve">
+    <value>Thank you for being an open source author 💟!</value>
+  </data>
+  <data name="OpenSource_Title" xml:space="preserve">
+    <value>You are a an open source author, you rock 💟!</value>
+  </data>
 </root>

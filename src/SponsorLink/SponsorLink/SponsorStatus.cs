@@ -49,5 +49,9 @@ public enum SponsorStatus
     /// <summary>
     /// The user is a member of a contributing organization.
     /// </summary>
-    Organization
+    Organization,
+    /// <summary>
+    /// The user is a OSS author.
+    /// </summary>
+    OpenSource,
 }
