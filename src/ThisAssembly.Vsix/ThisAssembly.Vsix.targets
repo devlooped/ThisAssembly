@@ -9,6 +9,8 @@
          By setting this property, we will always succeed independently of the value of $(CreateVsixContainer), 
          $(DeployExtension) and $(CopyVsixExtensionFiles) -->
     <CopyVsixManifestToOutput>true</CopyVsixManifestToOutput>
+
+    <ThisAssemblyVsixComment>Provides access to source.extension.vsixmanifest values.</ThisAssemblyVsixComment>
   </PropertyGroup>
 
   <ItemGroup>
@@ -59,13 +61,12 @@
       <Output TaskParameter="Result" PropertyName="VsixPublisher" />
     </XmlPeek>
 
-
     <ItemGroup>
-      <Constant Include="Vsix.Id" Value="$(VsixID)" Root="." />
-      <Constant Include="Vsix.Name" Value="$(VsixName)" Root="." />
-      <Constant Include="Vsix.Description" Value="$(VsixDescription)" Root="." />
-      <Constant Include="Vsix.Publisher" Value="$(VsixPublisher)" Root="." />
-      <Constant Include="Vsix.Version" Value="$(VsixVersion)" Root="." />
+      <Constant Include="Vsix.Id" Value="$(VsixID)" Root="." RootComment="$(ThisAssemblyVsixComment)" />
+      <Constant Include="Vsix.Name" Value="$(VsixName)" Root="." RootComment="$(ThisAssemblyVsixComment)" />
+      <Constant Include="Vsix.Description" Value="$(VsixDescription)" Root="." RootComment="$(ThisAssemblyVsixComment)" />
+      <Constant Include="Vsix.Publisher" Value="$(VsixPublisher)" Root="." RootComment="$(ThisAssemblyVsixComment)" />
+      <Constant Include="Vsix.Version" Value="$(VsixVersion)" Root="." RootComment="$(ThisAssemblyVsixComment)" />
     </ItemGroup>
 
   </Target>
