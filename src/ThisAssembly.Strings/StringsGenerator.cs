@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Resources;
 using System.Text;
+using System.Text.RegularExpressions;
 using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -16,6 +16,8 @@ namespace ThisAssembly;
 [Generator(LanguageNames.CSharp)]
 public class StringsGenerator : IIncrementalGenerator
 {
+    static readonly Regex SeeExpr = new("<see.+sponsorlink\"/>", RegexOptions.Compiled);
+
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         // Read the ThisAssemblyNamespace property or default to null
@@ -83,10 +85,12 @@ public class StringsGenerator : IIncrementalGenerator
 
         var output = template.Render(model, member => member.Name);
 
-        output = SyntaxFactory.ParseCompilationUnit(output, options: parse as CSharpParseOptions)
+        output = SeeExpr.Replace(SyntaxFactory
+            .ParseCompilationUnit(output, options: parse as CSharpParseOptions)
             .NormalizeWhitespace()
             .GetText()
-            .ToString();
+            .ToString(),
+            $"<see cref=\"{Funding.HelpUrl}\"/>");
 
         spc.AddSource(resourceName, SourceText.From(output, Encoding.UTF8));
     }
