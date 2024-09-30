@@ -1,8 +1,14 @@
 # Changelog
 
-## [v2.0.1](https://github.com/devlooped/ThisAssembly/tree/v2.0.1) (2024-09-30)
+## [v2.0.2](https://github.com/devlooped/ThisAssembly/tree/v2.0.2) (2024-09-30)
 
-[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.0...v2.0.1)
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.0...v2.0.2)
+
+:bug: Fixed bugs:
+
+- Warnings about invalid XML Comments in generated code [\#408](https://github.com/devlooped/ThisAssembly/issues/408)
+- Properly fix formatting error by switching to href [\#411](https://github.com/devlooped/ThisAssembly/pull/411) (@kzu)
+- Avoid duplicate \[Obsolete\] attribute in Resources [\#410](https://github.com/devlooped/ThisAssembly/pull/410) (@kzu)
 
 :twisted_rightwards_arrows: Merged:
 
