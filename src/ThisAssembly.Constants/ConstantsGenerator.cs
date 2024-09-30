@@ -25,10 +25,15 @@ public class ConstantsGenerator : IIncrementalGenerator
                 && itemType == "Constant")
             .Select((x, ct) =>
             {
-                x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Value", out var value);
-                x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Type", out var type);
-                x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Comment", out var comment);
-                x.Right.GetOptions(x.Left).TryGetValue("build_metadata.Constant.Root", out var root);
+                var options = x.Right.GetOptions(x.Left);
+                options.TryGetValue("build_metadata.Constant.Value", out var value);
+                options.TryGetValue("build_metadata.Constant.Type", out var type);
+                options.TryGetValue("build_metadata.Constant.Comment", out var comment);
+                options.TryGetValue("build_metadata.Constant.Root", out var root);
+                options.TryGetValue("build_metadata.Constant.RootComment", out var rootComment);
+
+                if (string.IsNullOrEmpty(rootComment))
+                    rootComment = "Provides access project-defined constants.";
 
                 // Revert auto-escaping due to https://github.com/dotnet/roslyn/issues/51692
                 if (value != null && value.StartsWith("|") && value.EndsWith("|"))
@@ -53,7 +58,7 @@ public class ConstantsGenerator : IIncrementalGenerator
                     }
                 }
 
-                return (name, value: value ?? "", type: string.IsNullOrWhiteSpace(type) ? null : type, comment: string.IsNullOrWhiteSpace(comment) ? null : comment, root!);
+                return (name, value: value ?? "", type: string.IsNullOrWhiteSpace(type) ? null : type, comment: string.IsNullOrWhiteSpace(comment) ? null : comment, root!, rootComment!);
             });
 
         // Read the ThisAssemblyNamespace property or default to null
@@ -72,9 +77,9 @@ public class ConstantsGenerator : IIncrementalGenerator
     }
 
     void GenerateConstant(SourceProductionContext spc,
-        (((string name, string value, string? type, string? comment, string root), ((string? ns, string? visibility), ParseOptions parse)), StatusOptions options) args)
+        (((string name, string value, string? type, string? comment, string root, string rootComment), ((string? ns, string? visibility), ParseOptions parse)), StatusOptions options) args)
     {
-        var (((name, value, type, comment, root), ((ns, visibility), parse)), options) = args;
+        var (((name, value, type, comment, root, rootComment), ((ns, visibility), parse)), options) = args;
         var cs = (CSharpParseOptions)parse;
 
         if (!string.IsNullOrWhiteSpace(ns) &&
@@ -93,7 +98,7 @@ public class ConstantsGenerator : IIncrementalGenerator
             comment = "/// " + string.Join(Environment.NewLine + "/// ", value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
 
         // Revert normalization of newlines performed in MSBuild to workaround the limitation in editorconfig.
-        var rootArea = Area.Load([new(name, value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']), comment, type ?? "string"),], root);
+        var rootArea = Area.Load([new(name, value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']), comment, type ?? "string"),], root, rootComment);
         // For now, we only support C# though
         var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);

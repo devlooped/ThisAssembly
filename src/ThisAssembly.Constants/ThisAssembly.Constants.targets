@@ -10,6 +10,7 @@
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Value" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Type" />
     <CompilerVisibleItemMetadata Include="Constant" MetadataName="Root" />
+    <CompilerVisibleItemMetadata Include="Constant" MetadataName="RootComment" />
 
     <!-- Make sure we're always private to the referencing project. 
          Prevents analyzers from "flowing out" of the referencing project. -->
