@@ -422,6 +422,13 @@ The following MSBuild properties can be used to customize the generated code:
 <!-- #strings -->
 <!-- src/ThisAssembly.Strings/readme.md#strings -->
 
+## ThisAssembly.Vsix
+
+[![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Vsix.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Vsix)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Vsix.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Vsix)
+
+<!-- include src/ThisAssembly.Vsix/readme.md#vsix -->
+
 <!-- include src/visibility.md -->
 ## Customizing the generated code
 
