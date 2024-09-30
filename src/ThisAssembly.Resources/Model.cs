@@ -9,6 +9,9 @@ namespace ThisAssembly;
 [DebuggerDisplay("Values = {RootArea.Values.Count}")]
 record Model(Area RootArea, string? Namespace, bool IsPublic)
 {
+    public string? Warn { get; set; }
+    public string? Remarks { get; set; }
+    public string Url => Devlooped.Sponsors.SponsorLink.Funding.HelpUrl;
     public string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
     public string Visibility => IsPublic ? "public " : "";
 }
