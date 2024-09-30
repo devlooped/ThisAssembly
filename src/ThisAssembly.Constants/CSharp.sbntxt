@@ -30,7 +30,7 @@
 {{ func remarks }}
 {{~ if Remarks ~}}
 {{ Remarks }}
-/// <see cref="{{ Url }}"/>
+/// <see href="{{ Url }}"/>
 {{~ end ~}}
 {{ end }}
 {{ func render }}
