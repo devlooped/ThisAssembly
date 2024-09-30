@@ -10,8 +10,8 @@
 
   <PropertyGroup>
     <PackageId>ThisAssembly.Vsix</PackageId>
-    <Description>This package generates a static `ThisAssembly.Vsix` class with public 
-constants exposing key VSIX manifest properties. For example:
+    <Description>Allows consuming VSIX manifest properties from code, as well as 
+MSBuild project properties from the VSIX manifest. For example:
 
   partial class ThisAssembly
   {
@@ -20,6 +20,17 @@ constants exposing key VSIX manifest properties. For example:
           public const string Id = "MyVsix";
       }
   }
+
+or 
+
+  &lt;PackageManifest Version=&quot;2.0.0&quot; ...&gt;
+    &lt;Metadata&gt;
+      &lt;Identity Id=&quot;|%CurrentProject%;VsixId|&quot; Version=&quot;|%CurrentProject%;VsixVersion|&quot; Language=&quot;|%CurrentProject%;VsixLanguage|&quot; Publisher=&quot;|%CurrentProject%;VsixPublisher|&quot; /&gt;
+      &lt;DisplayName&gt;|%CurrentProject%;VsixDisplayName|&lt;/DisplayName&gt;
+      &lt;Description&gt;|%CurrentProject%;VsixDescription|&lt;/Description&gt;
+    &lt;/Metadata&gt;
+    ...
+  &lt;/PackageManifest&gt;
 </Description>
   </PropertyGroup>
 

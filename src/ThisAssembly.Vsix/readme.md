@@ -1,29 +1,11 @@
 <!-- include https://github.com/devlooped/.github/raw/main/sponsorlinkr.md -->
 <!-- #vsix -->
-This package generates a static `ThisAssembly.Vsix` class with public 
-constants exposing key VSIX manifest properties.
+Allows consuming VSIX manifest properties from code, as well as 
+MSBuild project properties from the VSIX manifest. For example:
 
 ![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Vsix.png)
 
-For example:
-
-```csharp
-  partial class ThisAssembly
-  {
-      public static partial class Vsix
-      {
-          public const string Id = "MyVsix";
-      }
-  }
-```
-
-In addition to making the [VSIX manifest metadata](https://learn.microsoft.com/en-us/visualstudio/extensibility/vsix-extension-schema-2-0-reference?view=vs-2022#metadata-element) 
-properties available as constants, the package also provides targets for those properties 
-with sensible defaults from project properties so that the manifest can leverage 
-[placeolder syntax](https://learn.microsoft.com/en-us/visualstudio/extensibility/vsix-extension-schema-2-0-reference?view=vs-2022#metadata-element) 
-and avoid duplication. 
-
-For example, the following `source.extension.vsixmanifest` uses values from MSBuild exclusively:
+And in the `source.extension.vsixmanifest`:
 ```xml
 <PackageManifest Version="2.0.0" 
                  xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" 
@@ -38,6 +20,12 @@ For example, the following `source.extension.vsixmanifest` uses values from MSBu
 </PackageManifest>
 ```
 
+As shown above, in addition to making the [VSIX manifest metadata](https://learn.microsoft.com/en-us/visualstudio/extensibility/vsix-extension-schema-2-0-reference?view=vs-2022#metadata-element) 
+properties available as constants, the package also provides targets for those properties 
+with sensible defaults from project properties so that the manifest can leverage 
+[placeolder syntax](https://learn.microsoft.com/en-us/visualstudio/extensibility/vsix-extension-schema-2-0-reference?view=vs-2022#metadata-element) 
+and avoid duplication. 
+
 The available properties and their default values are:
 
 | Name              | Default Value                       |
@@ -51,7 +39,7 @@ The available properties and their default values are:
 | VsixLanguage      | `$(NeutralLanguage)` or 'en-US'     |
 | VsixDescription   | `$(Description)`                    |
 
-As shown in the example above, the syntax for using these properties from the `.vsxmanifest` is 
+As shown in the example above, the syntax for using these properties from the `source.extension.vsixmanifest` is 
 `|%CurrentProject%;[PROPERTY]|`. This is because the package defines a corresponding target to 
 retrieve each of the above properties. You can provide a different value for each property via 
 MSBuild as usual, of course.
