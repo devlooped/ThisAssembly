@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.1](https://github.com/devlooped/ThisAssembly/tree/v2.0.1) (2024-09-30)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.0...v2.0.1)
+
+:twisted_rightwards_arrows: Merged:
+
+- Add sponsored API annotations to Resources too [\#409](https://github.com/devlooped/ThisAssembly/pull/409) (@kzu)
+
 ## [v2.0.0](https://github.com/devlooped/ThisAssembly/tree/v2.0.0) (2024-09-27)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.0-alpha...v2.0.0)
