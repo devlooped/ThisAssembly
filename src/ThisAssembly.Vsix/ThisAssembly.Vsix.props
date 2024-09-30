@@ -1,0 +1,8 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Allows redefining Pack as CreateVsixContainer -->
+    <ImportNuGetBuildTasksPackTargetsFromSdk>false</ImportNuGetBuildTasksPackTargetsFromSdk>
+  </PropertyGroup>
+
+</Project>
