@@ -74,7 +74,7 @@ namespace {{ Namespace }};
 {{ Visibility }}partial class ThisAssembly
 {
     /// <summary>
-    /// Provides access project-defined constants.
+    /// {{ RootArea.Comment }}
     /// </summary>
     {{ render RootArea }}
 }

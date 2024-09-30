@@ -22,7 +22,7 @@ record Model(Area RootArea, string? Namespace, bool IsPublic)
 }
 
 [DebuggerDisplay("Name = {Name}, NestedAreas = {NestedAreas.Count}, Values = {Values.Count}")]
-record Area(string Name, string Prefix)
+record Area(string Name, string Prefix, string Comment)
 {
     public List<Area> NestedAreas { get; init; } = new();
     public List<Constant> Values { get; init; } = new();
@@ -48,9 +48,9 @@ record Area(string Name, string Prefix)
         return result;
     }
 
-    public static Area Load(List<Constant> constants, string rootArea = "Constants")
+    public static Area Load(List<Constant> constants, string rootArea = "Constants", string comment = "Provides access project-defined constants.")
     {
-        var root = new Area(rootArea, "");
+        var root = new Area(rootArea, "", comment);
 
         foreach (var constant in constants)
         {
@@ -96,7 +96,7 @@ record Area(string Name, string Prefix)
                         "Area name '{0}' is already in use as a value name under area '{1}'.",
                         areaName, currentArea.Name));
 
-                existing = new Area(areaName, currentArea.Prefix + areaName + ".");
+                existing = new Area(areaName, currentArea.Prefix + areaName + ".", "");
                 currentArea.NestedAreas.Add(existing);
             }
 
