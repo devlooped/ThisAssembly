@@ -7,9 +7,7 @@ MSBuild project properties from the VSIX manifest. For example:
 
 And in the `source.extension.vsixmanifest`:
 ```xml
-<PackageManifest Version="2.0.0" 
-                 xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" 
-                 xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+<PackageManifest Version="2.0.0" ...>
   <Metadata>
     <!-- You can use the |ProjectName;TargetName| syntax throughout this manifest, BTW -->
     <Identity Id="|%CurrentProject%;VsixId|" Version="|%CurrentProject%;VsixVersion|" Language="|%CurrentProject%;VsixLanguage|" Publisher="|%CurrentProject%;VsixPublisher|" />
