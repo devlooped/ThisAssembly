@@ -1,0 +1,123 @@
+<Project>
+
+  <PropertyGroup>
+    <Vsix2011>&lt;Namespace Prefix='vs' Uri='http://schemas.microsoft.com/developer/vsx-schema/2011'/&gt;</Vsix2011>
+    <Vsix2010>&lt;Namespace Prefix='vs' Uri='http://schemas.microsoft.com/developer/vsx-schema/2010'/&gt;</Vsix2010>
+
+    <!-- This is required as `true` to cause FindSourceVsixManifest target to run and locate the manifest
+         which is required for the DetokenizeVsixManifestFile to run.
+         By setting this property, we will always succeed independently of the value of $(CreateVsixContainer), 
+         $(DeployExtension) and $(CopyVsixExtensionFiles) -->
+    <CopyVsixManifestToOutput>true</CopyVsixManifestToOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Make sure we're always private to the referencing project. 
+         Prevents analyzers from "flowing out" of the referencing project. -->
+    <PackageReference Update="ThisAssembly.Vsix" PrivateAssets="all" PackTransitive="false" />
+  </ItemGroup>
+
+  <Target Name="PrepareVsixConstants"
+          Condition="$(VsSDKInstall) != ''"
+          BeforeTargets="PrepareConstants"
+          DependsOnTargets="DetokenizeVsixManifestFile">
+
+    <!-- DetokenizeVsixManifestFile populates the values in $(IntermediateVsixManifest) from project references   -->
+
+    <XmlPeek Condition="'$(VsixID)' == ''" Namespaces="$(Vsix2010)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:Vsix/vs:Identifier/@Id">
+      <Output TaskParameter="Result" PropertyName="VsixID" />
+    </XmlPeek>
+    <XmlPeek Condition="'$(VsixID)' == ''" Namespaces="$(Vsix2011)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:PackageManifest/vs:Metadata/vs:Identity/@Id">
+      <Output TaskParameter="Result" PropertyName="VsixID" />
+    </XmlPeek>
+
+    <XmlPeek Condition="'$(VsixVersion)' == ''" Namespaces="$(Vsix2010)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:Vsix/vs:Identifier/@Version">
+      <Output TaskParameter="Result" PropertyName="VsixVersion" />
+    </XmlPeek>
+    <XmlPeek Condition="'$(VsixVersion)' == ''" Namespaces="$(Vsix2011)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:PackageManifest/vs:Metadata/vs:Identity/@Version">
+      <Output TaskParameter="Result" PropertyName="VsixVersion" />
+    </XmlPeek>
+
+    <XmlPeek Condition="'$(VsixName)' == ''" Namespaces="$(Vsix2010)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:Vsix/vs:Identifier/vs:Name/text()">
+      <Output TaskParameter="Result" PropertyName="VsixName" />
+    </XmlPeek>
+    <XmlPeek Condition="'$(VsixName)' == ''" Namespaces="$(Vsix2011)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:PackageManifest/vs:Metadata/vs:DisplayName/text()">
+      <Output TaskParameter="Result" PropertyName="VsixName" />
+    </XmlPeek>
+
+    <XmlPeek Condition="'$(VsixDescription)' == ''" Namespaces="$(Vsix2010)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:Vsix/vs:Identifier/vs:Description/text()">
+      <Output TaskParameter="Result" PropertyName="VsixDescription" />
+    </XmlPeek>
+    <XmlPeek Condition="'$(VsixDescription)' == ''" Namespaces="$(Vsix2011)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:PackageManifest/vs:Metadata/vs:Description/text()">
+      <Output TaskParameter="Result" PropertyName="VsixDescription" />
+    </XmlPeek>
+
+    <XmlPeek Condition="'$(VsixPublisher)' == ''" Namespaces="$(Vsix2010)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:Vsix/vs:Identifier/vs:Author/text()">
+      <Output TaskParameter="Result" PropertyName="VsixPublisher" />
+    </XmlPeek>
+    <XmlPeek Condition="'$(VsixPublisher)' == ''" Namespaces="$(Vsix2011)" XmlInputPath="$(IntermediateVsixManifest)" Query="/vs:PackageManifest/vs:Metadata/vs:Identity/@Publisher">
+      <Output TaskParameter="Result" PropertyName="VsixPublisher" />
+    </XmlPeek>
+
+
+    <ItemGroup>
+      <Constant Include="Vsix.Id" Value="$(VsixID)" Root="." />
+      <Constant Include="Vsix.Name" Value="$(VsixName)" Root="." />
+      <Constant Include="Vsix.Description" Value="$(VsixDescription)" Root="." />
+      <Constant Include="Vsix.Publisher" Value="$(VsixPublisher)" Root="." />
+      <Constant Include="Vsix.Version" Value="$(VsixVersion)" Root="." />
+    </ItemGroup>
+
+  </Target>
+
+  <Target Name="VsixID" Returns="$(VsixID)">
+    <PropertyGroup>
+      <VsixID Condition="$(VsixID) ==''">$(PackageId)</VsixID>
+      <VsixID Condition="$(VsixID) ==''">$(AssemblyName)</VsixID>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="VsixVersion" Returns="$(VsixVersion)">
+    <PropertyGroup>
+      <VsixVersion Condition="$(VsixVersion) ==''">$(Version)</VsixVersion>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="VsixDisplayName" Returns="$(VsixDisplayName)">
+    <PropertyGroup>
+      <VsixDisplayName Condition="$(VsixDisplayName) ==''">$(Title)</VsixDisplayName>
+    </PropertyGroup>    
+  </Target>
+
+  <Target Name="VsixDescription" Returns="$(VsixDescription)">
+    <PropertyGroup>
+      <VsixDescription Condition="$(VsixDescription) ==''">$(Description)</VsixDescription>
+    </PropertyGroup>    
+  </Target>
+
+  <Target Name="VsixProduct" Returns="$(VsixProduct)">
+    <PropertyGroup>
+      <VsixProduct Condition="$(VsixProduct) ==''">$(Product)</VsixProduct>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="VsixPublisher" Returns="$(VsixPublisher)">
+    <PropertyGroup>
+      <VsixPublisher Condition="$(VsixPublisher) ==''">$(Company)</VsixPublisher>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="VsixLanguage" Returns="$(VsixLanguage)">
+    <PropertyGroup>
+      <VsixLanguage Condition="$(VsixLanguage) ==''">$(NeutralLanguage)</VsixLanguage>
+      <VsixLanguage Condition="$(VsixLanguage) ==''">en-US</VsixLanguage>
+    </PropertyGroup>
+  </Target>
+
+  <ItemGroup Condition="$(VsSDKInstall) != '' and $(PackageId) != ''">
+    <ProjectCapability Include="Pack"/>
+  </ItemGroup>
+
+  <Import Project="ThisAssembly.Vsix.Pack.targets" Condition="$(VsSDKInstall) != '' and $(PackageId) != ''"/>
+
+</Project>

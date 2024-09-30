@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <PackBuildOutput>false</PackBuildOutput>
+    <PackageTags>$(PackageTags) vsix</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>ThisAssembly.Vsix</PackageId>
+    <Description>This package generates a static `ThisAssembly.Vsix` class with public 
+constants exposing key VSIX manifest properties. For example:
+
+  partial class ThisAssembly
+  {
+      public static partial class Vsix
+      {
+          public const string Id = "MyVsix";
+      }
+  }
+</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ThisAssembly.Metadata.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGetizer" Version="1.2.2" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5240" IncludeAssets="none" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ThisAssembly.Constants\ThisAssembly.Constants.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\Shared\Shared.projitems" Label="Shared" />
+
+</Project>

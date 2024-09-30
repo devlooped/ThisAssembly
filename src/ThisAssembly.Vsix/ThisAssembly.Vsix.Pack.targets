@@ -1,0 +1,6 @@
+<Project>
+
+  <!-- Overwrites Pack to mean CreateVsixContainer -->
+  <Target Name="Pack" DependsOnTargets="CreateVsixContainer" Condition="'$(IsPackable)' != 'false'" />
+
+</Project>
