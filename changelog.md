@@ -1,5 +1,17 @@
 # Changelog
 
+## [v2.0.4](https://github.com/devlooped/ThisAssembly/tree/v2.0.4) (2024-10-08)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.3...v2.0.4)
+
+:sparkles: Implemented enhancements:
+
+- Allow project properties to specify custom comment [\#420](https://github.com/devlooped/ThisAssembly/pull/420) (@kzu)
+
+:bug: Fixed bugs:
+
+- Properly emit AssemblyInfo even if GenerateAssemblyInfo=false [\#422](https://github.com/devlooped/ThisAssembly/pull/422) (@kzu)
+
 ## [v2.0.3](https://github.com/devlooped/ThisAssembly/tree/v2.0.3) (2024-09-30)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.2...v2.0.3)
