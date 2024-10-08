@@ -5,6 +5,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ThisAssemblyNamespace>ThisAssemblyTests</ThisAssemblyNamespace>
     <ThisAssemblyVisibility>public</ThisAssemblyVisibility>
+    <!-- Showcase we don't require the built-in assembly info generation --> 
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Multiline>
       A Description
       with a newline and
