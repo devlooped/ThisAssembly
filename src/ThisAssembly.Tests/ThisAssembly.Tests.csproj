@@ -20,6 +20,7 @@
     <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
     <NoWarn>CS0618;CS8981;TA100;$(NoWarn)</NoWarn>
     <PackageScribanIncludeSource>false</PackageScribanIncludeSource>
+    <ProjectFile>$([System.IO.File]::ReadAllText($(MSBuildProjectFullPath)))</ProjectFile>
   </PropertyGroup>
 
   <Import Project="..\*\ThisAssembly*.props" />
@@ -66,6 +67,7 @@
     <ProjectProperty Include="Foo" />
     <ProjectProperty Include="Description" />
     <ProjectProperty Include="Multiline" />
+    <ProjectProperty Include="ProjectFile" Comment="Full project contents" />
     <Constant Include="Foo.Raw" Value="$(Multiline)" Comment="$(Multiline)" />
     <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />
     <Constant Include="Foo.Hello" Value="World" Comment="Comments make everything better 😍" />

@@ -40,6 +40,13 @@ public record class Tests(ITestOutputHelper Output)
             """.ReplaceLineEndings(), ThisAssembly.Project.Multiline.ReplaceLineEndings());
 
     [Fact]
+    public void CanUseProjectFullFileContents()
+    {
+        Assert.NotEmpty(ThisAssembly.Project.ProjectFile);
+        Assert.False(ThisAssembly.Project.ProjectFile.StartsWith("|"));
+    }
+
+    [Fact]
     public void CanUseConstants()
         => Assert.Equal("Baz", ThisAssembly.Constants.Foo.Bar);
 

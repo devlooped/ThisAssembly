@@ -24,7 +24,7 @@
     </ItemGroup>
     <ItemGroup>
       <!-- Collect requested properties, and eval their value -->
-      <Constant Include="@(ProjectPropertyDistinct -> 'Project.%(Identity)')" Value="$(%(ProjectPropertyDistinct.Identity))" Root="." />
+      <Constant Include="@(ProjectPropertyDistinct -> 'Project.%(Identity)')" Value="$(%(ProjectPropertyDistinct.Identity))" Comment="%(ProjectPropertyDistinct.Comment)" Root="." />
     </ItemGroup>
   </Target>
   
