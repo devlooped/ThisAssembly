@@ -11,7 +11,7 @@ them as `ProjectProperty` MSBuild items in the project file, such as:
   </PropertyGroup>
   <ItemGroup>
     <!-- Opt-in to emitting that property value as a constant in ThisAssembly.Project -->
-    <ProjectProperty Include="Foo" />
+    <ProjectProperty Include="Foo" Comment="This comment replaces the default comment :)" />
   </ItemGroup>
 ```
 
