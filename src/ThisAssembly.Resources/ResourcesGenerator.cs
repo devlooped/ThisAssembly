@@ -42,7 +42,7 @@ public class ResourcesGenerator : IIncrementalGenerator
                 {
                     if (!p.GlobalOptions.TryGetValue("build_property.EmbeddedResourceStringExtensions", out var extensions) ||
                         extensions == null)
-                        return Array.Empty<string>();
+                        return [];
 
                     return extensions.Split('|');
                 })

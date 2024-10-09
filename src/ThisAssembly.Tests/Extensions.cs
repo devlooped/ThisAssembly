@@ -1,9 +1,12 @@
 ﻿using System;
 
+/// <summary />
 public static class Extensions
 {
+    /// <summary />
     public static string ReplaceLineEndings(this string input) => ReplaceLineEndings(input, Environment.NewLine);
 
+    /// <summary />
     public static string ReplaceLineEndings(this string input, string replacementText)
     {
 #if NET6_0_OR_GREATER

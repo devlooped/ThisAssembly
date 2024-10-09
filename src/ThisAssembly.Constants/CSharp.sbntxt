@@ -34,6 +34,9 @@
 {{~ end ~}}
 {{ end }}
 {{ func render }}
+    /// <summary>
+    /// {{ $0.Comment }}
+    /// </summary>
     public static partial class {{ $0.Name | string.replace "-" "_" | string.replace " " "_" }}
     {
         {{~ for value in $0.Values ~}}
@@ -73,8 +76,5 @@ namespace {{ Namespace }};
 /// </summary>
 {{ Visibility }}partial class ThisAssembly
 {
-    /// <summary>
-    /// {{ RootArea.Comment }}
-    /// </summary>
     {{ render RootArea }}
 }
