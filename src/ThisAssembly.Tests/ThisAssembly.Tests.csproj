@@ -23,6 +23,7 @@
     <NoWarn>CS0618;CS8981;TA100;$(NoWarn)</NoWarn>
     <PackageScribanIncludeSource>false</PackageScribanIncludeSource>
     <ProjectFile>$([System.IO.File]::ReadAllText($(MSBuildProjectFullPath)))</ProjectFile>
+    <ProjectFileComment>$(ProjectFile)</ProjectFileComment>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <WarningsAsErrors>true</WarningsAsErrors>
   </PropertyGroup>
@@ -71,6 +72,7 @@
     <ProjectProperty Include="Foo" />
     <ProjectProperty Include="Description" />
     <ProjectProperty Include="Multiline" />
+    <ProjectProperty Include="ProjectFileComment" Comment="Full project contents" />
     <ProjectProperty Include="ProjectFile" />
     <Constant Include="Foo.Raw" Value="$(Multiline)" Comment="$(Multiline)" />
     <Constant Include="Foo.Bar" Value="Baz" Comment="Yay!" />

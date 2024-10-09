@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -93,9 +94,9 @@ public class ConstantsGenerator : IIncrementalGenerator
         }
 
         if (comment != null)
-            comment = "/// " + string.Join(Environment.NewLine + "/// ", comment.Trim().Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
+            comment = "/// " + string.Join(Environment.NewLine + "/// ", new XText(comment).ToString().Trim().Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
         else
-            comment = "/// " + string.Join(Environment.NewLine + "/// ", value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
+            comment = "/// " + string.Join(Environment.NewLine + "/// ", new XText(value).ToString().Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
 
         // Revert normalization of newlines performed in MSBuild to workaround the limitation in editorconfig.
         var rootArea = Area.Load([new(name, value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']), comment, type ?? "string"),], root, rootComment);
