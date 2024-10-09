@@ -29,6 +29,7 @@
         {{~ end ~}}
 {{ end }}
 {{ func render }}
+    /// <summary />
     public static partial class {{ $0.Id }}
     {
         {{~ for value in $0.Values }}

@@ -19,12 +19,34 @@ record Model(Area RootArea, string? Namespace, bool IsPublic)
 [DebuggerDisplay("Name = {Name}")]
 record Area(string Name)
 {
-    public Area? NestedArea { get; private set; }
+    Area? nestedArea = null;
+    Area? parent = null;
+    string? comment = null;
+
+    public string? Comment
+    {
+        get => comment ?? $"Provides access to embedded resources under {Path}";
+        set => comment = value;
+    }
+
+    public Area? NestedArea
+    {
+        get => nestedArea;
+        set
+        {
+            nestedArea = value;
+            if (nestedArea != null)
+                nestedArea.parent = this;
+        }
+    }
+
+    public string Path => parent == null ? Name : $"{parent.Path}/{Name}";
+
     public IEnumerable<Resource>? Resources { get; private set; }
 
-    public static Area Load(string basePath, List<Resource> resources, string rootArea = "Resources")
+    public static Area Load(string basePath, List<Resource> resources, string rootArea = "Resources", string comment = "Provides access to embedded resources.")
     {
-        var root = new Area(rootArea);
+        var root = new Area(rootArea) { Comment = comment };
 
         //  Splits: ([area].)*[name]
         var area = root;
@@ -36,9 +58,7 @@ record Area(string Name)
         {
             var partStr = PathSanitizer.Sanitize(part, parent);
             parent = partStr;
-
-            area.NestedArea = new Area(partStr);
-            area = area.NestedArea;
+            area = area.NestedArea = new Area(partStr);
         }
 
         area.Resources = resources

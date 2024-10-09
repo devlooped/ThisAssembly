@@ -9,8 +9,10 @@ using Xunit.Abstractions;
 
 namespace ThisAssemblyTests;
 
+/// <summary />
 public class ScribanTests(ITestOutputHelper Console)
 {
+    /// <summary />
     [Fact]
     public void CanRenderModel()
     {

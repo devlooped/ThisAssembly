@@ -31,17 +31,31 @@
 		{
 			{{~ if $0.IsText ~}}
 			private static string text;
+
+            /// <summary>
+            /// Gets the resource as plain text.
+            /// </summary>
 			public static string Text => 
 				text ??= EmbeddedResource.GetContent(@"{{ $0.Path }}");
 			{{~ end ~}}
 
+            /// <summary>
+            /// Gets the resource as a byte array.
+            /// </summary>
 			public static byte[] GetBytes() => 
 				EmbeddedResource.GetBytes(@"{{ $0.Path }}");
+
+            /// <summary>
+            /// Gets the resource as a stream.
+            /// </summary>
 			public static Stream GetStream() =>
 				EmbeddedResource.GetStream(@"{{ $0.Path }}");
 		}
 {{ end }}
 {{ func render }}
+    /// <summary>
+    /// {{ $0.Comment }}
+    /// </summary>
 	public static partial class {{ $0.Name | string.replace "-" "_" | string.replace " " "_" }}
 	{
 		{{~ if $0.Resources ~}}
@@ -65,8 +79,5 @@ namespace {{ Namespace }};
 /// </summary>
 {{ Visibility }}partial class ThisAssembly
 {
-    /// <summary>
-    /// Provides access to assembly embedded resources.
-    /// </summary>
 	{{ render RootArea }}
 }
