@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.0.5](https://github.com/devlooped/ThisAssembly/tree/v2.0.5) (2024-10-09)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.4...v2.0.5)
+
+:sparkles: Implemented enhancements:
+
+- Make sure we escape constants XML comments [\#425](https://github.com/devlooped/ThisAssembly/pull/425) (@kzu)
+- Since types can be public, ensure we always have XML comments [\#424](https://github.com/devlooped/ThisAssembly/pull/424) (@kzu)
+
+:bug: Fixed bugs:
+
+- Setting GenerateAssemblyInfo=false stops source generator from running [\#407](https://github.com/devlooped/ThisAssembly/issues/407)
+
 ## [v2.0.4](https://github.com/devlooped/ThisAssembly/tree/v2.0.4) (2024-10-08)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.3...v2.0.4)
