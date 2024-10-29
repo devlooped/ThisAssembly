@@ -40,7 +40,7 @@ C#:
   <PropertyGroup Label="SponsorLink">
     <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
     <!-- We also bring in the additional packages that just customize ThisAssembly.Constants -->
-    <FundingPackageId>ThisAssembly;ThisAssembly.Git;ThisAssembly.Metadata;$(PackageId)</FundingPackageId>
+    <FundingPackageId>ThisAssembly;ThisAssembly.Git;ThisAssembly.Metadata;GitInfo;$(PackageId)</FundingPackageId>
   </PropertyGroup>
 
   <ItemGroup>
