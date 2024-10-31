@@ -35,9 +35,9 @@
 	sha = 5e17ad62ebb5241555a7a4d29e3ab15e5ba120d2
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
-	etag = a9c37ae312afac14b78436a7d018af4483d88736b5f780576f2c5a0b3f14998c
+	etag = c449ec6f76803e1891357ca2b8b4fcb5b2e5deeff8311622fd92ca9fbf1e6575
 	weak
-	sha = 02811fa23b0a102b9b33048335d41e515bf75737
+	sha = e0be248fff1d39133345283b8227372b36574b75
 [file "license.txt"]
 	url = https://github.com/devlooped/oss/blob/main/license.txt
 	etag = 2c6335b37e4ae05eea7c01f5d0c9d82b49c488f868a8b5ba7bff7c6ff01f3994
@@ -131,8 +131,8 @@
 	url = https://github.com/devlooped/SponsorLink/tree/main/samples/dotnet/
 [file "src/SponsorLink/Analyzer/Analyzer.csproj"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/Analyzer.csproj
-	sha = efdaa7c93cca3bed49aafdca4a1f29e85126c94f
-	etag = 3a15ca6d1eec97f5280de063a3463dd24eafe47a8a9ac193bc0ecb2603643b6e
+	sha = e55425333883c4470d745f8fee70bdf204c292ee
+	etag = 8aa140018fcfbd889c11da36c8c21b5cfb5730c07aa3317d734b118cfa60b416
 	weak
 [file "src/SponsorLink/Analyzer/Properties/launchSettings.json"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/Properties/launchSettings.json
@@ -166,8 +166,8 @@
 	weak
 [file "src/SponsorLink/Library/Library.csproj"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Library/Library.csproj
-	sha = f47528874a6d9192b5546f84b455f5ccc474a707
-	etag = 06a4ffe0d8f24f795a484b1e86bcbad538437d819c41dd1ae0e5184a1e4a7d31
+	sha = f74ea7a8c7f81c5bceefb3ed7ef4249b1d8574a3
+	etag = 592707adba548606ec50ced6e424be4cbfe34f18bf01555a19b29fa61efa416a
 	weak
 [file "src/SponsorLink/Library/MyClass.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Library/MyClass.cs
@@ -216,8 +216,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLink.csproj"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/SponsorLink.csproj
-	sha = 46e9abe02e5a6abadda66ef050ddc5b9859aa2b8
-	etag = 9674d70c0042b3b973846d5252d6861a981e1e7b84bc806a8d20698ba0c27481
+	sha = f74ea7a8c7f81c5bceefb3ed7ef4249b1d8574a3
+	etag = d87299dc7de83bd69c5b3232e8f58c8df66dc587c22c6f4539b8829d9d860c52
 	weak
 [file "src/SponsorLink/SponsorLink/SponsorLinkAnalyzer.cs"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/SponsorLinkAnalyzer.cs
@@ -301,8 +301,8 @@
 	weak
 [file "src/SponsorLink/Tests/Tests.csproj"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Tests/Tests.csproj
-	sha = eceeb2c5596285c95db4d1a031cc36238a7cd22d
-	etag = ce125080f1a10d94caecf0c93840a3e2878bf73b83526aaa9a569f91414cf2be
+	sha = b75813df2c8623fbf084e54617c1131dde31180c
+	etag = 145c7fb55216852edef0876fc52d0e706c79e3c1f2aab3782ef900d9c34884f8
 	weak
 [file "src/SponsorLink/Tests/keys/kzu.key"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Tests/keys/kzu.key
@@ -351,8 +351,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink.Analyzer.targets"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink.Analyzer.targets
-	sha = efdaa7c93cca3bed49aafdca4a1f29e85126c94f
-	etag = 96480c337e10cdca35957d41b651879b146da30a6e6db234f2bb6f09e88e3a7f
+	sha = 1f083cf675260f176cc36c70220080a2e6211ddf
+	etag = 25b42de9005557475d1d21f28822d690727c2cc0cddc64fdd0d6c13da672cee8
 	weak
 [file "src/SponsorLink/SponsorLink.Analyzer.Tests.targets"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink.Analyzer.Tests.targets

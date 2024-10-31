@@ -219,19 +219,10 @@ packaging experience possible:
 <!-- include src/ThisAssembly.Metadata/readme.md#metadata -->
 <!-- #metadata -->
 This package provides a static `ThisAssembly.Metadata` class with public 
-constants exposing each `[System.Reflection.AssemblyMetadata(..)]` defined for 
-the project.
+constants exposing each `[System.Reflection.AssemblyMetadata(..)]` defined in 
+the project file as [supported by the .NET SDK](https://learn.microsoft.com/en-us/dotnet/standard/assembly/set-attributes-project-file#set-arbitrary-attributes).
 
-![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Metadata.png)
-
-For an attribute declared (i.e. in *AssemblyInfo.cs*) like:
-
-```csharp
-[assembly: System.Reflection.AssemblyMetadataAttribute("Foo", "Bar")]
-```
-
-A corresponding `ThisAssembly.Metadata.Foo` constant with the value `Bar` is provided. 
-The metadata attribute can alternatively be declared using MSBuild syntax in the project 
+The metadata attribute is declared using MSBuild syntax in the project 
 (for .NET 5.0+ projects that have built-in support for `@(AssemblyMetadata)` items):
 
 ```xml
@@ -239,6 +230,11 @@ The metadata attribute can alternatively be declared using MSBuild syntax in the
     <AssemblyMetadata Include="Foo" Value="Bar" />
   </ItemGroup>
 ```
+
+And a corresponding `ThisAssembly.Metadata.Foo` constant with the value `Bar` is provided 
+for this example.
+
+![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Metadata.png)
 
 <!-- #metadata -->
 <!-- src/ThisAssembly.Metadata/readme.md#metadata -->
@@ -579,7 +575,6 @@ The versioning scheme for packages is:
 [![Jonathan ](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/Jonathan-Hickey.png "Jonathan ")](https://github.com/Jonathan-Hickey)
 [![Charley Wu](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/akunzai.png "Charley Wu")](https://github.com/akunzai)
 [![Jakob Tikjøb Andersen](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/jakobt.png "Jakob Tikjøb Andersen")](https://github.com/jakobt)
-[![Seann Alexander](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/seanalexander.png "Seann Alexander")](https://github.com/seanalexander)
 [![Tino Hager](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/tinohager.png "Tino Hager")](https://github.com/tinohager)
 [![Mark Seemann](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/ploeh.png "Mark Seemann")](https://github.com/ploeh)
 [![Ken Bonny](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/KenBonny.png "Ken Bonny")](https://github.com/KenBonny)
