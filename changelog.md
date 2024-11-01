@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.6](https://github.com/devlooped/ThisAssembly/tree/v2.0.6) (2024-11-01)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.5...v2.0.6)
+
+:twisted_rightwards_arrows: Merged:
+
+- Consider GitInfo a direct reference of ThisAssembly [\#428](https://github.com/devlooped/ThisAssembly/pull/428) (@kzu)
+
 ## [v2.0.5](https://github.com/devlooped/ThisAssembly/tree/v2.0.5) (2024-10-09)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.4...v2.0.5)
