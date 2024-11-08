@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.7](https://github.com/devlooped/ThisAssembly/tree/v2.0.7) (2024-11-08)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.6...v2.0.7)
+
+:bug: Fixed bugs:
+
+- Add missing ThisAssembly.Constants dependency from Project [\#429](https://github.com/devlooped/ThisAssembly/pull/429) (@kzu)
+
 ## [v2.0.6](https://github.com/devlooped/ThisAssembly/tree/v2.0.6) (2024-11-01)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.5...v2.0.6)
