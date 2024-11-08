@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.8](https://github.com/devlooped/ThisAssembly/tree/v2.0.8) (2024-11-08)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.7...v2.0.8)
+
+:bug: Fixed bugs:
+
+- ThisAssembly.Project should not pack main output [\#431](https://github.com/devlooped/ThisAssembly/pull/431) (@kzu)
+
 ## [v2.0.7](https://github.com/devlooped/ThisAssembly/tree/v2.0.7) (2024-11-08)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.6...v2.0.7)
