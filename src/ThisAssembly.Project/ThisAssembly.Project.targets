@@ -13,12 +13,14 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <InjectThisAssemblyProjectDependsOn Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
+    <!-- Backwards compability for original property name -->
+    <PrepareProjectPropertiesDependsOn>$(InjectThisAssemblyProjectDependsOn)</PrepareProjectPropertiesDependsOn>
+    <PrepareProjectPropertiesDependsOn Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
       InitializeSourceControlInformation
-    </InjectThisAssemblyProjectDependsOn>
+    </PrepareProjectPropertiesDependsOn>
   </PropertyGroup>
 
-  <Target Name="PrepareProjectProperties" BeforeTargets="PrepareConstants">
+  <Target Name="PrepareProjectProperties" BeforeTargets="PrepareConstants" DependsOnTargets="$(PrepareProjectPropertiesDependsOn)">
     <ItemGroup>
       <ProjectPropertyDistinct Include="@(ProjectProperty -> Distinct())" />
     </ItemGroup>

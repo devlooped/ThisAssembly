@@ -54,6 +54,13 @@ public record class Tests(ITestOutputHelper Output)
 
     /// <summary />
     [Fact]
+    public void CanUseProjectRepositoryUrl()
+    {
+        Assert.NotEmpty(ThisAssembly.Project.RepositoryUrl);
+    }
+
+    /// <summary />
+    [Fact]
     public void CanUseConstants()
         => Assert.Equal("Baz", ThisAssembly.Constants.Foo.Bar);
 
