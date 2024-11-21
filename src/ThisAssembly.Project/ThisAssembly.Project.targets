@@ -16,7 +16,8 @@
     <!-- Backwards compability for original property name -->
     <PrepareProjectPropertiesDependsOn>$(InjectThisAssemblyProjectDependsOn)</PrepareProjectPropertiesDependsOn>
     <PrepareProjectPropertiesDependsOn Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
-      InitializeSourceControlInformation
+      InitializeSourceControlInformation;
+      $(PrepareProjectPropertiesDependsOn)
     </PrepareProjectPropertiesDependsOn>
   </PropertyGroup>
 
