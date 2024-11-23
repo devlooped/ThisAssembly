@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.9](https://github.com/devlooped/ThisAssembly/tree/v2.0.9) (2024-11-21)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.8...v2.0.9)
+
+:bug: Fixed bugs:
+
+- Make sure project properties initialize after source control [\#434](https://github.com/devlooped/ThisAssembly/pull/434) (@kzu)
+
 ## [v2.0.8](https://github.com/devlooped/ThisAssembly/tree/v2.0.8) (2024-11-08)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.7...v2.0.8)
