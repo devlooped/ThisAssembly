@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.10](https://github.com/devlooped/ThisAssembly/tree/v2.0.10) (2024-11-26)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.9...v2.0.10)
+
+:sparkles: Implemented enhancements:
+
+- Provide public documented extension point to add resources [\#435](https://github.com/devlooped/ThisAssembly/pull/435) (@kzu)
+
 ## [v2.0.9](https://github.com/devlooped/ThisAssembly/tree/v2.0.9) (2024-11-21)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.8...v2.0.9)
