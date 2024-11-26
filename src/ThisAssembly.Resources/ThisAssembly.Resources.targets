@@ -28,9 +28,11 @@
     </EmbeddedResource>
   </ItemDefinitionGroup>
 
+  <Target Name="PrepareEmbeddedResources" DependsOnTargets="PrepareResourceNames" />
+
   <Target Name="_InjectResourcesAdditionalFiles"
           BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
-          DependsOnTargets="PrepareResourceNames">
+          DependsOnTargets="PrepareEmbeddedResources">
     <ItemGroup>
       <EmbeddedResource Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)')) OR '%(Link)' != ''">
         <AreaPath Condition="!$([System.IO.Path]::IsPathRooted('%(RelativeDir)'))">%(RelativeDir)%(Filename)</AreaPath>

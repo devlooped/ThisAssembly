@@ -52,6 +52,19 @@ The following MSBuild properties can be used to customize the generated code:
 | ThisAssemblyNamespace   | Sets the namespace of the generated `ThisAssembly` root class. If not set, it will be in the global namespace. |
 | ThisAssemblyVisibility  | Sets the visibility modifier of the generated `ThisAssembly` root class. If not set, it will be internal. |
 
+## Adding dynamic resources
+
+You can also provide additional embedded resources dynamically, by running a target before 
+`PrepareEmbeddedResources`:
+
+```xml
+  <Target Name="AddDynamicResources" BeforeTargets="PrepareEmbeddedResources">
+    <ItemGroup>
+      <EmbeddedResource Include="Content/Docs/$(Configuration).md" />
+    </ItemGroup>
+  </Target>
+```
+
 <!-- #resources -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->
