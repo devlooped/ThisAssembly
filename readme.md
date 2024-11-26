@@ -313,20 +313,13 @@ Optionally, you can specify the `Kind` metadata for a specific `EmbeddedResource
 treated as a text file:
 
 ```xml
+<ItemGroup>
     <EmbeddedResource Include="query.kql" Kind="Text" />
+</ItemGroup>
 ```
 
 You can also add a `Comment` item metadata attribute, which will be used as the `<summary>` XML 
 doc for the generated member.
-
-## Customizing the generated code
-
-The following MSBuild properties can be used to customize the generated code:
-
-| Property                | Description                                                                                          |
-|-------------------------|------------------------------------------------------------------------------------------------------|
-| ThisAssemblyNamespace   | Sets the namespace of the generated `ThisAssembly` root class. If not set, it will be in the global namespace. |
-| ThisAssemblyVisibility  | Sets the visibility modifier of the generated `ThisAssembly` root class. If not set, it will be internal. |
 
 ## Adding dynamic resources
 
@@ -340,6 +333,15 @@ You can also provide additional embedded resources dynamically, by running a tar
     </ItemGroup>
   </Target>
 ```
+
+## Customizing the generated code
+
+The following MSBuild properties can be used to customize the generated code:
+
+| Property                | Description                                                                                          |
+|-------------------------|------------------------------------------------------------------------------------------------------|
+| ThisAssemblyNamespace   | Sets the namespace of the generated `ThisAssembly` root class. If not set, it will be in the global namespace. |
+| ThisAssemblyVisibility  | Sets the visibility modifier of the generated `ThisAssembly` root class. If not set, it will be internal. |
 
 <!-- #resources -->
 <!-- src/ThisAssembly.Resources/readme.md#resources -->
