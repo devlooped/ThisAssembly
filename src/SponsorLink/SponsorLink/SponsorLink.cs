@@ -107,6 +107,15 @@ static partial class SponsorLink
         => context.GetSponsorAdditionalFiles().Combine(context.AnalyzerConfigOptionsProvider)
             .Select((source, _) => new StatusOptions(source.Left, source.Right.GlobalOptions));
 
+    /// <summary>
+    /// Gets the status options for use within a source generator, to avoid depending on 
+    /// analyzer runs. Used in combination with <see cref="DiagnosticsManager.GetOrSetStatus(StatusOptions)"/>.
+    /// </summary>
+    public static StatusOptions GetStatusOptions(this GeneratorExecutionContext context)
+        => new StatusOptions(
+            context.AdditionalFiles.Where(x => x.IsSponsorManifest(context.AnalyzerConfigOptions) || x.IsSponsorableAnalyzer(context.AnalyzerConfigOptions)).ToImmutableArray(),
+            context.AnalyzerConfigOptions.GlobalOptions);
+
     static bool IsSponsorManifest(this AdditionalText text, AnalyzerConfigOptionsProvider provider)
         => provider.GetOptions(text).TryGetValue("build_metadata.SponsorManifest.ItemType", out var itemType) &&
            itemType == "SponsorManifest" &&
