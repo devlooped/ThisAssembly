@@ -21,18 +21,28 @@
       <ReferenceCopyLocalAssemblies Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll' 
         And !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase))
         And !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('ThisAssembly', StringComparison.OrdinalIgnoreCase))" />
-      <Analyzer Include="@(ReferenceCopyLocalAssemblies)" Condition="
+
+      <CandidateAnalyzer Include="@(ReferenceCopyLocalAssemblies)" Condition="
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CodeAnalysis', StringComparison.OrdinalIgnoreCase)) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase)) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.', StringComparison.OrdinalIgnoreCase))"
       />
       <!-- Brings in System/Microsoft.IdentityModel, System.Text.Encodings.Web, System.Text.Json, Humanizer  -->
-      <Analyzer Include="@(ReferenceCopyLocalAssemblies)" Condition="
+      <CandidateAnalyzer Include="@(ReferenceCopyLocalAssemblies)" Condition="
         $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
         $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
         $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.Text', StringComparison.OrdinalIgnoreCase)) Or
         $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Humanizer', StringComparison.OrdinalIgnoreCase))"
       />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UniqueCandidateAnalyzer Include="@(CandidateAnalyzer -> Distinct())" />
+      <UniqueCandidateAnalyzer>
+        <NetStandard>$([MSBuild]::ValueOrDefault('%(FullPath)', '').Replace('net6.0', 'netstandard2.0').Replace('net8.0', 'netstandard2.0').Replace('netcoreapp3.1', 'netstandard2.0'))</NetStandard>
+      </UniqueCandidateAnalyzer>
+      <!-- Analyzer assemblies cannot target anything other than NS2.0 -->
+      <Analyzer Include="@(UniqueCandidateAnalyzer -> '%(NetStandard)')" Condition="Exists('%(UniqueCandidateAnalyzer.NetStandard)')"/>
     </ItemGroup>
   </Target>
 
