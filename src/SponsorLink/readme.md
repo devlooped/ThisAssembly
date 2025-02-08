@@ -35,4 +35,19 @@ Including the analyzer and targets in a project involves two steps.
 </Project>
 ```
 
+3. Set the package id(s) that will be checked for funding in the analyzer, such as:
+
+```xml
+  <PropertyGroup>
+    <FundingPackageId>SponsorableLib;SponsorableLib.Core</FundingPackageId>
+  </PropertyGroup>
+```
+
+  The default analyzer will report a diagnostic for sponsorship status only 
+  if the project being compiled as a direct package reference to one of the 
+  specified package ids. 
+
+  This property defaults to `$(PackageId)` if present. Otherwise, it defaults 
+  to `$(FundingProduct)`, which in turn defaults to `$(Product)` if not provided.
+
 As long as NuGetizer is used, the right packaging will be done automatically.

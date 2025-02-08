@@ -213,7 +213,7 @@ public class AnalyzerTests : IDisposable
             .Where(x => x.Properties.TryGetValue(nameof(SponsorStatus), out var _));
 
         Assert.NotEmpty(diagnostics);
-        Assert.Single(diagnostics.Where(x => x.Properties.TryGetValue(nameof(SponsorStatus), out var value)));
+        Assert.Single(diagnostics, x => x.Properties.TryGetValue(nameof(SponsorStatus), out var value));
     }
 
     [Fact]

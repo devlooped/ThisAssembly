@@ -61,13 +61,13 @@
 
   <Target Name="SL_CollectSponsorableAnalyzer" Inputs="@(FundingPackageId)" Outputs="|%(FundingPackageId.Identity)|">
     <PropertyGroup>
-      <FundingPackageId>%(FundingPackageId.Identity)</FundingPackageId>
+      <_FundingPackageId>%(FundingPackageId.Identity)</_FundingPackageId>
     </PropertyGroup>
     <ItemGroup>
        <!--Used to determine installation time, for example, by looking up the analyzer assembly in additional files with: 
               build_metadata.Analyzer.ItemType = Analyzer
               build_metadata.Analyzer.NuGetPackageId = [PackageId] -->
-      <AdditionalFiles Include="@(Analyzer -> WithMetadataValue('NuGetPackageId', '$(FundingPackageId)'))" />
+      <AdditionalFiles Include="@(Analyzer -> WithMetadataValue('NuGetPackageId', '$(_FundingPackageId)'))" />
     </ItemGroup>
   </Target>
 
