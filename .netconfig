@@ -131,8 +131,8 @@
 	url = https://github.com/devlooped/SponsorLink/tree/main/samples/dotnet/
 [file "src/SponsorLink/Analyzer/Analyzer.csproj"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/Analyzer.csproj
-	sha = 697e210b68c7d6f0ececca7673d13f4309df6cd7
-	etag = 4cee5215a5472e4dcc40c4452d3db74c412a4413c021705c15709c1b4156937b
+	sha = 8f0e6216360f3f8700b4845f3ec2310aabd996f3
+	etag = 671a82f0f6770a990f9364ecf321eeea75bd6092f98c009039af02df172152df
 	weak
 [file "src/SponsorLink/Analyzer/Properties/launchSettings.json"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/Analyzer/Properties/launchSettings.json
