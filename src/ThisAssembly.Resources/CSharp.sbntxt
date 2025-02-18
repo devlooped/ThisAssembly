@@ -29,27 +29,72 @@
         {{~ end ~}}
 		public static partial class {{ $0.Name }}
 		{
+			#if DEBUG
+			static readonly string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
+			#endif
+
 			{{~ if $0.IsText ~}}
 			private static string text;
 
             /// <summary>
             /// Gets the resource as plain text.
             /// </summary>
-			public static string Text => 
-				text ??= EmbeddedResource.GetContent(@"{{ $0.Path }}");
+			public static string Text => text ??= GetContent(@"{{ $0.Path }}");
 			{{~ end ~}}
 
             /// <summary>
             /// Gets the resource as a byte array.
             /// </summary>
-			public static byte[] GetBytes() => 
-				EmbeddedResource.GetBytes(@"{{ $0.Path }}");
+			public static byte[] GetBytes() => GetBytes(@"{{ $0.Path }}");
 
             /// <summary>
             /// Gets the resource as a stream.
             /// </summary>
-			public static Stream GetStream() =>
-				EmbeddedResource.GetStream(@"{{ $0.Path }}");
+			public static Stream GetStream() => GetStream(@"{{ $0.Path }}");
+
+			/// <summary>
+			/// Gets the content of the embedded resource at the specified relative path.
+			/// </summary>
+ 			static string GetContent(string relativePath)
+ 			{
+ 				using var stream = GetStream(relativePath);
+ 				using var reader = new StreamReader(stream);
+ 				return reader.ReadToEnd();
+ 			}
+ 			
+ 			/// <summary>
+ 			/// Gets the bytes of the embedded resource at the specified relative path.
+ 			/// </summary>
+ 			static byte[] GetBytes(string relativePath)
+ 			{
+ 				using var stream = GetStream(relativePath);
+ 				var bytes = new byte[stream.Length];
+ 				stream.Read(bytes, 0, bytes.Length);
+ 				return bytes;
+ 			}
+ 			
+ 			/// <summary>
+ 			/// Gets the stream of the embedded resource at the specified relative path.
+ 			/// </summary>
+ 			/// <exception cref="InvalidOperationException"></exception>
+ 			static Stream GetStream(string relativePath)
+ 			{
+ 				var baseName = Assembly.GetExecutingAssembly().GetName().Name;
+ 				var resourceName = relativePath
+ 					.TrimStart('.')
+ 					.Replace('/', '.')
+ 					.Replace('\\', '.');
+ 				
+ 				var manifestResourceName = Assembly.GetExecutingAssembly()
+ 					.GetManifestResourceNames().FirstOrDefault(x => x.EndsWith(resourceName, StringComparison.Ordinal));
+ 				
+ 				if (string.IsNullOrEmpty(manifestResourceName))
+ 					throw new InvalidOperationException($"Did not find required resource ending in '{resourceName}' in assembly '{baseName}'.");
+ 				
+ 				return
+ 					Assembly.GetExecutingAssembly().GetManifestResourceStream(manifestResourceName) ??
+ 					throw new InvalidOperationException($"Did not find required resource '{manifestResourceName}' in assembly '{baseName}'.");
+ 			}
 		}
 {{ end }}
 {{ func render }}
@@ -70,6 +115,8 @@
 
 using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 {{ if Namespace }}
 namespace {{ Namespace }};
 {{~ end ~}}
