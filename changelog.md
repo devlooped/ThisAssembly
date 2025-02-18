@@ -1,5 +1,21 @@
 # Changelog
 
+## [v2.0.12](https://github.com/devlooped/ThisAssembly/tree/v2.0.12) (2025-02-18)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.11...v2.0.12)
+
+:sparkles: Implemented enhancements:
+
+- Improve detection of git root by leveraging SourceLink [\#444](https://github.com/devlooped/ThisAssembly/pull/444) (@kzu)
+
+:bug: Fixed bugs:
+
+- Avoid conflicts with multiple helper classes from multiple assemblies [\#443](https://github.com/devlooped/ThisAssembly/pull/443) (@kzu)
+
+:hammer: Other:
+
+- Multiple assemblies using `ThisAssembly.Resources` result in CS0436 due to `EmbeddedResource` being in global namespace referenced multiple times [\#442](https://github.com/devlooped/ThisAssembly/issues/442)
+
 ## [v2.0.11](https://github.com/devlooped/ThisAssembly/tree/v2.0.11) (2025-02-08)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.10...v2.0.11)
