@@ -45,6 +45,7 @@
   <!-- Make sure git info is available before calling source generators -->
   <Target Name="InitializeGitInformation"
           BeforeTargets="GenerateMSBuildEditorConfigFileShouldRun"
+          AfterTargets="InitializeSourceControlInformation"
           DependsOnTargets="InitializeSourceControlInformation;$(SourceLinkUrlInitializerTargets)">
 
     <PropertyGroup Condition="'$(SourceControlInformationFeatureSupported)' == 'true'">
@@ -71,10 +72,12 @@
     <Warning Code="TA001" Text="A valid SourceLink provider does not seem to be installed for the current repository/project. Some values may be empty." Condition="'$(SourceLinkUrl)' == ''" />
     
     <PropertyGroup Condition="'$(RepositoryBranch)' == '' and '$(RepositoryRoot)' != ''">
-      <!-- We may not be in CI at all. If we got a git repo root, we can directly read HEAD -->
-      <RepositoryHead>$(RepositoryRoot).git/HEAD</RepositoryHead>
-      <RepositoryBranch Condition="Exists($(RepositoryHead))">$([System.IO.File]::ReadAllText($(RepositoryHead)).Trim())</RepositoryBranch>
-      <RepositoryBranch Condition="$(RepositoryBranch) != ''">$(RepositoryBranch.TrimStart("ref:").Trim().TrimStart("refs").Trim("/").TrimStart("heads").Trim("/").Trim())</RepositoryBranch>
+      <!-- If we didnd't populate from CI/ENV, we can still use the source control provider itself to get the branch name -->
+      <_ThisAssemblyGitBranchName>@(_ThisAssemblyGitSourceRoot -> '%(BranchName)')</_ThisAssemblyGitBranchName>
+      <!-- The above only works on .NET SDK 9.0+, so account for 8.0 implicit nuget package -->
+
+      <_ThisAssemblyGitBranchName Condition="'$(_ThisAssemblyGitBranchName)' == ''">$([System.IO.File]::ReadAllText('$(RepositoryRoot).git/HEAD').Trim())</_ThisAssemblyGitBranchName>
+      <RepositoryBranch>$(_ThisAssemblyGitBranchName.TrimStart("ref:").Trim().Replace('refs/heads/', '').Replace('refs/tags/', ''))</RepositoryBranch>
     </PropertyGroup>
 
   </Target>
