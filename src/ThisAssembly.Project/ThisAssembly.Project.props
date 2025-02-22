@@ -7,6 +7,9 @@
     <ProjectProperty Include="TargetFrameworkIdentifier" />
     <ProjectProperty Include="TargetFrameworkMoniker" />
     <ProjectProperty Include="TargetFrameworkVersion" />
+
+    <ProjectProperty Include="RuntimeIdentifier" />
+    <ProjectProperty Include="RuntimeIdentifiers" />
   </ItemGroup>
 
 </Project>
