@@ -126,6 +126,11 @@ public record class Tests(ITestOutputHelper Output)
 
     /// <summary />
     [Fact]
+    public void CanUseProjectProperty2()
+        => Assert.NotEmpty(ThisAssembly.Project.RuntimeIdentifiers);
+
+    /// <summary />
+    [Fact]
     public void CanUseStringsNamedArguments()
         => Assert.NotNull(ThisAssembly.Strings.Named("hello", "world"));
 

@@ -26,6 +26,7 @@
     <ProjectFileComment>$(ProjectFile)</ProjectFileComment>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <WarningsAsErrors>true</WarningsAsErrors>
+    <RuntimeIdentifiers>win-x64;linux-x86</RuntimeIdentifiers>
   </PropertyGroup>
 
   <Import Project="..\*\ThisAssembly*.props" />
