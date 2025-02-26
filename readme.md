@@ -4,7 +4,7 @@
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly)
 [![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=green)](https://www.nuget.org/packages/ThisAssembly)
 [![License](https://img.shields.io/github/license/devlooped/ThisAssembly.svg?color=blue)](https://github.com//devlooped/ThisAssembly/blob/main/license.txt)
-[![Build](https://github.com/devlooped/ThisAssembly/workflows/build/badge.svg?branch=main)](https://github.com/devlooped/ThisAssembly/actions)
+[![Build](https://github.com/devlooped/ThisAssembly/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/devlooped/ThisAssembly/actions)
 
 <!-- include https://github.com/devlooped/.github/raw/main/sponsorlinkr.md -->
 *This project uses [SponsorLink](https://github.com/devlooped#sponsorlink) to attribute sponsor status (direct, indirect or implicit).*
@@ -552,7 +552,7 @@ public partial ThisAssembly
 # Dogfooding
 
 [![CI Version](https://img.shields.io/endpoint?url=https://shields.kzu.io/vpre/Stunts/main&label=nuget.ci&color=brightgreen)](https://pkg.kzu.io/index.json)
-[![Build](https://github.com/devlooped/ThisAssembly/workflows/build/badge.svg?branch=main)](https://github.com/devlooped/ThisAssembly/actions)
+[![Build](https://github.com/devlooped/ThisAssembly/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/devlooped/ThisAssembly/actions)
 
 We also produce CI packages from branches and pull requests so you can dogfood builds as quickly as they are produced. 
 
