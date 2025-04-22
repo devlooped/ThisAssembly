@@ -171,7 +171,7 @@ Please consider supporting the project by sponsoring at {0} and running 'sponsor
     <value>You are a contributor to the project, you rock 💟!</value>
   </data>
   <data name="Editor_Disabled" xml:space="preserve">
-    <value>Editor usage of {0} requires an active sponsorship. Learn more at {1}.</value>
+    <value>Editor usage of {0} without warnings requires an active sponsorship. Learn more at {1}.</value>
   </data>
   <data name="Grace_Description" xml:space="preserve">
     <value>Sponsoring projects you depend on ensures they remain active, and that you get the support you need. It's also super affordable and available worldwide! 
