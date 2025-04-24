@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.13](https://github.com/devlooped/ThisAssembly/tree/v2.0.13) (2025-04-24)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.12...v2.0.13)
+
+:sparkles: Implemented enhancements:
+
+- Add RuntimeIdentifer\(s\) properties to project constants [\#446](https://github.com/devlooped/ThisAssembly/pull/446) (@kzu)
+
 ## [v2.0.12](https://github.com/devlooped/ThisAssembly/tree/v2.0.12) (2025-02-18)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.11...v2.0.12)
