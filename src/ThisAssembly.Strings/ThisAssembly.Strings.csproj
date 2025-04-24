@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -31,7 +31,7 @@ such as "Hello {name}".
   <ItemGroup>
     <PackageReference Include="NuGetizer" Version="1.2.2" />
 
-    <PackageReference Include="Scriban" Version="5.10.0" Pack="false" IncludeAssets="build" />
+    <PackageReference Include="Scriban" Version="6.2.1" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
 
