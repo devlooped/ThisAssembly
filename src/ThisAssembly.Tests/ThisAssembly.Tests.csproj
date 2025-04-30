@@ -119,4 +119,18 @@
     <CompilerVisibleProperty Include="ThisAssembly" />
   </ItemGroup>
 
+  <Target Name="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes" Inputs="$(MSBuildProjectFullPath)" Outputs="$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk">
+    <Exec Command="curl --silent --output $(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk https://sponsorlink.devlooped.com/jwk" />
+  </Target>
+
+  <Target Name="ReadDevloopedJwk" DependsOnTargets="DownloadDevloopedJwk" BeforeTargets="GetAssemblyAttributes">
+    <PropertyGroup>
+      <!-- Read public key we validate manifests against -->
+      <DevloopedJwk>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)devlooped.jwk'))</DevloopedJwk>
+    </PropertyGroup>
+    <ItemGroup>
+      <AssemblyMetadata Include="Funding.GitHub.devlooped" Value="$(DevloopedJwk.Trim())" />
+    </ItemGroup>
+  </Target>
+
 </Project>

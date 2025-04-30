@@ -45,7 +45,6 @@
         {{ obsolete }}
         {{~ if RawStrings && value.IsText ~}}
 	    public {{ Modifier }} string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} ={{ Lambda }} 
-
 """
 {{ value.Value }}
 """;

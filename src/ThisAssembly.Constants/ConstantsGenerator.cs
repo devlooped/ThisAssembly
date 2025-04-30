@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Linq;
 using Devlooped.Sponsors;
@@ -94,12 +95,12 @@ public class ConstantsGenerator : IIncrementalGenerator
         }
 
         if (comment != null)
-            comment = "/// " + string.Join(Environment.NewLine + "/// ", new XText(comment).ToString().Trim().Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
+            comment = "/// " + string.Join(Environment.NewLine + "/// ", new XText(comment).ToString().Trim().Replace("`n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
         else
-            comment = "/// " + string.Join(Environment.NewLine + "/// ", new XText(value).ToString().Replace("\\n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
+            comment = "/// " + string.Join(Environment.NewLine + "/// ", new XText(value).ToString().Replace("`n", Environment.NewLine).Trim(['\r', '\n']).Split([Environment.NewLine], StringSplitOptions.None));
 
         // Revert normalization of newlines performed in MSBuild to workaround the limitation in editorconfig.
-        var rootArea = Area.Load([new(name, value.Replace("\\n", Environment.NewLine).Trim(['\r', '\n']), comment, type ?? "string"),], root, rootComment);
+        var rootArea = Area.Load([new(name, value.Replace("`n", Environment.NewLine).Trim(['\r', '\n']), comment, type ?? "string"),], root, rootComment);
         // For now, we only support C# though
         var file = parse.Language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
@@ -123,17 +124,35 @@ public class ConstantsGenerator : IIncrementalGenerator
 
         var output = template.Render(model, member => member.Name);
 
-        // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
-        // structures via functions.
         if (parse.Language == LanguageNames.CSharp)
         {
-            output = SyntaxFactory
-                .ParseCompilationUnit(output, options: cs)
-                .NormalizeWhitespace()
-                .GetText()
-                .ToString();
+            // Apply formatting since indenting isn't that nice in Scriban when rendering nested 
+            // structures via functions.
+            // We alos rewrite to prepend a newline leading trivia before the raw string literals if any
+            var node = new RawStringLiteralRewriter().Visit(
+                SyntaxFactory.ParseCompilationUnit(output, options: cs).NormalizeWhitespace(eol: Environment.NewLine));
+
+            output = node.GetText().ToString();
         }
 
         spc.AddSource($"{root}.{name}.g.cs", SourceText.From(output, Encoding.UTF8));
+    }
+
+    class RawStringLiteralRewriter : CSharpSyntaxRewriter
+    {
+        public override SyntaxToken VisitToken(SyntaxToken token)
+        {
+            // See https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.csharp.syntaxkind?view=roslyn-dotnet-4.13.0
+            // MultiLineRawStringLiteralToken = 8519
+            // Utf8MultiLineRawStringLiteralToken = 8522
+            if (token.RawKind == 8519 || token.RawKind == 8522)
+                return token.WithLeadingTrivia(
+                    token.LeadingTrivia.Add(
+                        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
+                        SyntaxFactory.CarriageReturnLineFeed :
+                        SyntaxFactory.LineFeed));
+
+            return base.VisitToken(token);
+        }
     }
 }

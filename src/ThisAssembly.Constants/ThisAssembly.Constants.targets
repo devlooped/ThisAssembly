@@ -50,8 +50,8 @@
     <ItemGroup>
       <!-- Normalize newlines to avoid losing content -->
       <Constant Update="@(Constant)">
-        <Value>$([MSBuild]::ValueOrDefault('%(Constant.Value)', '').Replace($([System.Environment]::NewLine), '\n'))</Value>
-        <Comment>$([MSBuild]::ValueOrDefault('%(Constant.Comment)', '').Replace($([System.Environment]::NewLine), '\n'))</Comment>
+        <Value>$([MSBuild]::ValueOrDefault('%(Constant.Value)', '').Replace('&#xD;&#xA;', '`n').Replace('&#xA;', '`n'))</Value>
+        <Comment>$([MSBuild]::ValueOrDefault('%(Constant.Comment)', '').Replace('&#xD;&#xA;', '`n').Replace('&#xA;', '`n'))</Comment>
       </Constant>
     </ItemGroup>
   </Target>
