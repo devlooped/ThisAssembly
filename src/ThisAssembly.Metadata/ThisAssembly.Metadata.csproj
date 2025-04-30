@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -44,7 +44,7 @@ C#:
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.2.2" />
+    <PackageReference Include="NuGetizer" Version="1.2.4" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -39,7 +39,7 @@ or
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.2.2" />
+    <PackageReference Include="NuGetizer" Version="1.2.4" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5240" IncludeAssets="none" />
   </ItemGroup>
 
