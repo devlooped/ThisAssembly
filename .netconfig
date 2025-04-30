@@ -346,8 +346,8 @@
 	weak
 [file "src/SponsorLink/SponsorLink.Analyzer.Tests.targets"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink.Analyzer.Tests.targets
-	sha = 1454a8f481610a6cf33adfc6082a19421bbed43c
-	etag = a06c8e06228a859eb15ba9ffad88c15874048a2ee23e515029fc36a78df1349c
+	sha = 869f74bcf8103598591dd7550c77d36a2405ef87
+	etag = 9daeb728e943a8cdc6b5191aa6aa881ec31326c12d719b583fd76f5617f1f5a8
 	weak
 [file "src/SponsorLink/SponsorLink/Resources.es-AR.resx"]
 	url = https://github.com/devlooped/SponsorLink/blob/main/samples/dotnet/SponsorLink/Resources.es-AR.resx
