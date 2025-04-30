@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.14](https://github.com/devlooped/ThisAssembly/tree/v2.0.14) (2025-04-30)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.13...v2.0.14)
+
+:sparkles: Implemented enhancements:
+
+- Ensure we properly format multiline raw strings [\#458](https://github.com/devlooped/ThisAssembly/pull/458) (@kzu)
+
 ## [v2.0.13](https://github.com/devlooped/ThisAssembly/tree/v2.0.13) (2025-04-24)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.12...v2.0.13)
