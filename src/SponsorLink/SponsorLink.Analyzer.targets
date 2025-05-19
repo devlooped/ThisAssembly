@@ -85,14 +85,14 @@
     <PackageReference Include="Humanizer.Core" VersionOverride="2.14.1" PrivateAssets="all" Pack="$(PackMergedAssemblies)" />
     <PackageReference Include="Humanizer.Core.es" VersionOverride="2.14.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" VersionOverride="8.10.0" PrivateAssets="all" Pack="$(PackMergedAssemblies)" />
-    <PackageReference Include="ILRepack" VersionOverride="2.0.37" PrivateAssets="all" Pack="false" />
+    <PackageReference Include="ILRepack" VersionOverride="2.0.42" PrivateAssets="all" Pack="false" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(ManagePackageVersionsCentrally)' != 'true'">
     <PackageReference Include="Humanizer.Core" Version="2.14.1" PrivateAssets="all" Pack="$(PackMergedAssemblies)" />
     <PackageReference Include="Humanizer.Core.es" Version="2.14.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.10.0" PrivateAssets="all" Pack="$(PackMergedAssemblies)" />
-    <PackageReference Include="ILRepack" Version="2.0.37" PrivateAssets="all" Pack="false" />
+    <PackageReference Include="ILRepack" Version="2.0.42" PrivateAssets="all" Pack="false" />
   </ItemGroup>
 
   <Target Name="EmitFunding" BeforeTargets="CompileDesignTime;CoreCompile" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)SponsorLink.g.cs">
