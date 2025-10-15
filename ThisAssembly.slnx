@@ -1,0 +1,13 @@
+<Solution>
+  <Project Path="src/Shared/Shared.shproj" />
+  <Project Path="src/ThisAssembly.AssemblyInfo/ThisAssembly.AssemblyInfo.csproj" />
+  <Project Path="src/ThisAssembly.Constants/ThisAssembly.Constants.csproj" />
+  <Project Path="src/ThisAssembly.Git/ThisAssembly.Git.csproj" />
+  <Project Path="src/ThisAssembly.Metadata/ThisAssembly.Metadata.csproj" />
+  <Project Path="src/ThisAssembly.Project/ThisAssembly.Project.csproj" />
+  <Project Path="src/ThisAssembly.Resources/ThisAssembly.Resources.csproj" />
+  <Project Path="src/ThisAssembly.Strings/ThisAssembly.Strings.csproj" />
+  <Project Path="src/ThisAssembly.Tests/ThisAssembly.Tests.csproj" />
+  <Project Path="src/ThisAssembly.Vsix/ThisAssembly.Vsix.csproj" />
+  <Project Path="src/ThisAssembly/ThisAssembly.csproj" />
+</Solution>
