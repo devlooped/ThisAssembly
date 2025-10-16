@@ -39,7 +39,7 @@ or
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.4.2" />
+    <PackageReference Include="NuGetizer" Version="1.4.3" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5240" IncludeAssets="none" />
   </ItemGroup>
 
