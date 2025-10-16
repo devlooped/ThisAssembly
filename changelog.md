@@ -1,8 +1,8 @@
 # Changelog
 
-## [untagged-984175ddab49d6e173ff](https://github.com/devlooped/ThisAssembly/tree/untagged-984175ddab49d6e173ff) (2025-10-16)
+## [v2.1.0-beta](https://github.com/devlooped/ThisAssembly/tree/v2.1.0-beta) (2025-10-16)
 
-[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.14...untagged-984175ddab49d6e173ff)
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.14...v2.1.0-beta)
 
 :hammer: Other:
 
