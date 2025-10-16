@@ -1,8 +1,0 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="Devlooped.Sponsors.targets"/>
-  <ItemGroup>
-    <!-- Brings in the analyzer file to report installation time -->
-    <FundingPackageId Include="SponsorableLib" />
-    <CompilerVisibleProperty Include="MSBuildProjectFullPath" />
-  </ItemGroup>
-</Project>

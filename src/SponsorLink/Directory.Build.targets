@@ -1,8 +1,0 @@
-<Project>
-
-  <ItemGroup Condition="Exists('$(PackageOutputPath)\SponsorableLib.$(Version).nupkg')">
-    <PackageReference Update="@(PackageReference -> WithMetadataValue('Identity', 'SponsorableLib'))"
-                      Version="$(Version)" />
-  </ItemGroup>
-
-</Project>

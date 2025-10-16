@@ -3,12 +3,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
-using static Devlooped.Sponsors.SponsorLink;
 
 namespace ThisAssembly;
 
@@ -52,33 +50,20 @@ public class StringsGenerator : IIncrementalGenerator
 
 
         context.RegisterSourceOutput(
-            files.Combine(right).Combine(context.ParseOptionsProvider.Combine(context.GetStatusOptions())),
+            files.Combine(right).Combine(context.ParseOptionsProvider),
             GenerateSource);
     }
 
     static void GenerateSource(SourceProductionContext spc,
-        (((string fileName, SourceText? text, string resourceName), ((string? ns, string? visibility), string language)), (ParseOptions parse, StatusOptions options)) arg)
+        (((string fileName, SourceText? text, string resourceName), ((string? ns, string? visibility), string language)), ParseOptions parse) arg)
     {
-        var (((fileName, resourceText, resourceName), ((ns, visibility), language)), (parse, options)) = arg;
+        var (((fileName, resourceText, resourceName), ((ns, visibility), language)), parse) = arg;
 
         var file = language.Replace("#", "Sharp") + ".sbntxt";
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
 
         var rootArea = ResourceFile.LoadText(resourceText!.ToString(), "Strings");
         var model = new Model(rootArea, resourceName, ns, "public".Equals(visibility, StringComparison.OrdinalIgnoreCase));
-        if (IsEditor)
-        {
-            var status = Diagnostics.GetOrSetStatus(options);
-            if (status == SponsorStatus.Unknown || status == SponsorStatus.Expired)
-            {
-                model.Warn = string.Format(CultureInfo.CurrentCulture, Resources.Editor_Disabled, Funding.Product, Funding.HelpUrl);
-                model.Remarks = Resources.Editor_DisabledRemarks;
-            }
-            else if (status == SponsorStatus.Grace && Diagnostics.TryGet() is { } grace && grace.Properties.TryGetValue(nameof(SponsorStatus.Grace), out var days))
-            {
-                model.Remarks = string.Format(CultureInfo.CurrentCulture, Resources.Editor_GraceRemarks, days);
-            }
-        }
 
         var output = template.Render(model, member => member.Name);
 

@@ -8,7 +8,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-{{- func summary -}}
+{{ func summary }}
 	    /// <summary>
         {{~ if $0.Comment ~}}
         {{ $0.Comment }}
@@ -16,22 +16,6 @@
 	    /// => @"{{ $0.EscapedValue }}"
         {{~ end ~}}
 	    /// </summary>
-{{- end -}}
-{{ func obsolete }}
-{{~ if Warn ~}}
-[Obsolete("{{ Warn }}", false
-#if NET6_0_OR_GREATER
-    , UrlFormat = "{{ Url }}"
-#endif
-)]
-
-{{~ end }}
-{{ end }}
-{{ func remarks }}
-{{~ if Remarks ~}}
-{{ Remarks }}
-/// <see href="{{ Url }}"/>
-{{~ end ~}}
 {{ end }}
 {{ func render }}
     /// <summary>
@@ -41,8 +25,6 @@
     {
         {{~ for value in $0.Values ~}}
         {{- summary value -}}
-        {{- remarks -}}
-        {{ obsolete }}
         {{~ if RawStrings && value.IsText ~}}
 	    public {{ Modifier }} string {{ value.Name | string.replace "-" "_" | string.replace " " "_" }} ={{ Lambda }} 
 """

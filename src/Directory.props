@@ -14,6 +14,8 @@
     <!-- ThisAssembly shouldn't propagate transitively by default -->
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageProjectUrl>https://clarius.org/ThisAssembly</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>OSMFEULA.txt</PackageLicenseFile>
 
     <!-- See https://github.com/scriban/scriban#source-embedding -->
     <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
@@ -29,5 +31,9 @@
     <SignAssembly>false</SignAssembly>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\osmfeula.txt" Link="osmfeula.txt" PackagePath="OSMFEULA.txt" />
+  </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -37,19 +37,13 @@ C#:
     </Description>
   </PropertyGroup>
 
-  <PropertyGroup Label="SponsorLink">
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
-    <!-- We also bring in the additional packages that just customize ThisAssembly.Constants -->
-    <FundingPackageId>ThisAssembly;ThisAssembly.Git;ThisAssembly.Metadata;GitInfo;$(PackageId)</FundingPackageId>
-  </PropertyGroup>
-
   <ItemGroup>
     <None Remove="CSharp.sbntxt" />
     <EmbeddedResource Include="CSharp.sbntxt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.2.4" />
+    <PackageReference Include="NuGetizer" Version="1.4.2" />
 
     <PackageReference Include="Scriban" Version="6.2.1" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -58,10 +52,6 @@ C#:
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" Pack="false" />
     <PackageReference Include="PolySharp" Version="1.15.0" PrivateAssets="All" />
   </ItemGroup>
-
-  <Target Name="VerifySponsorLink" AfterTargets="Build">
-    <Error Condition="'$(SponsorLinkImported)' != 'true'" Text="SponsorLink was not imported." />
-  </Target>
 
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
 
