@@ -26,16 +26,10 @@
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase)) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.', StringComparison.OrdinalIgnoreCase))"
       />
-      <!-- Brings in System/Microsoft.IdentityModel, System.Text.Encodings.Web, System.Text.Json  -->
-      <PackCopyLocalAssemblies Include="@(ReferenceCopyLocalAssemblies)" Condition="
-        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
-        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.IdentityModel', StringComparison.OrdinalIgnoreCase)) Or
-        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.Text', StringComparison.OrdinalIgnoreCase))"
-      />
       <PackageFile Include="@(PackCopyLocalAssemblies)" PackFolder="$(PackFolder)" />
     </ItemGroup>
   </Target>
-
+  
   <Target Name="SetLocalVersion" Condition="!$(CI)">
     <GetVersion>
       <Output TaskParameter="Version" PropertyName="Version" />
@@ -66,4 +60,5 @@
     </Task>
   </UsingTask>
 
+  <Import Project="ILRepack.targets" Condition="'$(IsAnalyzer)' == 'true'" />
 </Project>
