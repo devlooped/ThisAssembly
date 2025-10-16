@@ -1,4 +1,4 @@
-<!-- include https://github.com/devlooped/.github/raw/main/sponsorlinkr.md -->
+<!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
 <!-- #project -->
 This package generates a static `ThisAssembly.Project` class with public 
 constants exposing project properties that have been opted into this mechanism by adding 

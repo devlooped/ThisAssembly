@@ -16,17 +16,6 @@
 	    /// = "{{ $0.Value }}"
         {{~ end ~}}
 	    /// </summary>
-        {{~ if Remarks ~}}
-        {{ Remarks }}
-        /// <see href="{{ Url }}"/>
-        {{~ end ~}}
-        {{~ if Warn ~}}
-        [Obsolete("{{ Warn }}", false
-        #if NET6_0_OR_GREATER
-            , UrlFormat = "{{ Url }}"
-        #endif
-        )]
-        {{~ end ~}}
 {{ end }}
 {{ func render }}
     /// <summary />
@@ -92,6 +81,5 @@ namespace {{ Namespace }};
     /// <summary>
     /// Provides access to the assembly strings.
     /// </summary>
-    {{- remarks -}}
     {{ render RootArea ResourceName }}
 }

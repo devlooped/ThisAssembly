@@ -44,7 +44,7 @@ C#:
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.2.4" />
+    <PackageReference Include="NuGetizer" Version="1.4.2" />
   </ItemGroup>
 
   <ItemGroup>

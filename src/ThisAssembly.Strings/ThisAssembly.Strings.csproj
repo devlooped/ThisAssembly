@@ -23,13 +23,8 @@ such as "Hello {name}".
 </Description>
   </PropertyGroup>
 
-  <PropertyGroup Label="SponsorLink">
-    <CustomAfterMicrosoftCSharpTargets>$(MSBuildThisFileDirectory)..\SponsorLink\SponsorLink.Analyzer.targets</CustomAfterMicrosoftCSharpTargets>
-    <FundingPackageId>ThisAssembly;$(PackageId)</FundingPackageId>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.2.4" />
+    <PackageReference Include="NuGetizer" Version="1.4.2" />
 
     <PackageReference Include="Scriban" Version="6.2.1" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -40,9 +35,5 @@ such as "Hello {name}".
   </ItemGroup>
 
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
-
-  <Target Name="VerifySponsorLink" AfterTargets="Build">
-    <Error Condition="'$(SponsorLinkImported)' != 'true'" Text="SponsorLink was not imported." />
-  </Target>
 
 </Project>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using Microsoft.IdentityModel.Tokens;
 using Xunit;
 using Xunit.Abstractions;
 //using ThisAssembly = ThisAssemblyTests
@@ -192,8 +191,4 @@ public record class Tests(ITestOutputHelper Output)
     [Fact]
     public void CanUseSemicolonsInConstant()
         => Assert.Equal("A;B;C", ThisAssembly.Constants.WithSemiColon);
-
-    /// <summary />
-    [Fact]
-    public void CanReadJsonConstant() => JsonWebKey.Create(ThisAssembly.Metadata.Funding.GitHub.devlooped);
 }

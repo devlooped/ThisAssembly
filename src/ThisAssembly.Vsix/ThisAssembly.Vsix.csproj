@@ -23,9 +23,9 @@ MSBuild project properties from the VSIX manifest. For example:
 
 or 
 
-  &lt;PackageManifest Version=&quot;2.0.0&quot; ...&gt;
+  &lt;PackageManifest Version="2.0.0" ...&gt;
     &lt;Metadata&gt;
-      &lt;Identity Id=&quot;|%CurrentProject%;VsixId|&quot; Version=&quot;|%CurrentProject%;VsixVersion|&quot; Language=&quot;|%CurrentProject%;VsixLanguage|&quot; Publisher=&quot;|%CurrentProject%;VsixPublisher|&quot; /&gt;
+      &lt;Identity Id="|%CurrentProject%;VsixId|" Version="|%CurrentProject%;VsixVersion|" Language="|%CurrentProject%;VsixLanguage|" Publisher="|%CurrentProject%;VsixPublisher|" /&gt;
       &lt;DisplayName&gt;|%CurrentProject%;VsixDisplayName|&lt;/DisplayName&gt;
       &lt;Description&gt;|%CurrentProject%;VsixDescription|&lt;/Description&gt;
     &lt;/Metadata&gt;
@@ -39,7 +39,7 @@ or
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.2.4" />
+    <PackageReference Include="NuGetizer" Version="1.4.2" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5240" IncludeAssets="none" />
   </ItemGroup>
 

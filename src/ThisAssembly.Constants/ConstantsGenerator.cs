@@ -5,13 +5,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Linq;
-using Devlooped.Sponsors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
-using static Devlooped.Sponsors.SponsorLink;
-using Resources = Devlooped.Sponsors.Resources;
 
 namespace ThisAssembly;
 
@@ -72,16 +69,14 @@ public class ConstantsGenerator : IIncrementalGenerator
             .Combine(context.ParseOptionsProvider);
 
         var inputs = files.Combine(right);
-        // this is required to ensure status is registered properly independently of analyzer runs. 
-        var options = context.GetStatusOptions();
 
-        context.RegisterSourceOutput(inputs.Combine(options), GenerateConstant);
+        context.RegisterSourceOutput(inputs, GenerateConstant);
     }
 
     void GenerateConstant(SourceProductionContext spc,
-        (((string name, string value, string? type, string? comment, string root, string rootComment), ((string? ns, string? visibility), ParseOptions parse)), StatusOptions options) args)
+        ((string name, string value, string? type, string? comment, string root, string rootComment), ((string? ns, string? visibility), ParseOptions parse)) args)
     {
-        var (((name, value, type, comment, root, rootComment), ((ns, visibility), parse)), options) = args;
+        var ((name, value, type, comment, root, rootComment), ((ns, visibility), parse)) = args;
         var cs = (CSharpParseOptions)parse;
 
         if (!string.IsNullOrWhiteSpace(ns) &&
@@ -107,20 +102,6 @@ public class ConstantsGenerator : IIncrementalGenerator
         var model = new Model(rootArea, ns, "public".Equals(visibility, StringComparison.OrdinalIgnoreCase));
         if ((int)cs.LanguageVersion >= 1100)
             model.RawStrings = true;
-
-        if (IsEditor)
-        {
-            var status = Diagnostics.GetOrSetStatus(options);
-            if (status == SponsorStatus.Unknown || status == SponsorStatus.Expired)
-            {
-                model.Warn = string.Format(CultureInfo.CurrentCulture, Resources.Editor_Disabled, Funding.Product, Funding.HelpUrl);
-                model.Remarks = Resources.Editor_DisabledRemarks;
-            }
-            else if (status == SponsorStatus.Grace && Diagnostics.TryGet() is { } grace && grace.Properties.TryGetValue(nameof(SponsorStatus.Grace), out var days))
-            {
-                model.Remarks = string.Format(CultureInfo.CurrentCulture, Resources.Editor_GraceRemarks, days);
-            }
-        }
 
         var output = template.Render(model, member => member.Name);
 

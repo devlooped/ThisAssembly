@@ -6,11 +6,7 @@
 [![License](https://img.shields.io/github/license/devlooped/ThisAssembly.svg?color=blue)](https://github.com//devlooped/ThisAssembly/blob/main/license.txt)
 [![Build](https://github.com/devlooped/ThisAssembly/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/devlooped/ThisAssembly/actions)
 
-<!-- include https://github.com/devlooped/.github/raw/main/sponsorlinkr.md -->
-*This project uses [SponsorLink](https://github.com/devlooped#sponsorlink) to attribute sponsor status (direct, indirect or implicit).*
-*For IDE usage (without warnings), sponsor status is required. IDE-only warnings will be issued after a grace period otherwise.*
-
-<!-- https://github.com/devlooped/.github/raw/main/sponsorlinkr.md -->
+<!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
 
 <!-- #meta -->
 Expose project and assembly level information as constants in the ThisAssembly 
