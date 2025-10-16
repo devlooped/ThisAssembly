@@ -1,5 +1,6 @@
+[![EULA](https://img.shields.io/badge/EULA-OSMF-blue?labelColor=black&color=C9FF30)](osmfeula.txt)
+[![OSS](https://img.shields.io/github/license/devlooped/oss.svg?color=blue)](license.txt) 
 <!-- #strings -->
-
 This package generates a static `ThisAssembly.Strings` class with public 
 constants exposing string resources in .resx files or methods with the right number of 
 parameters for strings that use formatting parameters. 

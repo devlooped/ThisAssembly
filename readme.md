@@ -2,9 +2,9 @@
 ============
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=green)](https://www.nuget.org/packages/ThisAssembly)
-[![License](https://img.shields.io/github/license/devlooped/ThisAssembly.svg?color=blue)](https://github.com//devlooped/ThisAssembly/blob/main/license.txt)
-[![Build](https://github.com/devlooped/ThisAssembly/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/devlooped/ThisAssembly/actions)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly)
+[![EULA](https://img.shields.io/badge/EULA-OSMF-blue?labelColor=black&color=C9FF30)](osmfeula.txt)
+[![OSS](https://img.shields.io/github/license/devlooped/oss.svg?color=blue)](license.txt) 
 
 <!-- #meta -->
 Expose project and assembly level information as constants in the ThisAssembly 
@@ -43,7 +43,7 @@ OSMF tier (starting at just $10!).
 
 ## ThisAssembly.AssemblyInfo
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.AssemblyInfo.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.AssemblyInfo)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.AssemblyInfo.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.AssemblyInfo)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.AssemblyInfo.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly.AssemblyInfo)
 
 <!-- include src/ThisAssembly.AssemblyInfo/readme.md#assembly -->
 <!-- #assembly -->
@@ -72,7 +72,7 @@ on the `ThisAssembly.Info` class.
 ## ThisAssembly.Constants
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Constants.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Constants)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Constants.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Constants)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Constants.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly.Constants)
 
 <!-- include src/ThisAssembly.Constants/readme.md#constants -->
 <!-- #constants -->
@@ -145,7 +145,7 @@ Which results in:
 ## ThisAssembly.Git
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Git.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Git)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Git.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Git)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Git.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly.Git)
 
 <!-- include src/ThisAssembly.Git/readme.md#git -->
 <!-- #git -->
@@ -225,7 +225,7 @@ packaging experience possible:
 ## ThisAssembly.Metadata
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Metadata.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Metadata)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Metadata.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Metadata)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Metadata.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly.Metadata)
 
 <!-- include src/ThisAssembly.Metadata/readme.md#metadata -->
 <!-- #metadata -->
@@ -253,7 +253,7 @@ for this example.
 ## ThisAssembly.Project
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Project.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Project)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Project.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Project)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Project.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly.Project)
 
 <!-- include src/ThisAssembly.Project/readme.md#project -->
 <!-- #project -->
@@ -280,7 +280,7 @@ them as `ProjectProperty` MSBuild items in the project file, such as:
 ## ThisAssembly.Resources
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Resources.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Resources)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Resources.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Resources)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Resources.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly.Resources)
 
 This package generates a static `ThisAssembly.Resources` class with public 
 properties exposing shortcuts to retrieve the contents of embedded resources.
@@ -360,7 +360,7 @@ The following MSBuild properties can be used to customize the generated code:
 ## ThisAssembly.Strings
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Strings.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Strings)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Strings.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Strings)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Strings.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly.Strings)
 
 <!-- include src/ThisAssembly.Strings/readme.md#strings -->
 <!-- #strings -->
@@ -447,7 +447,7 @@ The following MSBuild properties can be used to customize the generated code:
 ## ThisAssembly.Vsix
 
 [![Version](https://img.shields.io/nuget/vpre/ThisAssembly.Vsix.svg?color=royalblue)](https://www.nuget.org/packages/ThisAssembly.Vsix)
-[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Vsix.svg?color=green)](https://www.nuget.org/packages/ThisAssembly.Vsix)
+[![Downloads](https://img.shields.io/nuget/dt/ThisAssembly.Vsix.svg?color=darkmagenta)](https://www.nuget.org/packages/ThisAssembly.Vsix)
 
 <!-- include src/ThisAssembly.Vsix/readme.md#vsix -->
 <!-- #vsix -->

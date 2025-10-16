@@ -1,6 +1,7 @@
+[![EULA](https://img.shields.io/badge/EULA-OSMF-blue?labelColor=black&color=C9FF30)](osmfeula.txt)
+[![OSS](https://img.shields.io/github/license/devlooped/oss.svg?color=blue)](license.txt) 
 <!-- #vsix -->
-Allows consuming VSIX manifest properties from code, as well as 
-MSBuild project properties from the VSIX manifest. For example:
+Allows consuming VSIX manifest properties from code and MSBuild. 
 
 ![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Vsix.png)
 

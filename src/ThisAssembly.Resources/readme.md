@@ -1,3 +1,5 @@
+[![EULA](https://img.shields.io/badge/EULA-OSMF-blue?labelColor=black&color=C9FF30)](osmfeula.txt)
+[![OSS](https://img.shields.io/github/license/devlooped/oss.svg?color=blue)](license.txt) 
 <!-- #resources -->
 
 This package generates a static `ThisAssembly.Resources` class with public 
