@@ -1,5 +1,3 @@
-<!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
-## Overview
 <!-- #strings -->
 
 This package generates a static `ThisAssembly.Strings` class with public 
@@ -79,5 +77,6 @@ The following MSBuild properties can be used to customize the generated code:
 | ThisAssemblyVisibility  | Sets the visibility modifier of the generated `ThisAssembly` root class. If not set, it will be internal. |
 
 <!-- #strings -->
+<!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->
