@@ -1,4 +1,5 @@
 <!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
+## Overview
 <!-- #strings -->
 
 This package generates a static `ThisAssembly.Strings` class with public 

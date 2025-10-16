@@ -1,4 +1,5 @@
 <!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
+## Overview
 <!-- #resources -->
 
 This package generates a static `ThisAssembly.Resources` class with public 

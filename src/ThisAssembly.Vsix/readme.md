@@ -1,4 +1,5 @@
 <!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
+## Overview
 <!-- #vsix -->
 Allows consuming VSIX manifest properties from code, as well as 
 MSBuild project properties from the VSIX manifest. For example:

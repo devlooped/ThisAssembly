@@ -1,4 +1,5 @@
 <!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
+## Overview
 <!-- #constants -->
 This package generates a static `ThisAssembly.Constants` class with public
 constants for `@(Constant)` MSBuild items in the project.
