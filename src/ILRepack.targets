@@ -1,0 +1,89 @@
+<Project>
+  <!--
+  ILRepack.targets provides MSBuild integration for ILRepack, allowing merging of assemblies into a single output.
+
+  Extension Points:
+  - Property 'ILRepack': Set to 'true' to enable ILRepack (default: true in Release, false otherwise).
+  - Item 'ILRepackInclude': list of assembly filenames to explicitly include in merging.
+  - Item 'ILRepackExclude': list of assembly filenames to exclude from merging.
+  - Item 'ILRepackPreserve': Assemblies that should not be deleted after merging, even if merged.
+  -->
+  
+  <PropertyGroup>
+    <ILRepack Condition="'$(ILRepack)' == '' and '$(Configuration)' == 'Release'">true</ILRepack>
+    <ILRepack Condition="'$(ILRepack)' == ''">false</ILRepack>
+    <!-- We need to turn on copy-local for ILRepack to find deps -->
+    <CopyLocalLockFileAssemblies Condition="'$(CopyLocalLockFileAssemblies)' == '' and '$(ILRepack)' == 'true'">true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <Target Name="EnsureILRepack" BeforeTargets="ILRepack" Condition="'$(ILRepack)' == 'true'">
+    <Exec Command="ilrepack --version" StandardErrorImportance="high" StandardOutputImportance="low" ConsoleToMSBuild="true" IgnoreExitCode="true" ContinueOnError="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="ILRepackOutput" />
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Exec>
+    <Message Importance="high" Text="Using installed dotnet-ilrepack v$(ILRepackOutput)" Condition="$(ExitCode) == '0'" />
+    <Exec Command="dotnet tool install -g dotnet-ilrepack"
+          Condition="$(ExitCode) != '0'" />
+    <Exec Command="ilrepack --version" Condition="$(ExitCode) != '0'" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="ILRepackInstalledOutput" />
+    </Exec>
+    <Message Importance="high" Text="Installed dotnet-ilrepack v$(ILRepackInstalledOutput)" Condition="$(ExitCode) != '0'" />
+  </Target>
+
+  <Target Name="ILRepack" AfterTargets="CoreCompile" BeforeTargets="CopyFilesToOutputDirectory"
+          Inputs="@(IntermediateAssembly -&gt; '%(FullPath)')"
+          Outputs="$(IntermediateOutputPath)ilrepack.txt"
+          Returns="@(MergedAssemblies)"
+          Condition="Exists(@(IntermediateAssembly -&gt; '%(FullPath)')) And '$(ILRepack)' == 'true'">
+    <PropertyGroup>
+      <ILRepackInclude>;@(ILRepackInclude, ';');</ILRepackInclude>
+      <ILRepackExclude>;@(ILRepackExclude, ';');</ILRepackExclude>
+    </PropertyGroup>
+    <ItemGroup>
+      <ReferenceCopyLocalAssemblies Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll' 
+        And !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase))" />
+      
+      <!-- Default to never mergingmerging analyzer, C# or system assemblies -->
+      <MergedAssemblies Include="@(ReferenceCopyLocalAssemblies)" Condition="
+        !$(ILRepackExclude.Contains(';%(FileName);')) And
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CodeAnalysis', StringComparison.OrdinalIgnoreCase)) And
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase)) And
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.', StringComparison.OrdinalIgnoreCase))"
+      />
+      <!-- Brings in explicitly opted-in assemblies -->
+      <MergedAssemblies Include="@(ReferenceCopyLocalAssemblies)" Condition="$(ILRepackInclude.Contains(';%(FileName);'))" />
+    </ItemGroup>
+    <ItemGroup>
+      <ReferenceCopyLocalDirs Include="@(ReferenceCopyLocalPaths -&gt; '%(RootDir)%(Directory)')" />
+      <ReferenceCopyLocalPaths Remove="@(MergedAssemblies)" />
+      <LibDir Include="@(ReferenceCopyLocalDirs -&gt; Distinct())" />
+    </ItemGroup>
+    <PropertyGroup>
+      <AbsoluteAssemblyOriginatorKeyFile Condition="'$(SignAssembly)' == 'true' and '$(AssemblyOriginatorKeyFile)' != ''">$([System.IO.Path]::GetFullPath($([System.IO.Path]::Combine('$(MSBuildProjectDirectory)','$(AssemblyOriginatorKeyFile)'))))</AbsoluteAssemblyOriginatorKeyFile>
+      <ILRepackArgs Condition="'$(AbsoluteAssemblyOriginatorKeyFile)' != ''">/keyfile:"$(AbsoluteAssemblyOriginatorKeyFile)" /delaysign</ILRepackArgs>
+      <ILRepackArgs>$(ILRepackArgs) /internalize</ILRepackArgs>
+      <ILRepackArgs>$(ILRepackArgs) /union</ILRepackArgs>
+      <!-- This is needed to merge types with identical names into one, wich happens with IFluentInterface in Merq and Merq.Core (Xamarin.Messaging dependencies) -->
+      <ILRepackArgs>$(ILRepackArgs) @(LibDir -&gt; '/lib:"%(Identity)."', ' ')</ILRepackArgs>
+      <ILRepackArgs>$(ILRepackArgs) /out:"@(IntermediateAssembly -&gt; '%(FullPath)')"</ILRepackArgs>
+      <ILRepackArgs>$(ILRepackArgs) "@(IntermediateAssembly -&gt; '%(FullPath)')"</ILRepackArgs>
+      <ILRepackArgs>$(ILRepackArgs) @(MergedAssemblies -&gt; '"%(FullPath)"', ' ')</ILRepackArgs>
+      <!--<ILRepackArgs>$(ILRepackArgs) "/lib:$(NetstandardDirectory)"</ILRepackArgs> -->
+      <!-- This is needed for ilrepack to find netstandard.dll, which is referenced by the System.Text.Json assembly -->
+    </PropertyGroup>
+    <Exec Command='ilrepack $(ILRepackArgs)' WorkingDirectory="$(MSBuildProjectDirectory)\$(OutputPath)" StandardErrorImportance="high" IgnoreStandardErrorWarningFormat="true" StandardOutputImportance="low" ConsoleToMSBuild="true" ContinueOnError="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="ILRepackOutput" />
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Exec>
+    <Message Importance="high" Text="$(ILRepackOutput)" Condition="'$(ExitCode)' != '0'" />
+    <Delete Files="$(IntermediateOutputPath)ilrepack.txt" Condition="'$(ExitCode)' != '0'" />
+    <Touch AlwaysCreate="true" Files="$(IntermediateOutputPath)ilrepack.txt" Condition="'$(ExitCode)' == '0'" />
+    <Error Text="$(ILRepackOutput)" Condition="'$(ExitCode)' != '0' And '$(ContinueOnError)' != 'true'" />
+    <ItemGroup>
+      <MergedAssembliesToRemove Include="@(MergedAssemblies)" />
+      <MergedAssembliesToRemove Remove="@(ILRepackPreserve)" />
+    </ItemGroup>
+    <Delete Files="@(MergedAssembliesToRemove -&gt; '$(MSBuildProjectDirectory)\$(OutputPath)%(Filename)%(Extension)')" Condition="Exists('$(MSBuildProjectDirectory)\$(OutputPath)%(Filename)%(Extension)')" />
+  </Target>
+
+</Project>
