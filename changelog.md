@@ -1,5 +1,13 @@
 # Changelog
 
+## [untagged-984175ddab49d6e173ff](https://github.com/devlooped/ThisAssembly/tree/untagged-984175ddab49d6e173ff) (2025-10-16)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.14...untagged-984175ddab49d6e173ff)
+
+:hammer: Other:
+
+- 💟 Adopting SponsorLink in v2.0 [\#352](https://github.com/devlooped/ThisAssembly/issues/352)
+
 ## [v2.0.14](https://github.com/devlooped/ThisAssembly/tree/v2.0.14) (2025-04-30)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.0.13...v2.0.14)
