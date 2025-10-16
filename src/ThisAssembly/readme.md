@@ -1,4 +1,5 @@
 <!-- include ../../readme.md#meta -->
+<!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
 
 ## ThisAssembly.AssemblyInfo
 <!-- include ../ThisAssembly.AssemblyInfo/readme.md#assembly -->
@@ -22,6 +23,5 @@
 <!-- include ../ThisAssembly.Strings/readme.md#strings -->
 
 <!-- include ../visibility.md -->
-<!-- include https://github.com/devlooped/.github/raw/main/osmf.md -->
 <!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
 <!-- exclude -->
