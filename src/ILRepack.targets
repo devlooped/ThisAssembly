@@ -43,7 +43,7 @@
       <ReferenceCopyLocalAssemblies Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll' 
         And !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase))" />
       
-      <!-- Default to never mergingmerging analyzer, C# or system assemblies -->
+      <!-- Default to never merging analyzer, C# or system assemblies -->
       <MergedAssemblies Include="@(ReferenceCopyLocalAssemblies)" Condition="
         !$(ILRepackExclude.Contains(';%(FileName);')) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CodeAnalysis', StringComparison.OrdinalIgnoreCase)) And

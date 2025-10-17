@@ -16,12 +16,16 @@
     <PackageFile Include="*.props;*.targets" PackagePath="build\$(TargetFramework)\%(Filename)%(Extension)" Visible="true" />
   </ItemGroup>
 
-  <Target Name="PackCopyLocalLockFileAssemblies" Condition="'$(IsAnalyzer)' == 'true' and '$(MergeAnalyzerAssemblies)' != 'true'" BeforeTargets="GetPackageContents" DependsOnTargets="ReferenceCopyLocalPathsOutputGroup">
+  <Target Name="PackCopyLocalLockFileAssemblies" Condition="'$(IsAnalyzer)' == 'true' and '$(ILRepack)' != 'true'" BeforeTargets="GetPackageContents" DependsOnTargets="ReferenceCopyLocalPathsOutputGroup">
+    <PropertyGroup>
+      <ILRepackExclude>;@(ILRepackExclude, ';');</ILRepackExclude>
+    </PropertyGroup>
     <ItemGroup>
       <ReferenceCopyLocalAssemblies Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll' 
         And !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase))
         And !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('ThisAssembly', StringComparison.OrdinalIgnoreCase))" />
       <PackCopyLocalAssemblies Include="@(ReferenceCopyLocalAssemblies)" Condition="
+        !$(ILRepackExclude.Contains(';%(FileName);')) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CodeAnalysis', StringComparison.OrdinalIgnoreCase)) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase)) And
         !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.', StringComparison.OrdinalIgnoreCase))"
