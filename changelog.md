@@ -1,5 +1,17 @@
 # Changelog
 
+## [v2.1.2](https://github.com/devlooped/ThisAssembly/tree/v2.1.2) (2025-10-17)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.1...v2.1.2)
+
+:bug: Fixed bugs:
+
+- Fix bug in ILRepack that caused wrong packing [\#478](https://github.com/devlooped/ThisAssembly/pull/478) (@kzu)
+
+:twisted_rightwards_arrows: Merged:
+
+- Repack tasks extensions to avoid collisions with other analyzers [\#476](https://github.com/devlooped/ThisAssembly/pull/476) (@kzu)
+
 ## [v2.1.1](https://github.com/devlooped/ThisAssembly/tree/v2.1.1) (2025-10-16)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.0...v2.1.1)
