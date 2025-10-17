@@ -150,3 +150,8 @@
 	sha = 33000c0c4ab4eb4e0e142fa54515b811a189d55c
 	etag = 013a47739e348f06891f37c45164478cca149854e6cd5c5158e6f073f852b61a
 	weak
+[file "src/ILRepack.targets"]
+	url = https://github.com/devlooped/catbag/blob/main/MSBuild/ILRepack.targets
+	sha = 04f82bd24a0c01503e33d3fe45d6de1935e0d2eb
+	etag = 5d3c3772b11e579ae9cbde8731ff3f9bbd97c166f7b159e03530a3ac8bd8c0bf
+	weak
