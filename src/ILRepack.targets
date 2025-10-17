@@ -1,14 +1,18 @@
-<Project>
+ <Project>
   <!--
   ILRepack.targets provides MSBuild integration for ILRepack, allowing merging of assemblies into a single output.
 
   Extension Points:
   - Property 'ILRepack': Set to 'true' to enable ILRepack (default: true in Release, false otherwise).
-  - Item 'ILRepackInclude': list of assembly filenames to explicitly include in merging.
-  - Item 'ILRepackExclude': list of assembly filenames to exclude from merging.
-  - Item 'ILRepackPreserve': Assemblies that should not be deleted after merging, even if merged.
-  -->
+  - Items:
+      * ILRepackInclude: assemblies to include 
+      * ILRepackExclude: assemblies to exclude
+      * ILRepackPreserve: assemblies to preserve after merging (otherwise, they are deleted from output)
   
+  Items can have metadata 'StartsWith' set to 'true' to indicate prefix matching rather than 
+  exact matching.
+  -->
+
   <PropertyGroup>
     <ILRepack Condition="'$(ILRepack)' == '' and '$(Configuration)' == 'Release'">true</ILRepack>
     <ILRepack Condition="'$(ILRepack)' == ''">false</ILRepack>
@@ -30,28 +34,70 @@
     <Message Importance="high" Text="Installed dotnet-ilrepack v$(ILRepackInstalledOutput)" Condition="$(ExitCode) != '0'" />
   </Target>
 
-  <Target Name="ILRepack" AfterTargets="CoreCompile" BeforeTargets="CopyFilesToOutputDirectory"
-          Inputs="@(IntermediateAssembly -&gt; '%(FullPath)')"
-          Outputs="$(IntermediateOutputPath)ilrepack.txt"
-          Returns="@(MergedAssemblies)"
-          Condition="Exists(@(IntermediateAssembly -&gt; '%(FullPath)')) And '$(ILRepack)' == 'true'">
+  <Target Name="ILRepackPrepare">
+    <ItemGroup>
+      <ILRepackIncludeWildcard Include="@(ILRepackInclude -> WithMetadataValue('StartsWith', 'true'))"/>
+      <ILRepackIncludeExact Include="@(ILRepackInclude)" Exclude="@(ILRepackIncludeWildcard)" />
+      <ILRepackExcludeWildcard Include="@(ILRepackExclude -> WithMetadataValue('StartsWith', 'true'))" />
+      <ILRepackExcludeExact Include="@(ILRepackExclude)" Exclude="@(ILRepackExcludeWildcard)" />
+      <ILRepackPreserveWildcard Include="@(ILRepackPreserve -> WithMetadataValue('StartsWith', 'true'))"/>
+      <ILRepackPreserveExact Include="@(ILRepackPreserve)" Exclude="@(ILRepackPreserveWildcard)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ILRepackFilterIncludeStartsWith" DependsOnTargets="ILRepackPrepare;CoreCompile"
+          Inputs="@(ILRepackIncludeWildcard)" Outputs="|%(ILRepackIncludeWildcard.Identity)|">
     <PropertyGroup>
-      <ILRepackInclude>;@(ILRepackInclude, ';');</ILRepackInclude>
-      <ILRepackExclude>;@(ILRepackExclude, ';');</ILRepackExclude>
+      <LocalFilter>%(ILRepackIncludeWildcard.Identity)</LocalFilter>
     </PropertyGroup>
     <ItemGroup>
-      <ReferenceCopyLocalAssemblies Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll' 
-        And !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase))" />
-      
-      <!-- Default to never merging analyzer, C# or system assemblies -->
-      <MergedAssemblies Include="@(ReferenceCopyLocalAssemblies)" Condition="
-        !$(ILRepackExclude.Contains(';%(FileName);')) And
-        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CodeAnalysis', StringComparison.OrdinalIgnoreCase)) And
-        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('Microsoft.CSharp', StringComparison.OrdinalIgnoreCase)) And
-        !$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('System.', StringComparison.OrdinalIgnoreCase))"
-      />
-      <!-- Brings in explicitly opted-in assemblies -->
-      <MergedAssemblies Include="@(ReferenceCopyLocalAssemblies)" Condition="$(ILRepackInclude.Contains(';%(FileName);'))" />
+      <ILRepackCandidate Include="@(ReferenceCopyLocalPaths)" Condition="
+        '%(Extension)' == '.dll' And 
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase)) And
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('$(LocalFilter)'))" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ILRepackFilterExcludeStartsWith" DependsOnTargets="ILRepackFilterIncludeStartsWith"
+          Inputs="@(ILRepackExcludeWildcard)" Outputs="|%(ILRepackExcludeWildcard.Identity)|">
+    <PropertyGroup>
+      <LocalFilter>%(ILRepackExcludeWildcard.Identity)</LocalFilter>
+    </PropertyGroup>
+    <ItemGroup>
+      <ILRepackCandidate Remove="@(ILRepackCandidate)" Condition="
+        $([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('$(LocalFilter)'))" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ILRepackFilterInclude" BeforeTargets="ILRepack" DependsOnTargets="ILRepackFilterExcludeStartsWith">
+    <PropertyGroup>
+      <ILRepackInclude>;@(ILRepackIncludeExact, ';');</ILRepackInclude>
+    </PropertyGroup>
+    <ItemGroup>
+      <ILRepackCandidate Include="@(ReferenceCopyLocalPaths)" Condition="
+        '%(Extension)' == '.dll' And 
+        !$([MSBuild]::ValueOrDefault('%(FileName)', '').EndsWith('.resources', StringComparison.OrdinalIgnoreCase)) And
+        $(ILRepackInclude.Contains(';%(FileName);'))" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ILRepackFilterExclude" BeforeTargets="ILRepack" DependsOnTargets="CoreCompile">
+    <PropertyGroup>
+      <ILRepackExclude>;@(ILRepackExcludeExact, ';');</ILRepackExclude>
+    </PropertyGroup>
+    <ItemGroup>
+      <ILRepackCandidate Remove="@(ILRepackCandidate)" Condition="$(ILRepackExclude.Contains(';%(FileName);'))" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ILRepack" AfterTargets="CoreCompile" BeforeTargets="CopyFilesToOutputDirectory"
+        Inputs="@(IntermediateAssembly -&gt; '%(FullPath)')"
+        Outputs="$(IntermediateOutputPath)ilrepack.txt"
+        Returns="@(MergedAssemblies)"
+        Condition="Exists(@(IntermediateAssembly -&gt; '%(FullPath)')) And '$(ILRepack)' == 'true'">
+
+    <ItemGroup>
+      <MergedAssemblies Include="@(ILRepackCandidate -&gt; Distinct())" />
     </ItemGroup>
     <ItemGroup>
       <ReferenceCopyLocalDirs Include="@(ReferenceCopyLocalPaths -&gt; '%(RootDir)%(Directory)')" />
@@ -80,10 +126,32 @@
     <Touch AlwaysCreate="true" Files="$(IntermediateOutputPath)ilrepack.txt" Condition="'$(ExitCode)' == '0'" />
     <Error Text="$(ILRepackOutput)" Condition="'$(ExitCode)' != '0' And '$(ContinueOnError)' != 'true'" />
     <ItemGroup>
-      <MergedAssembliesToRemove Include="@(MergedAssemblies)" />
-      <MergedAssembliesToRemove Remove="@(ILRepackPreserve)" />
+      <ILRepackCleanup Include="@(MergedAssemblies)" />
     </ItemGroup>
-    <Delete Files="@(MergedAssembliesToRemove -&gt; '$(MSBuildProjectDirectory)\$(OutputPath)%(Filename)%(Extension)')" Condition="Exists('$(MSBuildProjectDirectory)\$(OutputPath)%(Filename)%(Extension)')" />
+  </Target>
+
+  <Target Name="ILRepackPreserveStartsWith" DependsOnTargets="ILRepack"
+          Inputs="@(ILRepackPreserveWildcard)" Outputs="|%(ILRepackPreserveWildcard.Identity)|">
+    <PropertyGroup>
+      <LocalFilter>%(ILRepackPreserveWildcard.Identity)</LocalFilter>
+    </PropertyGroup>
+    <ItemGroup>
+      <ILRepackCleanup Remove="@(ILRepackCleanup)" Condition="$([MSBuild]::ValueOrDefault('%(FileName)', '').StartsWith('$(LocalFilter)'))" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ILRepackPreserve" DependsOnTargets="ILRepack">
+    <PropertyGroup>
+      <ILRepackPreserve>;@(ILRepackPreserveExact, ';');</ILRepackPreserve>
+    </PropertyGroup>
+    <ItemGroup>
+      <ILRepackCleanup Remove="@(ILRepackCleanup)" Condition="$(ILRepackPreserve.Contains(';%(FileName);'))" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ILRepackCleanup" AfterTargets="ILRepack" DependsOnTargets="ILRepackPreserveStartsWith;ILRepackPreserve" Returns="@(ILRepackCleanup)">
+    <Delete Files="@(ILRepackCleanup -&gt; '$(MSBuildProjectDirectory)\$(OutputPath)%(Filename)%(Extension)')" 
+            Condition="Exists('$(MSBuildProjectDirectory)\$(OutputPath)%(Filename)%(Extension)')" />
   </Target>
 
 </Project>
