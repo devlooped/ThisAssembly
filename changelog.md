@@ -1,5 +1,29 @@
 # Changelog
 
+## [v2.1.4](https://github.com/devlooped/ThisAssembly/tree/v2.1.4) (2026-08-27)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.3...v2.1.4)
+
+:sparkles: Implemented enhancements:
+
+- Resolve Git branch from worktree gitdir pointers [\#508](https://github.com/devlooped/ThisAssembly/pull/508) (@kzu)
+
+## [v2.1.3](https://github.com/devlooped/ThisAssembly/tree/v2.1.3) (2026-08-27)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.2...v2.1.3)
+
+:sparkles: Implemented enhancements:
+
+- Allow opting into ThisAssembly.Project via the ProjectProperty MSBuild property [\#507](https://github.com/devlooped/ThisAssembly/pull/507) (@kzu)
+
+:bug: Fixed bugs:
+
+- AOT , Single-file compilation error [\#467](https://github.com/devlooped/ThisAssembly/issues/467)
+
+:twisted_rightwards_arrows: Merged:
+
+- Sync ILRepack targets from 🐱 catbag [\#479](https://github.com/devlooped/ThisAssembly/pull/479) (@kzu)
+
 ## [v2.1.2](https://github.com/devlooped/ThisAssembly/tree/v2.1.2) (2025-10-17)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.1...v2.1.2)
