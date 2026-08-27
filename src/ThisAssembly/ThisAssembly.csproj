@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.4.7" />
+    <PackageReference Include="NuGetizer" Version="1.5.0" />
     <Compile Remove="..\*.cs" />
   </ItemGroup>
 

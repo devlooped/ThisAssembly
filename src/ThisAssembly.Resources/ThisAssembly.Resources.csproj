@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGetizer" Version="1.4.7" />
+    <PackageReference Include="NuGetizer" Version="1.5.0" />
 
     <PackageReference Include="Scriban" Version="7.2.2" Pack="false" IncludeAssets="build" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
