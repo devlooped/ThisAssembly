@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.1.5](https://github.com/devlooped/ThisAssembly/tree/v2.1.5) (2026-08-27)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.4...v2.1.5)
+
+:sparkles: Implemented enhancements:
+
+- Report TA003 when a strings resx name is used as a base name [\#509](https://github.com/devlooped/ThisAssembly/pull/509) (@kzu)
+
+:bug: Fixed bugs:
+
+- ThisAssembly.Git.targets fails to resolve branch name when working with worktrees [\#506](https://github.com/devlooped/ThisAssembly/issues/506)
+- Duplicated members on generated string resources class [\#493](https://github.com/devlooped/ThisAssembly/issues/493)
+
 ## [v2.1.4](https://github.com/devlooped/ThisAssembly/tree/v2.1.4) (2026-08-27)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.3...v2.1.4)
