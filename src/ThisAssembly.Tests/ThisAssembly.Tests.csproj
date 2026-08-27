@@ -67,6 +67,9 @@
 
   <PropertyGroup>
     <Foo>Bar</Foo>
+    <FromProjectProperty>from-property</FromProjectProperty>
+    <AlsoFromProjectProperty>also-from-property</AlsoFromProjectProperty>
+    <ProjectProperty>FromProjectProperty;AlsoFromProjectProperty</ProjectProperty>
   </PropertyGroup>
 
   <ItemGroup>

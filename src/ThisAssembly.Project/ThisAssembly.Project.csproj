@@ -22,6 +22,10 @@ them as `ProjectProperty` MSBuild items in project file, such as:
       &lt;ProjectProperty Include="Foo" /&gt;
     &lt;/ItemGroup&gt;
 
+Or via the ProjectProperty MSBuild property (included as-is as items), which file-based apps can set with:
+
+    #:property ProjectProperty=MSBuildProjectDirectory
+
 A corresponding `ThisAssembly.Project.Foo` constant with the value `Bar` is provided. 
 
 Generated code:

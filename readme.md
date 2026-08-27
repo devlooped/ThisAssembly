@@ -269,6 +269,15 @@ them as `ProjectProperty` MSBuild items in the project file, such as:
   </ItemGroup>
 ```
 
+The same opt-in can be the `ProjectProperty` MSBuild property instead of items. Its value is 
+included as-is as `@(ProjectProperty)` items, so semicolon-separated names work. This is the 
+path for [file-based apps](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps):
+
+```csharp
+#:package ThisAssembly.Project
+#:property ProjectProperty=MSBuildProjectDirectory
+```
+
 ![](https://raw.githubusercontent.com/devlooped/ThisAssembly/main/img/ThisAssembly.Project.png)
 
 <!-- #project -->
