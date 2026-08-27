@@ -72,12 +72,21 @@
     <Warning Code="TA001" Text="A valid SourceLink provider does not seem to be installed for the current repository/project. Some values may be empty." Condition="'$(SourceLinkUrl)' == ''" />
     
     <PropertyGroup Condition="'$(RepositoryBranch)' == '' and '$(RepositoryRoot)' != ''">
-      <!-- If we didnd't populate from CI/ENV, we can still use the source control provider itself to get the branch name -->
+      <!-- If we didn't populate from CI/ENV, we can still use the source control provider itself to get the branch name -->
       <_ThisAssemblyGitBranchName>@(_ThisAssemblyGitSourceRoot -> '%(BranchName)')</_ThisAssemblyGitBranchName>
       <!-- The above only works on .NET SDK 9.0+, so account for 8.0 implicit nuget package -->
 
-      <_ThisAssemblyGitBranchName Condition="'$(_ThisAssemblyGitBranchName)' == ''">$([System.IO.File]::ReadAllText('$(RepositoryRoot).git/HEAD').Trim())</_ThisAssemblyGitBranchName>
-      <RepositoryBranch>$(_ThisAssemblyGitBranchName.TrimStart("ref:").Trim().Replace('refs/heads/', '').Replace('refs/tags/', ''))</RepositoryBranch>
+      <!-- Regular checkout: .git is a directory containing HEAD -->
+      <_ThisAssemblyGitHead Condition="'$(_ThisAssemblyGitBranchName)' == '' and Exists('$(RepositoryRoot).git/HEAD')">$(RepositoryRoot).git/HEAD</_ThisAssemblyGitHead>
+
+      <!-- Worktree / separate-git-dir / submodule: .git is a file with 'gitdir: &lt;path&gt;' -->
+      <_ThisAssemblyGitFile Condition="'$(_ThisAssemblyGitHead)' == '' and '$(_ThisAssemblyGitBranchName)' == '' and $([System.IO.File]::Exists('$(RepositoryRoot).git'))">$([System.IO.File]::ReadAllText('$(RepositoryRoot).git').Trim())</_ThisAssemblyGitFile>
+      <_ThisAssemblyGitDir Condition="'$(_ThisAssemblyGitFile)' != '' and $(_ThisAssemblyGitFile.StartsWith('gitdir:', StringComparison.OrdinalIgnoreCase))">$(_ThisAssemblyGitFile.Substring(7).Trim())</_ThisAssemblyGitDir>
+      <_ThisAssemblyGitDir Condition="'$(_ThisAssemblyGitDir)' != ''">$([MSBuild]::NormalizePath('$(RepositoryRoot)', '$(_ThisAssemblyGitDir)'))</_ThisAssemblyGitDir>
+      <_ThisAssemblyGitHead Condition="'$(_ThisAssemblyGitHead)' == '' and '$(_ThisAssemblyGitDir)' != '' and Exists('$(_ThisAssemblyGitDir)/HEAD')">$(_ThisAssemblyGitDir)/HEAD</_ThisAssemblyGitHead>
+
+      <_ThisAssemblyGitBranchName Condition="'$(_ThisAssemblyGitBranchName)' == '' and '$(_ThisAssemblyGitHead)' != ''">$([System.IO.File]::ReadAllText('$(_ThisAssemblyGitHead)').Trim())</_ThisAssemblyGitBranchName>
+      <RepositoryBranch Condition="'$(_ThisAssemblyGitBranchName)' != ''">$(_ThisAssemblyGitBranchName.TrimStart("ref:").Trim().Replace('refs/heads/', '').Replace('refs/tags/', ''))</RepositoryBranch>
     </PropertyGroup>
 
   </Target>
