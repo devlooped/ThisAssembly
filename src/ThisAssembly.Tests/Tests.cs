@@ -126,6 +126,14 @@ public record class Tests(ITestOutputHelper Output)
 
     /// <summary />
     [Fact]
+    public void CanUseProjectPropertyFromProperty()
+    {
+        Assert.Equal("from-property", ThisAssembly.Project.FromProjectProperty);
+        Assert.Equal("also-from-property", ThisAssembly.Project.AlsoFromProjectProperty);
+    }
+
+    /// <summary />
+    [Fact]
     public void CanUseProjectProperty2()
         => Assert.NotEmpty(ThisAssembly.Project.RuntimeIdentifiers);
 

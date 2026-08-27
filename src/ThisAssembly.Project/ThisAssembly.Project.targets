@@ -23,6 +23,8 @@
 
   <Target Name="PrepareProjectProperties" BeforeTargets="PrepareConstants" DependsOnTargets="$(PrepareProjectPropertiesDependsOn)">
     <ItemGroup>
+      <!-- File-based apps can pass #:property ProjectProperty=Name;Other -->
+      <ProjectProperty Include="$(ProjectProperty)" Condition="'$(ProjectProperty)' != ''" />
       <ProjectPropertyDistinct Include="@(ProjectProperty -> Distinct())" />
     </ItemGroup>
     <ItemGroup>
