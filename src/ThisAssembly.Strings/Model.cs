@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Microsoft.CodeAnalysis;
 
 [DebuggerDisplay("ResourceName = {ResourceName}, Values = {RootArea.Values.Count}")]
 record Model(ResourceArea RootArea, string ResourceName, string? Namespace, bool IsPublic)
@@ -17,6 +18,17 @@ static class ResourceFile
 {
     static readonly Regex FormatExpression = new("{(?<arg>[^:{}]+)(?::(?<format>[^{}]+))?}", RegexOptions.Compiled);
     internal static readonly Regex NameReplaceExpression = new(@"\||:|;|\>|\<", RegexOptions.Compiled);
+
+    /// <summary>
+    /// Resource name used as an underscore-separated base for another name (issue #493).
+    /// </summary>
+    public static readonly DiagnosticDescriptor BaseNameCollision = new(
+        "TA003",
+        "Cannot use a resource name as the base name for another",
+        "You cannot use a resource name as the base name for another. Rename '{0}' to '{0}_Title' to be able to use '{1}'.",
+        "ThisAssembly",
+        DiagnosticSeverity.Error,
+        isEnabledByDefault: true);
 
     public static ResourceArea Load(string fileName, string rootArea)
     {
@@ -36,9 +48,19 @@ static class ResourceFile
             rootArea);
     }
 
+    public static IReadOnlyList<Diagnostic> GetDiagnostics(ResourceArea root) =>
+        [.. root.Collisions.Select(c => Diagnostic.Create(BaseNameCollision, Location.None, c.Name, c.NestedName))];
+
+    public static void ReportDiagnostics(ResourceArea root, Action<Diagnostic> report)
+    {
+        foreach (var diagnostic in GetDiagnostics(root))
+            report(diagnostic);
+    }
+
     public static ResourceArea Load(IEnumerable<XElement> data, string rootArea)
     {
         var root = new ResourceArea(rootArea, "");
+        var entries = new List<(string Name, string Id, string Value, string Comment)>();
 
         foreach (var element in data)
         {
@@ -58,15 +80,43 @@ static class ResourceFile
                 .Replace(">", "&gt;")
                 .Replace("\r\n", " ").Replace("\n", " ");
 
+            entries.Add((nameAttribute, id, valueElement, comment));
+        }
+
+        foreach (var entry in entries)
+        {
+            foreach (var other in entries)
+            {
+                if (other.Id.StartsWith(entry.Id + "_", StringComparison.Ordinal))
+                    root.Collisions.Add(new ResourceNameCollision(entry.Name, other.Name));
+            }
+        }
+
+        var baseIds = new HashSet<string>(
+            root.Collisions.Select(c => NameReplaceExpression.Replace(c.Name, "_")),
+            StringComparer.Ordinal);
+
+        foreach (var (nameAttribute, id, valueElement, comment) in entries)
+        {
+            // Skip names that are also an underscore base for another resource so
+            // generated code does not emit both a member and a nested class (CS0102).
+            if (baseIds.Contains(id))
+                continue;
+
             var areaParts = id.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
             if (areaParts.Length <= 1)
             {
+                if (root.NestedAreas.Any(a => a.Id == id))
+                    continue;
+
                 root.Values.Add(GetValue(id, nameAttribute, valueElement) with { Comment = comment });
             }
             else
             {
                 var area = GetArea(root, areaParts.Take(areaParts.Length - 1));
                 var value = GetValue(areaParts.Skip(areaParts.Length - 1).First(), nameAttribute, valueElement) with { Comment = comment };
+                if (area.NestedAreas.Any(a => a.Id == value.Id))
+                    continue;
 
                 area.Values.Add(value);
             }
@@ -91,10 +141,8 @@ static class ResourceFile
             var existing = currentArea.NestedAreas.FirstOrDefault(a => a.Id == areaName);
             if (existing == null)
             {
-                if (currentArea.Values.Any(v => v.Name == areaName))
-                    throw new ArgumentException(string.Format(
-                        "Area name '{0}' is already in use as a value name under area '{1}'.",
-                        areaName, currentArea.Id));
+                // Drop a colliding value so we never emit both a member and a nested class.
+                currentArea.Values.RemoveAll(v => v.Id == areaName);
 
                 existing = new ResourceArea(areaName, currentArea.Prefix + areaName + "_");
                 currentArea.NestedAreas.Add(existing);
@@ -134,7 +182,10 @@ record ResourceArea(string Id, string Prefix)
 {
     public List<ResourceArea> NestedAreas { get; init; } = [];
     public List<ResourceValue> Values { get; init; } = [];
+    public List<ResourceNameCollision> Collisions { get; init; } = [];
 }
+
+record ResourceNameCollision(string Name, string NestedName);
 
 [DebuggerDisplay("{Id} = {Value}")]
 record ResourceValue(string Id, string Name, string? Raw)

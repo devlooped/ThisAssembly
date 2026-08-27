@@ -63,6 +63,8 @@ public class StringsGenerator : IIncrementalGenerator
         var template = Template.Parse(EmbeddedResource.GetContent(file), file);
 
         var rootArea = ResourceFile.LoadText(resourceText!.ToString(), "Strings");
+        ResourceFile.ReportDiagnostics(rootArea, spc.ReportDiagnostic);
+
         var model = new Model(rootArea, resourceName, ns, "public".Equals(visibility, StringComparison.OrdinalIgnoreCase));
 
         var output = template.Render(model, member => member.Name);
