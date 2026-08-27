@@ -19,6 +19,8 @@
 
     <!-- See https://github.com/scriban/scriban#source-embedding -->
     <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
+    <!-- Required so PolySharp polyfills AOT/trimming attributes used by Scriban 7+ on netstandard2.0 -->
+    <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
 
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     <NoWarn>MSB3277;$(NoWarn)</NoWarn>
