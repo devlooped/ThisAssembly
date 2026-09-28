@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.1.6](https://github.com/devlooped/ThisAssembly/tree/v2.1.6) (2026-09-28)
+
+[Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.5...v2.1.6)
+
+:bug: Fixed bugs:
+
+- Keep the ThisAssembly meta-package private to referencing projects [\#518](https://github.com/devlooped/ThisAssembly/pull/518) (@kzu)
+
 ## [v2.1.5](https://github.com/devlooped/ThisAssembly/tree/v2.1.5) (2026-08-27)
 
 [Full Changelog](https://github.com/devlooped/ThisAssembly/compare/v2.1.4...v2.1.5)
