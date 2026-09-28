@@ -1,0 +1,9 @@
+<Project>
+
+  <ItemGroup>
+    <!-- Make sure we're always private to the referencing project, and that none of 
+         the ThisAssembly.* dependencies are packed by NuGetizer as private assets. -->
+    <PackageReference Update="ThisAssembly" PrivateAssets="all" PackTransitive="false" />
+  </ItemGroup>
+
+</Project>
