@@ -35,9 +35,9 @@
 	sha = 5da103cfbc1c4f9b5f59cfa698d2afbd744a7525
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
-	etag = e5865f083db45081a7b4eaa518018971b34e6ef93f917ac510dea96d27f792b3
+	etag = 5bdfd49876c886aaa6b7026960261af9b587e7cc3baa0f4584db34d9cebbd3f4
 	weak
-	sha = ff61659751374b95c7a8a0477c908a8119f756f0
+	sha = fefbf3606e7bb7f483951e3107200a2f45ee52e0
 [file "license.txt"]
 	url = https://github.com/devlooped/oss/blob/main/license.txt
 	etag = 2c6335b37e4ae05eea7c01f5d0c9d82b49c488f868a8b5ba7bff7c6ff01f3994
