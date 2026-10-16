@@ -86,7 +86,10 @@
       <_ThisAssemblyGitHead Condition="'$(_ThisAssemblyGitHead)' == '' and '$(_ThisAssemblyGitDir)' != '' and Exists('$(_ThisAssemblyGitDir)/HEAD')">$(_ThisAssemblyGitDir)/HEAD</_ThisAssemblyGitHead>
 
       <_ThisAssemblyGitBranchName Condition="'$(_ThisAssemblyGitBranchName)' == '' and '$(_ThisAssemblyGitHead)' != ''">$([System.IO.File]::ReadAllText('$(_ThisAssemblyGitHead)').Trim())</_ThisAssemblyGitBranchName>
-      <RepositoryBranch Condition="'$(_ThisAssemblyGitBranchName)' != ''">$(_ThisAssemblyGitBranchName.TrimStart("ref:").Trim().Replace('refs/heads/', '').Replace('refs/tags/', ''))</RepositoryBranch>
+      <!-- Strip the 'ref: ' prefix used by git HEAD files. A plain TrimStart("ref:") would also corrupt
+           bare refs (e.g. 'refs/heads/main' becomes 's/heads/main') and commit shas starting with e/f. -->
+      <_ThisAssemblyGitBranchName Condition="'$(_ThisAssemblyGitBranchName)' != '' and $(_ThisAssemblyGitBranchName.StartsWith('ref: '))">$(_ThisAssemblyGitBranchName.Substring(5))</_ThisAssemblyGitBranchName>
+      <RepositoryBranch Condition="'$(_ThisAssemblyGitBranchName)' != ''">$(_ThisAssemblyGitBranchName.Trim().Replace('refs/heads/', '').Replace('refs/tags/', ''))</RepositoryBranch>
     </PropertyGroup>
 
   </Target>
